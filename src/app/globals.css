@@ -32,8 +32,8 @@ h1, h2, h3, h4, h5 {
 body {
   /* background: var(--background); */
   background-image: url('../../public/nasa-space.jpg');
+  background-attachment: fixed;
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center center;
   color: var(--foreground);
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
