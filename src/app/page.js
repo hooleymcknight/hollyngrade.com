@@ -81,7 +81,7 @@ export default async function Home() {
                     <br/><br/>
                     The road to this surgery has been a long one, as Chasm has other health issues that have prevented him from being eligible for a surgery up until now. In June of 2025, Chasm had a splenectomy, after which the surgeon noted his heart rate during recovery dropped to 30 beats per minute. The lowest healthy heart rate for a dog his size is 60 bpm. Since then, he has been on a heart medication to improve his heart rate. This has been very successful for&nbsp;him.
                     <br/><br/>
-                    Also leading up to this surgery, Chasm will need a PT-PTT test, an ultrasound, and a biopsy to assess his growing liver tumor and see if we need to address it during the surgery. A PT-PTT (Prothrombin Time and Partial Thromboplastin Time) test checks his blood to see how long it takes to clot, amongst other potential disorders. This will help Dr. Christianson know if it is safe to address his liver tumor during the upcoming&nbsp;surgery.
+                    Also leading up to this surgery, Chasm will need a PT-PTT test, an ultrasound, and a biopsy to assess his growing liver tumor and see if we need to address it during the surgery. A PT-PTT (Prothrombin Time and Partial Thromboplastin Time) test checks his blood to see how long it takes to clot, amongst other potential disorders. It is also known as a coagulation test. This will help Dr. Christianson know if it is safe to address his liver tumor during the upcoming&nbsp;surgery.
                     <br/><br/>
                     The cost for the surgery and pre-surgery procedures is shown&nbsp;below.
                 </p>
