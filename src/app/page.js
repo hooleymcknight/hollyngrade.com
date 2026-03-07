@@ -49,9 +49,16 @@ export default async function Home() {
                         height={200}
                         priority
                     />
-                    <h2 className="max-w-s text-3xl font-semibold leading-10 tracking-tight text-black">
-                        Chasm's surgery fundraiser
-                    </h2>
+                    <div className="flex flex-col flex-nowrap">
+                        <h2 className="max-w-s text-3xl font-semibold leading-10 tracking-tight text-black">
+                            Chasm's surgery fundraiser
+                        </h2>
+                        <p className="max-w-md text-lg leading-6 text-zinc-800 mt-3 mb-0">
+                            <a href="#chasm-updates" alt="jump to Chasm updates" className="underline">
+                                Click here to jump ahead to Chasm's status&nbsp;updates.
+                            </a>
+                        </p>
+                    </div>
                 </div>
 
                 <DonationButtons />
@@ -73,6 +80,7 @@ export default async function Home() {
                             height={2160}
                             priority
                             style={{ display: 'block', width: 'auto', maxHeight: '800px' }}
+                            // loading="eager"
                         />
                     </a>
                     The problematically-placed tumor is #12. The tumor has a high potential for wrapping around his muscles, nerves, and veins in his elbow. His doctor, Dr. Christianson, is determined to remove this tumor as soon as&nbsp;possible.
@@ -124,7 +132,17 @@ export default async function Home() {
 
                 <DonationButtons />
 
-                <ChasmPhotos />
+                <div id="chasm-updates" className="mt-20">
+                    <h2 className="text-2xl font-bold text-center">Status Updates</h2>
+                    <br/>
+                    <ul className="list-disc list-outside pl-6">
+                        <li><b><u>Mar 6:</u></b>  Chasm had his PT-PTT test today. We could have results as early as tomorrow or as late as Tuesday 3/10.</li>
+                    </ul>
+                </div>
+
+                <div id="chasm-photos" style={{ minHeight: '80vh' }}>
+                    <ChasmPhotos />
+                </div>
 
             </div>
         </main>

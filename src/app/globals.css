@@ -37,6 +37,7 @@ body {
   background-position: center center;
   color: var(--foreground);
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
 
 #donation-buttons a {
