@@ -45,7 +45,7 @@ export default function TwitchEmbed (props) {
     }, []);
 
     return (
-        <div className="twitch-embed-container" data-active={props.live}>
+        <div className="twitch-embed-container w-full" data-active={props.live}>
             <div id="twitch-embed" className="w-full mt-8 pb-8"></div>
             <script src="https://embed.twitch.tv/embed/v1.js"></script>
         </div>
