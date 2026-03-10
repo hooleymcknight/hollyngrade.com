@@ -137,6 +137,7 @@ export default async function Home() {
                     <br/>
                     <ul className="list-disc list-outside pl-6">
                         <li><b><u>Mar 6:</u></b>  Chasm had his PT-PTT test today. We could have results as early as tomorrow or as late as Tuesday 3/10.</li>
+                        <li><b><u>Mar 10:</u></b>  Chasm's clotting panel came back normal and he is cleared for his biopsy tomorrow.</li>
                     </ul>
                 </div>
 
