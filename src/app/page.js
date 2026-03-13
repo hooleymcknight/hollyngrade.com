@@ -138,6 +138,7 @@ export default async function Home() {
                     <ul className="list-disc list-outside pl-6">
                         <li><b><u>Mar 6:</u></b>  Chasm had his PT-PTT test today. We could have results as early as tomorrow or as late as Tuesday 3/10.</li>
                         <li><b><u>Mar 10:</u></b>  Chasm's clotting panel came back normal and he is cleared for his biopsy tomorrow.</li>
+                        <li><b><u>Mar 11:</u></b>  The liver mass has been biopsied; we are awaiting results on that. The ultrasound has reopened the discussion of his adrenal mass. We are now discussing if it is appropriate to remove that. It would cure Chasm of his Cushing's disease, so this removal could be very impactful for him. We just need to assess the risk involved. Dr. Christianson is consulting a colleague on Chasm's case. If we decide to go forward with the adrenal mass removal, Chasm will be referred to a specialist surgeon instead. I've scheduled a consultation with the specialist for Tuesday, Mar 17. We are gathering additional opinions, so I felt it made sense to include the potential surgeon as well.</li>
                     </ul>
                 </div>
 
