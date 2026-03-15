@@ -12,7 +12,9 @@ export default async function areYouLive() {
     });
 
     if (!response.ok) {
-        throw new Error(`Twitch API error: ${response.statusText}`);
+        // throw new Error(`Twitch API error: ${response.statusText}`);
+        console.log(`Twitch API error: ${response.statusText}`);
+        return null;
     }
 
     const data = await response.json();

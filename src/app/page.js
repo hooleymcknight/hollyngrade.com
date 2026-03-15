@@ -8,7 +8,7 @@ let isLive = false;
 
 export default async function Home() {
     const liveStreams = await areYouLive();
-    if (liveStreams.length) {
+    if (liveStreams?.length) {
         isLive = liveStreams[0].type;
     }
 
