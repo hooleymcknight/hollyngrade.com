@@ -51,47 +51,24 @@ export default async function Home() {
                     />
                     <div className="flex flex-col flex-nowrap">
                         <h2 className="max-w-s text-3xl font-semibold leading-10 tracking-tight text-black">
-                            Chasm's surgery fundraiser
+                            Chasm's tribute fundraiser
                         </h2>
-                        <p className="max-w-md text-lg leading-6 text-zinc-800 mt-3 mb-0">
+                        {/* <p className="max-w-md text-lg leading-6 text-zinc-800 mt-3 mb-0">
                             <a href="#chasm-updates" alt="jump to Chasm updates" className="underline">
                                 Click here to jump ahead to Chasm's status&nbsp;updates.
                             </a>
-                        </p>
+                        </p> */}
                     </div>
                 </div>
 
                 <DonationButtons />
 
                 <p className="max-w-full text-lg leading-normal text-zinc-800 mt-6 font-medium">
-                    Chasm has an upcoming surgery on Friday, March 27th, to remove a problematically-placed tumor, and possibly one additional&nbsp;tumor.
-                    <br/><br/>
-                    In total, Chasm has <b>15 known tumors</b>: 2 internal, and 13 external. Below is his most recent tumor chart. The tumors we are hoping to remove are numbers 4 and 12, <span className="text-[#72140c] font-bold">shown&nbsp;in&nbsp;red</span>.
-
-                    <a href="/Chasm-tumor-chart-3-1.png" target="_blank" alt="open image in new tab">
-                        <small className="underline mt-4 text-xs block text-center">Click image to open in new tab</small>
-                    </a>
-                    <a href="/Chasm-tumor-chart-3-1.png" target="_blank" alt="open image in new tab">
-                        <Image
-                            className="mx-auto mt-2 mb-4"
-                            src="/Chasm-tumor-chart-3-1.png"
-                            alt="Chasm body tumor chart"
-                            width={1668}
-                            height={2160}
-                            priority
-                            style={{ display: 'block', width: 'auto', maxHeight: '800px' }}
-                            // loading="eager"
-                        />
-                    </a>
-                    The problematically-placed tumor is #12. The tumor has a high potential for wrapping around his muscles, nerves, and veins in his elbow. His doctor, Dr. Christianson, is determined to remove this tumor as soon as&nbsp;possible.
-                    <br/><br/>
-                    Tumor #4 is not as urgent, but we do want to try to remove it for Chasm's comfort, as it is putting pressure on his&nbsp;genitalia.
-                    <br/><br/>
-                    The road to this surgery has been a long one, as Chasm has other health issues that have prevented him from being eligible for a surgery up until now. In June of 2025, Chasm had a splenectomy, after which the surgeon noted his heart rate during recovery dropped to 30 beats per minute. The lowest healthy heart rate for a dog his size is 60 bpm. Since then, he has been on a heart medication to improve his heart rate. This has been very successful for&nbsp;him.
-                    <br/><br/>
-                    Also leading up to this surgery, Chasm will need a PT-PTT test, an ultrasound, and a biopsy to assess his growing liver tumor and see if we need to address it during the surgery. A PT-PTT (Prothrombin Time and Partial Thromboplastin Time) test checks his blood to see how long it takes to clot, amongst other potential disorders. It is also known as a coagulation test. This will help Dr. Christianson know if it is safe to address his liver tumor during the upcoming&nbsp;surgery.
-                    <br/><br/>
-                    The cost for the surgery and pre-surgery procedures is shown&nbsp;below.
+                    We were raising money for a major surgery for Chasm, which he had done on Wednesday, April 8th. He did very well in the surgery, and recovered nicely. 
+                    On April 21st, he had his recheck with the surgeon and was cleared to return to normal activities.
+                    <br/>
+                    Unexpectedly, he went septic two days later. We do not believe this was a complication of surgery; it seems more likely that he had an abscess that ruptured. 
+                    Chasm was not able to recover, and he died in the hospital within a few hours.
                 </p>
 
                 <table className="my-6 sm:mx-auto sm:text-lg">
@@ -109,38 +86,59 @@ export default async function Home() {
                         <tr>
                             <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">Wed, Mar 11</span><span className="inline sm:hidden">3/11</span></td>
                             <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">ultrasound + biopsy</td>
-                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$1700</td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$1,565</td>
                         </tr>
                         <tr>
-                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">Fri, Mar 27</span><span className="inline sm:hidden">3/27</span></td>
-                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">mass </span>surgery + dental</td>
-                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$2740</td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">Tue, Mar 17</span><span className="inline sm:hidden">3/17</span></td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">oncology <span className="hidden sm:inline">consult + </span>tests</td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$1,400</td>
+                        </tr>
+                        <tr>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">Thu, Mar 26</span><span className="inline sm:hidden">3/26</span></td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">CT scan</td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$4,200</td>
+                        </tr>
+                        <tr>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">Wed, Apr 1</span><span className="inline sm:hidden">4/1</span></td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">echocardiogram</td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$1,350</td>
+                        </tr>
+                        <tr>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">Thu, Apr 2</span><span className="inline sm:hidden">4/2</span></td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">ACTH stim test + parathyroid panel</td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$870</td>
+                        </tr>
+                        <tr>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">Wed, Apr 8</span><span className="inline sm:hidden">4/8</span></td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">surgery: adrenalectomy, parathyroidectomy, liver lobectomy</td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$17,500</td>
+                        </tr>
+                        <tr>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2"><span className="hidden sm:inline">Thu, Apr 23</span><span className="inline sm:hidden">4/23</span></td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">emergency sepsis care</td>
+                            <td className="border border-gray-300 bg-zinc-50 pl-2 pr-4 py-2">$1,750</td>
                         </tr>
                         <tr>
                             <td style={{visibility: 'hidden'}}></td>
                             <td colSpan={1} className="font-bold border border-gray-300 bg-gray-400 pl-2 pr-6 py-2 text-left span-2">Total Cost:</td>
-                            <td className="font-bold border border-gray-300 bg-gray-400 pl-2 pr-6 py-2 text-left">$4815</td>
+                            <td className="font-bold border border-gray-300 bg-gray-400 pl-2 pr-6 py-2 text-left">$29,010</td>
                         </tr>
                     </tbody>
                 </table>
 
                 <p className="max-w-full text-lg leading-normal text-zinc-800 my-6 font-medium">
-                    My current fundraising goal is to reach $2500 so that I can afford his surgery. If any additional funds are raised, they will go to his surgery and pre-surgery procedures, to reduce the amount of debt that I have to take for&nbsp;this.
+                    The vets and I did our best for Chasm, tried to give him the best chance of a healthy, happy life. While the surgery didn't cause this, 
+                    we're glad we tried for him. We're all pretty wrecked to lose Chasm. The vets have cried, friends have cried. Chasm was one of the 
+                    most loved dogs I've had the opportunity to know. I loved being his owner. It was a privilege to take care of him for his whole life.
                     <br/><br/>
-                    Any amount donated is deeply, deeply appreciated. Chasm is a lovely, and delightful guy, and I just want him to be as healthy and happy as&nbsp;possible.
+                    I will be grieving Chasm for years regardless, but I will also be in debt for years as well, to pay off the procedures we had for him 
+                    recently. Any help in lightening that financial load is deeply, deeply appreciated.
+                    <br/><br/>
+                    If you wish to donate a small rock to Chasm's grave, you may mail one to my home address (assuming that you either already have this 
+                    information or are someone I know in person to give that information to). Any donated rocks will be placed on Chasm's grave.
                 </p>
 
                 <DonationButtons />
-
-                <div id="chasm-updates" className="mt-20">
-                    <h2 className="text-2xl font-bold text-center">Status Updates</h2>
-                    <br/>
-                    <ul className="list-disc list-outside pl-6">
-                        <li><b><u>Mar 6:</u></b>  Chasm had his PT-PTT test today. We could have results as early as tomorrow or as late as Tuesday 3/10.</li>
-                        <li><b><u>Mar 10:</u></b>  Chasm's clotting panel came back normal and he is cleared for his biopsy tomorrow.</li>
-                        <li><b><u>Mar 11:</u></b>  The liver mass has been biopsied; we are awaiting results on that. The ultrasound has reopened the discussion of his adrenal mass. We are now discussing if it is appropriate to remove that. It would cure Chasm of his Cushing's disease, so this removal could be very impactful for him. We just need to assess the risk involved. Dr. Christianson is consulting a colleague on Chasm's case. If we decide to go forward with the adrenal mass removal, Chasm will be referred to a specialist surgeon instead. I've scheduled a consultation with the specialist for Tuesday, Mar 17. We are gathering additional opinions, so I felt it made sense to include the potential surgeon as well.</li>
-                    </ul>
-                </div>
 
                 <div id="chasm-photos" style={{ minHeight: '80vh' }}>
                     <ChasmPhotos />
