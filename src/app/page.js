@@ -66,7 +66,7 @@ export default async function Home() {
                 <p className="max-w-full text-lg leading-normal text-zinc-800 mt-6 font-medium">
                     We were raising money for a major surgery for Chasm, which he had done on Wednesday, April 8th. He did very well in the surgery, and recovered nicely. 
                     On April 21st, he had his recheck with the surgeon and was cleared to return to normal activities.
-                    <br/>
+                    <br/><br/>
                     Unexpectedly, he went septic two days later. We do not believe this was a complication of surgery; it seems more likely that he had an abscess that ruptured. 
                     Chasm was not able to recover, and he died in the hospital within a few hours.
                 </p>
