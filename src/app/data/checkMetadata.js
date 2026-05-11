@@ -2,7 +2,7 @@ const exifr = require('exifr');
 const exiftool = require('exiftool-vendored').exiftool;
 const videoFormats = ['mp4', 'mov', 'avi', '3gp'];
 
-const photosDir = '../../../public/dogs/';
+const photosDir = 'https://hollyngrade.com/dogs/';
 const args = process.argv.slice(2); 
 
 const checkMetaData = async (arg) => {
@@ -17,7 +17,7 @@ const checkMetaData = async (arg) => {
             console.log(metadata ? metadata : `no metadata for ${filePath}`)
         }
         else {
-            console.log('we have a date!')
+            console.log('we have a date!', filePath)
             date = metadata.DateTimeOriginal || metadata['Creation Time'] || '';
         }
     }
