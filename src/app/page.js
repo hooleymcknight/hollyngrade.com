@@ -4,9 +4,8 @@ import TwitchEmbed from './components/TwitchEmbed/twitchEmbed';
 import DonationButtons from "./components/TwitchEmbed/donationButtons";
 import ChasmPhotos from "./components/pets/chasmPhotos";
 
-let isLive = false;
-
 export default async function Home() {
+    let isLive = false;
     const liveStreams = await areYouLive();
     if (liveStreams?.length) {
         isLive = liveStreams[0].type;
@@ -51,7 +50,7 @@ export default async function Home() {
                     />
                     <div className="flex flex-col flex-nowrap">
                         <h2 className="max-w-s text-3xl font-semibold leading-10 tracking-tight text-black">
-                            Chasm's tribute fundraiser
+                            Chasm&apos;s tribute fundraiser
                         </h2>
                         {/* <p className="max-w-md text-lg leading-6 text-zinc-800 mt-3 mb-0">
                             <a href="#chasm-updates" alt="jump to Chasm updates" className="underline">
@@ -127,15 +126,15 @@ export default async function Home() {
                 </table>
 
                 <p className="max-w-full text-lg leading-normal text-zinc-800 my-6 font-medium">
-                    The vets and I did our best for Chasm, tried to give him the best chance of a healthy, happy life. While the surgery didn't cause this, 
-                    we're glad we tried for him. We're all pretty wrecked to lose Chasm. The vets have cried, friends have cried. Chasm was one of the 
-                    most loved dogs I've had the opportunity to know. I loved being his owner. It was a privilege to take care of him for his whole life.
+                    The vets and I did our best for Chasm, tried to give him the best chance of a healthy, happy life. While the surgery didn&apos;t cause this, 
+                    we&apos;re glad we tried for him. We&apos;re all pretty wrecked to lose Chasm. The vets have cried, friends have cried. Chasm was one of the 
+                    most loved dogs I&apos;ve had the opportunity to know. I loved being his owner. It was a privilege to take care of him for his whole life.
                     <br/><br/>
                     I will be grieving Chasm for years regardless, but I will also be in debt for years as well, to pay off the procedures we had for him 
                     recently. Any help in lightening that financial load is deeply, deeply appreciated.
                     <br/><br/>
-                    If you wish to donate a small rock to Chasm's grave, you may mail one to my home address (assuming that you either already have this 
-                    information or are someone I know in person to give that information to). Any donated rocks will be placed on Chasm's grave.
+                    If you wish to donate a small rock to Chasm&apos;s grave, you may mail one to my home address (assuming that you either already have this 
+                    information or are someone I know in person to give that information to). Any donated rocks will be placed on Chasm&apos;s grave.
                 </p>
 
                 <DonationButtons />

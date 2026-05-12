@@ -1,4 +1,6 @@
+// import { getServerSession } from 'next-auth';
 import { headers } from 'next/headers';
+import SessionProvider from "./SessionProvider";
 import "./globals.css";
 
 // export const metadata = {
@@ -7,6 +9,7 @@ import "./globals.css";
 // };
 
 export async function generateMetadata({ params, searchParams }, parent) {
+    // const session = await getServerSession(options);
     const headersList = await headers();
     const pathname = headersList.get("hg-pathname") || "hollyngrade";
     
@@ -39,7 +42,9 @@ export default function RootLayout({ children }) {
                 {/* <meta content="#a20000" data-react-helmet="true" name="theme-color" /> */}
             </head>
             <body className={`antialiased`}>
-                {children}
+                <SessionProvider>
+                    {children}
+                </SessionProvider>
             </body>
         </html>
     );

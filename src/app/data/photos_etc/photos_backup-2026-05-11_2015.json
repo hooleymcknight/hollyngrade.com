@@ -1,0 +1,694 @@
+[
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/02-meetingKoda/koda-chasm-chicken_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/02-meetingKoda/koda-chasm-chicken.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2012-03-17T11:22:47.000Z",
+        "category": "02-meetingKoda"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/Video Jul 01, 17 52 51_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/Video Jul 01, 17 52 51.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-07-02T05:52:51.000Z",
+        "category": "2019"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/Video Oct 29, 20 54 41_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/Video Oct 29, 20 54 41.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-10-30T11:21:47.000Z",
+        "category": "2019"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/Video Sep 05, 17 39 06_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/Video Sep 05, 17 39 06.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-06T05:39:06.000Z",
+        "category": "2019"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2020/20201107_183709_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2020/20201107_183709.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2020-11-08T08:37:28.000Z",
+        "category": "2020"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2023/20230525_151049_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2023/20230525_151049.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2023-05-26T05:10:56.000Z",
+        "category": "2023"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2024/20240112_161657_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2024/20240112_161657.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2024-01-13T08:17:13.000Z",
+        "category": "2024"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2024/20240129_102653_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2024/20240129_102653.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2024-01-30T02:27:26.000Z",
+        "category": "2024"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2025/20250107_223416_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2025/20250107_223416.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2025-01-07T16:55:27.000Z",
+        "category": "2025"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2025/20250107_223416_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2025"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2025/20250526_164630_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2025/20250526_164630.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2025-05-27T11:20:42.000Z",
+        "category": "2025"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2025/20250526_164630_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2025"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2025/20251021_213127_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2025/20251021_213127.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2025-10-22T11:32:09.000Z",
+        "category": "2025"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2025/20251021_213127_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2025"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 01 23_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 01 23.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-18T12:01:23.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 01 23_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 03 25_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 03 25.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-18T12:03:25.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 03 25_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 04 18_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 04 18.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-18T12:04:18.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 04 18_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 12 24 03_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 12 24 03.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-19T00:24:03.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 12 24 03_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 42 52_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 42 52.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-22T07:42:52.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 42 52_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 45 00_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 45 00.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-22T07:45:00.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 45 00_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 52 13_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 52 13.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-22T07:52:13.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 52 13_poster.webp",
+        "alt": "",
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/02-meetingKoda/koda-chasm-chicken_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/02-meetingKoda/koda-chasm-chicken.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2012-03-17T11:22:47.000Z",
+        "category": "02-meetingKoda"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/Video Jul 01, 17 52 51_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/Video Jul 01, 17 52 51.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-07-02T05:52:51.000Z",
+        "category": "2019"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/Video Oct 29, 20 54 41_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/Video Oct 29, 20 54 41.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-10-30T11:21:47.000Z",
+        "category": "2019"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/Video Sep 05, 17 39 06_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/Video Sep 05, 17 39 06.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-06T05:39:06.000Z",
+        "category": "2019"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2020/20201107_183709_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2020/20201107_183709.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2020-11-08T08:37:28.000Z",
+        "category": "2020"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2023/20230525_151049_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2023/20230525_151049.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2023-05-26T05:10:56.000Z",
+        "category": "2023"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2024/20240112_161657_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2024/20240112_161657.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2024-01-13T08:17:13.000Z",
+        "category": "2024"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2024/20240129_102653_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2024/20240129_102653.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2024-01-30T02:27:26.000Z",
+        "category": "2024"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2025/20250107_223416_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2025/20250107_223416.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2025-01-07T16:55:27.000Z",
+        "category": "2025"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2025/20250526_164630_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2025/20250526_164630.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2025-05-27T11:20:42.000Z",
+        "category": "2025"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2025/20251021_213127_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2025/20251021_213127.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2025-10-22T11:32:09.000Z",
+        "category": "2025"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 01 23_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 01 23.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-18T12:01:23.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 03 25_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 03 25.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-18T12:03:25.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 04 18_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 00 04 18.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-18T12:04:18.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 12 24 03_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 18, 12 24 03.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-19T00:24:03.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 42 52_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 42 52.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-22T07:42:52.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 45 00_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 45 00.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-22T07:45:00.000Z",
+        "category": "2019/sad that matt is leaving"
+    },
+    {
+        "type": "video",
+        "poster": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 52 13_poster.webp",
+        "sources": {
+            "src": "https://hollyngrade.com/dogs/2019/sad that matt is leaving/Video Sep 21, 19 52 13.mp4",
+            "type": "video/mp4"
+        },
+        "alt": "",
+        "autoplay": true,
+        "controls": true,
+        "playsInline": true,
+        "title": "",
+        "description": "",
+        "data-tags": "",
+        "date": "2019-09-22T07:52:13.000Z",
+        "category": "2019/sad that matt is leaving"
+    }
+]

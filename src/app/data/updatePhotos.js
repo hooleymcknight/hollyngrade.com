@@ -5,6 +5,7 @@ const { readdir } = require('node:fs/promises');
 const { imageSizeFromFile } = require('image-size/fromFile');
 const exifr = require('exifr');
 const sharp = require('sharp');
+const exif = require('exif-reader');
 
 // videos
 const ffprobe = require('ffprobe')
@@ -27,7 +28,13 @@ const args = process.argv.slice(2);
 const getWebPMetadata = async (imagePath) => {
     try {
         const metadata = await sharp(imagePath).metadata();
-        return metadata;
+        const parsedExif = exif(metadata.exif);
+        const creationDate = parsedExif.Photo.DateTimeOriginal || parsedExif.Photo.DateTimeDigitized;
+        return {
+            width: metadata.width,
+            height: metadata.height,
+            DateTimeOriginal: creationDate,
+        };
         // Access specific fields: metadata.width, metadata.format, metadata.exif
     } catch (error) {
         console.error('Error reading metadata:', error);
@@ -35,7 +42,7 @@ const getWebPMetadata = async (imagePath) => {
 }
 
 const updatePhotosData = async () => {
-    let mapped = photosData.map(x => x.src);
+    let mapped = photosData.map(x => x.src || x.sources.src);
     const files = await readdir(photosDir, { withFileTypes: true });
 
     let missingData = [];
@@ -56,13 +63,11 @@ const updatePhotosData = async () => {
     for (const dir of directories) {
         console.log(`Searching directory "${dir}"...`);
         const dirFiles = await readdir(`${photosDir}${dir}/`, { withFileTypes: true });
-        console.log(dirFiles)
-        console.log(dirFiles[0].isFile())
 
         for (const dirFile of dirFiles) {
-            console.log(dirFile)
             let filePath = dirFile.parentPath + dirFile.name;
             let lightboxPath = `https://hollyngrade.com/dogs${dirFile.parentPath.split('dogs')[1]}${dirFile.name}`;
+            console.log('lb,', lightboxPath)
             let needsMoreInfo = false;
 
             // if we hit a directory
@@ -80,15 +85,9 @@ const updatePhotosData = async () => {
                 /**
                  * SKIP IF IT HAS "_POSTER" IN THE NAME -----------!!!!!!!!!!!!!!!
                  */
-                if (!videoFormats.includes(dirFile.name.split('.')[1]) && !dirFile.name.includes('_poster')) {
-                    console.log('looking for metadata', filePath)
+                if (!videoFormats.includes(dirFile.name.split('.')[1]) && !dirFile.name.includes('_poster.webp')) {
                     const metadata = filePath.includes('.webp') ? await getWebPMetadata(filePath) : await exifr.parse(filePath);
-                    // const metadata = await exifr.parse(filePath);
-                    console.log('I have metadata')
                     if (!metadata || (!metadata.DateTimeOriginal && !metadata['Creation Time'])) {
-                        console.log(filePath)
-                        console.log(metadata ? metadata : `no metadata for ${filePath}`)
-                        console.log(metadata && metadata['Creation Time'] ? metadata['Creation Time'] : 'metadata but no creation time???')
                         mediaWithoutDate.push(filePath);
                         needsMoreInfo = true;
                     }
@@ -132,6 +131,7 @@ const updatePhotosData = async () => {
                         "data-tags": "",
                         "date": date,
                         "category": dir,
+                        "active": true,
                     }
 
                     if (fileType == 'video') {
@@ -153,11 +153,14 @@ const updatePhotosData = async () => {
                             "data-tags": "",
                             "date": date,
                             "category": dir,
+                            "active": true,
                         }
                         posters.push(`${filePath.replace('.mp4', '').replace('.mov', '')}_poster.webp`);
                     }
 
-                    missingData.push(fileData);
+                    if (!lightboxPath.includes('_poster.webp')) {
+                        missingData.push(fileData);
+                    }
                 }
             }
         }
@@ -176,7 +179,7 @@ const updatePhotosData = async () => {
         console.log('No files are missing from the data.')
 
         if (mediaWithoutDate.length) {
-            console.log(`\n\nDate information needed for the following media files: \n-`, mediaWithoutDate.map(x => x.split('/public')[1]).join('\n- '));
+            console.log(`\n\nDate information needed for the following media files: \n-`, mediaWithoutDate.map(x => x.split('/dogs')[1]).join('\n- '));
         }
 
         return;
@@ -238,13 +241,13 @@ const addActiveProperty = async () => {
     }
 
     for (const item of newData) {
-        item.active = allFileNames.includes(item.src) ? true : false;
+        item.active = allFileNames.includes(item.src || item.sources.src) ? true : false;
     }
 
     fs.writeFileSync(dataFile, JSON.stringify(newData));
 }
 
-// addActiveProperty();
+addActiveProperty();
 
 const probeVideo = async (arg) => {
     const filePath = photosDir + arg;
@@ -355,4 +358,29 @@ const updateVideoData = async () => {
     }
 }
 
-updatePhotosData();
+// updateVideoData();
+
+const removePosters = async () => {
+    let newData = [...photosData];
+    // const files = await readdir(photosDir, { withFileTypes: true });
+
+    let posters = [];
+    let entriesToKeep = [];
+
+    for (const item of photosData) {
+        console.log(item);
+        let source = item.src || item.sources.src;
+        if (!source.includes('_poster.webp')) {
+            entriesToKeep.push(item);
+        }
+        else {
+            posters.push(item);
+        }
+    }
+
+    // console.log(entriesToKeep)
+
+    // fs.writeFileSync('./photos.json', JSON.stringify(entriesToKeep))
+}
+
+// removePosters();

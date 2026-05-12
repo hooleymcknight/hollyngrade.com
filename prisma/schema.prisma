@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model dogs {
+  id          Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  src         String? @db.Text
+  type        String? @db.Text
+  alt         String? @db.Text
+  width       Int?
+  height      Int?
+  title       String? @db.Text
+  description String? @db.Text
+  data_tags   String? @map("data-tags") @db.Text
+  date        String? @db.Text
+  category    String? @db.Text
+  active      Int?
+  poster      String? @db.Text
+}
