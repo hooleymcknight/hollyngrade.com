@@ -1,13 +1,39 @@
 'use client'
+import { useState, useEffect } from "react";
 import DogsLightbox from "./components/dogsLightbox";
+import { getPhotos } from "./components/server/getPhotos";
 
 export default function Chasm() {
+    const [categories, setCategories] = useState([]);
+
+    const loadData = async () => {
+        let res = await getPhotos()
+        .then((response) => {
+            if (response) {
+                console.log('res:', response)
+                setCategories([...response]);
+            }
+            else {
+                console.error('No photos data to load.')
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            return 'There has been an unknown error. Please refresh and try again.'
+        });
+    }
+
+    useEffect(() => {
+        if (!categories.length) {
+            loadData();
+        }
+    }, []);
 
     return (
         <main className="flex flex-col min-h-screen items-center justify-center">
-            <div id="photo-gallery" className="flex max-h-screen w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-8 sm:px-16 bg-zinc-50 sm:items-start mt-8 mb-8"
+            <div id="photo-gallery" className="flex w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-8 sm:px-16 bg-zinc-50 sm:items-start mt-8 mb-8"
                 style={{ background: "rgba(250, 250, 250, 0.6)" }}>
-                <DogsLightbox />
+                <DogsLightbox categories={categories} />
             </div>
         </main>
     );

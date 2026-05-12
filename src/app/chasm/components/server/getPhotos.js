@@ -6,20 +6,27 @@ const db = new PrismaClient();
 const alignThumbnails = (photos) => {
     // photos count should be 3. 
     photos[0].span = photos[0].width > photos[0].height ? 'col-span-2' : 'row-span-2';
-    return photos;
+    return [...new Set(photos)];
 }
 
-const getPhotos = async () => {
+const getMedian = (arr) => {
+    if (!arr.length) return undefined;
+    const mid = Math.floor(arr.length / 2);
+    return arr.length % 2 !== 0
+        ? arr[mid]
+        : arr[mid -1];
+};
+
+export const getPhotos = async () => {
     // return new Promise((resolve, reject) => {
     //     const success = true;
     //     if (success) resolve("Data received!");
     //     else reject("Error occurred.");
     // });
 
-    const res = await db.dogs.findMany();
+    const res = await db.dogs.findMany({});
 
     let categoryTiles = [...new Set(res.map(x => x.category))];
-    // console.log(categoryTiles)
     
     for (const category of categoryTiles) {
         const idx = categoryTiles.indexOf(category);
@@ -28,7 +35,7 @@ const getPhotos = async () => {
 
         categoryTiles[idx] = {
             "category": catName,
-            "thumbnails": alignThumbnails([photos[0], photos[1], photos[2]]),
+            "thumbnails": alignThumbnails([photos[0], getMedian(photos), photos[photos.length - 1]]),
             "photoSet": photos,
         }
     }
@@ -36,5 +43,3 @@ const getPhotos = async () => {
     return categoryTiles;
     
 }
-
-export default getPhotos;
