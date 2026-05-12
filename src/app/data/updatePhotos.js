@@ -4,17 +4,35 @@ const { readdir } = require('node:fs/promises');
 // images
 const { imageSizeFromFile } = require('image-size/fromFile');
 const exifr = require('exifr');
+const sharp = require('sharp');
 
 // videos
 const ffprobe = require('ffprobe')
 const ffprobeStatic = require('ffprobe-static');
 const exiftool = require('exiftool-vendored').exiftool;
 const videoFormats = ['mp4', 'mov', 'avi', '3gp'];
+const extractFrame = require('ffmpeg-extract-frame')
+
+const ffmpeg = require('fluent-ffmpeg');
+ffmpeg.setFfmpegPath('C:/Users/Hooley/node-packages_hollyn/ffmpeg-master-latest-win64-gpl-shared/bin/ffmpeg.exe');
 
 // general data
 const dataFile = './photos.json';
 const photosData = require(dataFile);
-const photosDir = 'https://hollyngrade.com/dogs/'; // fix how this plays out down below. it won't work right now, it is looking for a relative path.
+const photosDir = '../../../../dogs/'; // fix how this plays out down below. it won't work right now, it is looking for a relative path.
+
+// user input args
+const args = process.argv.slice(2);
+
+const getWebPMetadata = async (imagePath) => {
+    try {
+        const metadata = await sharp(imagePath).metadata();
+        return metadata;
+        // Access specific fields: metadata.width, metadata.format, metadata.exif
+    } catch (error) {
+        console.error('Error reading metadata:', error);
+    }
+}
 
 const updatePhotosData = async () => {
     let mapped = photosData.map(x => x.src);
@@ -23,6 +41,7 @@ const updatePhotosData = async () => {
     let missingData = [];
     let directories = [];
     let mediaWithoutDate = [];
+    let posters = [];
 
     for (const file of files) {
         if (file.isFile() && !mapped.includes(file)) {
@@ -37,10 +56,13 @@ const updatePhotosData = async () => {
     for (const dir of directories) {
         console.log(`Searching directory "${dir}"...`);
         const dirFiles = await readdir(`${photosDir}${dir}/`, { withFileTypes: true });
+        console.log(dirFiles)
+        console.log(dirFiles[0].isFile())
 
         for (const dirFile of dirFiles) {
+            console.log(dirFile)
             let filePath = dirFile.parentPath + dirFile.name;
-            let lightboxPath = `${dirFile.parentPath.split('public')[1]}${dirFile.name}`;
+            let lightboxPath = `https://hollyngrade.com/dogs${dirFile.parentPath.split('dogs')[1]}${dirFile.name}`;
             let needsMoreInfo = false;
 
             // if we hit a directory
@@ -52,10 +74,17 @@ const updatePhotosData = async () => {
             else if (dirFile.isFile() && !mapped.includes(lightboxPath)) {
                 let dim = '';
                 let date;
+                let fileType = 'image';
 
                 // images
-                if (!videoFormats.includes(dirFile.name.split('.')[1])) {
-                    const metadata = await exifr.parse(filePath);
+                /**
+                 * SKIP IF IT HAS "_POSTER" IN THE NAME -----------!!!!!!!!!!!!!!!
+                 */
+                if (!videoFormats.includes(dirFile.name.split('.')[1]) && !dirFile.name.includes('_poster')) {
+                    console.log('looking for metadata', filePath)
+                    const metadata = filePath.includes('.webp') ? await getWebPMetadata(filePath) : await exifr.parse(filePath);
+                    // const metadata = await exifr.parse(filePath);
+                    console.log('I have metadata')
                     if (!metadata || (!metadata.DateTimeOriginal && !metadata['Creation Time'])) {
                         console.log(filePath)
                         console.log(metadata ? metadata : `no metadata for ${filePath}`)
@@ -69,7 +98,8 @@ const updatePhotosData = async () => {
                     }
                 }
                 // videos
-                else {
+                else if (videoFormats.includes(dirFile.name.split('.')[1])) {
+                    fileType = 'video';
                     const fileMetaData = await ffprobe(filePath, {path: ffprobeStatic.path})
                     const tags = await exiftool.read(filePath);
                     if (!tags || !tags.CreateDate || !tags.CreateDate.rawValue) {
@@ -92,7 +122,7 @@ const updatePhotosData = async () => {
 
                 // if it doesn't need more info, add it to the array we will generate data for
                 if (!needsMoreInfo) {
-                    missingData.push({
+                    let fileData = {
                         "src": lightboxPath,
                         "alt": "",
                         "width": dim.width,
@@ -102,11 +132,45 @@ const updatePhotosData = async () => {
                         "data-tags": "",
                         "date": date,
                         "category": dir,
-                    });
+                    }
+
+                    if (fileType == 'video') {
+                        fileData = {
+                            "type": "video",
+                            "poster": `${lightboxPath.replace('.mp4', '')}_poster.webp`,
+                            "sources": {
+                                "src": lightboxPath,
+                                "type": "video/mp4",
+                            },
+                            "alt": "",
+                            "width": dim.width,
+                            "height": dim.height,
+                            "autoplay": true,
+                            "controls": true,
+                            "playsInline": true,
+                            "title": "",
+                            "description": "",
+                            "data-tags": "",
+                            "date": date,
+                            "category": dir,
+                        }
+                        posters.push(`${filePath.replace('.mp4', '').replace('.mov', '')}_poster.webp`);
+                    }
+
+                    missingData.push(fileData);
                 }
             }
         }
     }
+
+    // for (const poster of posters) {
+    //     const allFiles = fs.readdirSync(photosDir);
+    //     const found = allFiles.find(file => file === poster.replace(photosDir, ''));
+    //     if (!found) {
+    //         console.log('Creating poster file for ', poster.replace(photosDir, ''));
+    //         probeVideo(poster);
+    //     }
+    // }
 
     if (!missingData.length) {
         console.log('No files are missing from the data.')
@@ -134,6 +198,161 @@ const updatePhotosData = async () => {
 
     console.log(`\n\nDate information needed for the following media files: \n-`, mediaWithoutDate.map(x => x.split('/public')[1]).join('\n- '));
 
+}
+
+// updatePhotosData();
+
+const addActiveProperty = async () => {
+    let newData = [...photosData];
+    let directories = [];
+    const files = await readdir(photosDir, { withFileTypes: true });
+
+    let allFileNames = [];
+
+    for (const file of files) {
+        if (file.isFile() && !mapped.includes(file)) {
+            console.log('This file is missing, and loose:', file);
+            console.log('Please move this file!!')
+        }
+        if (file.isDirectory()) {
+            directories.push(file.name);
+        }
+    }
+
+    for (const dir of directories) {
+        console.log(`Searching directory "${dir}"...`);
+        const dirFiles = await readdir(`${photosDir}${dir}/`, { withFileTypes: true });
+
+        for (const dirFile of dirFiles) {
+            let filePath = dirFile.parentPath + dirFile.name;
+
+            if (dirFile.isDirectory()) {
+                // add the nested directory to the directories array
+                directories.push(filePath.split(photosDir)[1]);
+            }
+            else {
+                const serverFile = 'https://hollyngrade.com/dogs' + dirFile.parentPath.split('/dogs')[1] + dirFile.name;
+                allFileNames.push(serverFile);
+            }
+        }
+    }
+
+    for (const item of newData) {
+        item.active = allFileNames.includes(item.src) ? true : false;
+    }
+
+    fs.writeFileSync(dataFile, JSON.stringify(newData));
+}
+
+// addActiveProperty();
+
+const probeVideo = async (arg) => {
+    const filePath = photosDir + arg;
+    // const fileMetaData = await ffprobe(filePath, {path: ffprobeStatic.path});
+    // console.log(fileMetaData.streams[0])
+    await extractFrame({
+        input: filePath,
+        output: `${filePath.replace('.mp4', '')}_poster.webp`,
+        offset: 0,
+    });
+}
+
+// probeVideo(args[0]); // test with:  node updatePhotos.js 2024/20240112_161657.mp4
+
+const updateVideoData = async () => {
+    let newData = [...photosData];
+    let mapped = photosData.map(x => x.src);
+    const files = await readdir(photosDir, { withFileTypes: true });
+
+    let directories = [];
+    let mediaWithoutDate = [];
+    let posters = [];
+
+    for (const file of files) {
+        if (file.isFile() && !mapped.includes(file)) {
+            console.log('This file is missing, and loose:', file);
+            console.log('Please move this file!!')
+        }
+        if (file.isDirectory()) {
+            directories.push(file.name);
+        }
+    }
+
+    for (const dir of directories) {
+        console.log(`Searching directory "${dir}" for videos...`);
+        const dirFiles = await readdir(`${photosDir}${dir}/`, { withFileTypes: true });
+
+        for (const dirFile of dirFiles) {
+            let filePath = dirFile.parentPath + dirFile.name;
+            let lightboxPath = `https://hollyngrade.com/dogs${dirFile.parentPath.split('dogs')[1]}${dirFile.name}`;
+            let needsMoreInfo = false;
+
+            // if we hit a directory
+            if (dirFile.isDirectory()) {
+                // add the nested directory to the directories array
+                directories.push(filePath.split(photosDir)[1]);
+            }
+            // for all actual files:
+            else if (dirFile.isFile() && !mapped.includes(lightboxPath) && ['mp4'].includes(dirFile.name.split('.')[1])) {
+                let dim = '';
+                let date;
+                
+                const fileMetaData = await ffprobe(filePath, {path: ffprobeStatic.path})
+                const tags = await exiftool.read(filePath);
+                if (!tags || !tags.CreateDate || !tags.CreateDate.rawValue) {
+                    mediaWithoutDate.push(filePath);
+                    needsMoreInfo = true;
+                }
+                else {
+                    dim = { height: fileMetaData.height, width: fileMetaData.width };
+                    date = tags?.CreateDate?.rawValue || '';
+                }
+
+                let fileData = {
+                    "type": "video",
+                    "poster": `${lightboxPath.replace('.mp4', '')}_poster.webp`,
+                    "sources": {
+                        "src": lightboxPath,
+                        "type": "video/mp4",
+                    },
+                    "alt": "",
+                    "width": dim.width,
+                    "height": dim.height,
+                    "autoplay": true,
+                    "controls": true,
+                    "playsInline": true,
+                    "title": "",
+                    "description": "",
+                    "data-tags": "",
+                    "date": date,
+                    "category": dir,
+                }
+
+                console.log(lightboxPath)
+                const thisData = newData.filter(x => x.sources && x.sources.src === lightboxPath)?.[0] || false;
+                console.log(thisData)
+                if (thisData) {
+                    newData[newData.indexOf(thisData)] = fileData;
+                    posters.push(filePath);
+                }
+
+            }
+        }
+    }
+
+    // search for the posters.
+
+    console.log(posters)
+
+    for (const poster of posters) {
+        const allFiles = fs.readdirSync(photosDir);
+        const webpName = poster.replace(photosDir, '').replace('.mp4', '').replace('.mov', '') + '_poster.webp';
+        const found = allFiles.find(file => file === webpName);
+        if (!found) {
+            console.log('Creating poster file for ', poster);
+            probeVideo(poster.replace(photosDir, ''));
+        }
+    }
 }
 
 updatePhotosData();

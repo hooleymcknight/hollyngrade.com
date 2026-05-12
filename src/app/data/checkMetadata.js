@@ -3,7 +3,7 @@ const exiftool = require('exiftool-vendored').exiftool;
 const videoFormats = ['mp4', 'mov', 'avi', '3gp'];
 
 const photosDir = 'https://hollyngrade.com/dogs/';
-const args = process.argv.slice(2); 
+const args = process.argv.slice(2);
 
 const checkMetaData = async (arg) => {
     let date;

@@ -13,22 +13,30 @@ import photos from '@/app/data/photos.json';
 import { Captions, Download, Share, Thumbnails, Video, Zoom } from "yet-another-react-lightbox/plugins";
 
 export default function Chasm() {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
+    const [activePhotoSet, setActivePhotoSet] = useState(photos);
+
+    // console.log(photos);
+
+    const setPhotosAndOpen = (photoSet) => {
+        setActivePhotoSet(photoSet);
+        setOpen(true);
+    }
 
     return (
         <main className="flex flex-col min-h-screen items-center justify-center">
             <div id="coming-soon" className="flex max-h-screen w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-8 sm:px-16 bg-zinc-50 sm:items-start mt-8 mb-8"
                 style={{ background: "rgba(250, 250, 250, 0.6)" }}>
                 <div className="flex flex-row flex-wrap justify-center items-center gap-6 text-center sm:items-center sm:text-left sm:flex-nowrap">
-                    {/* <button type="button" onClick={() => setOpen(true)}>
-                        Open Lightbox
-                    </button> */}
+                    <button type="button" onClick={() => setPhotosAndOpen(photos)}>
+                        View All
+                    </button>
 
                     <Lightbox
                         plugins={[Captions, Download, Share, Thumbnails, Video, Zoom]}
                         open={open}
                         close={() => setOpen(false)}
-                        slides={photos}
+                        slides={activePhotoSet.filter(x => x.active === true)}
                     />
                 </div>
             </div>
