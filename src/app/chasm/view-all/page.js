@@ -91,10 +91,11 @@ export default function ViewAll() {
                             {`${slides.length} photo${slides.length > 1 ? 's' : ''}`}
                         </small>
                         <ServerPhotoAlbum
-                            layout="rows"
-                            breakpoints={[1800]}
-                            defaultContainerWidth={2000}
-                            targetRowHeight={150}
+                            layout="masonry"
+                            breakpoints={[400, 465, 500, 600, 639]}
+                            defaultContainerWidth={640}
+                            // targetRowHeight={150}
+                            rowConstraints={{ singleRowMaxHeight: 200 }}
                             photos={slidesWithPosters(slides)}
                             classNames={{ container: 'w-full h-full' }}
                             onClick={({ index: current }) => setIndex(current)}
@@ -108,6 +109,13 @@ export default function ViewAll() {
                                     />
                                 </div>
                             )}
+                            columns={(containerWidth) => {
+                                if (containerWidth < 400) return 1;
+                                if (containerWidth < 465) return 2;
+                                if (containerWidth < 500) return 3;
+                                if (containerWidth < 600) return 4;
+                                return 5;
+                            }}
                         />
                     </>
                 : 
