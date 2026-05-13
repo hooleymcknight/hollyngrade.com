@@ -57,7 +57,8 @@ export default function Chasm() {
 
     useEffect(() => {
         if (!categories.length) {
-            sessionData && sessionData?.photos ? setCategories(sessionData.photos.photos) : loadData();
+            // sessionData && sessionData?.photos ? setCategories(sessionData.photos.photos) : loadData();
+            loadData();
         }
     }, []);
 
