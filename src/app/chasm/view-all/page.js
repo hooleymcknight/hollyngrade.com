@@ -6,12 +6,9 @@ import ServerPhotoAlbum from "react-photo-album/server";
 import "react-photo-album/styles.css";
 import "react-photo-album/rows.css";
 
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-import "yet-another-react-lightbox/plugins/captions.css";
-import "yet-another-react-lightbox/plugins/thumbnails.css";
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
-import { Captions, Counter, Download, Share, Thumbnails, Video, Zoom } from "yet-another-react-lightbox/plugins";
 import BackButton from "@/app/components/backButton";
 
 import { getPhotos } from '../components/server/getPhotos';
@@ -69,6 +66,10 @@ export default function ViewAll() {
         });
     }
 
+    const AlbumLightbox = dynamic(() => import('../components/albumLightbox.js'), {
+        loading: () => <p className="hidden">Loading...</p>,
+    });
+
     useEffect(() => {
         if (!categories.length) {
             sessionData && sessionData?.photos ? loadData(sessionData.photos.photos) : loadData();
@@ -97,23 +98,27 @@ export default function ViewAll() {
                             photos={slidesWithPosters(slides)}
                             classNames={{ container: 'w-full h-full' }}
                             onClick={({ index: current }) => setIndex(current)}
+                            renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => (
+                                <div style={wrapperStyle}>
+                                    <Image
+                                        alt={photo.alt}
+                                        src={photo.src}
+                                        height={photo.height}
+                                        width={photo.width}
+                                    />
+                                </div>
+                            )}
                         />
                     </>
                 : 
                     <p className="text-center block w-full mb-16">Loading...</p>
                 }
 
-                <Lightbox
-                    plugins={[Captions, Counter, Download, Share, Thumbnails, Video, Zoom]}
-                    open={index >= 0}
-                    close={() => setIndex(-1)}
-                    index={index}
-                    slides={[...new Set(categories.map(x => x.photoSet).flat())]}
-                    video={{
-                        autoPlay: true,
-                        controls: true,
-                    }}
+                <AlbumLightbox
+                    sharedStateIndex={index} setSharedStateIndex={setIndex}
+                    sharedStateCategories={categories} setSharedStateCategories={setCategories}
                 />
+
             </div>
         </main>
     );

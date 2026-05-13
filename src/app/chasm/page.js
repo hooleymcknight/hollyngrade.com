@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from '@/app/SessionProvider';
 
-import DynamicLightbox from "./components/dynamicLightbox";
+import CategoriesGallery from './components/categoriesGallery';
 import { getPhotos } from "./components/server/getPhotos";
 
 import BackButton from "../components/backButton";
@@ -49,7 +49,7 @@ export default function Chasm() {
             >
                 <BackButton target='./' />
                 <h1 className="text-4xl mt-6 mb-16 text-center block w-full tracking-tighter">Koda &amp; Chasm Photo&nbsp;Gallery</h1>
-                <DynamicLightbox categories={categories} />
+                <CategoriesGallery categories={categories} />
             </div>
         </main>
     );
