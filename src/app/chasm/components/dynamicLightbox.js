@@ -8,7 +8,7 @@ import "yet-another-react-lightbox/plugins/counter.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 import { Captions, Counter, Download, Share, Thumbnails, Video, Zoom } from "yet-another-react-lightbox/plugins";
-import { processCategoryName, processSpanClasses, sortedCategories } from './lightboxHelpers';
+import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './lightboxHelpers';
 
 export default function DynamicLightbox(props) {
     const [open, setOpen] = useState(false);
@@ -39,7 +39,7 @@ export default function DynamicLightbox(props) {
             : ''}
 
             {sortedCategories(props.categories).map(x => 
-                <Link href={`/chasm/${x.category}/`}
+                <Link href={`/chasm/${pathnameSlug(x.category)}/`}
                 // <div
                     className="self-start w-full col-span-1 row-span-1" key={x.category} // data-photos={x.photoSet}
                     // onClick={() => props.openCategoryPage(x.category, x.photoSet)}

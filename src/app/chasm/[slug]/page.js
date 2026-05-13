@@ -16,7 +16,7 @@ import { Captions, Counter, Download, Share, Thumbnails, Video, Zoom } from "yet
 import BackButton from "@/app/components/backButton";
 
 import { getPhotos } from '../components/server/getPhotos';
-import { sortedCategories, processCategoryName } from "../components/lightboxHelpers";
+import { sortedCategories, processCategoryName, databaseSlug } from "../components/lightboxHelpers";
 
 const slidesWithPosters = (slides) => {
     let returnSlides = [...slides];
@@ -53,7 +53,7 @@ export default function ViewAll() {
             return;
         }
         console.log('Loading photos from database');
-        let res = await getPhotos(slug)
+        let res = await getPhotos(databaseSlug(slug))
         .then((response) => {
             if (response) {
                 const result = sortedCategories([...response]);
@@ -86,12 +86,13 @@ export default function ViewAll() {
         if (!categories.length) {
             if (sessionData && sessionData?.photos) {
                 // console.log('load from session data')
-                // console.log(sessionData.photos.filter(x => x.category === slug));
-                loadData(sessionData.photos.filter(x => x.category === slug));
+                console.log(databaseSlug(slug))
+                console.log(sessionData.photos.filter(x => x.category === databaseSlug(slug)));
+                loadData(sessionData.photos.filter(x => x.category === databaseSlug(slug)));
             }
             else {
                 // console.log('new load')
-                loadData(null, slug);
+                loadData(null, databaseSlug(slug));
             }
         }
     }, []);
