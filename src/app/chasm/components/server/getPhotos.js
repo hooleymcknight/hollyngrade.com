@@ -17,6 +17,10 @@ const getMedian = (arr) => {
         : arr[mid -1];
 };
 
+const sortByDate = (arr) => {
+    //
+}
+
 export const getPhotos = async (slug) => {
     // return new Promise((resolve, reject) => {
     //     const success = true;
