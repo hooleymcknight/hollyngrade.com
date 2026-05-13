@@ -41,7 +41,8 @@ export default function DynamicLightbox(props) {
                 // <Link href={`/chasm/${x.category}/`}
                 <div
                     className="self-start w-full col-span-1 row-span-1" key={x.category} // data-photos={x.photoSet}
-                    onClick={() => props.openCategoryPage(x.category, x.photoSet)}
+                    // onClick={() => props.openCategoryPage(x.category, x.photoSet)}
+                    onClick={() => setPhotosAndOpen(x.photoSet)}
                 >
                     <div className={`grid gap-2 mb-4 ${x.thumbnails.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
                         {x.thumbnails.map(y => 
