@@ -17,14 +17,15 @@ const getMedian = (arr) => {
         : arr[mid -1];
 };
 
-export const getPhotos = async () => {
+export const getPhotos = async (slug) => {
     // return new Promise((resolve, reject) => {
     //     const success = true;
     //     if (success) resolve("Data received!");
     //     else reject("Error occurred.");
     // });
+    const options = slug ? { where: { category: slug }, orderBy: { date: "asc" } } : { orderBy: { id: "asc" } };
 
-    const res = await db.dogs.findMany({});
+    const res = await db.dogs.findMany(options);
 
     let categoryTiles = [...new Set(res.map(x => x.category))];
     
@@ -34,6 +35,13 @@ export const getPhotos = async () => {
         const photos = res.filter(x => x.category === category);
 
         for (let item of photos) {
+            // add dates to all the descriptions.
+            let dt = new Date(item.date);
+            let options = { year: 'numeric', month: 'short', day: 'numeric' };
+            dt = dt.toLocaleDateString('en-US', options);
+            item.description = `${dt}${item.description.length ? ': ' + item.description : ''}`;
+
+            // fix video src
             if (item.type === 'video' && !item.sources?.type) {
                 const ext = item.src.split('.')?.[item.src.split('.').length - 1];
                 if (!item.sources) {

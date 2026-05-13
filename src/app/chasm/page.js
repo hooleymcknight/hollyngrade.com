@@ -5,12 +5,18 @@ import { useSession } from '@/app/SessionProvider';
 import DynamicLightbox from "./components/dynamicLightbox";
 import { getPhotos } from "./components/server/getPhotos";
 
+import BackButton from "../components/backButton";
+
 export default function Chasm() {
     const [categories, setCategories] = useState([]);
     const { updateSession } = useSession();
     const sessionData = useSession().sessionData;
 
-    const loadData = async () => {
+    const loadData = async (data) => {
+        if (data) {
+            setCategories(data);
+            return;
+        }
         console.log('Loading photos from database');
         let res = await getPhotos()
         .then((response) => {
@@ -19,7 +25,7 @@ export default function Chasm() {
                 setCategories([...response]);
             }
             else {
-                console.error('No photos data to load.')
+                console.error('No photos data to load.');
             }
         })
         .catch((err) => {
@@ -30,8 +36,8 @@ export default function Chasm() {
 
     useEffect(() => {
         if (!categories.length) {
-            // sessionData && sessionData?.photos ? setCategories(sessionData.photos.photos) : loadData();
-            loadData();
+            sessionData && sessionData?.photos ? loadData(sessionData.photos.photos) : loadData();
+            // loadData();
         }
     }, []);
 
@@ -41,6 +47,7 @@ export default function Chasm() {
             <div id="photo-gallery" className="flex w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-8 sm:px-16 bg-zinc-50 sm:items-start mt-8 mb-8"
                 style={{ background: "rgba(250, 250, 250, 0.6)" }}
             >
+                <BackButton target='./' />
                 <h1 className="text-4xl mt-6 mb-16 text-center block w-full tracking-tighter">Koda &amp; Chasm Photo&nbsp;Gallery</h1>
                 <DynamicLightbox categories={categories} />
             </div>

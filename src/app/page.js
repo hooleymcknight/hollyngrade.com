@@ -3,6 +3,7 @@ import areYouLive from './api/twitch';
 import TwitchEmbed from './components/TwitchEmbed/twitchEmbed';
 import DonationButtons from "./components/TwitchEmbed/donationButtons";
 import ChasmPhotos from "./components/pets/chasmPhotos";
+import Link from "next/link";
 
 export default async function Home() {
     let isLive = false;
@@ -38,7 +39,17 @@ export default async function Home() {
             </div>
 
             <div id="chasm-surgery" className="flex w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-4 sm:py-16 sm:px-16 bg-zinc-50 sm:items-start mb-8"
-                style={{ background: "rgba(250, 250, 250, 0.6)" }}>
+                style={{ background: "rgba(250, 250, 250, 0.6)" }}
+            >
+
+                <Link
+                    href='/chasm'
+                    alt='Koda & Chasm Photo Gallery'
+                    className="text-xl min-w-[300px] text-center cursor-pointer btn text-white px-8 py-4 border-[#222] rounded-[30px] mt-[-12px] mb-12 mx-auto"
+                >
+                    Koda & Chasm Photo Gallery
+                </Link>
+
                 <div className="flex flex-row flex-wrap justify-center items-center gap-6 text-center sm:items-center sm:text-left sm:flex-nowrap">
                     <Image
                         className=""
@@ -139,9 +150,9 @@ export default async function Home() {
 
                 <DonationButtons />
 
-                <div id="chasm-photos" style={{ minHeight: '80vh' }}>
+                {/* <div id="chasm-photos" style={{ minHeight: '80vh' }}>
                     <ChasmPhotos />
-                </div>
+                </div> */}
 
             </div>
         </main>

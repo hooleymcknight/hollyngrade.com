@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Link } from 'next/link';
+import Link from "next/link";
 
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
+import "yet-another-react-lightbox/plugins/counter.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
-import { Captions, Download, Share, Thumbnails, Video, Zoom } from "yet-another-react-lightbox/plugins";
+import { Captions, Counter, Download, Share, Thumbnails, Video, Zoom } from "yet-another-react-lightbox/plugins";
 import { processCategoryName, processSpanClasses, sortedCategories } from './lightboxHelpers';
 
 export default function DynamicLightbox(props) {
@@ -38,11 +39,11 @@ export default function DynamicLightbox(props) {
             : ''}
 
             {sortedCategories(props.categories).map(x => 
-                // <Link href={`/chasm/${x.category}/`}
-                <div
+                <Link href={`/chasm/${x.category}/`}
+                // <div
                     className="self-start w-full col-span-1 row-span-1" key={x.category} // data-photos={x.photoSet}
                     // onClick={() => props.openCategoryPage(x.category, x.photoSet)}
-                    onClick={() => setPhotosAndOpen(x.photoSet)}
+                    // onClick={() => setPhotosAndOpen(x.photoSet)}
                 >
                     <div className={`grid gap-2 mb-4 ${x.thumbnails.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
                         {x.thumbnails.map(y => 
@@ -68,8 +69,8 @@ export default function DynamicLightbox(props) {
                         <h2 className="text-2xl text-center cursor-pointer hover:underline">{processCategoryName(x.category)}</h2>
                         <small className="">{`(${x.photoSet.length} photo${x.photoSet.length > 1 ? 's' : ''})`}</small>
                     </div>
-                {/* </Link> */}
-                </div>
+                </Link>
+                // </div>
             )}
 
             <div className="w-full col-span-2 flex items-center justify-center">
@@ -82,7 +83,7 @@ export default function DynamicLightbox(props) {
             </div>
 
             <Lightbox
-                plugins={[Captions, Download, Share, Thumbnails, Video, Zoom]}
+                plugins={[Captions, Counter, Download, Share, Thumbnails, Video, Zoom]}
                 open={open}
                 index={slideIndex}
                 close={() => { setOpen(false); setSlideIndex(0); }}
