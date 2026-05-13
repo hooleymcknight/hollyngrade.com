@@ -19,6 +19,7 @@ export const processCategoryName = (name) => {
 
 export const pathnameSlug = (name) => {
     // this comes in as the category from the database still, not the processed name. ex. "05-Sanger/pool boys"
+    // goes out as a single pathname. ex. "05-Sanger_pool boys" (I guess the - gets fixed somewhere else?)
     return name.replace(/\//g, '_');
 }
 

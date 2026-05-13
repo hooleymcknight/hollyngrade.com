@@ -41,6 +41,13 @@ export const getPhotos = async (slug) => {
             dt = dt.toLocaleDateString('en-US', options);
             item.description = `${dt}${item.description.length ? ': ' + item.description : ''}`;
 
+            // add a better share link, using the src field.
+            // example of the src field: https://hollyngrade.com/dogs/05-Sanger/pool boys/IMG_2569.webp
+            let fileName = item.src.split('/')[item.src.split('/').length - 1];
+            let categoryPath = item.src.split('/dogs/')[1].split('/' + fileName)[0].replace(/\//g, '_').replace(/\s/g, '-');
+            let shareLink = `https://hollyngrade.com/chasm/${categoryPath}?photo=${encodeURI(fileName)}`;
+            item.share = shareLink;
+            
             // fix video src
             if (item.type === 'video' && !item.sources?.type) {
                 const ext = item.src.split('.')?.[item.src.split('.').length - 1];

@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useSession } from '@/app/SessionProvider';
-import { useParams } from "next/navigation.js";
+import { useParams, useSearchParams } from "next/navigation.js";
 
 import ServerPhotoAlbum from "react-photo-album/server";
 import "react-photo-album/styles.css";
@@ -33,6 +33,7 @@ export default function ViewAll() {
     const { updateSession } = useSession();
     const sessionData = useSession().sessionData;
     const slug = useParams()?.slug;
+    const photoQuery = useSearchParams()?.get('photo') || null;
 
     useBackButtonClose(index >= 0, () => setIndex(-1));
 
@@ -46,10 +47,19 @@ export default function ViewAll() {
      * );
      */
 
+
+    const openPhotoFromQuery = (query, currentSlides) => {
+        if (!query || !currentSlides.length) return;
+
+        const queryIndex = currentSlides.map(x => x.src.split('/')[x.src.split('/').length - 1]).indexOf(query) || null;
+        setIndex(queryIndex);
+    }
+
     const loadData = async (data, slug) => {
         if (data) {
             setSlides(data[0].photoSet);
             setCategories(data);
+            openPhotoFromQuery(photoQuery, data[0].photoSet);
             return;
         }
         console.log('Loading photos from database');
@@ -71,6 +81,7 @@ export default function ViewAll() {
 
                 setCategories(result);
                 setSlides(finalSlideSet);
+                openPhotoFromQuery(photoQuery, finalSlideSet);
             }
             else {
                 console.error('No photos data to load.');
