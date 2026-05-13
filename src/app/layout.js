@@ -15,16 +15,21 @@ export async function generateMetadata({ params, searchParams }, parent) {
     
     // fetch data
     let pageTitle = 'hollyngrade';
+    let pageDesc = 'full website coming soon';
+    if (pathname.includes('chasm')) {
+        pageTitle = 'Koda & Chasm Photo Gallery'
+        pageDesc = 'Remembering Chasm.'
+    }
     
     // optionally access and extend (rather than replace) parent metadata
     //   const previousImages = (await parent).openGraph?.images || [];
     
     return {
         title: pageTitle,
-        description: "full website coming soon",
+        description: pageDesc,
         openGraph: {
             title: pageTitle,
-            description: 'full website coming soon',
+            description: pageDesc,
             url: `https://hollyngrade.com/${pathname}`,
             images: ['favicon.ico'],
         },
