@@ -38,9 +38,10 @@ export default function DynamicLightbox(props) {
             : ''}
 
             {sortedCategories(props.categories).map(x => 
-                <Link href={`/chasm/${x.category}/`}
+                // <Link href={`/chasm/${x.category}/`}
+                <div
                     className="self-start w-full col-span-1 row-span-1" key={x.category} // data-photos={x.photoSet}
-                    // onClick={() => props.openCategoryPage(x.category, x.photoSet)}
+                    onClick={() => props.openCategoryPage(x.category, x.photoSet)}
                 >
                     <div className={`grid gap-2 mb-4 ${x.thumbnails.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
                         {x.thumbnails.map(y => 
@@ -66,7 +67,8 @@ export default function DynamicLightbox(props) {
                         <h2 className="text-2xl text-center cursor-pointer hover:underline">{processCategoryName(x.category)}</h2>
                         <small className="">{`(${x.photoSet.length} photo${x.photoSet.length > 1 ? 's' : ''})`}</small>
                     </div>
-                </Link>
+                {/* </Link> */}
+                </div>
             )}
 
             <div className="w-full col-span-2 flex items-center justify-center">

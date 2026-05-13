@@ -39,19 +39,19 @@ export default function Chasm() {
                         width: slide.width,
                         height: slide.height
                     });
-                
                 }
-                console.log('slides result', finalSlideSet)
+
+                console.log('slides result', finalSlideSet);
                 // setCategories(result);
                 setSlides(finalSlideSet);
             }
             else {
-                console.error('No photos data to load.')
+                console.error('No photos data to load.');
             }
         })
         .catch((err) => {
             console.error(err);
-            return 'There has been an unknown error. Please refresh and try again.'
+            return 'There has been an unknown error. Please refresh and try again.';
         });
     }
 
