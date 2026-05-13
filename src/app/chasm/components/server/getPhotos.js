@@ -33,6 +33,21 @@ export const getPhotos = async () => {
         const catName = categoryTiles[idx];
         const photos = res.filter(x => x.category === category);
 
+        for (let item of photos) {
+            if (item.type === 'video' && !item.sources?.type) {
+                const ext = item.src.split('.')?.[item.src.split('.').length - 1];
+                if (!item.sources) {
+                    item.sources = [{
+                        src: item.src,
+                        type: `video/${ext}`
+                    }];
+                }
+                
+                const { src, ...videoItem } = item;
+                item = { ...videoItem }
+            }
+        }
+
         categoryTiles[idx] = {
             "category": catName,
             "thumbnails": alignThumbnails([photos[0], getMedian(photos), photos[photos.length - 1]]),
