@@ -3,6 +3,7 @@ const nextConfig = {
     // output: 'export',
     experimental: {
         serverActions: true,
+        windowHistorySupport: true,
     },
     reactStrictMode: false,
     distDir: 'build',

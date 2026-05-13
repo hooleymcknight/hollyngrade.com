@@ -9,11 +9,14 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 import { Captions, Counter, Download, Share, Thumbnails, Video, Zoom } from "yet-another-react-lightbox/plugins";
 import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './lightboxHelpers';
+import { useBackButtonClose } from "@/app/components/useBackButtonClose";
 
 export default function DynamicLightbox(props) {
     const [open, setOpen] = useState(false);
     const [activePhotoSet, setActivePhotoSet] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
+
+    useBackButtonClose(open, () => setOpen(false));
 
     const setPhotosAndOpen = (photoSet) => {
         setActivePhotoSet(photoSet);

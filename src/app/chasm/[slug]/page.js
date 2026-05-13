@@ -17,6 +17,7 @@ import BackButton from "@/app/components/backButton";
 
 import { getPhotos } from '../components/server/getPhotos';
 import { sortedCategories, processCategoryName, databaseSlug } from "../components/lightboxHelpers";
+import { useBackButtonClose } from "@/app/components/useBackButtonClose";
 
 const slidesWithPosters = (slides) => {
     let returnSlides = [...slides];
@@ -35,6 +36,8 @@ export default function ViewAll() {
     const { updateSession } = useSession();
     const sessionData = useSession().sessionData;
     const slug = useParams()?.slug;
+
+    useBackButtonClose(index >= 0, () => setIndex(-1));
 
     /**
      * I need to explore ways to get load data out of use effect. check out the below, maybe I can split load data out into a few functions?
