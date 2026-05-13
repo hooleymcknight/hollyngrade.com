@@ -9,16 +9,16 @@ datasource db {
 
 model dogs {
   id          Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  src         String? @db.Text
-  type        String? @db.Text
-  alt         String? @db.Text
+  src         String? @db.VarChar(245)
+  type        String? @db.VarChar(45)
+  alt         String? @db.VarChar(145)
   width       Int?
   height      Int?
-  title       String? @db.Text
-  description String? @db.Text
-  data_tags   String? @map("data-tags") @db.Text
-  date        String? @db.Text
-  category    String? @db.Text
-  active      Int?
-  poster      String? @db.Text
+  title       String? @db.VarChar(145)
+  description String? @db.VarChar(240)
+  data_tags   String? @map("data-tags") @db.VarChar(145)
+  date        String? @db.VarChar(80)
+  category    String? @db.VarChar(45)
+  active      Int?    @db.TinyInt
+  poster      String? @db.VarChar(245)
 }
