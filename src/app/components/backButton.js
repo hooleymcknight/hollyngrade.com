@@ -6,7 +6,7 @@ export default function BackButton(props) {
     const router = useRouter();
 
     return (
-        <button type="button" className="go-back" onClick={() => router.push(props.target)}>
+        <button type="button" className="go-back self-start" onClick={() => router.push(props.target)}>
             <FontAwesomeIcon icon={faArrowLeftLong} />
         </button>
     );
