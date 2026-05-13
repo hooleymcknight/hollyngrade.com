@@ -137,6 +137,7 @@ export default function ViewAll() {
                         autoPlay: true,
                         controls: true,
                     }}
+                    counter={{ container: { style: { top: "26px", bottom: "unset" } } }}
                 />
             </div>
         </main>

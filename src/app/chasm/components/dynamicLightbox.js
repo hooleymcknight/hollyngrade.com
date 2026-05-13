@@ -95,6 +95,7 @@ export default function DynamicLightbox(props) {
                     autoPlay: true,
                     controls: true,
                 }}
+                counter={{ container: { style: { top: "26px", bottom: "unset" } } }}
             />
         </div>
     )
