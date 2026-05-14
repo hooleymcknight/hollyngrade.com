@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from '@/app/SessionProvider';
 
 import ServerPhotoAlbum from "react-photo-album/server";
@@ -13,7 +13,7 @@ import BackButton from "@/app/components/backButton";
 
 import { getPhotos } from '../components/server/getPhotos';
 import { sortedCategories } from "../components/lightboxHelpers";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams, searchParams } from "next/navigation";
 
 const slidesWithPosters = (slides) => {
     let returnSlides = [...slides];
@@ -31,7 +31,7 @@ export default function ViewAll() {
     const [slides, setSlides] = useState([]);
     const { updateSession } = useSession();
     const sessionData = useSession().sessionData;
-    const searchParams = useSearchParams();
+    // const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
 

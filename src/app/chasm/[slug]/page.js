@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useSession } from '@/app/SessionProvider';
-import { useParams, useSearchParams, useRouter, usePathname } from "next/navigation.js";
+import { useParams, useSearchParams, useRouter, usePathname, searchParams } from "next/navigation.js";
 
 import ServerPhotoAlbum from "react-photo-album/server";
 import "react-photo-album/styles.css";
@@ -33,8 +33,7 @@ export default function ViewAll() {
     const { updateSession } = useSession();
     const sessionData = useSession().sessionData;
     const slug = useParams()?.slug;
-    const photoQuery = useSearchParams()?.get('photo') || null;
-    const searchParams = useSearchParams();
+    const photoQuery = searchParams?.get('photo') || null;
     const router = useRouter();
     const pathname = usePathname();
 

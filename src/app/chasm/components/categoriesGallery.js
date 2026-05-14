@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useSearchParams, useRouter, usePathname, searchParams } from "next/navigation";
 
 import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './lightboxHelpers';
 import { useBackButtonClose } from "@/app/components/useBackButtonClose";
@@ -11,7 +11,7 @@ export default function CategoriesGallery(props) {
     const [open, setOpen] = useState(false);
     const [activePhotoSet, setActivePhotoSet] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
-    const searchParams = useSearchParams();
+    // const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
 
