@@ -15,7 +15,6 @@ export default function CategoriesGallery(props) {
     // const searchParams = useSearchParams();
 
     useBackButtonClose(open, () => setOpen(false));
-    useClearQueryOnClose(open, ['photo']);
 
     const setPhotosAndOpen = (photoSet) => {
         setActivePhotoSet(photoSet);
@@ -36,12 +35,6 @@ export default function CategoriesGallery(props) {
     const CategoriesLightbox = dynamic(() => import('../components/categoriesLightbox.js'), {
         loading: () => <p className="hidden">Loading...</p>,
     });
-
-    useEffect(() => {
-        if (!open) {
-            removeParam('photo');
-        }
-    }, [open]);
 
     return(
         <>
