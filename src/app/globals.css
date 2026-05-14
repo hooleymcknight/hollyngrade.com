@@ -38,6 +38,10 @@ body {
   scroll-behavior: smooth;
 }
 
+a, button {
+    cursor: pointer;
+}
+
 #donation-buttons a,
 .btn {
     /* background: #72140c; */
@@ -92,4 +96,36 @@ button.go-back:hover {
     transition: all 0.3s ease;
     position: relative;
     z-index: 10;
+}
+
+/* upload form */
+
+input[type="file"]::file-selector-button {
+  background-color: #919191;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-right: 10px;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #808080;
+}
+
+.error-message,
+.success-message,
+.error-message.err-on + .success-message.success-on {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s all ease;
+}
+
+.error-message.err-on,
+.success-message.success-on {
+    visibility: visible;
+    opacity: 1;
+    transition: 0.2s all ease;
 }

@@ -4,8 +4,10 @@ import { useSession } from '@/app/SessionProvider';
 
 import CategoriesGallery from './components/categoriesGallery';
 import { getPhotos } from "./components/server/getPhotos";
+import { upload } from './components/server/upload';
 
 import BackButton from "../components/backButton";
+import Link from "next/link";
 
 export default function Chasm() {
     const [categories, setCategories] = useState([]);
@@ -43,12 +45,27 @@ export default function Chasm() {
 
     return (
         <main className="flex flex-col min-h-screen items-center justify-center">
-            {/* <button onClick={() => console.log(sessionData)}>session data</button> */}
             <div id="photo-gallery" className="flex w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-8 sm:px-16 bg-zinc-50 sm:items-start mt-8 mb-8"
                 style={{ background: "rgba(250, 250, 250, 0.6)" }}
             >
                 <BackButton target='./' />
-                <h1 className="text-4xl mt-6 mb-16 text-center block w-full tracking-tighter">Koda &amp; Chasm Photo&nbsp;Gallery</h1>
+                <h1 className="text-4xl mt-6 mb-8 text-center block w-full tracking-tighter">Koda &amp; Chasm Photo&nbsp;Gallery</h1>
+                
+                <div className="upload-section flex flex-col items-center mx-auto">
+                    <span className="mb-8">
+                        Have a photo of Chasm to share?&emsp;
+                        <Link href="/chasm/upload" className="font-bold hover:underline">
+                            Upload it here.
+                        </Link>
+                    </span>
+                    {/* <button
+                        className="mb-8 btn px-8 py-2 text-white rounded-[30px] cursor-pointer"
+                        onClick={() => console.log(sessionData)}
+                    >
+                        Upload Image
+                    </button> */}
+                </div>
+
                 <CategoriesGallery categories={categories} />
             </div>
         </main>

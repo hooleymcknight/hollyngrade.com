@@ -18,7 +18,7 @@ const getMedian = (arr) => {
 };
 
 const sortByDate = (arr) => {
-    //
+    return arr.sort((a, b) => new Date(a.date) - new Date(b.date));
 }
 
 export const getPhotos = async (slug) => {
@@ -36,7 +36,7 @@ export const getPhotos = async (slug) => {
     for (const category of categoryTiles) {
         const idx = categoryTiles.indexOf(category);
         const catName = categoryTiles[idx];
-        const photos = res.filter(x => x.category === category);
+        const photos = sortByDate(res.filter(x => x.category === category));
 
         for (let item of photos) {
             // add dates to all the descriptions.

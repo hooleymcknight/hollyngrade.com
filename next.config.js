@@ -4,6 +4,9 @@ const nextConfig = {
     experimental: {
         serverActions: true,
         windowHistorySupport: true,
+        serverActions: {
+            bodySizeLimit: '10mb',
+        },
     },
     reactStrictMode: false,
     distDir: 'build',
