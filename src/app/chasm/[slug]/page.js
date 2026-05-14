@@ -42,76 +42,58 @@ export default function ViewAll() {
 
     useBackButtonClose(index >= 0, () => setIndex(-1), paramsToClear);
 
-    /**
-     * I need to explore ways to get load data out of use effect. check out the below, maybe I can split load data out into a few functions?
-     * or maybe I dont need that, maybe I just need like... use state, look for this thing, if not then default. and then let load data without the setStates run in use effect?
-     * that might not work. not sure. just thoughts. poke around sometime.
-     * 
-     * const [theme, setTheme] = useState(() => 
-     *     typeof window !== 'undefined' ? localStorage.getItem('theme') : 'light'
-     * );
-     */
-
-
-    const openPhotoFromQuery = (query, currentSlides) => {
-        if (!query || !currentSlides.length) return;
-
-        const queryIndex = currentSlides.map(x => x.src.split('/')[x.src.split('/').length - 1]).indexOf(query) || null;
-        setIndex(queryIndex);
-    }
-
-    const loadData = async (data, slug) => {
-        if (data) {
-            setSlides(data[0].photoSet);
-            setCategories(data);
-            openPhotoFromQuery(photo, data[0].photoSet);
-            return;
-        }
-        console.log('Loading photos from database');
-        let res = await getPhotos(databaseSlug(slug))
-        .then((response) => {
-            if (response) {
-                const result = sortedCategories([...response]);
-                updateSession({ photos: result });
-                const slidesResult = [...new Set(result.map(x => x.photoSet).flat())];
-                
-                let finalSlideSet = [];
-                for (const slide of slidesResult) {
-                    finalSlideSet.push({
-                        src: slide.src || slide.sources.src,
-                        width: slide.width,
-                        height: slide.height
-                    });
-                }
-
-                setCategories(result);
-                setSlides(finalSlideSet);
-                openPhotoFromQuery(photo, finalSlideSet);
-            }
-            else {
-                console.error('No photos data to load.');
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            return 'There has been an unknown error. Please refresh and try again.';
-        });
-    }
-
     const AlbumLightbox = dynamic(() => import('../components/albumLightbox.js'), {
         loading: () => <p className="hidden">Loading...</p>,
     });
 
     useEffect(() => {
-        if (!categories.length) {
-            if (sessionData && sessionData?.photos) {
-                loadData(sessionData.photos.filter(x => x.category === databaseSlug(slug)));
+        const dbSlug = databaseSlug(slug);
+        let cancelled = false;
+
+        const apply = (categoriesData, slidesData) => {
+            if (cancelled) return;
+            setCategories(categoriesData);
+            setSlides(slidesData);
+            if (photo) {
+                const idx = slidesData.findIndex(s => s.src.endsWith(photo));
+                if (idx >= 0) setIndex(idx);
             }
-            else {
-                loadData(null, databaseSlug(slug));
-            }
+        };
+
+        // Try the session cache first
+        const cached = sessionData?.photos?.filter(x => x.category === dbSlug);
+        if (cached?.length) {
+            apply(cached, cached[0].photoSet);
+            return () => { cancelled = true; };
         }
-    }, []);
+
+        // Otherwise fetch from the server
+        (async () => {
+            try {
+                const response = await getPhotos(dbSlug);
+                if (cancelled) return;
+                if (!response) {
+                    console.error('No photos data to load.');
+                    return;
+                }
+
+                const result = sortedCategories([...response]);
+                const finalSlideSet = [...new Set(result.flatMap(x => x.photoSet))]
+                    .map(slide => ({
+                        src: slide.src || slide.sources.src,
+                        width: slide.width,
+                        height: slide.height,
+                    }));
+
+                updateSession({ photos: result });
+                apply(result, finalSlideSet);
+            } catch (err) {
+                console.error(err);
+            }
+        })();
+
+        return () => { cancelled = true; };
+        }, [slug, sessionData, photo, updateSession]);
 
     return (
         <main className="flex flex-col min-h-screen items-center justify-center">
