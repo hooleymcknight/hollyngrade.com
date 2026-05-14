@@ -22,12 +22,19 @@ const sortByDate = (arr) => {
 }
 
 export const getPhotos = async (slug) => {
-    // return new Promise((resolve, reject) => {
-    //     const success = true;
-    //     if (success) resolve("Data received!");
-    //     else reject("Error occurred.");
-    // });
-    const options = slug ? { where: { category: slug }, orderBy: { date: "asc" } } : { orderBy: { id: "asc" } };
+    const options = slug ?
+        {
+            where: { 
+                category: slug,
+                active: 1,
+            },
+            orderBy: { date: "asc" }
+        } 
+    :
+        {
+            where: { active: 1 },
+            orderBy: { date: "asc" }
+        };
 
     const res = await db.dogs.findMany(options);
 

@@ -19,6 +19,11 @@ export async function generateMetadata({ params, searchParams }, parent) {
     if (pathname.includes('chasm')) {
         pageTitle = 'Koda & Chasm Photo Gallery'
         pageDesc = 'Remembering Chasm.'
+
+        let subFolder = pathname.split('/chasm')?.[1] || null;
+        if (subFolder.length) {
+            pageTitle = `Koda & Chasm | ${subFolder.replace(/\//g, '')}`;
+        }
     }
     
     // optionally access and extend (rather than replace) parent metadata
