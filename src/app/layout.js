@@ -21,7 +21,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
         pageDesc = 'Remembering Chasm.'
 
         let subFolder = pathname.split('/chasm')?.[1] || null;
-        if (subFolder.length) {
+        if (subFolder?.length) {
             pageTitle = `Koda & Chasm | ${subFolder.replace(/\//g, '')}`;
         }
     }
