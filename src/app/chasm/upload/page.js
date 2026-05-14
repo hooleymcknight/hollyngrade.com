@@ -25,7 +25,7 @@ export default function Upload() {
                     document.querySelector('.success-message').classList.add('success-on');
                     fetch('https://ntfy.sh/chasm_story_hollyn', {
                         method: 'POST', // PUT works too
-                        body: 'Some has shared a memory through the online form.',
+                        body: 'Someone has shared a memory through the online form.',
                         headers: {
                             'Title': 'Chasm memory submission received',
                             // 'Priority': 'normal',
