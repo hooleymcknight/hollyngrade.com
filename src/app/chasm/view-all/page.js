@@ -13,7 +13,7 @@ import BackButton from "@/app/components/backButton";
 
 import { getPhotos } from '../components/server/getPhotos';
 import { sortedCategories } from "../components/lightboxHelpers";
-import { usePathname, useRouter, useSearchParams, searchParams } from "next/navigation";
+// import { usePathname, useRouter, useSearchParams, searchParams } from "next/navigation";
 
 const slidesWithPosters = (slides) => {
     let returnSlides = [...slides];
@@ -32,14 +32,15 @@ export default function ViewAll() {
     const { updateSession } = useSession();
     const sessionData = useSession().sessionData;
     // const searchParams = useSearchParams();
-    const router = useRouter();
-    const pathname = usePathname();
+    // const router = useRouter();
+    // const pathname = usePathname();
 
-    const removeParam = (key) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.delete(key);
-        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-    }
+    // const removeParam = async (key) => {
+    //     const query = await searchParams; // Await in Next.js 15
+    //     const params = new URLSearchParams(query.toString());
+    //     params.delete(key);
+    //     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    // }
 
     const loadData = async (data) => {
         if (data) {

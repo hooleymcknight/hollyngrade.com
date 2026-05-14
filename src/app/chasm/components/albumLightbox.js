@@ -6,6 +6,7 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 import { Captions, Counter, Download, Share, Thumbnails, Video, Zoom } from "yet-another-react-lightbox/plugins";
 
 export default function AlbumLightbox({ sharedStateIndex, setSharedStateIndex, sharedStateCategories, setSharedStateCategories }) {
+        
     return (
         <Lightbox
             plugins={[Captions, Counter, Download, Share, Thumbnails, Video, Zoom]}

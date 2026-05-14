@@ -11,17 +11,11 @@ export default function CategoriesGallery(props) {
     const [open, setOpen] = useState(false);
     const [activePhotoSet, setActivePhotoSet] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
+    const [slideShown, setSlideShown] = useState(false);
     // const searchParams = useSearchParams();
-    const router = useRouter();
-    const pathname = usePathname();
-
-    const removeParam = (key) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.delete(key);
-        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-    }
 
     useBackButtonClose(open, () => setOpen(false));
+    useClearQueryOnClose(open, ['photo']);
 
     const setPhotosAndOpen = (photoSet) => {
         setActivePhotoSet(photoSet);

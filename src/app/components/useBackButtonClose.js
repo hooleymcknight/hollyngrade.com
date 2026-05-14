@@ -1,25 +1,32 @@
 import { useEffect } from 'react';
 
-export function useBackButtonClose(isOpen, onClose) {
-  useEffect(() => {
-    if (!isOpen) return;
+export function useBackButtonClose(isOpen, onClose, paramsToClear) {
+    useEffect(() => {
+        if (!isOpen) return;
 
-    // Push a dummy state when the lightbox opens
-    window.history.pushState({ lightbox: true }, '');
+        const originalUrl = window.location.href;
 
-    const handlePopState = () => {
-      onClose();
-    };
+        if (paramsToClear?.length) {
+        const cleanUrl = new URL(originalUrl);
+            paramsToClear.forEach((p) => cleanUrl.searchParams.delete(p));
+            // Rewrite the entry we'll go back to so it's clean...
+            window.history.replaceState(window.history.state, '', cleanUrl.toString());
+            // ...then push the dummy with the original URL so the address bar still
+            // shows ?photo=X while the lightbox is open.
+            window.history.pushState({ lightbox: true }, '', originalUrl);
+        }
+        else {
+            window.history.pushState({ lightbox: true }, '');
+        }
 
-    window.addEventListener('popstate', handlePopState);
+        const handlePopState = () => onClose();
+        window.addEventListener('popstate', handlePopState);
 
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-      // If the lightbox is closed by other means (X button, ESC, backdrop click),
-      // pop the dummy state so the history stays clean
-      if (window.history.state?.lightbox) {
-        window.history.back();
-      }
-    };
-  }, [isOpen, onClose]);
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+            if (window.history.state?.lightbox) {
+                window.history.back();
+            }
+        };
+    }, [isOpen, onClose, paramsToClear]);
 }

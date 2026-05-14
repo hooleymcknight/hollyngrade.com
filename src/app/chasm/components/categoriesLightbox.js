@@ -10,12 +10,13 @@ export default function CategoriesLightbox({
     sharedStateSlideIndex, setSharedStateSlideIndex,
     sharedStateActivePhotoset, setSharedStateActivePhotoset
 }) {
+
     return (
         <Lightbox
             plugins={[Captions, Counter, Download, Share, Thumbnails, Video, Zoom]}
             open={sharedStateOpen}
             index={sharedStateSlideIndex}
-            close={() => { setSharedStateOpen(false); setSharedStateSlideIndex(0); }}
+            close={() => {setSharedStateOpen(false); setSharedStateSlideIndex(0);}}
             slides={sharedStateActivePhotoset.filter(x => x.active == true)}
             video={{
                 autoPlay: true,

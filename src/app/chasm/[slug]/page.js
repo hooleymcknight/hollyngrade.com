@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useSession } from '@/app/SessionProvider';
-import { useParams, useSearchParams, useRouter, usePathname, searchParams } from "next/navigation.js";
+import { useParams, useSearchParams } from "next/navigation.js";
 
 import ServerPhotoAlbum from "react-photo-album/server";
 import "react-photo-album/styles.css";
@@ -15,6 +15,8 @@ import BackButton from "@/app/components/backButton";
 import { getPhotos } from '../components/server/getPhotos';
 import { sortedCategories, processCategoryName, databaseSlug } from "../components/lightboxHelpers";
 import { useBackButtonClose } from "@/app/components/useBackButtonClose";
+
+const paramsToClear = ['photo'];
 
 const slidesWithPosters = (slides) => {
     let returnSlides = [...slides];
@@ -33,17 +35,12 @@ export default function ViewAll() {
     const { updateSession } = useSession();
     const sessionData = useSession().sessionData;
     const slug = useParams()?.slug;
-    const photoQuery = searchParams?.get('photo') || null;
-    const router = useRouter();
-    const pathname = usePathname();
+    
+    const searchParams = useSearchParams();
+    const photoQuery = searchParams.get('photo') || null;
+    const [photo, setPhoto] = useState(photoQuery)
 
-    const removeParam = (key) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.delete(key);
-        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-    }
-
-    useBackButtonClose(index >= 0, () => setIndex(-1));
+    useBackButtonClose(index >= 0, () => setIndex(-1), paramsToClear);
 
     /**
      * I need to explore ways to get load data out of use effect. check out the below, maybe I can split load data out into a few functions?
@@ -67,7 +64,7 @@ export default function ViewAll() {
         if (data) {
             setSlides(data[0].photoSet);
             setCategories(data);
-            openPhotoFromQuery(photoQuery, data[0].photoSet);
+            openPhotoFromQuery(photo, data[0].photoSet);
             return;
         }
         console.log('Loading photos from database');
@@ -89,7 +86,7 @@ export default function ViewAll() {
 
                 setCategories(result);
                 setSlides(finalSlideSet);
-                openPhotoFromQuery(photoQuery, finalSlideSet);
+                openPhotoFromQuery(photo, finalSlideSet);
             }
             else {
                 console.error('No photos data to load.');
@@ -113,9 +110,6 @@ export default function ViewAll() {
             else {
                 loadData(null, databaseSlug(slug));
             }
-        }
-        if (index == -1) {
-            removeParam('photo');
         }
     }, []);
 

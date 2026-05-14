@@ -4,7 +4,7 @@ import { useSession } from '@/app/SessionProvider';
 
 import CategoriesGallery from './components/categoriesGallery';
 import { getPhotos } from "./components/server/getPhotos";
-import { upload } from './components/server/upload';
+// import { upload } from './components/server/upload';
 
 import BackButton from "../components/backButton";
 import Link from "next/link";
