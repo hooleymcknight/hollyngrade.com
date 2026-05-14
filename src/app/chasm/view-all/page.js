@@ -13,6 +13,7 @@ import BackButton from "@/app/components/backButton";
 
 import { getPhotos } from '../components/server/getPhotos';
 import { sortedCategories } from "../components/lightboxHelpers";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const slidesWithPosters = (slides) => {
     let returnSlides = [...slides];
@@ -30,6 +31,15 @@ export default function ViewAll() {
     const [slides, setSlides] = useState([]);
     const { updateSession } = useSession();
     const sessionData = useSession().sessionData;
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const removeParam = (key) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.delete(key);
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
 
     const loadData = async (data) => {
         if (data) {
@@ -75,7 +85,10 @@ export default function ViewAll() {
             sessionData && sessionData?.photos ? loadData(sessionData.photos.photos) : loadData();
             // loadData();
         }
-    }, []);
+        if (index == -1) {
+            removeParam('photo');
+        }
+    }, [index]);
 
     return (
         <main className="flex flex-col min-h-screen items-center justify-center">

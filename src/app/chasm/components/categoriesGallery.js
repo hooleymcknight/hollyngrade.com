@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './lightboxHelpers';
 import { useBackButtonClose } from "@/app/components/useBackButtonClose";
+import Image from "next/image";
 
 export default function CategoriesGallery(props) {
     const [open, setOpen] = useState(false);
     const [activePhotoSet, setActivePhotoSet] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const removeParam = (key) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.delete(key);
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
 
     useBackButtonClose(open, () => setOpen(false));
 
@@ -32,6 +43,12 @@ export default function CategoriesGallery(props) {
         loading: () => <p className="hidden">Loading...</p>,
     });
 
+    useEffect(() => {
+        if (!open) {
+            removeParam('photo');
+        }
+    }, [open]);
+
     return(
         <>
             <div className="w-full flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows[auto_1fr] xl:grid-cols-3 justify-center items-center gap-6 text-centr">
@@ -52,10 +69,11 @@ export default function CategoriesGallery(props) {
                                 <div key={y.src} data-hover="img-tile" className={processSpanClasses(y.span, x.thumbnails)}
                                     onClick={(e) => handleTileClick(e, x.photoSet)}
                                 >
-                                    <img
+                                    <Image
                                         src={y.src.includes('.mp4') ? y.src.replace('.mp4', '_poster.webp') : y.src}
                                         alt={y.alt}
                                         className="w-full h-full object-cover"
+                                        width={y.width} height={y.height}
                                     />
                                 </div>
                             )}

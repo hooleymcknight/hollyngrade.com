@@ -16,7 +16,6 @@ export default function Upload() {
         const btn = document.querySelector('form#upload').querySelector('button');
         btn.textContent = buttonThinkingText;
         // wait for a reply
-        // console.log(e);
         setTimeout(async () => {
             const result = await uploadMemory(e);
                 if (!result.success) {

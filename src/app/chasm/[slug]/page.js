@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useSession } from '@/app/SessionProvider';
-import { useParams, useSearchParams } from "next/navigation.js";
+import { useParams, useSearchParams, useRouter, usePathname } from "next/navigation.js";
 
 import ServerPhotoAlbum from "react-photo-album/server";
 import "react-photo-album/styles.css";
@@ -34,6 +34,15 @@ export default function ViewAll() {
     const sessionData = useSession().sessionData;
     const slug = useParams()?.slug;
     const photoQuery = useSearchParams()?.get('photo') || null;
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const removeParam = (key) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.delete(key);
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
 
     useBackButtonClose(index >= 0, () => setIndex(-1));
 
@@ -100,15 +109,14 @@ export default function ViewAll() {
     useEffect(() => {
         if (!categories.length) {
             if (sessionData && sessionData?.photos) {
-                // console.log('load from session data')
-                console.log(databaseSlug(slug))
-                console.log(sessionData.photos.filter(x => x.category === databaseSlug(slug)));
                 loadData(sessionData.photos.filter(x => x.category === databaseSlug(slug)));
             }
             else {
-                // console.log('new load')
                 loadData(null, databaseSlug(slug));
             }
+        }
+        if (index == -1) {
+            removeParam('photo');
         }
     }, []);
 
