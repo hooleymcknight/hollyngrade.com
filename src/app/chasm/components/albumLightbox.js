@@ -6,14 +6,14 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 import { Captions, Counter, Download, Share, Thumbnails, Video, Zoom } from "yet-another-react-lightbox/plugins";
 
 export default function AlbumLightbox({ sharedStateIndex, setSharedStateIndex, sharedStateCategories, setSharedStateCategories }) {
-        
+
     return (
         <Lightbox
             plugins={[Captions, Counter, Download, Share, Thumbnails, Video, Zoom]}
             open={sharedStateIndex >= 0}
             close={() => setSharedStateIndex(-1)}
             index={sharedStateIndex}
-            slides={[...new Set(sharedStateCategories.map(x => x.photoSet).flat())]}
+            slides={[...new Set(sharedStateCategories.map(x => x.photoSet).flat())].map(x => ({ ...x, src: x.src.replace('_x300', '') }))}
             video={{
                 autoPlay: true,
                 controls: true,

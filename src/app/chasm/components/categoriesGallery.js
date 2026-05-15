@@ -35,7 +35,7 @@ export default function CategoriesGallery(props) {
         e.stopPropagation();
 
         const targetTile = e.target.closest('[data-hover="img-tile"]');
-        const targetSrc = decodeURIComponent(targetTile.querySelector('img').src).replace('_poster.webp', '.mp4');
+        const targetSrc = decodeURIComponent(targetTile.querySelector('img').src).replace('_poster.webp', '.mp4').replace('_x300', '');
         const indexToStart = photoSet.map(x => x.src || x.sources.src).indexOf(targetSrc);
         setSlideIndex(indexToStart);
         setPhotosAndOpen(photoSet);
@@ -48,7 +48,7 @@ export default function CategoriesGallery(props) {
             if (cancelled) return;
             setCategories(categoriesData);
             setSlides(slidesData);
-            // in masonry gallery,this is where we open a photo query.
+            // in masonry gallery, this is where we open a photo query.
             // that wouldnt be relevant here.
         }
 
