@@ -118,6 +118,7 @@ input[type="file"]::file-selector-button:hover {
 .error-message,
 .success-message,
 .error-message.err-on + .success-message.success-on {
+    filter: brightness(1);
     visibility: hidden;
     opacity: 0;
     transition: 0.2s all ease;
@@ -128,4 +129,14 @@ input[type="file"]::file-selector-button:hover {
     visibility: visible;
     opacity: 1;
     transition: 0.2s all ease;
+}
+
+.error-message.err-on.flash {
+    animation: flash 0.5s;
+}
+
+@keyframes flash {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(2); }
+    100% { filter: brightness(1); }
 }

@@ -5,9 +5,10 @@ export function useBackButtonClose(isOpen, onClose, paramsToClear) {
         if (!isOpen) return;
 
         const originalUrl = window.location.href;
+        const needToClear = paramsToClear?.length ? paramsToClear.some(p => originalUrl.split('?')[1]?.includes(p)) : false;
 
-        if (paramsToClear?.length) {
-        const cleanUrl = new URL(originalUrl);
+        if (needToClear) {
+            const cleanUrl = new URL(originalUrl);
             paramsToClear.forEach((p) => cleanUrl.searchParams.delete(p));
             // Rewrite the entry we'll go back to so it's clean...
             window.history.replaceState(window.history.state, '', cleanUrl.toString());
@@ -28,5 +29,5 @@ export function useBackButtonClose(isOpen, onClose, paramsToClear) {
                 window.history.back();
             }
         };
-    }, [isOpen, onClose, paramsToClear]);
+    }, [isOpen, paramsToClear]);
 }
