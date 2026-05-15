@@ -115,6 +115,7 @@ export default function MasonryGallery(props) {
                         photoData.src = photoData.src.replace('.webp', '_x300.webp');
                     }
                 }
+                console.log(result?.[0].photoSet?.[0])
                 
                 updateSession({ photos: result });
                 apply(result, finalSlideSet);
