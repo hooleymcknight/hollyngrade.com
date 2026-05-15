@@ -57,15 +57,22 @@ export default function Chasm() {
                             Upload it here.
                         </Link>
                     </span>
-                    {/* <button
-                        className="mb-8 btn px-8 py-2 text-white rounded-[30px] cursor-pointer"
-                        onClick={() => console.log(sessionData)}
-                    >
-                        Upload Image
-                    </button> */}
                 </div>
 
                 <CategoriesGallery categories={categories} />
+
+                <div className="w-full col-span-2 flex items-center justify-center mt-8">
+                    {/* <button */}
+                    <Link
+                        className="text-xl min-w-[300px] text-center cursor-pointer btn text-white py-4 border-[#222] rounded-[30px]"
+                        type="button"
+                        // onClick={() => setPhotosAndOpen([...new Set(props.categories.map(x => x.photoSet).flat())])}
+                        href='/chasm/view-all'
+                    >
+                        View All
+                    {/* </button> */}
+                    </Link>
+                </div>
             </div>
         </main>
     );
