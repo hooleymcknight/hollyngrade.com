@@ -54,7 +54,7 @@ export default function CategoriesGallery(props) {
 
         // try session cache
         const cached = sessionData?.photos;
-        if (cached?.length) {
+        if (cached?.length > 1) { // we want this to be greater than 1. if it is only one set, we are coming from inside of a set. and we want to rebuild our cache.
             apply(cached, cached.map(x => x.photoset).flat());
             return () => { cancelled = true; };
         }

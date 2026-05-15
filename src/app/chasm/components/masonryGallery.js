@@ -24,6 +24,9 @@ const slidesWithPosters = (slides) => {
         if (slide.src.includes('.mp4')) {
             slide.src = slide.src.replace('.mp4', '_poster.webp');
         }
+        else if (!slide.src.includes('_x300.webp') && !slide.src.includes('_poster')) {
+            slide.src = slide.src.replace('.webp', '_x300.webp');
+        }
     }
     return returnSlides;
 }
@@ -47,7 +50,7 @@ const slideSrcset = (slide) => {
 
     srcSetSizes.forEach((dim) => {
         let thisSet = { ...frame };
-        thisSet.src = !slide.src.includes(`_x${dim}.webp`) ? slide.src.replace('.webp', `_x${dim}.webp`) : slide.src;
+        thisSet.src = !slide.src.includes(`_x${dim}.webp`) && !slide.src.includes('_poster') ? slide.src.replace('.webp', `_x${dim}.webp`) : slide.src;
         thisSet[gDimension] = dim;
         thisSet[lDimension] = dim * lDimValue / gDimValue;
         returnSet.push(thisSet);
@@ -104,7 +107,8 @@ export default function MasonryGallery(props) {
                 const result = sortedCategories([...response]);
                 const finalSlideSet = [...new Set(result.flatMap(x => x.photoSet))]
                     .map(slide => ({
-                        src: (!slide.src.includes('_x300') ? slide.src.replace('.webp', '_x300.webp') : slide.src) || slide.sources.src,
+                        // src: (!slide.src.includes('_x300') ? slide.src.replace('.webp', '_x300.webp') : slide.src) || slide.sources.src,
+                        src: slide.src || slide.sources.src,
                         width: slide.width,
                         height: slide.height,
                         // srcSet: !slide.src?.includes('_poster') ? slideSrcset(slide) : null
@@ -115,7 +119,6 @@ export default function MasonryGallery(props) {
                         photoData.src = photoData.src.replace('.webp', '_x300.webp');
                     }
                 }
-                console.log(result?.[0].photoSet?.[0])
                 
                 updateSession({ photos: result });
                 apply(result, finalSlideSet);

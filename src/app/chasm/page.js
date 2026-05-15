@@ -1,47 +1,12 @@
 'use client'
 import { Suspense } from "react";
-// import { useState, useEffect } from "react";
-// import { useSession } from '@/app/SessionProvider';
 
 import CategoriesGallery from './components/categoriesGallery';
-// import { getPhotos } from "./components/server/getPhotos";
 
 import BackButton from "../components/backButton";
 import Link from "next/link";
 
 export default function Chasm() {
-    // const [categories, setCategories] = useState([]);
-    // const { updateSession } = useSession();
-    // const sessionData = useSession().sessionData;
-
-    // const loadData = async (data) => {
-    //     if (data) {
-    //         setCategories(data);
-    //         return;
-    //     }
-    //     console.log('Loading photos from database');
-    //     let res = await getPhotos()
-    //     .then((response) => {
-    //         if (response) {
-    //             updateSession({ photos: [...response] });
-    //             setCategories([...response]);
-    //         }
-    //         else {
-    //             console.error('No photos data to load.');
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.error(err);
-    //         return 'There has been an unknown error. Please refresh and try again.'
-    //     });
-    // }
-
-    // useEffect(() => {
-    //     if (!categories.length) {
-    //         sessionData && sessionData?.photos ? loadData(sessionData.photos.photos) : loadData();
-    //         // loadData();
-    //     }
-    // }, []);
 
     return (
         <main className="flex flex-col min-h-screen items-center justify-center">
