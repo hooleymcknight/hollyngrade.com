@@ -16,6 +16,8 @@ import { getPhotos } from '@/app/chasm/components/server/getPhotos';
 import { sortedCategories, databaseSlug } from "@/app/chasm/components/lightboxHelpers";
 import { useBackButtonClose } from '@/app/components/useBackButtonClose';
 
+const srcSetSizes = [300, 600, 800, 1200];
+
 const slidesWithPosters = (slides) => {
     let returnSlides = [...slides];
     for (const slide of returnSlides) {
@@ -32,6 +34,28 @@ const AlbumLightbox = dynamic(() => import('../components/albumLightbox.js'), {
     loading: () => <p className="hidden">Loading...</p>,
 });
 
+const slideSrcset = (slide) => {
+    let frame = { src: '', width: 0, height: 0 };
+    let returnSet = [];
+
+    // g = greater, l = lesser
+    const gDimension = Object.keys(slide).find(k => slide[k] === Math.max(slide.width, slide.height));
+    const lDimension = Object.keys(slide).find(k => slide[k] === Math.min(slide.width, slide.height));
+    // we will always set the bigger dimension to match the preset src size.
+    const gDimValue = slide[gDimension];
+    const lDimValue = slide[lDimension];
+
+    srcSetSizes.forEach((dim) => {
+        let thisSet = { ...frame };
+        thisSet.src = !slide.src.includes(`_x${dim}.webp`) ? slide.src.replace('.webp', `_x${dim}.webp`) : slide.src;
+        thisSet[gDimension] = dim;
+        thisSet[lDimension] = dim * lDimValue / gDimValue;
+        returnSet.push(thisSet);
+    });
+
+    return returnSet;
+}
+
 export default function MasonryGallery(props) {
     const [index, setIndex] = useState(-1);
     const [categories, setCategories] = useState([]);
@@ -42,8 +66,7 @@ export default function MasonryGallery(props) {
     // check out params for photo queries.
     const searchParams = useSearchParams();
     const photoQuery = searchParams.get('photo') || null;
-    // const [photo, setPhoto] = useState(photoQuery);
-    const photo = useRef(photoQuery);
+    const photoRef = useRef(photoQuery);
 
     useBackButtonClose(index >= 0, () => setIndex(-1), paramsToClear);
 
@@ -55,8 +78,8 @@ export default function MasonryGallery(props) {
             if (cancelled) return;
             setCategories(categoriesData);
             setSlides(slidesData);
-            if (photo.current) {
-                const idx = slidesData.findIndex(s => s.src.endsWith(photo.current));
+            if (photoRef.current) {
+                const idx = slidesData.findIndex(s => s.src.endsWith(photoRef.current));
                 if (idx >= 0) setIndex(idx);
             }
         };
@@ -81,20 +104,28 @@ export default function MasonryGallery(props) {
                 const result = sortedCategories([...response]);
                 const finalSlideSet = [...new Set(result.flatMap(x => x.photoSet))]
                     .map(slide => ({
-                        src: slide.src || slide.sources.src,
+                        src: (!slide.src.includes('_x300') ? slide.src.replace('.webp', '_x300.webp') : slide.src) || slide.sources.src,
                         width: slide.width,
                         height: slide.height,
+                        // srcSet: !slide.src?.includes('_poster') ? slideSrcset(slide) : null
                     }));
 
+                for (const photoData of result[0].photoSet) {
+                    if (!photoData.src.includes('_x300')) {
+                        photoData.src = photoData.src.replace('.webp', '_x300.webp');
+                    }
+                }
+                
                 updateSession({ photos: result });
                 apply(result, finalSlideSet);
-            } catch (err) {
+            }
+            catch (err) {
                 console.error(err);
             }
         })();
 
         return () => { cancelled = true; };
-    }, [props.slug, sessionData, photo, updateSession]);
+    }, [props.slug, sessionData, photoRef, updateSession]);
 
     return (
         <main className="flex flex-col min-h-screen items-center justify-center">
@@ -117,13 +148,14 @@ export default function MasonryGallery(props) {
                             photos={slidesWithPosters(slides)}
                             classNames={{ container: 'w-full h-full' }}
                             onClick={({ index: current }) => setIndex(current)}
-                            renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => (
+                            renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => ( // this is a different photo from our state phtoto.
                                 <div style={wrapperStyle}>
                                     <Image
                                         alt={photo.alt}
                                         src={photo.src}
                                         height={photo.height}
                                         width={photo.width}
+                                        // srcset={photo.srcSet}
                                     />
                                 </div>
                             )}

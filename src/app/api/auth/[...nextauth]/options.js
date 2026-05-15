@@ -1,6 +1,6 @@
 // import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import TwitchProvider from "next-auth/providers/twitch";
+// import TwitchProvider from "next-auth/providers/twitch";
 import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from 'bcryptjs';

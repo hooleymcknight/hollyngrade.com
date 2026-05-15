@@ -1,7 +1,7 @@
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useSearchParams, useRouter, usePathname, searchParams } from "next/navigation";
+import { getPhotos } from "./server/getPhotos";
 
 import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './lightboxHelpers';
 import { useBackButtonClose } from "@/app/components/useBackButtonClose";
@@ -18,8 +18,7 @@ export default function CategoriesGallery(props) {
     const [slideIndex, setSlideIndex] = useState(0);
     const [categories, setCategories] = useState([]);
     const [slides, setSlides] = useState([]);
-    const [slideShown, setSlideShown] = useState(false);
-    // const searchParams = useSearchParams();
+    // const [slideShown, setSlideShown] = useState(false);
 
     const{ updateSession } = useSession();
     const sessionData = useSession().sessionData;
@@ -47,20 +46,21 @@ export default function CategoriesGallery(props) {
 
         const apply = (categoriesData, slidesData) => {
             if (cancelled) return;
-            sortedCategories(categoriesData);
+            setCategories(categoriesData);
             setSlides(slidesData);
             // in masonry gallery,this is where we open a photo query.
             // that wouldnt be relevant here.
         }
 
         // try session cache
-        const cached = sessionData?.photos?.photos;
-        if (cached.length) {
+        const cached = sessionData?.photos;
+        if (cached?.length) {
             apply(cached, cached.map(x => x.photoset).flat());
             return () => { cancelled = true; };
         }
 
-        (async () => {
+        // otherwise fetch from server
+        (async () => { // the issue is definitely here.
             try {
                 const response = await getPhotos();
                 if (cancelled) return;
@@ -91,24 +91,21 @@ export default function CategoriesGallery(props) {
     return(
         <div className="w-full flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows[auto_1fr] xl:grid-cols-3 justify-center items-center gap-6 text-centr">
 
-            {!props.categories.length ?
+            {!categories.length ? // ================================ maybe check here. props.cat to cat
                 <p className="block w-full text-center text-lg col-span-2 mb-8">Loading...</p>
             : ''}
 
-            {sortedCategories(props.categories).map(x => 
+            {sortedCategories(categories)?.map(x =>  // ================================ maybe check here. props.cat to cat
                 <Link href={`/chasm/${pathnameSlug(x.category)}/`}
-                // <div
-                    className="self-start w-full col-span-1 row-span-1" key={x.category} // data-photos={x.photoSet}
-                    // onClick={() => props.openCategoryPage(x.category, x.photoSet)}
-                    // onClick={() => setPhotosAndOpen(x.photoSet)}
+                    className="self-start w-full col-span-1 row-span-1" key={x.category}
                 >
                     <div className={`grid gap-2 mb-4 ${x.thumbnails.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
                         {x.thumbnails.map(y => 
                             <div key={y.src} data-hover="img-tile" className={processSpanClasses(y.span, x.thumbnails)}
                                 onClick={(e) => handleTileClick(e, x.photoSet)}
- >
+                            >
                                 <Image
-                                    src={y.src.includes('.mp4') ? y.src.replace('.mp4', '_poster.webp') : y.src}
+                                    src={y.src.includes('.mp4') ? y.src.replace('.mp4', '_poster.webp') : (!y.src.includes('_x300') ? y.src.replace('.webp', '_x300.webp') : y.src)}
                                     alt={y.alt}
                                     className="w-full h-full object-cover"
                                     width={y.width} height={y.height}
@@ -116,11 +113,9 @@ export default function CategoriesGallery(props) {
                             </div>
                         )}
                         {x.thumbnails.length < 3 && x.thumbnails.length > 1 ? /* add placeholder divs to fill in the squares if less than 3 */
-                            // [...Array(4 - x.thumbnails.length)].map((_, idx) => 
                                 <div key={'idx'} className="aspect-square">
                                     <div className="w-full h-full">&nbsp;</div>
                                 </div>
-                            // )
                         : ''}
                     </div>
                     <div className="flex flex-col items-center">
@@ -128,7 +123,6 @@ export default function CategoriesGallery(props) {
                         <small className="">{`(${x.photoSet.length} photo${x.photoSet.length > 1 ? 's' : ''})`}</small>
                     </div>
                 </Link>
-                // </div>
             )}
 
             <CategoriesLightbox

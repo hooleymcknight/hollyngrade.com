@@ -1,46 +1,47 @@
 'use client'
-import { useState, useEffect } from "react";
-import { useSession } from '@/app/SessionProvider';
+import { Suspense } from "react";
+// import { useState, useEffect } from "react";
+// import { useSession } from '@/app/SessionProvider';
 
 import CategoriesGallery from './components/categoriesGallery';
-import { getPhotos } from "./components/server/getPhotos";
+// import { getPhotos } from "./components/server/getPhotos";
 
 import BackButton from "../components/backButton";
 import Link from "next/link";
 
 export default function Chasm() {
-    const [categories, setCategories] = useState([]);
-    const { updateSession } = useSession();
-    const sessionData = useSession().sessionData;
+    // const [categories, setCategories] = useState([]);
+    // const { updateSession } = useSession();
+    // const sessionData = useSession().sessionData;
 
-    const loadData = async (data) => {
-        if (data) {
-            setCategories(data);
-            return;
-        }
-        console.log('Loading photos from database');
-        let res = await getPhotos()
-        .then((response) => {
-            if (response) {
-                updateSession({ photos: [...response] });
-                setCategories([...response]);
-            }
-            else {
-                console.error('No photos data to load.');
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            return 'There has been an unknown error. Please refresh and try again.'
-        });
-    }
+    // const loadData = async (data) => {
+    //     if (data) {
+    //         setCategories(data);
+    //         return;
+    //     }
+    //     console.log('Loading photos from database');
+    //     let res = await getPhotos()
+    //     .then((response) => {
+    //         if (response) {
+    //             updateSession({ photos: [...response] });
+    //             setCategories([...response]);
+    //         }
+    //         else {
+    //             console.error('No photos data to load.');
+    //         }
+    //     })
+    //     .catch((err) => {
+    //         console.error(err);
+    //         return 'There has been an unknown error. Please refresh and try again.'
+    //     });
+    // }
 
-    useEffect(() => {
-        if (!categories.length) {
-            sessionData && sessionData?.photos ? loadData(sessionData.photos.photos) : loadData();
-            // loadData();
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!categories.length) {
+    //         sessionData && sessionData?.photos ? loadData(sessionData.photos.photos) : loadData();
+    //         // loadData();
+    //     }
+    // }, []);
 
     return (
         <main className="flex flex-col min-h-screen items-center justify-center">
@@ -53,24 +54,26 @@ export default function Chasm() {
                 <div className="upload-section flex flex-col items-center mx-auto">
                     <span className="mb-8">
                         Have a photo of Chasm to share?&emsp;
-                        <Link href="/chasm/upload" className="font-bold hover:underline">
+                        <Link 
+                            className="font-bold hover:underline"
+                            href="/chasm/upload" alt="Upload your photos/stories here"
+                        >
                             Upload it here.
                         </Link>
                     </span>
                 </div>
 
-                <CategoriesGallery categories={categories} />
+                <Suspense fallback={null}>
+                    <CategoriesGallery />
+                </Suspense>
 
                 <div className="w-full col-span-2 flex items-center justify-center mt-8">
-                    {/* <button */}
                     <Link
                         className="text-xl min-w-[300px] text-center cursor-pointer btn text-white py-4 border-[#222] rounded-[30px]"
                         type="button"
-                        // onClick={() => setPhotosAndOpen([...new Set(props.categories.map(x => x.photoSet).flat())])}
-                        href='/chasm/view-all'
+                        href='/chasm/view-all' alt="View All Photos"
                     >
                         View All
-                    {/* </button> */}
                     </Link>
                 </div>
             </div>
