@@ -16,22 +16,19 @@ model dogs {
   height      Int?
   title       String? @db.Text
   description String? @db.Text
-  data_tags   String? @map("data-tags") @db.Text
+  data_tags   String? @db.Text
   date        String? @db.Text
   category    String? @db.Text
   active      Int?
   poster      String? @db.Text
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model users {
   id       Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  username String? @db.Text
+  username String? @unique(map: "username_UNIQUE") @db.VarChar(32)
   password String? @db.Text
+  type     String? @db.Text
   fname    String? @db.Text
   lname    String? @db.Text
-  type     String? @db.Text
-  email    String? @db.VarChar(60)
-
-  @@ignore
+  email    String? @unique(map: "email_UNIQUE") @db.VarChar(255)
 }

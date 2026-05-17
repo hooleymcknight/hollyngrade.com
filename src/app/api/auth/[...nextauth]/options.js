@@ -16,29 +16,34 @@ export const options = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials) {
-                const allAccounts = await db.users.findFirst({
-                    where: {
-                        AND: [
-                            {
-                                OR: [
-                                    { username: credentials?.username, },
-                                    { email: credentials?.username, },
-                                ]
-                            }
-                        ]
-                    }
-                });
+                try {
+                    const allAccounts = await db.users.findFirst({
+                        where: {
+                            AND: [
+                                {
+                                    OR: [
+                                        { username: credentials?.username, },
+                                        { email: credentials?.username, },
+                                    ]
+                                }
+                            ]
+                        }
+                    });
 
-                const isMatch = bcrypt.compareSync(credentials?.password, allAccounts?.password);
-                if (allAccounts && isMatch) {
-                    return allAccounts;
+                    const isMatch = bcrypt.compareSync(credentials?.password, allAccounts?.password);
+                    if (allAccounts && isMatch) {
+                        return allAccounts;
+                    }
+                    else if (allAccounts && !isMatch && credentials?.password === allAccounts?.password) {
+                        allAccounts.needsReset = true;
+                        return allAccounts;
+                    }
+                    else {
+                        return null;
+                    }
                 }
-                else if (allAccounts && !isMatch && credentials?.password === allAccounts?.password) {
-                    allAccounts.needsReset = true;
-                    return allAccounts;
-                }
-                else {
-                    return null;
+                catch (err) {
+                    console.error('somethins broke', err)
                 }
             }
         }),
@@ -58,6 +63,11 @@ export const options = {
         async session({ session, token }) {
             session.user = token.user;
             return session;
-        }
+        },
+        // async redirect({ url, baseUrl }) {
+        //     if (url.startsWith('/')) return `${baseUrl}${url}`;
+        //     else if (new URL(url).origin === baseUrl) return url;
+        //     return baseUrl;
+        // }
     }
 }

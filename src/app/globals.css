@@ -140,3 +140,18 @@ input[type="file"]::file-selector-button:hover {
     50% { filter: brightness(2); }
     100% { filter: brightness(1); }
 }
+
+/* database editor */
+[data-field-label="id"] {
+    display: none;
+}
+
+td[data-field-label="src"], th[data-field-label="src"] {
+    position: sticky;
+    left: 0;
+}
+
+tr:first-child {
+    position: sticky;
+    top: 0;
+}

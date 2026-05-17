@@ -1,6 +1,8 @@
 // import { getServerSession } from 'next-auth';
 import { headers } from 'next/headers';
 import SessionProvider from "./SessionProvider";
+import { getServerSession } from 'next-auth';
+import { options } from '@/app/api/auth/[...nextauth]/options';
 import "./globals.css";
 
 // export const metadata = {
@@ -30,6 +32,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
     //   const previousImages = (await parent).openGraph?.images || [];
     
     return {
+        metadataBase: new URL('https://hollyngrade.com'),
         title: pageTitle,
         description: pageDesc,
         openGraph: {
@@ -41,7 +44,13 @@ export async function generateMetadata({ params, searchParams }, parent) {
     }
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+    const session = await getServerSession(options);
+    const headerStore = await headers();
+    const searchParams = Object.fromEntries(
+        new URLSearchParams(headerStore.get('searchParams') || '')
+    );
+
     return (
         <html lang="en">
             <head>
@@ -52,7 +61,7 @@ export default function RootLayout({ children }) {
                 {/* <meta content="#a20000" data-react-helmet="true" name="theme-color" /> */}
             </head>
             <body className={`antialiased`}>
-                <SessionProvider>
+                <SessionProvider session={session}>
                     {children}
                 </SessionProvider>
             </body>

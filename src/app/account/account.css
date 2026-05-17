@@ -9,6 +9,7 @@
 }
 
 .account-sidebar {
+    margin-top: 16px;
     margin-bottom: 40px;
     display: flex;
     gap: 20px;
@@ -23,6 +24,7 @@
     .account-page-content {
         display: flex;
         justify-content: space-between;
+        width: 100%;
     }
     .account-sidebar {
         width: 20%;
