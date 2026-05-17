@@ -31,7 +31,7 @@ export default function Account() {
         {
             sessionData?.user
             ?
-            <Main mainClasses="account" divClasses={[]} contentId="account" children={
+            <Main id="account">
                 <>
                     <h1>{sessionData?.user?.type === 'admin' ? 'Admin' : 'User'} Account Page</h1>
                     <div className="">
@@ -68,15 +68,14 @@ export default function Account() {
                         </div>
                     </div>
                 </>
-            } />
+            </Main>
             :
-            
-            <Main children={[
+            <Main>
                 <>
                     <p>You are not logged in.</p>
                     <Link href="/api/auth/signin?callbackUrl=/account">Sign in.</Link>
                 </>
-            ]} />
+            </Main>
         }
         </>
     );

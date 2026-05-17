@@ -14,8 +14,8 @@ export default async function Home() {
     }
 
     return (
-        <Main mainClasses="account" divClasses={[]} contentIds={['coming-soon', 'chasm-surgery']}
-            children={[
+        <>
+            <Main classes={'flex-row gap-4 sm:items-center'} styles={{ alignItems: 'center' }} id="coming-soon">
                 <div className="flex flex-row flex-wrap justify-center items-center gap-6 text-center sm:items-center sm:text-left sm:flex-nowrap">
                     <Image
                         className=""
@@ -36,7 +36,9 @@ export default async function Home() {
 
                     <TwitchEmbed live={isLive} />
                 </div>
-                ,
+            </Main>
+
+            <Main classes="" id="chasm-surgery">
                 <>
                     <Link
                         href='/chasm'
@@ -150,7 +152,7 @@ export default async function Home() {
                         <ChasmPhotos />
                     </div> */}
                 </>
-            ]}
-        />
+            </Main>
+        </>
     );
 }

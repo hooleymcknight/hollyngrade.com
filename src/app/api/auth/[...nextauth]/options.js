@@ -17,7 +17,7 @@ export const options = {
             },
             async authorize(credentials) {
                 try {
-                    const allAccounts = await db.users.findFirst({
+                    const userAccount = await db.users.findFirst({
                         where: {
                             AND: [
                                 {
@@ -30,13 +30,16 @@ export const options = {
                         }
                     });
 
-                    const isMatch = bcrypt.compareSync(credentials?.password, allAccounts?.password);
-                    if (allAccounts && isMatch) {
-                        return allAccounts;
+                    const isMatch = bcrypt.compareSync(credentials?.password, userAccount?.password);
+                    if (userAccount && isMatch) {
+                        userAccount.needsReset = false;
+                        const { password, ...returnedUser } = userAccount;
+                        return returnedUser;
                     }
-                    else if (allAccounts && !isMatch && credentials?.password === allAccounts?.password) {
-                        allAccounts.needsReset = true;
-                        return allAccounts;
+                    else if (userAccount && !isMatch && credentials?.password === userAccount?.password) {
+                        userAccount.needsReset = true;
+                        const { password, ...returnedUser } = userAccount;
+                        return returnedUser;
                     }
                     else {
                         return null;

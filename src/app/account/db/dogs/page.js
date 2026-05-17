@@ -5,6 +5,7 @@ import Main from "@/app/components/mainWrapper";
 
 import Link from "next/link";
 import Database from "../components/dbDisplay";
+import BackButton from "@/app/components/backButton";
 
 
 export default function DogsDB() {
@@ -16,21 +17,25 @@ export default function DogsDB() {
         {
             sessionData?.user
             ?
-            <Main mainClasses="account" divClasses={[]} contentId="account" children={
+            <Main classes="" id="dogs-db">
                 <>
+                    <BackButton target="/account" />
                     <h1>Dogs Database</h1>
 
-                    <Database db="dogs" filters={['alt', 'title', 'description', 'data_tags']} />
+                    <Database db="dogs" filters={['alt', 'title', 'description', 'data_tags']}
+                        selects={['src', 'alt', 'title', 'description', 'data_tags', 'active']}
+                        whereNulls={['alt', 'title', 'description', 'data_tags']}
+                    />
                     
                 </>
-            } />
+            </Main>
             :
             
-            <Main children={[
+            <Main>
                 <>
                     <p>Unauthorized user.</p>
                 </>
-            ]} />
+            </Main>
         }
         </>
     );

@@ -62,7 +62,9 @@ export default async function RootLayout({ children }) {
             </head>
             <body className={`antialiased`}>
                 <SessionProvider session={session}>
-                    {children}
+                    <main className={`flex flex-col min-h-screen items-center justify-center`}>
+                        {children}
+                    </main>
                 </SessionProvider>
             </body>
         </html>

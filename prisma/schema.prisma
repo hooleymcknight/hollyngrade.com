@@ -16,7 +16,7 @@ model dogs {
   height      Int?
   title       String? @db.Text
   description String? @db.Text
-  data_tags   String? @db.Text
+  data_tags   String? @map("data-tags") @db.Text
   date        String? @db.Text
   category    String? @db.Text
   active      Int?
@@ -25,10 +25,10 @@ model dogs {
 
 model users {
   id       Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  username String? @unique(map: "username_UNIQUE") @db.VarChar(32)
+  username String? @db.Text
   password String? @db.Text
-  type     String? @db.Text
   fname    String? @db.Text
   lname    String? @db.Text
-  email    String? @unique(map: "email_UNIQUE") @db.VarChar(255)
+  type     String? @db.Text
+  email    String? @db.VarChar(60)
 }

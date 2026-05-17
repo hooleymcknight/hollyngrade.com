@@ -12,13 +12,12 @@ const CategoriesLightbox = dynamic(() => import('../components/categoriesLightbo
     loading: () => <p className="hidden">Loading...</p>,
 });
 
-export default function CategoriesGallery(props) {
+export default function CategoriesGallery() {
     const [open, setOpen] = useState(false);
     const [activePhotoSet, setActivePhotoSet] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
     const [categories, setCategories] = useState([]);
     const [slides, setSlides] = useState([]);
-    // const [slideShown, setSlideShown] = useState(false);
 
     const{ updateSession } = useSession();
     const sessionData = useSession().sessionData;
@@ -105,7 +104,7 @@ export default function CategoriesGallery(props) {
                                 onClick={(e) => handleTileClick(e, x.photoSet)}
                             >
                                 <Image
-                                    src={y.src.includes('.mp4') ? y.src.replace('.mp4', '_poster.webp') : (!y.src.includes('_x300') ? y.src.replace('.webp', '_x300.webp') : y.src)}
+                                    src={y.src.includes('.mp4') || y.src.includes('_poster') ? y.src.replace('.mp4', '_poster.webp') : (!y.src.includes('_x300') ? y.src.replace('.webp', '_x300.webp') : y.src)}
                                     alt={y.alt}
                                     className="w-full h-full object-cover"
                                     width={y.width} height={y.height}

@@ -155,3 +155,9 @@ tr:first-child {
     position: sticky;
     top: 0;
 }
+
+table input[disabled],
+button[type="submit"][disabled] {
+    background-color: #00000066;
+    cursor: not-allowed;
+}

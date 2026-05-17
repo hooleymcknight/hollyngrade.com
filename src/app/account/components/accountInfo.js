@@ -26,7 +26,7 @@ export default function AccountInfo({ session, onDataSend }) {
                     <div className="acct-info-section" data-section="password">
                         <h3>Password:</h3>
                         <ChangePasswordButton
-                            required={session?.user?.needsReset ? true : false}
+                            required={session?.user?.needsReset}
                             updatePwChangeRequired={(x) => { updateSession({ user: { ...session?.user, needsReset: false } }) }}
                             onDataSend={updateServerPassword} 
                         />

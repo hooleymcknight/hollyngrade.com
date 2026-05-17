@@ -132,56 +132,54 @@ export default function MasonryGallery(props) {
     }, [props.slug, sessionData, photoRef, updateSession]);
 
     return (
-        <main className="flex flex-col min-h-screen items-center justify-center">
-            <div id="photo-gallery" className="flex w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-8 sm:px-16 bg-zinc-50 sm:items-start mt-8 mb-8"
-                style={{ background: "rgba(250, 250, 250, 0.6)" }}
-            >
-                <BackButton target='./' />
-                <h1 className={`text-4xl mt-6 text-center block w-full tracking-tighter ${!slides?.length ? 'mb-16' : 'mb-2'}`}>{props.heading}</h1>
+        <div id="photo-gallery" className="flex w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-8 sm:px-16 bg-zinc-50 sm:items-start mt-8 mb-8"
+            style={{ background: "rgba(250, 250, 250, 0.6)" }}
+        >
+            <BackButton target='./' />
+            <h1 className={`text-4xl mt-6 text-center block w-full tracking-tighter ${!slides?.length ? 'mb-16' : 'mb-2'}`}>{props.heading}</h1>
 
-                {slides?.length ?
-                    <>
-                        <small className="text-center block w-full mb-16">
-                            {`${slides.length} photo${slides.length > 1 ? 's' : ''}`}
-                        </small>
-                        <ServerPhotoAlbum
-                            layout="masonry"
-                            breakpoints={[400, 465, 500, 600, 639]}
-                            defaultContainerWidth={640}
-                            rowConstraints={{ singleRowMaxHeight: 200 }}
-                            photos={slidesWithPosters(slides)}
-                            classNames={{ container: 'w-full h-full' }}
-                            onClick={({ index: current }) => setIndex(current)}
-                            renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => ( // this is a different photo from our state phtoto.
-                                <div style={wrapperStyle}>
-                                    <Image
-                                        alt={photo.alt}
-                                        src={photo.src}
-                                        height={photo.height}
-                                        width={photo.width}
-                                        // srcset={photo.srcSet}
-                                    />
-                                </div>
-                            )}
-                            columns={(containerWidth) => {
-                                if (containerWidth < 400) return 1;
-                                if (containerWidth < 465) return 2;
-                                if (containerWidth < 500) return 3;
-                                if (containerWidth < 600) return 4;
-                                return 5;
-                            }}
-                        />
-                    </>
-                : 
-                    <p className="text-center block w-full mb-16">Loading...</p>
-                }
+            {slides?.length ?
+                <>
+                    <small className="text-center block w-full mb-16">
+                        {`${slides.length} photo${slides.length > 1 ? 's' : ''}`}
+                    </small>
+                    <ServerPhotoAlbum
+                        layout="masonry"
+                        breakpoints={[400, 465, 500, 600, 639]}
+                        defaultContainerWidth={640}
+                        rowConstraints={{ singleRowMaxHeight: 200 }}
+                        photos={slidesWithPosters(slides)}
+                        classNames={{ container: 'w-full h-full' }}
+                        onClick={({ index: current }) => setIndex(current)}
+                        renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => ( // this is a different photo from our state phtoto.
+                            <div style={wrapperStyle}>
+                                <Image
+                                    alt={photo.alt}
+                                    src={photo.src}
+                                    height={photo.height}
+                                    width={photo.width}
+                                    // srcset={photo.srcSet}
+                                />
+                            </div>
+                        )}
+                        columns={(containerWidth) => {
+                            if (containerWidth < 400) return 1;
+                            if (containerWidth < 465) return 2;
+                            if (containerWidth < 500) return 3;
+                            if (containerWidth < 600) return 4;
+                            return 5;
+                        }}
+                    />
+                </>
+            : 
+                <p className="text-center block w-full mb-16">Loading...</p>
+            }
 
-                <AlbumLightbox
-                    sharedStateIndex={index} setSharedStateIndex={setIndex}
-                    sharedStateCategories={categories} setSharedStateCategories={setCategories}
-                />
+            <AlbumLightbox
+                sharedStateIndex={index} setSharedStateIndex={setIndex}
+                sharedStateCategories={categories} setSharedStateCategories={setCategories}
+            />
 
-            </div>
-        </main>
+        </div>
     );
 }
