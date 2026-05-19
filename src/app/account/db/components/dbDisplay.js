@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSession } from "@/app/SessionProvider";
 import { getDatabase, updateDatabase } from "./server/getDatabase";
-import { tablify } from "./server/dbHelpers";
+import { tablify, newLine } from "./server/dbHelpers";
 
 export default function Database(props) {
     const [emptyFields, setEmptyFields] = useState([]);
     const [data, setData] = useState([]);
+    const [addedLines, setAddedLines] = useState([]);
+
     const{ updateSession } = useSession();
     const sessionData = useSession().sessionData;
 
@@ -160,6 +162,7 @@ export default function Database(props) {
                                         )}
                                     </tr>
                                 )}
+                                {/* { addedLines ? addedLines.map(x => x) : ''} */}
                             </tbody>
                         </table>
                     </div>

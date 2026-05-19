@@ -18,7 +18,7 @@ export default function GardenDB() {
         {
             sessionData?.user
             ?
-            <Main classes="" id="garden-db">
+            <Main classes="" id="garden-db" styles={{ maxWidth: 'unset' }}>
                 <>
                     <BackButton target="/account" />
                     <h1>Garden Database</h1>

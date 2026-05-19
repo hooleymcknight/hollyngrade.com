@@ -63,3 +63,19 @@ export const tablify = (fieldValue, fieldLabel, rowDbId) => {
             />);
     }
 }
+
+export const newLine = (rowId, fieldLabels) => {
+    return (
+        <tr data-row-id={rowId}
+            className="items-center"
+        >
+            {fieldLabels.map((z, zIdx) =>
+                <td key={zIdx} data-field-label={z}
+                    className={`h-full ${z == 'photos' ? 'flex flex-row' : ''}`}
+                >
+                    <textarea />
+                </td>
+            )}
+        </tr>
+    );
+}
