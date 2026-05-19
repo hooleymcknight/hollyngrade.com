@@ -4,24 +4,35 @@ import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 
 export const getDatabase = async (dbName, selects, whereNulls) => {
-    const selectObject = { id: true };
-    selects.map(s => { selectObject[`${s}`] = true });
+    let query = {};
 
-    const whereObject = { OR: [] };
-    for (const w of whereNulls) {
-        let nullObj = {};
-        nullObj[`${w}`] = null;
-        let emptyObj = {};
-        emptyObj[`${w}`] = '';
-        whereObject['OR'].push(nullObj, emptyObj);
+    if (selects?.length) {
+        const selectObject = { id: true };
+        selects.map(s => { selectObject[`${s}`] = true });
+        query.select = selectObject;
     }
 
-    const data = await db[`${dbName}`].findMany({
-        select: selectObject,
-        where: whereObject,
-    });
-    
-    return Array.isArray(data) ? data : [data];
+    if (whereNulls?.length) {
+        const whereObject = { OR: [] };
+        for (const w of whereNulls) {
+            let nullObj = {};
+            nullObj[`${w}`] = null;
+            let emptyObj = {};
+            emptyObj[`${w}`] = '';
+            whereObject['OR'].push(nullObj, emptyObj);
+        }
+        query.where = whereObject;
+    }
+
+    if (!Object.keys(query).length) return `Incomplete query.`;
+
+    try {
+        const data = await db[`${dbName}`].findMany(query);
+        return Array.isArray(data) ? data : [data];
+    }
+    catch (err) {
+        return `Error retrieving database: ${err}`;
+    }
 }
 
 export const updateDatabase = async (pushData) => {
@@ -29,14 +40,13 @@ export const updateDatabase = async (pushData) => {
 
     const transaction = await db.$transaction(
         pushData.updates.map((data) =>
-            db.dogs.update({
+            db[`${pushData.table}`].update({
                 where: { id: Number(data.id) },
                 data: { [`${data.field}`]: data.value },
             })
         )
     );
 
-    console.log(transaction);
     return transaction;
 
 }

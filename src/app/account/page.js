@@ -53,10 +53,13 @@ export default function Account() {
                             }
                             {
                                 activeTab === 'Edit DBs' ? 
-                                    <>
-                                        <Link className="inline-block border-[2px] mx-3 py-2 px-8 hover:underline font-bold bg-[#4e4e4e4d] underline-offset-[3px]" href="/account/db/dogs">Dogs</Link>
-                                        <Link className="inline-block border-[2px] mx-3 py-2 px-8 hover:underline font-bold bg-[#4e4e4e4d] underline-offset-[3px]" href="/account/db/garden">Garden</Link>
-                                    </>
+                                        ['Dogs', 'Garden', 'Inventory'].map(x => 
+                                            <Link key={x} href={`/account/db/${x.toLowerCase()}`}
+                                                className="inline-block border-[2px] mr-3 py-2 px-6 hover:underline font-bold bg-[#4e4e4e4d] underline-offset-[3px]"
+                                            >
+                                                {x}
+                                            </Link>
+                                        )
                                 : ''
                             }
                             {/* {

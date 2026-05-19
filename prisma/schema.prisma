@@ -45,3 +45,12 @@ model rfid {
   room      String? @db.Text
   container String? @db.Text
 }
+
+model garden {
+  id       Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  date     String? @db.VarChar(45)
+  location String? @db.VarChar(45)
+  plants   String? @db.VarChar(145)
+  entry    String? @db.Text
+  photos   String? @db.VarChar(255)
+}

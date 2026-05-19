@@ -32,11 +32,11 @@ export default function AccountInfo({ session, onDataSend }) {
                         />
                     </div>
 
-                    <p className="inline">
+                    {/* <p className="inline">
                         We are still adding features to give you more control over your account.
                         <br/>
                         If you need something changed for your account that you cannot change here, please submit a message on the <Link href="/contact">Contact page</Link>.
-                    </p>
+                    </p> */}
                 </>
         :
                 <p>You are not logged in.</p>
