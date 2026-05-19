@@ -13,7 +13,7 @@ import "react-photo-album/styles.css";
 import "react-photo-album/rows.css";
 
 import { getPhotos } from '@/app/chasm/components/server/getPhotos';
-import { sortedCategories, databaseSlug } from "@/app/chasm/components/lightboxHelpers";
+import { sortedCategories, databaseSlug } from "@/app/chasm/components/helpers/lightboxHelpers";
 import { useBackButtonClose } from '@/app/components/useBackButtonClose';
 
 const srcSetSizes = [300, 600, 800, 1200];

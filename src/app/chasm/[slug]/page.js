@@ -2,7 +2,7 @@
 import { Suspense } from "react";
 import { useParams } from "next/navigation.js";
 
-import { processCategoryName }from "../components/lightboxHelpers";
+import { processCategoryName }from "../components/helpers/lightboxHelpers";
 import MasonryGallery from '@/app/chasm/components/masonryGallery';
 
 export default function ViewAll() {

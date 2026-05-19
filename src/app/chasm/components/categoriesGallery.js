@@ -3,7 +3,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { getPhotos } from "./server/getPhotos";
 
-import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './lightboxHelpers';
+import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './helpers/lightboxHelpers';
 import { useBackButtonClose } from "@/app/components/useBackButtonClose";
 import Image from "next/image";
 import { useSession } from "@/app/SessionProvider";

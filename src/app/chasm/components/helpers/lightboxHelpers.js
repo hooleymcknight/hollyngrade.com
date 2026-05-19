@@ -13,7 +13,11 @@ export const processSpanClasses = (input, thumbnailsSet) => {
 export const processCategoryName = (name) => {
     let returnName = name.replace(/\d+-/g, '').replace(/-/g, ' ').replace(/_/g, '/').replace(/([A-Z])/g, ' $1').replace(/^./, (str) => { return str.toUpperCase(); });
     // the custom requests:
-    returnName = returnName.replace('Woods With Me', 'In the Woods with Me').replace('Atx Sort', 'ATX (some year or other)').replace('2022', '2022 - First Year in WA')
+    returnName = returnName
+        .replace('Woods With Me', 'In the Woods with Me')
+        .replace('Atx Sort', 'ATX (some year or other)')
+        .replace('2022', '2022 - First Year in WA')
+        .replace('2017', '2017 - Living with Taylor + Nick')
     return returnName;
 }
 
