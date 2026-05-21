@@ -4,7 +4,7 @@ import { useSession } from "@/app/SessionProvider";
 import Main from "@/app/components/mainWrapper";
 
 import Link from "next/link";
-import Database from "../components/dbDisplay";
+import Database from "../components/dogsDbDisplay";
 import BackButton from "@/app/components/backButton";
 
 

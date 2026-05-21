@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./hg-client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model dogs {
+  id          Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  src         String? @db.Text
+  type        String? @db.Text
+  alt         String? @db.Text
+  width       Int?
+  height      Int?
+  title       String? @db.Text
+  description String? @db.Text
+  data_tags   String? @db.Text
+  date        String? @db.Text
+  category    String? @db.Text
+  active      Int?
+  poster      String? @db.Text
+}
+
+model users {
+  id       Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  username String? @unique(map: "username_UNIQUE") @db.VarChar(32)
+  password String? @db.Text
+  type     String? @db.Text
+  fname    String? @db.Text
+  lname    String? @db.Text
+  email    String? @unique(map: "email_UNIQUE") @db.VarChar(255)
+}
+
+model inventory {
+  item_id     Int     @id @unique(map: "item_id_UNIQUE") @default(autoincrement())
+  item        String? @db.Text
+  description String? @db.Text
+  rfid        Int?
+}
+
+model rfid {
+  rfid      Int     @id @unique(map: "rfid_UNIQUE")
+  room      String? @db.Text
+  container String? @db.Text
+}
