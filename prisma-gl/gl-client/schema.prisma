@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./gl-client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_GL")
+}
+
+model entries {
+  id           Int            @id @default(autoincrement()) @db.UnsignedInt
+  entry_date   DateTime       @db.Date
+  location_id  Int?           @db.UnsignedInt
+  entry        String         @db.Text
+  created_at   DateTime       @default(now()) @db.DateTime(0)
+  updated_at   DateTime       @default(now()) @db.DateTime(0)
+  locations    locations?     @relation(fields: [location_id], references: [id], onUpdate: NoAction, map: "entries_ibfk_1")
+  entry_plants entry_plants[]
+  photos       photos[]
+
+  @@index([entry_date], map: "idx_entry_date")
+  @@index([location_id], map: "location_id")
+}
+
+model entry_plants {
+  entry_id Int     @db.UnsignedInt
+  plant_id Int     @db.UnsignedInt
+  entries  entries @relation(fields: [entry_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "entry_plants_ibfk_1")
+  plants   plants  @relation(fields: [plant_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "entry_plants_ibfk_2")
+
+  @@id([entry_id, plant_id])
+  @@index([plant_id], map: "idx_plant")
+}
+
+model locations {
+  id          Int       @id @default(autoincrement()) @db.UnsignedInt
+  name        String    @unique(map: "name") @db.VarChar(64)
+  description String?   @db.VarChar(255)
+  created_at  DateTime  @default(now()) @db.DateTime(0)
+  entries     entries[]
+}
+
+model photos {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  entry_id    Int      @db.UnsignedInt
+  url         String   @db.VarChar(512)
+  caption     String?  @db.VarChar(255)
+  sort_order  Int      @default(0)
+  uploaded_at DateTime @default(now()) @db.DateTime(0)
+  entries     entries  @relation(fields: [entry_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "photos_ibfk_1")
+
+  @@index([entry_id, sort_order], map: "idx_entry")
+}
+
+model plant_families {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  name        String   @unique(map: "name") @db.VarChar(64)
+  color_token String?  @db.VarChar(32)
+  sort_order  Int      @default(0)
+  plants      plants[]
+}
+
+model plants {
+  id             Int             @id @default(autoincrement()) @db.UnsignedInt
+  name           String          @unique(map: "name") @db.VarChar(64)
+  nickname       String?         @db.VarChar(64)
+  family_id      Int?            @db.UnsignedInt
+  created_at     DateTime        @default(now()) @db.DateTime(0)
+  entry_plants   entry_plants[]
+  plant_families plant_families? @relation(fields: [family_id], references: [id], onUpdate: NoAction, map: "plants_ibfk_1")
+
+  @@index([family_id], map: "family_id")
+}

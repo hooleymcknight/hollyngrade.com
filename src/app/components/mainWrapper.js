@@ -12,7 +12,7 @@ export default function Main({ id, classes, styles, children }) {
     return (
         <div id={id || ''}
             className={`flex flex-col w-[95%] max-w-3xl items-center justify-between
-                py-8 px-8 sm:p-16 bg-zinc-50 sm:items-start mt-8 ${idx > 0 ? 'mb-8' : '0'} 
+                py-8 px-4 sm:p-16 bg-zinc-50 sm:items-start mt-8 ${idx > 0 ? 'mb-8' : '0'} 
                 ${classes || ''}`
             }
             style={{ ...styles, background: "rgba(250, 250, 250, 0.6)" }}

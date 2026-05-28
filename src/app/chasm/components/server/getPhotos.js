@@ -1,7 +1,8 @@
 'use server'
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
+import { PrismaClient as PrismaClientHG } from "@/../prisma-hg/hg-client/client"
 
-const db = new PrismaClient();
+const db = new PrismaClientHG();
 
 const alignThumbnails = (photos) => {
     // photos count should be 3. 
