@@ -192,7 +192,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "K:\\Coding\\hollyngrade.com\\hollyngrade.com\\prisma-gl\\gl-client",
+      "value": "/var/www/hollyngrade.com/prisma-gl/gl-client",
       "fromEnvVar": null
     },
     "config": {
@@ -201,12 +201,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "K:\\Coding\\hollyngrade.com\\hollyngrade.com\\prisma-gl\\schema.prisma",
+    "sourceFilePath": "/var/www/hollyngrade.com/prisma-gl/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

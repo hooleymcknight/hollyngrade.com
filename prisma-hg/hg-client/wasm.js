@@ -191,7 +191,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "K:\\Coding\\hollyngrade.com\\hollyngrade.com\\prisma-hg\\hg-client",
+      "value": "/var/www/hollyngrade.com/prisma-hg/hg-client",
       "fromEnvVar": null
     },
     "config": {
@@ -200,12 +200,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "K:\\Coding\\hollyngrade.com\\hollyngrade.com\\prisma-hg\\schema.prisma",
+    "sourceFilePath": "/var/www/hollyngrade.com/prisma-hg/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -228,8 +228,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./hg-client\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel dogs {\n  id          Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  src         String? @db.Text\n  type        String? @db.Text\n  alt         String? @db.Text\n  width       Int?\n  height      Int?\n  title       String? @db.Text\n  description String? @db.Text\n  data_tags   String? @db.Text\n  date        String? @db.Text\n  category    String? @db.Text\n  active      Int?\n  poster      String? @db.Text\n}\n\nmodel users {\n  id       Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  username String? @unique(map: \"username_UNIQUE\") @db.VarChar(32)\n  password String? @db.Text\n  type     String? @db.Text\n  fname    String? @db.Text\n  lname    String? @db.Text\n  email    String? @unique(map: \"email_UNIQUE\") @db.VarChar(255)\n}\n\nmodel inventory {\n  item_id     Int     @id @unique(map: \"item_id_UNIQUE\") @default(autoincrement())\n  item        String? @db.Text\n  description String? @db.Text\n  rfid        Int?\n}\n\nmodel rfid {\n  rfid      Int     @id @unique(map: \"rfid_UNIQUE\")\n  room      String? @db.Text\n  container String? @db.Text\n}\n",
-  "inlineSchemaHash": "5d86e6af17c4d0d845b8614ec1f902eda9c582b10dfa02997bd4b253fdcec58a",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./hg-client\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel dogs {\n  id          Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  src         String? @db.VarChar(245)\n  type        String? @db.VarChar(45)\n  alt         String? @db.VarChar(145)\n  width       Int?\n  height      Int?\n  title       String? @db.VarChar(145)\n  description String? @db.VarChar(240)\n  data_tags   String? @db.VarChar(145)\n  date        String? @db.VarChar(80)\n  category    String? @db.VarChar(45)\n  active      Int?    @db.TinyInt\n  poster      String? @db.VarChar(245)\n}\n\nmodel users {\n  id       Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  username String? @unique(map: \"username_UNIQUE\") @db.VarChar(32)\n  password String? @db.Text\n  type     String? @db.Text\n  fname    String? @db.Text\n  lname    String? @db.Text\n  email    String? @unique(map: \"email_UNIQUE\") @db.VarChar(255)\n}\n\nmodel inventory {\n  item_id     Int     @id @unique(map: \"item_id_UNIQUE\") @default(autoincrement())\n  item        String? @db.Text\n  description String? @db.Text\n  rfid        Int?\n}\n\nmodel rfid {\n  rfid      Int     @id @unique(map: \"rfid_UNIQUE\")\n  room      String? @db.VarChar(45)\n  container String? @db.VarChar(145)\n}\n",
+  "inlineSchemaHash": "3cb75d4e43c61cb066affa007557626f507b708908b0812dec8ebf0cb8b5d633",
   "copyEngine": true
 }
 config.dirname = '/'
