@@ -2,11 +2,10 @@
 const nextConfig = {
     // output: 'export',
     experimental: {
-        serverActions: true,
-        windowHistorySupport: true,
         serverActions: {
-            bodySizeLimit: '10mb',
+            bodySizeLimit: '150mb',
         },
+        windowHistorySupport: true,
     },
     reactStrictMode: false,
     distDir: 'build',

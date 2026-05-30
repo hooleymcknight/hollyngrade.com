@@ -71,6 +71,10 @@ a, button {
     background-image: radial-gradient(ellipse at center, #72140c 10%, #222 100%); 
 }
 
+.btn[disabled] {
+    filter: saturate(0) brightness(1.3);
+}
+
 .twitch-embed-container[data-active="false"] #twitch-embed {
     display: none;
 }
