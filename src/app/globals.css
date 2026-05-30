@@ -23,10 +23,6 @@
   } */
 }
 
-h1, h2, h3, h4, h5 {
-    font-family: Allerta, Arial, Helvetica, sans-serif;
-}
-
 body {
   /* background: var(--background); */
   background-image: url('../../public/nasa-space.jpg');
@@ -36,6 +32,27 @@ body {
   color: var(--foreground);
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: Allerta, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: -0.75px;
+}
+
+/* link in a paragraph */
+p a {
+    color: #5f0000;
+    font-weight: 700;
+}
+p a:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 a, button {

@@ -2,7 +2,6 @@ import Image from "next/image";
 import areYouLive from './api/twitch';
 import TwitchEmbed from './components/TwitchEmbed/twitchEmbed';
 import DonationButtons from "./components/TwitchEmbed/donationButtons";
-import ChasmPhotos from "./components/pets/chasmPhotos";
 import Link from "next/link";
 import Main from './components/mainWrapper';
 
@@ -147,10 +146,6 @@ export default async function Home() {
                     </p>
 
                     <DonationButtons />
-
-                    {/* <div id="chasm-photos" style={{ minHeight: '80vh' }}>
-                        <ChasmPhotos />
-                    </div> */}
                 </>
             </Main>
         </>

@@ -8,11 +8,11 @@ export default function HooleyMcKnight() {
     return (
         <Main>
             <>
-                <h1>HooleyMcKnight.com no longer exists.</h1>
+                <h1 className="mb-16">HooleyMcKnight.com no longer exists.</h1>
                 <p>
                     Did you come here looking for my developer portfolio?
                     <br/><br/>
-                    If so, here is my new dev site: <Link href="htts://hollymphillips.com/" alt="Holly M. Phillips dev site">hollymphillips.com</Link>.
+                    If so, here is my new dev site: <Link href="https://hollymphillips.com/" alt="Holly M. Phillips dev site">hollymphillips.com</Link> (opens in this window).
                     <br/><br/>
                     <br/><br/>
                     If you were looking for anything relating to my Twitch streaming, or other fun things, you're in the right place.
