@@ -1,9 +1,12 @@
-import { useSession, updateSession } from "@/app/SessionProvider";
+import { useSession } from "@/app/SessionProvider";
+
+const dismissToaster = () => {
+    updateSession({ errorToaster: false });
+}
 
 export default function ErrorToaster() {
     const session = useSession().session;
-
-    updateSession({ errorToaster: false });
+    const { updateSession } = useSession();
 
     if (session?.errorToaster) {
         return (
@@ -13,7 +16,9 @@ export default function ErrorToaster() {
             >
                 <h3 className="mb-6 font-bolder text-xl">Error: {session.errorToaster.title}</h3>
                 <p>{session.errorToaster.message}</p>
-                <button class="block mr-0 ml-[auto] mt-6 rounded border-1 border-solid border-[black] px-4 font-bold">
+                <button class="block mr-0 ml-[auto] mt-6 rounded border-1 border-solid border-[black] px-4 font-bold"
+                    onClick={dismissToaster}
+                >
                     <span className="text-lg">⨯</span> Dismiss
                 </button>
             </div>

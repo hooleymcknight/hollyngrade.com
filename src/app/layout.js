@@ -11,7 +11,6 @@ import "./globals.css";
 // };
 
 export async function generateMetadata({ params, searchParams }, parent) {
-    // const session = await getServerSession(options);
     const headersList = await headers();
     const pathname = headersList.get("hg-pathname") || "hollyngrade";
     
@@ -30,8 +29,6 @@ export async function generateMetadata({ params, searchParams }, parent) {
     
     // optionally access and extend (rather than replace) parent metadata
     //   const previousImages = (await parent).openGraph?.images || [];
-
-    // console.log('sp', searchParams ?? 'none')
 
     const metadataObj = {
         metadataBase: new URL('https://hollyngrade.com'),

@@ -68,6 +68,7 @@ export default function CategoriesGallery() {
             console.log('================================================== run this async.')
             try {
                 const response = await getPhotos();
+                // console.log('get photos, ', response)
                 if (cancelled) return;
                 if (!response) {
                     console.error('No photos to load.');
@@ -100,7 +101,7 @@ export default function CategoriesGallery() {
         })();
 
         return () => { cancelled = true; };
-    }, [session, updateSession])
+    }, [session, updateSession, attempts])
 
     return(
         <div className="w-full flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows[auto_1fr] xl:grid-cols-3 justify-center items-center gap-6 text-centr">
