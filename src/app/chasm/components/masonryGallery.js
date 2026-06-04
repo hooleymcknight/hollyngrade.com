@@ -64,7 +64,7 @@ export default function MasonryGallery(props) {
     const [categories, setCategories] = useState([]);
     const [slides, setSlides] = useState([]);
     const { updateSession } = useSession();
-    const sessionData = useSession().sessionData;
+    const session = useSession().session;
 
     // check out params for photo queries.
     const searchParams = useSearchParams();
@@ -88,7 +88,7 @@ export default function MasonryGallery(props) {
         };
 
         // Try the session cache first
-        const cached = sessionData?.photos?.filter(x => dbSlug ? x.category === dbSlug : x.category);
+        const cached = session?.photos?.filter(x => dbSlug ? x.category === dbSlug : x.category);
         if (cached?.length) {
             apply(cached, dbSlug ? cached[0].photoSet : cached.map(x => x.photoSet).flat());
             return () => { cancelled = true; };
@@ -129,7 +129,7 @@ export default function MasonryGallery(props) {
         })();
 
         return () => { cancelled = true; };
-    }, [props.slug, sessionData, photoRef, updateSession]);
+    }, [props.slug, session, photoRef, updateSession]);
 
     return (
         <div id="photo-gallery" className="flex w-[95%] max-w-3xl flex-col items-center justify-between py-8 px-8 sm:px-16 bg-zinc-50 sm:items-start mt-8 mb-8"

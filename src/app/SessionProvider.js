@@ -1,17 +1,24 @@
 'use client';
 import { createContext, useContext, useState } from "react";
 
-const SessionContext = createContext();
+const SessionContext = createContext({
+    session: null,
+    updateSession: () => {}
+});
 
-export default function SessionProvider({ children, session }) {
-    const [sessionData, setSessionData] = useState(session);
+export default function SessionProvider({ children, session: initialSession }) {
+    const [session, setSession] = useState(initialSession);
 
     const updateSession = (newData) => {
-        setSessionData(prevData => ({ ...prevData, ...newData }));
+        setSession(prevData => ({ ...prevData, ...newData }));
     };
 
+    if (!session || session?.errorToaster === null) {
+        updateSession({ errorToaster: false });
+    }
+
     return (
-        <SessionContext.Provider value={{sessionData, updateSession}}>
+        <SessionContext.Provider value={{session, updateSession}}>
             {children}
         </SessionContext.Provider>
     );

@@ -20,20 +20,20 @@ let activeTabClasses = 'border-4 border-[#a20000]';
 export default function Account() {
     const [activeTab, setActiveTab] = useState(adminTabs[0]);
 
-    const sessionData = useSession().sessionData;
-    const displayName = sessionData?.user?.username;
+    const session = useSession().session;
+    const displayName = session?.user?.username;
 
-    // let acctTabs = sessionData?.user?.type === 'admin' ? adminTabs : userTabs;
+    // let acctTabs = session?.user?.type === 'admin' ? adminTabs : userTabs;
     let acctTabs = adminTabs;
 
     return (
         <>
         {
-            sessionData?.user
+            session?.user
             ?
             <Main id="account">
                 <>
-                    <h1>{sessionData?.user?.type === 'admin' ? 'Admin' : 'User'} Account Page</h1>
+                    <h1>{session?.user?.type === 'admin' ? 'Admin' : 'User'} Account Page</h1>
                     <div className="">
                         {displayName}
                     </div>
@@ -49,7 +49,7 @@ export default function Account() {
 
                         <div className="acct-info-group main-content-section">
                             {
-                                activeTab === 'Account' ? <AccountInfo session={sessionData} /> : ''
+                                activeTab === 'Account' ? <AccountInfo session={session} /> : ''
                             }
                             {
                                 activeTab === 'Edit DBs' ? 
@@ -63,10 +63,10 @@ export default function Account() {
                                 : ''
                             }
                             {/* {
-                                activeTab === 'Events' ? <EditEvents session={sessionData} /> : ''
+                                activeTab === 'Events' ? <EditEvents session={session} /> : ''
                             }
                             {
-                                activeTab === 'Messages' ? <Messages session={sessionData} /> : ''
+                                activeTab === 'Messages' ? <Messages session={session} /> : ''
                             } */}
                         </div>
                     </div>

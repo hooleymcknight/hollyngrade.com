@@ -10,13 +10,13 @@ import BackButton from "@/app/components/backButton";
 // const gardenFields = ['date', 'location', 'plants', 'entry', 'photos'];
 
 export default function InventoryDB() {
-    const sessionData = useSession().sessionData;
+    const session = useSession().session;
 
 
     return (
         <>
         {
-            sessionData?.user
+            session?.user
             ?
             <Main classes="" id="inventory-db">
                 <>

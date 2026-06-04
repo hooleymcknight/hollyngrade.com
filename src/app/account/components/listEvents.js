@@ -17,8 +17,8 @@ const dtToTime = (dt) => {
 export const ListEvents = ({ session, onEdit }) => {
     const [events, setEvents] = useState([]);
     const { updateSession } = useSession();
-    const sessionData = useSession().sessionData;
-    const isAdmin = sessionData?.user?.type;
+    const session = useSession().session;
+    const isAdmin = session?.user?.type;
     const pathname = usePathname();
 
     const editEventHandler = (e) => {

@@ -24,8 +24,8 @@ import EntryCard from "./EntryCard";
  * Server-side join sketch lives in a comment at the bottom of this file.
  */
 export default function GardenJournalFeed() {
-    const { sessionData, updateSession } = useSession();
-    const isAdmin = !!sessionData?.user?.admin;
+    const { session, updateSession } = useSession();
+    const isAdmin = !!session?.user?.admin;
 
     const [entries, setEntries] = useState([]);
     const [locations, setLocations] = useState([]);
@@ -46,7 +46,7 @@ export default function GardenJournalFeed() {
     useEffect(() => {
         let cancelled = false;
 
-        const cached = sessionData?.entries_full;
+        const cached = session?.entries_full;
         if (cached?.entries && cached?.locations) {
             setEntries(cached.entries);
             setLocations(cached.locations);
@@ -76,7 +76,7 @@ export default function GardenJournalFeed() {
         })();
 
         return () => { cancelled = true; };
-    }, [sessionData, updateSession]);
+    }, [session, updateSession]);
 
     // ---- Derived: family list with counts ---------------------------------
     const familyChips = useMemo(() => {

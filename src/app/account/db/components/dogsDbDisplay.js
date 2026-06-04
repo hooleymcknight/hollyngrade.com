@@ -9,7 +9,7 @@ export default function Database(props) {
     const [addedLines, setAddedLines] = useState([]);
 
     const{ updateSession } = useSession();
-    const sessionData = useSession().sessionData;
+    const session = useSession().session;
 
     const filterRows = (checkedInputs) => {
         const rows = Array.from(document.querySelectorAll(`tr[data-all-values]`));
@@ -89,7 +89,7 @@ export default function Database(props) {
             setData(scopedData);
         }
 
-        const cached = sessionData?.[`${props.db}`];
+        const cached = session?.[`${props.db}`];
         if (cached?.length) {
             apply(cached);
             return () => { cancelled = true; };
@@ -115,7 +115,7 @@ export default function Database(props) {
         })();
         
         return () => { cancelled = true; };
-    }, [sessionData, updateSession, props.db, emptyFields, props.selects, props.whereNulls]);
+    }, [session, updateSession, props.db, emptyFields, props.selects, props.whereNulls]);
 
     return (
         <>

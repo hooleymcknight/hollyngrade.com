@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -19,8 +20,10 @@ export default function CategoriesGallery() {
     const [categories, setCategories] = useState([]);
     const [slides, setSlides] = useState([]);
 
-    const{ updateSession } = useSession();
-    const sessionData = useSession().sessionData;
+    const { updateSession } = useSession();
+    const session = useSession().session;
+    // if I'm going to use session to fire a toaster, then I need one more state to help me prevent errors from looping.
+    const [attempts, setAttempts] = useState(0);
 
     useBackButtonClose(open, () => setOpen(false));
 
@@ -41,7 +44,9 @@ export default function CategoriesGallery() {
     }
 
     useEffect(() => {
+        console.log('================================================== use effect is running.')
         let cancelled = false;
+        if (attempts >=5 && !!session.errorToaster) return;
 
         const apply = (categoriesData, slidesData) => {
             if (cancelled) return;
@@ -52,7 +57,7 @@ export default function CategoriesGallery() {
         }
 
         // try session cache
-        const cached = sessionData?.photos;
+        const cached = session?.photos;
         if (cached?.length > 1) { // we want this to be greater than 1. if it is only one set, we are coming from inside of a set. and we want to rebuild our cache.
             apply(cached, cached.map(x => x.photoset).flat());
             return () => { cancelled = true; };
@@ -60,6 +65,7 @@ export default function CategoriesGallery() {
 
         // otherwise fetch from server
         (async () => { // the issue is definitely here.
+            console.log('================================================== run this async.')
             try {
                 const response = await getPhotos();
                 if (cancelled) return;
@@ -80,12 +86,21 @@ export default function CategoriesGallery() {
                 apply(result, finalSlideSet);
             }
             catch (err) {
+                console.log('toaster') // consoles to dev tools
+                setAttempts(Number(attempts + 1)); // throwing in the number call to force it to not try to change the assignment of attempts directly?
+                updateSession( { errorToaster: {
+                    title: 'Cannot connect to database...',
+                    message: 'But please try again in a bit! This error has been sent directly to Hollyn\'s phone; she will fix it asap!'
+                }});
                 console.error(err);
+                // throw err;
+                // I added this 6/3 but then thought... if it aint broke don't fix it?
+                // I just wanna have more time to test this and make sure I'm not causing an error to end up unhandled or hidden from the user.
             }
         })();
 
         return () => { cancelled = true; };
-    }, [sessionData, updateSession])
+    }, [session, updateSession])
 
     return(
         <div className="w-full flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows[auto_1fr] xl:grid-cols-3 justify-center items-center gap-6 text-centr">

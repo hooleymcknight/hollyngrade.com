@@ -3,14 +3,14 @@
 // SECURITY: admin gating is currently UI-only.
 // ---------------------------------------------------------------------------
 // GardenJournalFeed hides edit and new-entry affordances when
-// sessionData.user.admin is falsy, but the Server Actions in this file
+// session.user.admin is falsy, but the Server Actions in this file
 // (updateDatabase, updateGardenDatabase) do NOT verify admin status
 // server-side. A motivated visitor could invoke either action directly.
 //
 // If this site is ever shared beyond personal use, add an admin check at
 // the top of updateDatabase before the $transaction call — probably by
 // reading the session on the server side via the same auth layer that
-// populates sessionData.user.
+// populates session.user.
 // ---------------------------------------------------------------------------
 
 // import { PrismaClient } from "@prisma/client"; //  .\node_modules\@prisma\client

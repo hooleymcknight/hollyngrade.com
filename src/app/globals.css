@@ -182,3 +182,16 @@ button[type="submit"][disabled] {
     background-color: #00000066;
     cursor: not-allowed;
 }
+
+/** toaster **/
+
+@keyframes showToaster {
+    from { bottom: -200px; }
+    to { bottom: 30px; }
+}
+
+#error-toaster {
+    animation-name: showToaster;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}

@@ -1,6 +1,6 @@
 // import { getServerSession } from 'next-auth';
 import { headers } from 'next/headers';
-import SessionProvider from "./SessionProvider";
+import SessionProvider, { useSession } from "./SessionProvider";
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import "./globals.css";
@@ -30,8 +30,10 @@ export async function generateMetadata({ params, searchParams }, parent) {
     
     // optionally access and extend (rather than replace) parent metadata
     //   const previousImages = (await parent).openGraph?.images || [];
-    
-    return {
+
+    // console.log('sp', searchParams ?? 'none')
+
+    const metadataObj = {
         metadataBase: new URL('https://hollyngrade.com'),
         title: pageTitle,
         description: pageDesc,
@@ -42,6 +44,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
             images: ['favicon.ico'],
         },
     }
+    
+    return metadataObj;
 }
 
 export default async function RootLayout({ children }) {

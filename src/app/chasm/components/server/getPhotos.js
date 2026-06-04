@@ -1,6 +1,7 @@
 'use server'
 // import { PrismaClient } from "@prisma/client";
-import { PrismaClient as PrismaClientHG } from "@/../prisma-hg/hg-client/client"
+import { Prisma, PrismaClient as PrismaClientHG } from "@/../prisma-hg/hg-client/client"
+import reportError from '@/app/api/reportError';
 
 const db = new PrismaClientHG();
 
@@ -37,51 +38,69 @@ export const getPhotos = async (slug) => {
             orderBy: { date: "asc" }
         };
 
-    const res = await db.dogs.findMany(options);
+    try {
+        const res = await db.dogs.findMany(options);
 
-    let categoryTiles = [...new Set(res.map(x => x.category))];
-    
-    for (const category of categoryTiles) {
-        const idx = categoryTiles.indexOf(category);
-        const catName = categoryTiles[idx];
-        const photos = sortByDate(res.filter(x => x.category === category));
+        let categoryTiles = [...new Set(res.map(x => x.category))];
+        
+        for (const category of categoryTiles) {
+            const idx = categoryTiles.indexOf(category);
+            const catName = categoryTiles[idx];
+            const photos = sortByDate(res.filter(x => x.category === category));
 
-        for (let item of photos) {
-            // add dates to all the descriptions.
-            let dt = new Date(item.date);
-            let options = { year: 'numeric', month: 'short', day: 'numeric' };
-            dt = dt.toLocaleDateString('en-US', options);
-            item.description = `${dt}${item.description.length ? ': ' + item.description : ''}`;
+            for (let item of photos) {
+                // add dates to all the descriptions.
+                let dt = new Date(item.date);
+                let options = { year: 'numeric', month: 'short', day: 'numeric' };
+                dt = dt.toLocaleDateString('en-US', options);
+                item.description = `${dt}${item.description.length ? ': ' + item.description : ''}`;
 
-            // add a better share link, using the src field.
-            // example of the src field: https://hollyngrade.com/dogs/05-Sanger/pool boys/IMG_2569.webp
-            let fileName = item.src.split('/')[item.src.split('/').length - 1];
-            let categoryPath = item.src.split('/dogs/')[1].split('/' + fileName)[0].replace(/\//g, '_').replace(/\s/g, '-');
-            let shareLink = `https://hollyngrade.com/chasm/${categoryPath}?photo=${encodeURI(fileName)}`;
-            item.share = shareLink;
-            
-            // fix video src
-            if (item.type === 'video' && !item.sources?.type) {
-                const ext = item.src.split('.')?.[item.src.split('.').length - 1];
-                if (!item.sources) {
-                    item.sources = [{
-                        src: item.src,
-                        type: `video/${ext}`
-                    }];
-                }
+                // add a better share link, using the src field.
+                // example of the src field: https://hollyngrade.com/dogs/05-Sanger/pool boys/IMG_2569.webp
+                let fileName = item.src.split('/')[item.src.split('/').length - 1];
+                let categoryPath = item.src.split('/dogs/')[1].split('/' + fileName)[0].replace(/\//g, '_').replace(/\s/g, '-');
+                let shareLink = `https://hollyngrade.com/chasm/${categoryPath}?photo=${encodeURI(fileName)}`;
+                item.share = shareLink;
                 
-                const { src, ...videoItem } = item;
-                item = { ...videoItem }
+                // fix video src
+                if (item.type === 'video' && !item.sources?.type) {
+                    const ext = item.src.split('.')?.[item.src.split('.').length - 1];
+                    if (!item.sources) {
+                        item.sources = [{
+                            src: item.src,
+                            type: `video/${ext}`
+                        }];
+                    }
+                    
+                    const { src, ...videoItem } = item;
+                    item = { ...videoItem }
+                }
+            }
+
+            categoryTiles[idx] = {
+                "category": catName,
+                "thumbnails": alignThumbnails([photos[0], getMedian(photos), photos[photos.length - 1]]),
+                "photoSet": photos,
             }
         }
 
-        categoryTiles[idx] = {
-            "category": catName,
-            "thumbnails": alignThumbnails([photos[0], getMedian(photos), photos[photos.length - 1]]),
-            "photoSet": photos,
-        }
+        return categoryTiles;
     }
+    catch(err) {
+        let msgToReport = err.message ?? '';
+        if (err instanceof Prisma.PrismaClientInitializationError) {
+            msgToReport += ' Prisma Client Initialization Error. getPhotos.js';
+        }
+        else if (err instanceof Prisma.PrismaClientKnownRequestError) {
+            msgToReport += ' Prisma Client Known Request Error. getPhotos.js';
+        }
+        else {
+            msgToReport += ' Error unknown. getPhotos.js'
+        }
 
-    return categoryTiles;
+        console.log(msgToReport)
+        // reportError(msgToReport);
+        throw msgToReport; // POST /chasm 500 
+    }
     
 }
