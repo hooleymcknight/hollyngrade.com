@@ -10,8 +10,10 @@ export const processSpanClasses = (input, thumbnailsSet) => {
     }
 }
 
-export const processCategoryName = (name) => {
+export const processCategoryName = (name, layout = false) => {
+    if (layout === true) console.log('processing', name)
     let returnName = name.replace(/\d+-/g, '').replace(/-/g, ' ').replace(/_/g, '/').replace(/([A-Z])/g, ' $1').replace(/^./, (str) => { return str.toUpperCase(); });
+    if (layout === true) console.log(returnName)
     // the custom requests:
     returnName = returnName
         .replace('Woods With Me', 'In the Woods with Me')

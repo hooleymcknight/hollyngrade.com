@@ -1,5 +1,6 @@
 import { useParams } from "next/navigation.js";
 import SlugPage from '@/app/chasm/components/slugPage';
+import { processCategoryName } from "../components/helpers/lightboxHelpers";
 
 export async function generateMetadata({ params, searchParams }, parent) {
     // const headersList = await headers();
@@ -8,23 +9,16 @@ export async function generateMetadata({ params, searchParams }, parent) {
     // optionally access and extend (rather than replace) parent metadata
     //   const previousImages = (await parent).openGraph?.images || [];
 
-    const sp = await searchParams;
-    console.log('sp', sp ?? 'none')
+    
     const par = await params;
-    console.log(par);
-
     const rent = await parent;
-    console.log(rent);
-
-    let srcUrl = encodeURI(rent.metadataBase + 'dogs/' + par.slug + '/' + sp.photo);
-    let url = encodeURI(rent.metadataBase + 'chasm/' + par.slug + '?photo=' + sp.photo);
-    console.log(srcUrl, url)
-
-    // WHAT IF NO QUERY???
+    const sp = await searchParams;
+    let srcUrl = sp ? encodeURI(rent.metadataBase + 'dogs/' + par.slug + '/' + sp.photo) : 'favicon.ico';
+    let url = encodeURI(`${rent.metadataBase}chasm/${par.slug}${sp ? '?photo=' + sp.photo : ''}`);
 
     const metadataObj = {
         openGraph: {
-            title: `Koda & Chasm | ${par.slug.replace(/\//g, '')}`,
+            title: `Koda & Chasm | ${processCategoryName(par.slug.replace(/\//g, ''))}`,
             pageDesc: 'Remembering Chasm.',
             url: url,
             images: [srcUrl],

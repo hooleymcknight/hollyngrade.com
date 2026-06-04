@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import SessionProvider, { useSession } from "./SessionProvider";
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
+import { processCategoryName } from './chasm/components/helpers/lightboxHelpers';
 import "./globals.css";
 
 // export const metadata = {
@@ -12,7 +13,8 @@ import "./globals.css";
 
 export async function generateMetadata({ params, searchParams }, parent) {
     const headersList = await headers();
-    const pathname = headersList.get("hg-pathname") || "hollyngrade";
+    const pathname = headersList.get("hg-pathname") || "";
+    console.log("path", pathname)
     
     // fetch data
     let pageTitle = 'hollyngrade';
@@ -23,7 +25,9 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
         let subFolder = pathname.split('/chasm')?.[1] || null;
         if (subFolder?.length) {
-            pageTitle = `Koda & Chasm | ${subFolder.replace(/\//g, '')}`;
+            let pipedTitle = subFolder.replace(/\//g, '');
+            pipedTitle = pipedTitle.includes('?') ? pipedTitle.split('?')[0] : pipedTitle;
+            pageTitle = `Koda & Chasm | ${processCategoryName(pipedTitle)}`;
         }
     }
     
@@ -37,7 +41,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
         openGraph: {
             title: pageTitle,
             description: pageDesc,
-            url: `https://hollyngrade.com/${pathname}`,
+            url: `https://hollyngrade.com${pathname}`,
             images: ['favicon.ico'],
         },
     }

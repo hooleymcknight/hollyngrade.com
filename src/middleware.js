@@ -1,26 +1,32 @@
-// import { NextRequest, NextResponse } from "next/server";
-
-// export function middleware (request) {
-//     const requestHeaders = new Headers(request.headers);
-//     requestHeaders.set('hg-pathname', request.nextUrl.pathname);
-
-//     return NextResponse.next({
-//         request: {
-//             headers: requestHeaders,
-//         }
-//     });
-// }
-
-
+import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
-export default function middleware(request) {
-    const response = NextResponse.next();
-    response.headers.set('searchParams', request.nextUrl.searchParams || 'no value');
+export default withAuth(
+    // This runs on every matched request that passes `authorized`
+    function middleware(req) {
+        const requestHeaders = new Headers(req.headers);
+        requestHeaders.set('hg-pathname', req.nextUrl.pathname);
+        requestHeaders.set('hg-search-params', req.nextUrl.searchParams.toString() || 'no value');
 
-    return NextResponse.next(new URL('/', request.url));
-}
+        return NextResponse.next({
+            request: { headers: requestHeaders },
+        });
+    },
+    {
+        callbacks: {
+            // Decides whether to let the request through to the function above.
+            // Return true = allowed (function runs). Return false = redirect to sign-in.
+            authorized: ({ token, req }) => {
+                const { pathname } = req.nextUrl;
+                if (pathname.startsWith('/account')) {
+                    return !!token;   // protected: require a session
+                }
+                return true;          // everything else: always allowed
+            },
+        },
+    }
+);
 
-// // applies next-auth only to matching routes - can be regex
-// // ref: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-export const config = { matcher: ['/account'] };
+export const config = {
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+};
