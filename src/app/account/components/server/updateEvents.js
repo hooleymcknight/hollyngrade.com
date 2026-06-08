@@ -34,7 +34,6 @@ export async function createNewEvent(data) {
 /* edit/delete event */
 export async function editEventDB(eventID, newData) {
     if (newData === 'delete') {
-        console.log('delete this event', eventID);
         const deleteEvent = await db.events.delete({
             where: {
                 id: Number(eventID)

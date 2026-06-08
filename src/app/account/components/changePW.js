@@ -23,7 +23,6 @@ export default function ChangePasswordButton({ required, onDataSend, updatePwCha
                     setChangingPassword(false);
                 }
                 else {
-                    console.log('try again');
                     window.alert('Please check passwords and try again.');
                     /**
                      * insert error messaging here
@@ -31,7 +30,6 @@ export default function ChangePasswordButton({ required, onDataSend, updatePwCha
                 }
             }
             else {
-                console.log('get ya passwords matching');
                 window.alert('Please make sure your new passwords match and try again.');
                 /**
                  * insert error messaging here

@@ -11,7 +11,11 @@
     "deploy": "pm2 delete 'hollyngrade.com' && pm2 start npm --name 'hollyngrade.com' -- start",
     "fulldeploy": "git fetch && git pull origin main && pm2 delete 'hollyngrade.com' && npm run build && pm2 start npm --name 'hollyngrade.com' -- start",
     "order": "echo 'fetch, pull, pm2 delete ONLY HOLLYNGRADE, run build, pm2 start'",
-    "pm2start": "pm2 start npm --name 'hollyngrade.com' -- start"
+    "pm2start": "pm2 start npm --name 'hollyngrade.com' -- start",
+    "prisma:gl:pull": "prisma db pull --schema=./prisma-gl/schema.prisma",
+    "prisma:gl:generate": "prisma generate --schema=./prisma-gl/schema.prisma",
+    "prisma:hg:pull": "prisma db pull --schema=./prisma-hg/schema.prisma",
+    "prisma:hg:generate": "prisma generate --schema=./prisma-hg/schema.prisma"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^7.2.0",

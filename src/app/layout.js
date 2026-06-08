@@ -14,7 +14,6 @@ import "./globals.css";
 export async function generateMetadata({ params, searchParams }, parent) {
     const headersList = await headers();
     const pathname = headersList.get("hg-pathname") || "";
-    console.log("path", pathname)
     
     // fetch data
     let pageTitle = 'hollyngrade';

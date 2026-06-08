@@ -44,7 +44,6 @@ export default function CategoriesGallery() {
     }
 
     useEffect(() => {
-        console.log('================================================== use effect is running.')
         let cancelled = false;
         if (attempts >=5 && !!session.errorToaster) return;
 
@@ -65,10 +64,8 @@ export default function CategoriesGallery() {
 
         // otherwise fetch from server
         (async () => { // the issue is definitely here.
-            console.log('================================================== run this async.')
             try {
                 const response = await getPhotos();
-                // console.log('get photos, ', response)
                 if (cancelled) return;
                 if (!response) {
                     console.error('No photos to load.');
@@ -87,7 +84,6 @@ export default function CategoriesGallery() {
                 apply(result, finalSlideSet);
             }
             catch (err) {
-                console.log('toaster') // consoles to dev tools
                 setAttempts(Number(attempts + 1)); // throwing in the number call to force it to not try to change the assignment of attempts directly?
                 updateSession( { errorToaster: {
                     title: 'Cannot connect to database...',

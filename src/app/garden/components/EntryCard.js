@@ -1,10 +1,5 @@
-import {
-    formatHeadline,
-    MapPinIcon,
-    CameraIcon,
-    PencilIcon,
-    PlantChip,
-} from "../helpers/gardenHelpers";
+import { formatHeadline } from "../helpers/gardenHelpers";
+import { MapPinIcon, CameraIcon, PencilIcon, PlantChip } from "../helpers/gardenIconsChips";
 
 /**
  * EntryCard

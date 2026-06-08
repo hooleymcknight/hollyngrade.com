@@ -40,7 +40,6 @@ export async function uploadMemory(formData) {
 
     try {
         for (const file of files) {
-            console.log(file.name, file)
             const { buffer, fileName } = await getImageData(file, dateString);
             if (buffer?.length) {
                 imageUploaded = true;

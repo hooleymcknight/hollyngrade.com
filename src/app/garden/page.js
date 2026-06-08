@@ -1,5 +1,4 @@
 'use client'
-import { useState } from "react";
 import Main from "@/app/components/mainWrapper";
 import GardenJournalFeed from "./components/GardenJournalFeed";
 import BackButton from '@/app/components/backButton';

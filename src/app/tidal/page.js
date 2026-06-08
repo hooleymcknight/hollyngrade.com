@@ -26,7 +26,6 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
 export default async function Tidal({ params, searchParams }) {
     let query = await searchParams;
-    // console.log(query.song);
 
     let songInfo = await fetch('https://embed.tidal.com/tracks/419499614')
     .then((response) => {
@@ -34,13 +33,11 @@ export default async function Tidal({ params, searchParams }) {
     })
     .then((html) => {
         const root = parse(html);
-        // console.log(root.innerHTML);
         return root.innerHTML;
     })
     .catch((err) => {
         console.log('errer', err);
     })
-    // console.log(songInfo)
 
     return (
         <>

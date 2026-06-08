@@ -1,17 +1,17 @@
-import { useEffect, useMemo, useState, useCallback } from "react";
-import { useSession } from "@/app/SessionProvider";
-import { getEntriesFull, updateGardenDatabase } from "@/app/api/db/getDatabase"
-import { FilterChip, MapPinIcon } from "../helpers/gardenHelpers";
+import { useMemo, useState, useCallback } from "react";
+import { useGardenData } from '@/app/garden/hooks/useGardenData';
+import { useEntryEdits } from '@/app/garden/hooks/useEntryEdits';
+import { createGardenEntry } from "@/app/api/db/gardenQueries";
+import { FilterChip, MapPinIcon } from "../helpers/gardenIconsChips";
 import EntryCard from "./EntryCard";
+import EntryForm from "./EntryForm";
+import FeedHeader from './FeedHeader';
+import { buildFamilyChips, buildLocationChips, filterEntries } from "../helpers/gardenMemos";
+import Modal from '@/app/components/Modal';
 
 /**
- * GardenJournalFeed
- * ----------------------------------------------------------------
- * Card feed replacing the old dbDisplay.js table view. State lives
- * in React; filtering happens via useMemo derivations; submit
- * updates state in place (no reload).
  *
- * EXPECTED FETCH SHAPE — getDatabase("entries_full") returns:
+ * getDatabase("entries_full") returns:
  *   {
  *     entries: [{
  *       id, entry_date, entry, location_id, location_name, created_at,
@@ -21,206 +21,64 @@ import EntryCard from "./EntryCard";
  *     locations: [{ id, name }]
  *   }
  *
- * Server-side join sketch lives in a comment at the bottom of this file.
  */
 export default function GardenJournalFeed() {
-    const { session, updateSession } = useSession();
-    const isAdmin = !!session?.user?.admin;
+    // const isAdmin = !!session?.user?.admin;
+    const isAdmin = true;
 
-    const [entries, setEntries] = useState([]);
-    const [locations, setLocations] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const { entries, setEntries, locations, allPlants, loading, error, invalidate } = useGardenData();
+    const {
+        editingId, dirtyRows, savingId,
+        startEdit, cancelEdit, updateDraft, saveEdit,
+    } = useEntryEdits({ setEntries, locations, invalidate });
 
-    // editingId: which entry is currently in edit mode (null = none)
-    const [editingId, setEditingId] = useState(null);
-    // dirtyRows keyed by entry id; holds the in-progress draft
-    const [dirtyRows, setDirtyRows] = useState({});
-    const [savingId, setSavingId] = useState(null);
+    const [newEntryOpen, setNewEntryOpen] = useState(false);
+    const [creatingEntry, setCreatingEntry] = useState(false);
 
     // Filter state — arrays of selected ids
     const [selectedFamilyIds, setSelectedFamilyIds] = useState([]);
     const [selectedLocationIds, setSelectedLocationIds] = useState([]);
 
-    // ---- Data fetch -------------------------------------------------------
-    useEffect(() => {
-        let cancelled = false;
-
-        const cached = session?.entries_full;
-        if (cached?.entries && cached?.locations) {
-            setEntries(cached.entries);
-            setLocations(cached.locations);
-            setLoading(false);
-            return () => { cancelled = true; };
+    // create garden entryyyyyyy
+    const handleCreateEntry = useCallback(async (formData) => {
+        // data: entry_date, location_id, entry, plant_ids
+        setCreatingEntry(true);
+        try {
+            const result = await createGardenEntry(formData);
+            if (typeof result === 'string') throw new Error(result);
+            invalidate();
+            // The effect re-fires because session changed; fresh data lands shortly.
+            setNewEntryOpen(false);
+        } catch (err) {
+            window.alert(`Create failed: ${err.message || err}`);
+        } finally {
+            setCreatingEntry(false);
         }
+    }, [invalidate]);
 
-        (async () => {
-            try {
-                const response = await getEntriesFull();
-                if (cancelled) return;
-                if (!response || typeof response === "string") {
-                    setError(response || "Failed to load entries");
-                    setLoading(false);
-                    return;
-                }
-                setEntries(response.entries || []);
-                setLocations(response.locations || []);
-                updateSession({ entries_full: response });
-                setLoading(false);
-            } catch (err) {
-                if (!cancelled) {
-                    setError(err.message || "Failed to load entries");
-                    setLoading(false);
-                }
-            }
-        })();
+    // memo hooks
+    const familyChips = useMemo(() => buildFamilyChips(entries), [entries]);
+    const locationChips = useMemo(() => buildLocationChips(entries, locations), [entries, locations]);
+    const filteredEntries = useMemo(() => filterEntries(entries, selectedFamilyIds, selectedLocationIds), [entries, selectedFamilyIds, selectedLocationIds]);
 
-        return () => { cancelled = true; };
-    }, [session, updateSession]);
-
-    // ---- Derived: family list with counts ---------------------------------
-    const familyChips = useMemo(() => {
-        const map = new Map(); // family_id -> { id, name, color_token, sort_order, count }
-        for (const entry of entries) {
-            const seen = new Set();
-            for (const p of entry.plants || []) {
-                if (seen.has(p.family_id)) continue;
-                seen.add(p.family_id);
-                const existing = map.get(p.family_id);
-                if (existing) {
-                    existing.count += 1;
-                } else {
-                    map.set(p.family_id, {
-                        id: p.family_id,
-                        name: p.family_name,
-                        color_token: p.color_token,
-                        sort_order: p.family_sort_order,
-                        count: 1,
-                    });
-                }
-            }
-        }
-        return Array.from(map.values()).sort((a, b) => a.sort_order - b.sort_order);
-    }, [entries]);
-
-    // ---- Derived: location chips with counts ------------------------------
-    const locationChips = useMemo(() => {
-        const counts = new Map();
-        for (const entry of entries) {
-            counts.set(entry.location_id, (counts.get(entry.location_id) || 0) + 1);
-        }
-        return locations
-            .map((loc) => ({ ...loc, count: counts.get(loc.id) || 0 }))
-            .filter((loc) => loc.count > 0);
-    }, [entries, locations]);
-
-    // ---- Derived: filtered entries ----------------------------------------
-    const filteredEntries = useMemo(() => {
-        const familySet = new Set(selectedFamilyIds);
-        const locationSet = new Set(selectedLocationIds);
-        return entries
-            .filter((entry) => {
-                if (locationSet.size > 0 && !locationSet.has(entry.location_id)) return false;
-                if (familySet.size > 0) {
-                    const matchesAny = (entry.plants || []).some((p) => familySet.has(p.family_id));
-                    if (!matchesAny) return false;
-                }
-                return true;
-            })
-            .sort((a, b) => (a.entry_date < b.entry_date ? 1 : a.entry_date > b.entry_date ? -1 : 0));
-    }, [entries, selectedFamilyIds, selectedLocationIds]);
-
-    // ---- Toggle helpers ---------------------------------------------------
+    // Toggle helpers
     const toggleFamily = useCallback((id) => {
         setSelectedFamilyIds((prev) =>
             prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
         );
     }, []);
+
     const toggleLocation = useCallback((id) => {
         setSelectedLocationIds((prev) =>
             prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
         );
     }, []);
 
-    // ---- Editing handlers -------------------------------------------------
-    const startEdit = useCallback((entry) => {
-        setEditingId(entry.id);
-        setDirtyRows((prev) => ({
-            ...prev,
-            [entry.id]: {
-                entry: entry.entry || "",
-                entry_date: entry.entry_date,
-                location_id: entry.location_id,
-            },
-        }));
-    }, []);
+    // handle modal close
+    const handleClose = useCallback(() => setNewEntryOpen(false), [])
 
-    const cancelEdit = useCallback((entryId) => {
-        setEditingId(null);
-        setDirtyRows((prev) => {
-            const next = { ...prev };
-            delete next[entryId];
-            return next;
-        });
-    }, []);
+    // render time:
 
-    const updateDraft = useCallback((entryId, field, value) => {
-        setDirtyRows((prev) => ({
-            ...prev,
-            [entryId]: { ...prev[entryId], [field]: value },
-        }));
-    }, []);
-
-    const saveEdit = useCallback(async (entry) => {
-        const draft = dirtyRows[entry.id];
-        if (!draft) return;
-
-        // Match existing updateDatabase contract: { table, updates: [{ field, value, id }] }
-        const updates = [];
-        if (draft.entry !== entry.entry) {
-            updates.push({ field: "entry", value: draft.entry, id: entry.id });
-        }
-        if (draft.entry_date !== entry.entry_date) {
-            updates.push({ field: "entry_date", value: draft.entry_date, id: entry.id });
-        }
-        if (draft.location_id !== entry.location_id) {
-            updates.push({ field: "location_id", value: draft.location_id, id: entry.id });
-        }
-
-        if (updates.length === 0) {
-            cancelEdit(entry.id);
-            return;
-        }
-
-        setSavingId(entry.id);
-        try {
-            const result = await updateGardenDatabase({ table: "entries", updates });
-            if (!result) throw new Error("Update failed");
-
-            // Patch entries in place — no reload.
-            setEntries((prev) =>
-                prev.map((e) => {
-                    if (e.id !== entry.id) return e;
-                    const updated = { ...e, ...draft };
-                    if (draft.location_id !== entry.location_id) {
-                        const loc = locations.find((l) => l.id === draft.location_id);
-                        if (loc) updated.location_name = loc.name;
-                    }
-                    return updated;
-                })
-            );
-            // Invalidate the session cache so the next mount refetches.
-            updateSession({ entries_full: null });
-
-            cancelEdit(entry.id);
-        } catch (err) {
-            window.alert(`Save failed: ${err.message || err}`);
-        } finally {
-            setSavingId(null);
-        }
-    }, [dirtyRows, locations, updateSession, cancelEdit]);
-
-    // ---- Render -----------------------------------------------------------
     if (loading) {
         return (
             <div className="max-w-2xl mx-auto px-4 py-12 text-neutral-500">
@@ -239,25 +97,24 @@ export default function GardenJournalFeed() {
     return (
         <div className="max-w-2xl mx-auto px-0 sm:px-4 py-8">
             {/* Header */}
-            <header className="mb-6 flex items-end justify-between gap-4">
-                <div>
-                    <h1 className="text-3xl font-semibold tracking-tight">Garden journal</h1>
-                    <p className="text-sm text-neutral-800 mt-1 tabular-nums">
-                        {entries.length} {entries.length === 1 ? "entry" : "entries"}
-                        {filteredEntries.length !== entries.length &&
-                            ` · ${filteredEntries.length} shown`}
-                    </p>
-                </div>
-                {isAdmin && (
-                    <button
-                        type="button"
-                        onClick={() => {/* hook up to new-entry route next */}}
-                        className="px-3.5 py-2 rounded-full bg-black text-white text-sm font-medium hover:bg-neutral-800 transition-colors"
-                    >
-                        + New entry
-                    </button>
-                )}
-            </header>
+            <FeedHeader 
+                entries={entries}
+                filteredEntries={filteredEntries}
+                isAdmin={isAdmin} 
+                onNewEntry={() => setNewEntryOpen(true)}
+            />
+
+            {/* // onsave data: entry_date, location_id, entry, plant_ids */}
+            <Modal open={newEntryOpen} onClose={handleClose}>
+                <EntryForm
+                    initialEntry={null}
+                    locations={locations}
+                    allPlants={allPlants}
+                    onSave={handleCreateEntry}
+                    onCancel={handleClose}
+                    isSaving={creatingEntry}
+                />
+            </Modal>
 
             {/* Filters */}
             <div className="mb-6 space-y-2">
