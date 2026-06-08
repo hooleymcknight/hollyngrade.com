@@ -22,9 +22,8 @@ const reportError = (errorMessage) => {
         console.error('Error Details:', error.message);
         throw error;
     })
-    .finally(() => {
-        return 'error';
-    });
 }
+// this doesnt really need to return anything but it's fine that it does, for now.
+// just something to clean up later.
 
 export default reportError;

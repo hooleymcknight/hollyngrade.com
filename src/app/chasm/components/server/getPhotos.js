@@ -99,7 +99,7 @@ export const getPhotos = async (slug) => {
         }
 
         console.log(msgToReport)
-        // reportError(msgToReport);
+        reportError(msgToReport);
         throw msgToReport; // POST /chasm 500 
     }
     
