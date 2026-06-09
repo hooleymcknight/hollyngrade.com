@@ -4,8 +4,9 @@ const nextConfig = {
     experimental: {
         serverActions: {
             bodySizeLimit: '150mb',
-            middlewareClientMaxBodySize: '150mb',
         },
+        proxyClientMaxBodySize: '150mb',
+        middlewareClientMaxBodySize: '150mb',
         windowHistorySupport: true,
     },
     reactStrictMode: false,
