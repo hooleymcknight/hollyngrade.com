@@ -2,7 +2,7 @@
 import { Suspense } from "react";
 import { useParams } from "next/navigation.js";
 
-import { processCategoryName }from "../components/helpers/lightboxHelpers";
+import { processCategoryName }from "./helpers/lightboxHelpers";
 import MasonryGallery from '@/app/koda-and-chasm/components/masonryGallery';
 
 export default function SlugPage() {

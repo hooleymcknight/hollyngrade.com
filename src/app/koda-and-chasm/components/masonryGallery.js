@@ -33,7 +33,7 @@ const slidesWithPosters = (slides) => {
 
 const paramsToClear = ['photo'];
 
-const AlbumLightbox = dynamic(() => import('../components/albumLightbox.js'), {
+const AlbumLightbox = dynamic(() => import('./albumLightbox.js'), {
     loading: () => <p className="hidden">Loading...</p>,
 });
 

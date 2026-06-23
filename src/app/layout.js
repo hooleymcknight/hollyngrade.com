@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import SessionProvider, { useSession } from "./SessionProvider";
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
-import { processCategoryName } from './chasm/components/helpers/lightboxHelpers';
+import { processCategoryName } from './koda-and-chasm/components/helpers/lightboxHelpers';
 import "./globals.css";
 
 // export const metadata = {
@@ -18,11 +18,11 @@ export async function generateMetadata({ params, searchParams }, parent) {
     // fetch data
     let pageTitle = 'hollyngrade';
     let pageDesc = 'full website coming soon';
-    if (pathname.includes('chasm')) {
+    if (pathname.includes('chasm') || pathname.includes('koda')) {
         pageTitle = 'Koda & Chasm Photo Gallery'
-        pageDesc = 'Remembering Chasm.'
+        pageDesc = 'Remembering Koda & Chasm.'
 
-        let subFolder = pathname.split('/chasm')?.[1] || null;
+        let subFolder = pathname.split('/koda-and-chasm')?.[1] || null;
         if (subFolder?.length) {
             let pipedTitle = subFolder.replace(/\//g, '');
             pipedTitle = pipedTitle.includes('?') ? pipedTitle.split('?')[0] : pipedTitle;

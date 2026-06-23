@@ -7,7 +7,7 @@ import ErrorToaster from './components/errorToaster';
 import BackButton from "../components/backButton";
 import Link from "next/link";
 
-export default function Chasm() {
+export default function KodaChasm() {
 
     return (
         <>

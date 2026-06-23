@@ -2,14 +2,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { getPhotos } from "./server/getPhotos";
+import { getPhotos } from "./server/getPhotos.js";
 
-import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './helpers/lightboxHelpers';
+import { processCategoryName, processSpanClasses, sortedCategories, pathnameSlug } from './helpers/lightboxHelpers.js';
 import { useBackButtonClose } from "@/app/components/useBackButtonClose";
 import Image from "next/image";
 import { useSession } from "@/app/SessionProvider";
 
-const CategoriesLightbox = dynamic(() => import('../components/categoriesLightbox.js'), {
+const CategoriesLightbox = dynamic(() => import('./categoriesLightbox.js'), {
     loading: () => <p className="hidden">Loading...</p>,
 });
 
