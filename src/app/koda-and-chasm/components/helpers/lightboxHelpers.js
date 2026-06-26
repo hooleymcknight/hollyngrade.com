@@ -16,6 +16,7 @@ export const processCategoryName = (name, layout = false) => {
     if (layout === true) console.log(returnName)
     // the custom requests:
     returnName = returnName
+        .replace('Meeting Koda', 'Meeting Each Other')
         .replace('Woods With Me', 'In the Woods with Me')
         .replace('Atx Sort', 'ATX (some year or other)')
         .replace('2022', '2022 - First Year in WA')
