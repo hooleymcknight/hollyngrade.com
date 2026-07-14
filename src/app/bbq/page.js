@@ -10,7 +10,7 @@ export default function BBQ() {
                 style={{ background: "rgba(250, 250, 250, 0.6)" }}
             >
                 {/* <BackButton target='./' /> */}
-                <h1 className="text-4xl mt-6 mb-8 text-center block w-full tracking-tighter">A BBQ for Koda&nbsp;&amp;&nbsp;Chasm</h1>
+                <h1 className="text-4xl mt-6 mb-8 text-center block w-full tracking-tighter">A Barbecue for Koda&nbsp;&amp;&nbsp;Chasm</h1>
                 
                 <div className="upload-section flex flex-col items-center mx-auto">
                     <span className="mb-8">
