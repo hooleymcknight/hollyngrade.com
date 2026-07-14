@@ -172,6 +172,7 @@ body { margin:0; padding:0; background:#1b1613; }
   font-size:42px; line-height:.94; color:var(--ink); text-shadow:0 1px 0 rgba(255,255,255,.25);
 }
 #bbq .title .koda{color:var(--koda);}
+#bbq .title .chasm{color:var(--chasm);}
 #bbq .sub{
   text-align:center; margin:8px 0 0;
   font-family:'Caveat','Segoe Script','Brush Script MT',cursive; font-weight:700;
