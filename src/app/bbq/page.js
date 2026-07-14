@@ -15,7 +15,7 @@ export default function BbqPage() {
 
           {/* ---------- header ---------- */}
           <p className="eyebrow">You&rsquo;re invited &middot; Tacoma</p>
-          <h1 className="title">A Barbecue for<br />Chasm &amp; <span className="koda">Koda</span></h1>
+          <h1 className="title">A Barbecue for<br /><span className="chasm">Chasm</span> &amp; <span className="koda">Koda</span></h1>
           <p className="sub">two good dogs, well loved &mdash; come celebrate &rsquo;em, Texas style</p>
           <p className="meta">Saturday, July 25 &nbsp;&middot;&nbsp; 2pm &rsquo;til late</p>
 
