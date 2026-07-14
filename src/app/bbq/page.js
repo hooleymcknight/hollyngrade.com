@@ -1,6 +1,13 @@
 'use client'
 import BackButton from "../components/backButton";
 import Link from "next/link";
+import Image from "next/image";
+import Menu from './components/menu';
+
+// import './components/bbq-styles.css';
+
+const parkingMapUrl = 'https://hollyngrade.com/photos/bbq-info/parking-map.png';
+const inviteUrl = 'https://hollyngrade.com/photos/bbq-info/Chasm & Koda — 5x7 Invitation.jpg';
 
 export default function BBQ() {
 
@@ -10,20 +17,110 @@ export default function BBQ() {
                 style={{ background: "rgba(250, 250, 250, 0.6)" }}
             >
                 {/* <BackButton target='./' /> */}
-                <h1 className="text-4xl mt-6 mb-8 text-center block w-full tracking-tighter">A Barbecue for Koda&nbsp;&amp;&nbsp;Chasm</h1>
+                <h1 className="text-4xl mt-6 mb-8 text-center block w-full tracking-tighter"
+                    // style={{
+                    //     height: 0,
+                    //     width: 0,
+                    //     visibility: 'hidden',
+                    //     padding: 0,
+                    //     margin: 0,
+                    // }}
+                >
+                    A Barbecue for Chasm&nbsp;&amp;&nbsp;Koda
+                </h1>
+
+                {/* <Image src={inviteUrl} alt="parking map" width="680" height="515"
+                    style={{
+                        borderRadius: 8,
+                        marginBottom: 28,
+                    }}
+                /> */}
                 
-                <div className="upload-section flex flex-col items-center mx-auto">
+                <div className="flex flex-col mx-auto">
                     <span className="mb-8">
-                        All info will be posted here by July 13th at 8:00pm.
+                        <b>RSVP:</b>
+                        <a href="sms:+19364251225&body=I'll be there!"
+                            className="ml-2 underline"
+
+                        >
+                            Click to send me a text
+                        </a>
+                        {/* All info will be posted here by July 14th at 4:00pm.
                         <br/><br/>
                         If it&rsquo;s after that time, please message me and tell me to get it together.
-                        {/* <Link 
+                        <Link 
                             className="font-bold hover:underline"
                             href="/koda-and-chasm/upload" alt="Upload your photos/stories here"
                         >
                             Upload it here.
                         </Link> */}
                     </span>
+                </div>
+
+                <div className="flex flex-col mx-auto w-full">
+                    <h2 className="text-2xl mb-4 text-left">Parking:</h2>
+                    <Image src={parkingMapUrl} alt="parking map" width="680" height="515"
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.6)',
+                            borderRadius: 8,
+                            paddingBottom: 28,
+                        }}
+                    />
+                    <a href={parkingMapUrl} target="_blank" className="mt-4 text-sm text-center block w-full">Open image in new tab</a>
+                </div>
+
+                
+                
+
+                <div className="flex flex-col mx-auto w-full">
+                    <h2 className="text-2xl mb-4 text-left">Activities:</h2>
+
+                    <h3 className="text-xl">In honor of the dogs:</h3>
+                    <ul>
+                        <li>
+                            <b>Rock painting:</b>
+                            <span className="block my-2 ml-4">
+                                There will be a table for painting rocks for the boys' graves. Rocks, paints, and brushes will all be provided, but please feel free to bring your own if you wish.
+                            </span>
+                        </li>
+                        <li>
+                            <b>Bracelet making:</b>
+                            <span className="block my-2 ml-4">
+                                We will have stuff for making bracelets in the dogs' signature colors: <span className="red">red for Chasm</span> + <span className="blue">blue for Koda</span>
+                            </span>
+                        </li>
+                    </ul>
+
+                    <h3 className="text-xl">SUMMERTIME:</h3>
+                    <ul>
+                        <li>
+                            <b>Pool!!!</b>
+                            <span className="block my-2 ml-4">
+                                The pool will be set up right there in the yard, so bring something you're comfy swimming in if you wanna take a dip!
+                            </span>
+                        </li>
+                        <li>
+                            <b>Cornhole!</b>
+                            <span className="block my-2 ml-4">
+                            </span>
+                        </li>
+                        <li>
+                            <b>Firepit! (after dark)</b>
+                            <span className="block my-2 ml-4">
+                                I wouldn't protest if someone wanted to bring smore's stuff. I've got a few marshmallow roasting metal stick things.
+                            </span>
+                        </li>
+                    </ul>
+
+                    
+                </div>
+
+                <div className="flex flex-col mx-auto w-full">
+                    <h2 className="text-2xl mb-4 text-left">Food:</h2>
+
+                        menu goes here
+
+                    <h3 className="text-xl">SUMMERTIME:</h3>
                 </div>
 
                 {/* <div className="w-full col-span-2 flex items-center justify-center mt-8">
@@ -34,6 +131,10 @@ export default function BBQ() {
                     >
                         View All
                     </Link>
+
+                    <span className="mb-8">
+                        <br/><br/>
+                    </span>
                 </div> */}
             </div>
         </>
