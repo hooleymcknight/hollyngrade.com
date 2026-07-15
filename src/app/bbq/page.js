@@ -19,7 +19,7 @@ export default function BbqPage() {
           <p className="sub">two good dogs, well loved &mdash; come celebrate &rsquo;em, Texas style</p>
           <p className="meta">Saturday, July 25 &nbsp;&middot;&nbsp; 2pm &rsquo;til late</p>
 
-          <a className="btn" href="sms:+19364251225&body=I'll be there!">Text me &mdash; &ldquo;I&rsquo;ll be there!&rdquo;</a>
+          <a className="btn" href="sms:+19364251225?&body=I%27ll%20be%20there%21">Text me &mdash; &ldquo;I&rsquo;ll be there!&rdquo;</a>
 
           <div className="divider" />
 
@@ -100,7 +100,7 @@ export default function BbqPage() {
             <span className="k"><b>vegan option</b>&nbsp;= also made without meat</span>
           </div>
 
-          <p className="accnote">Got a food allergy or need any other accommodation? <a href="sms:+19364251225&body=Hi Hollyn, a heads-up:">Text me</a> and I&rsquo;ll take care of it.</p>
+          <p className="accnote">Got a food allergy or need any other accommodation? <a href="sms:+19364251225?&body=Hi Hollyn, a heads-up:">Text me</a> and I&rsquo;ll take care of it.</p>
 
           <div className="divider" />
           <p className="signoff">for Chasm &amp; Koda &mdash; good dogs, good barbecue</p>
