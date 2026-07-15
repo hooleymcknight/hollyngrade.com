@@ -14,9 +14,9 @@ export default function BbqPage() {
           <div className="frame" />
 
           {/* ---------- header ---------- */}
-          <p className="eyebrow">You&rsquo;re invited &middot; Tacoma</p>
+          <p className="eyebrow">You&rsquo;re invited</p>
           <h1 className="title">A Barbecue for<br /><span className="chasm">Chasm</span> &amp; <span className="koda">Koda</span></h1>
-          <p className="sub">two good dogs, well loved &mdash; come celebrate &rsquo;em, Texas style</p>
+          <p className="sub">two good dogs, well-loved &mdash; come celebrate &rsquo;em, Texas-style</p>
           <p className="meta">Saturday, July 25 &nbsp;&middot;&nbsp; 2pm &rsquo;til late</p>
 
           <a className="btn" href="sms:+19364251225?&body=I%27ll%20be%20there%21">Text me &mdash; &ldquo;I&rsquo;ll be there!&rdquo;</a>
