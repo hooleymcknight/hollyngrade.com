@@ -98,7 +98,7 @@ export default function BraceletsPage() {
           */}
 
           {/* <p className="accnote">New to this? It&rsquo;s genuinely easy &mdash; and if you get stuck, <a href="sms:+19364251225?&body=Hi Hollyn, bracelet help:">text me</a> and I&rsquo;ll walk you through it.</p> */}
-          <p className="accnote">Having trouble? Just holler "<span class="matt">Maaaaaattt</span>" (with lots of A's and a few extra T's), and he&rsquo;ll come over.</p>
+          <p className="accnote">Having trouble? Just holler "<span className="matt">Maaaaaattt</span>" (with lots of A's and a few extra T's), and he&rsquo;ll come over.</p>
 
           <div className="divider" />
           <div className="colors">
@@ -174,7 +174,7 @@ body { margin:0; padding:0; background:#1b1613; }
   font-size:42px; line-height:.94; color:var(--ink); text-shadow:0 1px 0 rgba(255,255,255,.25);
 }
 #bracelets .title .koda{color:var(--koda);}
-#bracelets .title .chasm, .matt{color:var(--chasm);}
+#bracelets .title .chasm, #bracelets .matt{color:var(--chasm);}
 #bracelets .sub{
   text-align:center; margin:8px 0 0;
   font-family:'Caveat','Segoe Script','Brush Script MT',cursive; font-weight:700;
