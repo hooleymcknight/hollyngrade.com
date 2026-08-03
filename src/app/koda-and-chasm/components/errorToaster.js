@@ -1,12 +1,12 @@
 import { useSession } from "@/app/SessionProvider";
 
-const dismissToaster = () => {
-    updateSession({ errorToaster: false });
-}
-
 export default function ErrorToaster() {
     const session = useSession().session;
     const { updateSession } = useSession();
+
+    const dismissToaster = () => {
+        updateSession({ errorToaster: false });
+    }
 
     if (session?.errorToaster) {
         return (

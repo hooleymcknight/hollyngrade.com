@@ -31,7 +31,7 @@ export const getPhotos = async (slug) => {
                 active: 1,
             },
             orderBy: { date: "asc" }
-        } 
+        }
     :
         {
             where: { active: 1 },
@@ -98,7 +98,7 @@ export const getPhotos = async (slug) => {
             msgToReport += ' Error unknown. getPhotos.js'
         }
 
-        console.log(msgToReport)
+        // console.log(msgToReport)
         reportError(msgToReport);
         throw msgToReport; // POST /koda-and-chasm 500 
     }

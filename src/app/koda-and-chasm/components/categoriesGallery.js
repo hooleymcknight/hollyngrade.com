@@ -117,9 +117,11 @@ export default function CategoriesGallery() {
                             >
                                 <Image
                                     src={y.src.includes('.mp4') || y.src.includes('_poster') ? y.src.replace('.mp4', '_poster.webp') : (!y.src.includes('_x300') ? y.src.replace('.webp', '_x300.webp') : y.src)}
+                                    // src={y.src.includes('.mp4') || y.src.includes('_poster') ? y.src.replace('.mp4', '_poster.webp') : y.src}
                                     alt={y.alt}
                                     className="w-full h-full object-cover"
                                     width={y.width} height={y.height}
+                                    // sizes="(min-width: 1280px) 260px, (min-width: 640px) 45vw, 100vw"
                                 />
                             </div>
                         )}
