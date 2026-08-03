@@ -40,14 +40,14 @@ export default async function Home() {
                 </div>
             </Main>
 
-            <Main id="coming-up" classes={'mb-10'} style={{ marginBottom: 10 }}>
-                <div className="flex flex-column flex-wrap justify-start gap-6 text-left sm:text-left sm:flex-nowrap mb-10 max-w-[60ch]">
+            <Main id="coming-up" classes={'mb-8'} style={{ marginBottom: 8 }}>
+                <div className="flex flex-column flex-wrap justify-start gap-6 text-left sm:text-left sm:flex-nowrap mb-8 !max-w-[60ch]">
                     <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Coming Up</h2>
 
                     <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>HEB Backyard BBQ</h3>
-                    <p className="ml-0 block w-full" style={{ fontWeight: "bold" }}><time dateTime="2026-08-22">Saturday, August 22nd</time></p>
-                    <p className="mt-6">
-                        Come eat, swim, play cornhole, sing karaoke! I’ll post what to bring closer to the date. <a href="sms:+19364251225?&body=I%27ll%20be%20there%21" style={{ fontWeight: 'normal' }}>Text me if you’re interested</a>.{" "}
+                    <p className="ml-0 block w-full"><time dateTime="2026-08-22">Saturday, August 22nd</time></p>
+                    <p className="mt-6 !max-w-[60ch] ml-0 mr-auto">
+                        Come eat, swim, play cornhole, sing karaoke! I’ll post what to bring closer to the date. <a href="sms:+19364251225?&body=I%27ll%20be%20there%21" style={{ fontWeight: 'normal' }} className="underline decoration-1 underline-offset-4 !text-slate-800 hover:text-slate-900 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2">Text me if you’re interested</a>.{" "}
                         <br /><br />
                         The karaoke is homemade! Send me your song requests and I’ll do my best to get it turned into karaoke format for the BBQ!
                     </p>
