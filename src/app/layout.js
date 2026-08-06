@@ -1,6 +1,7 @@
 // import { getServerSession } from 'next-auth';
 import { headers } from 'next/headers';
 import SessionProvider, { useSession } from "./SessionProvider";
+import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { processCategoryName } from './koda-and-chasm/components/helpers/lightboxHelpers';
@@ -69,6 +70,24 @@ export default async function RootLayout({ children }) {
                     <main className={`flex flex-col min-h-screen items-center justify-center`}>
                         {children}
                     </main>
+
+                    <footer className="flex flex-col w-[85%] max-w-2xl items-center justify-between mx-auto py-2 px-2 sm:p-4 bg-zinc-50 mt-8 mb-10">
+                        <ul className="!list-none !pl-0 !flex flex-row w-full justify-center gap-8">
+                            <li><Link href="https://twitch.tv/hollyngrade"
+                                className="underline decoration-1 underline-offset-4 text-slate-800 hover:text-slate-900 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2">
+                                    Twitch</Link></li>
+                            <li><Link href="mailto:hollyngrade@gmail.com"
+                                className="underline decoration-1 underline-offset-4 text-slate-800 hover:text-slate-900 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2">
+                                Email</Link></li>
+                            <li><Link href="https://hollymphillips.com"
+                                className="underline decoration-1 underline-offset-4 text-slate-800 hover:text-slate-900 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2">
+                                I build websites + apps, too</Link></li>
+                            <li><Link href="/koda-and-chasm"
+                                className="underline decoration-1 underline-offset-4 text-slate-800 hover:text-slate-900 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2">
+                                Koda + Chasm<span className="sr-only">, a tribute to my dogs</span></Link></li>
+                        </ul>
+                        <p>Hollyn</p>
+                    </footer>
                 </SessionProvider>
             </body>
         </html>
