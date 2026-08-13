@@ -12,16 +12,19 @@ import "./globals.css";
 //   description: "full website coming soon",
 // };
 
-export async function generateMetadata({ params, searchParams }, parent) {
+export async function generateMetadata({}, parent) {
     const headersList = await headers();
     const pathname = headersList.get("hg-pathname") || "";
     
     // fetch data
     let pageTitle = 'hollyngrade';
-    let pageDesc = 'full website coming soon';
-    if (pathname.includes('chasm') || pathname.includes('koda')) {
+    let pageDesc = 'Streams, fundraisers, backyard events, and the projects in between.';
+    let metaImg = [{ url: '/meta/hollyngrade-meta-img.png', width: 1200, height: 630, alt: 'hollyngrade' }];
+
+    if (pathname.startsWith('/koda-and-chasm')) {
         pageTitle = 'Koda & Chasm Photo Gallery'
         pageDesc = 'Remembering Koda & Chasm.'
+        metaImg = [{ url: '/meta/cowdogs.webp', width: 1200, height: 630, alt: 'Koda and Chasm in cowboy hats' }];
 
         let subFolder = pathname.split('/koda-and-chasm')?.[1] || null;
         if (subFolder?.length) {
@@ -29,6 +32,10 @@ export async function generateMetadata({ params, searchParams }, parent) {
             pipedTitle = pipedTitle.includes('?') ? pipedTitle.split('?')[0] : pipedTitle;
             pageTitle = `Koda & Chasm | ${processCategoryName(pipedTitle)}`;
         }
+    }
+    else if (pathname.startsWith('/bbq')) {
+        pageTitle = 'Backyard BBQ | hollyngrade';
+        pageDesc = 'Saturday, August 22nd. Food, swimming, cornhole, and homemade karaoke.';
     }
     
     // optionally access and extend (rather than replace) parent metadata
@@ -42,7 +49,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
             title: pageTitle,
             description: pageDesc,
             url: `https://hollyngrade.com${pathname}`,
-            images: ['favicon.ico'],
+            images: metaImg,
         },
     }
     

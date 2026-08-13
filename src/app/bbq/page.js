@@ -150,6 +150,10 @@ export default async function BbqPage({ searchParams }) {
                 <span className="act-name">Ribbons.</span> County fair rules &mdash; there are
                 ribbons on the line for the dishes that come off the rack. Bragging rights only.
               </li>
+              <li>
+                <span className="act-name">Homemade karaoke.</span> Send me whatever songs you wanna sing
+                ahead of time &mdash; I'll do my best to hook you up. Not sure what "homemade karaoke" means? Come find out.
+              </li>
               <li><span className="act-name">Cornhole.</span> Set up in the yard.</li>
               <li>
                 <span className="act-name">Firepit, after dark.</span> Evening-time friends, come by after
