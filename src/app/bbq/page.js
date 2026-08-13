@@ -253,7 +253,7 @@ footer p { display:none; }
 
 /* The extra Texas stops on the closing graphic (San Antonio, Denton, Waco,
    Dallardsville). Set display:none to leave just Austin and simplify it. */
-#bbq .tx-stars { display: inline; }
+#bbq .tx-stars { display: none; }
 
 #bbq{
   /* tokens are the invite's, verbatim */
@@ -471,7 +471,7 @@ footer p { display:none; }
     30% 92%, 25% 80%, 12% 80%, 12% 67%, 2% 60%, 8% 48%, 0% 36%, 11% 30%,
     9% 17%, 22% 16%, 27% 4%, 39% 9%);
 }
-#bbq .burst .text-content{transform:rotate(-19deg);}
+#bbq .burst .text-content{transform:rotate(-19deg) translate(2px, -4px);}
 #bbq .burst .b1{font-weight:500; font-size:8.5px; letter-spacing:.16em; text-transform:uppercase;}
 #bbq .burst .b2{font-family:'Ultra',Georgia,serif; font-size:20px; line-height:1; margin:2px 0;}
 #bbq .burst .b3{font-weight:500; font-size:8px; letter-spacing:.1em; text-transform:uppercase; line-height:1.3;}
