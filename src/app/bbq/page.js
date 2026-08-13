@@ -471,7 +471,7 @@ footer p { display:none; }
     30% 92%, 25% 80%, 12% 80%, 12% 67%, 2% 60%, 8% 48%, 0% 36%, 11% 30%,
     9% 17%, 22% 16%, 27% 4%, 39% 9%);
 }
-#bbq .burst .text-content{transform:rotate(-19deg) translate(2px, -4px);}
+#bbq .burst .text-content{transform:rotate(-19deg);}
 #bbq .burst .b1{font-weight:500; font-size:8.5px; letter-spacing:.16em; text-transform:uppercase;}
 #bbq .burst .b2{font-family:'Ultra',Georgia,serif; font-size:20px; line-height:1; margin:2px 0;}
 #bbq .burst .b3{font-weight:500; font-size:8px; letter-spacing:.1em; text-transform:uppercase; line-height:1.3;}
@@ -610,6 +610,15 @@ footer p { display:none; }
 }
 #bbq .rcard-meta .dot{padding:0 6px;}
 #bbq .rcard-meta a{color:var(--red); text-decoration:underline; text-underline-offset:2px;}
+/* Family mark. Small and flat rather than the angled Homemade Vanilla tag --
+   at this size an angled label fights the card's own edges. */
+#bbq .fam{
+  display:inline-block; margin-left:8px; padding:1px 7px; border-radius:3px;
+  background:var(--tag); color:var(--red-deep);
+  font-size:9px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+}
+#bbq .rcard.taken .fam{opacity:.55;}
+
 #bbq .rcard-who{
   margin-top:10px; font-family:'Caveat',cursive; font-weight:700; font-size:17px;
   line-height:1.2; color:var(--ink);

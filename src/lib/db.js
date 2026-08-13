@@ -31,6 +31,22 @@ export async function guestByToken(token) {
 }
 
 /**
+ * One recipe's full text, for the print page. Only returns rows that actually
+ * have a body -- the H-E-B ones link out instead and have nothing to render.
+ */
+export async function getRecipeBody(slug) {
+  if (!slug || typeof slug !== 'string') return null;
+  const [rows] = await pool.query(
+    `SELECT slug, title, blurb, host_note, body, category
+       FROM bbq_recipe
+      WHERE slug = ? AND body IS NOT NULL
+      LIMIT 1`,
+    [slug]
+  );
+  return rows[0] || null;
+}
+
+/**
  * Every recipe with its claims attached.
  * One query for recipes, one for claims, stitched in JS -- simpler to read
  * than a join you then have to un-flatten, and it's two round trips total.
@@ -41,7 +57,8 @@ export async function getRack(guestId = null) {
   // the HTML, which defeats the point of reserving them.
   const [recipes] = await pool.query(
     `SELECT id, slug, title, blurb, host_note, category, effort, source,
-            recipe_url, claim_cap, pairs_with, reserved_for
+            recipe_url, claim_cap, pairs_with, reserved_for,
+            (body IS NOT NULL) AS has_body
        FROM bbq_recipe
       WHERE reserved_for IS NULL OR reserved_for = ?
       ORDER BY sort_order, title`,

@@ -330,4 +330,3 @@ function ChallengeModal({ recipe, guest, busy, onCancel, onConfirm }) {
     </div>
   );
 }
-
