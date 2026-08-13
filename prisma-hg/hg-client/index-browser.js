@@ -147,17 +147,36 @@ exports.Prisma.UsersScalarFieldEnum = {
   email: 'email'
 };
 
-exports.Prisma.InventoryScalarFieldEnum = {
-  item_id: 'item_id',
-  item: 'item',
-  description: 'description',
-  rfid: 'rfid'
+exports.Prisma.Bbq_claimScalarFieldEnum = {
+  id: 'id',
+  recipe_id: 'recipe_id',
+  guest_id: 'guest_id',
+  created_at: 'created_at'
 };
 
-exports.Prisma.RfidScalarFieldEnum = {
-  rfid: 'rfid',
-  room: 'room',
-  container: 'container'
+exports.Prisma.Bbq_guestScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  token: 'token',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Bbq_recipeScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  blurb: 'blurb',
+  host_note: 'host_note',
+  category: 'category',
+  effort: 'effort',
+  source: 'source',
+  recipe_url: 'recipe_url',
+  body: 'body',
+  claim_cap: 'claim_cap',
+  pairs_with: 'pairs_with',
+  reserved_for: 'reserved_for',
+  sort_order: 'sort_order'
 };
 
 exports.Prisma.SortOrder = {
@@ -191,22 +210,49 @@ exports.Prisma.usersOrderByRelevanceFieldEnum = {
   email: 'email'
 };
 
-exports.Prisma.inventoryOrderByRelevanceFieldEnum = {
-  item: 'item',
-  description: 'description'
+exports.Prisma.bbq_guestOrderByRelevanceFieldEnum = {
+  name: 'name',
+  phone: 'phone',
+  token: 'token'
 };
 
-exports.Prisma.rfidOrderByRelevanceFieldEnum = {
-  room: 'room',
-  container: 'container'
+exports.Prisma.bbq_recipeOrderByRelevanceFieldEnum = {
+  slug: 'slug',
+  title: 'title',
+  blurb: 'blurb',
+  host_note: 'host_note',
+  recipe_url: 'recipe_url',
+  body: 'body',
+  pairs_with: 'pairs_with'
+};
+exports.bbq_recipe_category = exports.$Enums.bbq_recipe_category = {
+  appetizer: 'appetizer',
+  meat_dish: 'meat_dish',
+  meat_side: 'meat_side',
+  starchy_side: 'starchy_side',
+  veggie_side: 'veggie_side',
+  salad: 'salad',
+  dessert: 'dessert',
+  pantry: 'pantry'
 };
 
+exports.bbq_recipe_effort = exports.$Enums.bbq_recipe_effort = {
+  easy: 'easy',
+  medium: 'medium',
+  project: 'project'
+};
+
+exports.bbq_recipe_source = exports.$Enums.bbq_recipe_source = {
+  family: 'family',
+  heb: 'heb'
+};
 
 exports.Prisma.ModelName = {
   dogs: 'dogs',
   users: 'users',
-  inventory: 'inventory',
-  rfid: 'rfid'
+  bbq_claim: 'bbq_claim',
+  bbq_guest: 'bbq_guest',
+  bbq_recipe: 'bbq_recipe'
 };
 
 /**

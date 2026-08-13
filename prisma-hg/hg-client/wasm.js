@@ -119,17 +119,36 @@ exports.Prisma.UsersScalarFieldEnum = {
   email: 'email'
 };
 
-exports.Prisma.InventoryScalarFieldEnum = {
-  item_id: 'item_id',
-  item: 'item',
-  description: 'description',
-  rfid: 'rfid'
+exports.Prisma.Bbq_claimScalarFieldEnum = {
+  id: 'id',
+  recipe_id: 'recipe_id',
+  guest_id: 'guest_id',
+  created_at: 'created_at'
 };
 
-exports.Prisma.RfidScalarFieldEnum = {
-  rfid: 'rfid',
-  room: 'room',
-  container: 'container'
+exports.Prisma.Bbq_guestScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  token: 'token',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Bbq_recipeScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  blurb: 'blurb',
+  host_note: 'host_note',
+  category: 'category',
+  effort: 'effort',
+  source: 'source',
+  recipe_url: 'recipe_url',
+  body: 'body',
+  claim_cap: 'claim_cap',
+  pairs_with: 'pairs_with',
+  reserved_for: 'reserved_for',
+  sort_order: 'sort_order'
 };
 
 exports.Prisma.SortOrder = {
@@ -163,22 +182,49 @@ exports.Prisma.usersOrderByRelevanceFieldEnum = {
   email: 'email'
 };
 
-exports.Prisma.inventoryOrderByRelevanceFieldEnum = {
-  item: 'item',
-  description: 'description'
+exports.Prisma.bbq_guestOrderByRelevanceFieldEnum = {
+  name: 'name',
+  phone: 'phone',
+  token: 'token'
 };
 
-exports.Prisma.rfidOrderByRelevanceFieldEnum = {
-  room: 'room',
-  container: 'container'
+exports.Prisma.bbq_recipeOrderByRelevanceFieldEnum = {
+  slug: 'slug',
+  title: 'title',
+  blurb: 'blurb',
+  host_note: 'host_note',
+  recipe_url: 'recipe_url',
+  body: 'body',
+  pairs_with: 'pairs_with'
+};
+exports.bbq_recipe_category = exports.$Enums.bbq_recipe_category = {
+  appetizer: 'appetizer',
+  meat_dish: 'meat_dish',
+  meat_side: 'meat_side',
+  starchy_side: 'starchy_side',
+  veggie_side: 'veggie_side',
+  salad: 'salad',
+  dessert: 'dessert',
+  pantry: 'pantry'
 };
 
+exports.bbq_recipe_effort = exports.$Enums.bbq_recipe_effort = {
+  easy: 'easy',
+  medium: 'medium',
+  project: 'project'
+};
+
+exports.bbq_recipe_source = exports.$Enums.bbq_recipe_source = {
+  family: 'family',
+  heb: 'heb'
+};
 
 exports.Prisma.ModelName = {
   dogs: 'dogs',
   users: 'users',
-  inventory: 'inventory',
-  rfid: 'rfid'
+  bbq_claim: 'bbq_claim',
+  bbq_guest: 'bbq_guest',
+  bbq_recipe: 'bbq_recipe'
 };
 /**
  * Create the Client
@@ -228,13 +274,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./hg-client\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel dogs {\n  id          Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  src         String? @db.VarChar(245)\n  type        String? @db.VarChar(45)\n  alt         String? @db.VarChar(145)\n  width       Int?\n  height      Int?\n  title       String? @db.VarChar(145)\n  description String? @db.VarChar(240)\n  data_tags   String? @db.VarChar(145)\n  date        String? @db.VarChar(80)\n  category    String? @db.VarChar(45)\n  active      Int?    @db.TinyInt\n  poster      String? @db.VarChar(245)\n}\n\nmodel users {\n  id       Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  username String? @unique(map: \"username_UNIQUE\") @db.VarChar(32)\n  password String? @db.Text\n  type     String? @db.Text\n  fname    String? @db.Text\n  lname    String? @db.Text\n  email    String? @unique(map: \"email_UNIQUE\") @db.VarChar(255)\n}\n\nmodel inventory {\n  item_id     Int     @id @unique(map: \"item_id_UNIQUE\") @default(autoincrement())\n  item        String? @db.Text\n  description String? @db.Text\n  rfid        Int?\n}\n\nmodel rfid {\n  rfid      Int     @id @unique(map: \"rfid_UNIQUE\")\n  room      String? @db.VarChar(45)\n  container String? @db.VarChar(145)\n}\n",
-  "inlineSchemaHash": "3cb75d4e43c61cb066affa007557626f507b708908b0812dec8ebf0cb8b5d633",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./hg-client\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel dogs {\n  id          Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  src         String? @unique(map: \"src_UNIQUE\") @db.VarChar(245)\n  type        String? @db.VarChar(45)\n  alt         String? @db.VarChar(145)\n  width       Int?\n  height      Int?\n  title       String? @db.VarChar(145)\n  description String? @db.VarChar(240)\n  data_tags   String? @db.VarChar(145)\n  date        String? @db.VarChar(80)\n  category    String? @db.VarChar(45)\n  active      Int?    @db.TinyInt\n  poster      String? @db.VarChar(245)\n}\n\nmodel users {\n  id       Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  username String? @unique(map: \"username_UNIQUE\") @db.VarChar(32)\n  password String? @db.Text\n  type     String? @db.Text\n  fname    String? @db.Text\n  lname    String? @db.Text\n  email    String? @unique(map: \"email_UNIQUE\") @db.VarChar(255)\n}\n\nmodel bbq_claim {\n  id         Int        @id @default(autoincrement()) @db.UnsignedInt\n  recipe_id  Int        @db.UnsignedInt\n  guest_id   Int        @db.UnsignedInt\n  created_at DateTime   @default(now()) @db.Timestamp(0)\n  bbq_guest  bbq_guest  @relation(fields: [guest_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"fk_claim_guest\")\n  bbq_recipe bbq_recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"fk_claim_recipe\")\n\n  @@unique([recipe_id, guest_id], map: \"uniq_recipe_guest\")\n  @@index([guest_id], map: \"fk_claim_guest\")\n  @@index([recipe_id], map: \"idx_recipe\")\n}\n\nmodel bbq_guest {\n  id         Int          @id @default(autoincrement()) @db.UnsignedInt\n  name       String       @db.VarChar(80)\n  phone      String?      @db.VarChar(24)\n  token      String       @unique(map: \"uniq_token\") @db.Char(24)\n  created_at DateTime     @default(now()) @db.Timestamp(0)\n  bbq_claim  bbq_claim[]\n  bbq_recipe bbq_recipe[]\n}\n\nmodel bbq_recipe {\n  id           Int                 @id @default(autoincrement()) @db.UnsignedInt\n  slug         String              @unique(map: \"uniq_slug\") @db.VarChar(60)\n  title        String              @db.VarChar(120)\n  blurb        String?             @db.VarChar(240)\n  host_note    String?             @db.VarChar(300)\n  category     bbq_recipe_category\n  effort       bbq_recipe_effort   @default(medium)\n  source       bbq_recipe_source   @default(heb)\n  recipe_url   String?             @db.VarChar(255)\n  body         String?             @db.MediumText\n  claim_cap    Int?                @default(2) @db.UnsignedTinyInt\n  pairs_with   String?             @db.VarChar(60)\n  reserved_for Int?                @db.UnsignedInt\n  sort_order   Int                 @default(0)\n  bbq_claim    bbq_claim[]\n  bbq_guest    bbq_guest?          @relation(fields: [reserved_for], references: [id], onUpdate: NoAction, map: \"fk_recipe_reserved\")\n\n  @@index([reserved_for], map: \"fk_recipe_reserved\")\n  @@index([category, sort_order], map: \"idx_category\")\n}\n\nenum bbq_recipe_category {\n  appetizer\n  meat_dish\n  meat_side\n  starchy_side\n  veggie_side\n  salad\n  dessert\n  pantry\n}\n\nenum bbq_recipe_effort {\n  easy\n  medium\n  project\n}\n\nenum bbq_recipe_source {\n  family\n  heb\n}\n",
+  "inlineSchemaHash": "c11c6df13c21a68987f18555184bb096fdad01b61cf4342f3b623994739b611a",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"dogs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"src\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"alt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"width\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"height\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data_tags\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"active\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"poster\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"inventory\":{\"fields\":[{\"name\":\"item_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"item\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rfid\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"rfid\":{\"fields\":[{\"name\":\"rfid\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"room\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"container\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"dogs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"src\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"alt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"width\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"height\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data_tags\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"active\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"poster\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"bbq_claim\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"recipe_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"guest_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"bbq_guest\",\"kind\":\"object\",\"type\":\"bbq_guest\",\"relationName\":\"bbq_claimTobbq_guest\"},{\"name\":\"bbq_recipe\",\"kind\":\"object\",\"type\":\"bbq_recipe\",\"relationName\":\"bbq_claimTobbq_recipe\"}],\"dbName\":null},\"bbq_guest\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"bbq_claim\",\"kind\":\"object\",\"type\":\"bbq_claim\",\"relationName\":\"bbq_claimTobbq_guest\"},{\"name\":\"bbq_recipe\",\"kind\":\"object\",\"type\":\"bbq_recipe\",\"relationName\":\"bbq_guestTobbq_recipe\"}],\"dbName\":null},\"bbq_recipe\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"blurb\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"host_note\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"enum\",\"type\":\"bbq_recipe_category\"},{\"name\":\"effort\",\"kind\":\"enum\",\"type\":\"bbq_recipe_effort\"},{\"name\":\"source\",\"kind\":\"enum\",\"type\":\"bbq_recipe_source\"},{\"name\":\"recipe_url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"body\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"claim_cap\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pairs_with\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reserved_for\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"sort_order\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"bbq_claim\",\"kind\":\"object\",\"type\":\"bbq_claim\",\"relationName\":\"bbq_claimTobbq_recipe\"},{\"name\":\"bbq_guest\",\"kind\":\"object\",\"type\":\"bbq_guest\",\"relationName\":\"bbq_guestTobbq_recipe\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

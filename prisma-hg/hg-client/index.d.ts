@@ -24,15 +24,68 @@ export type dogs = $Result.DefaultSelection<Prisma.$dogsPayload>
  */
 export type users = $Result.DefaultSelection<Prisma.$usersPayload>
 /**
- * Model inventory
+ * Model bbq_claim
  * 
  */
-export type inventory = $Result.DefaultSelection<Prisma.$inventoryPayload>
+export type bbq_claim = $Result.DefaultSelection<Prisma.$bbq_claimPayload>
 /**
- * Model rfid
+ * Model bbq_guest
  * 
  */
-export type rfid = $Result.DefaultSelection<Prisma.$rfidPayload>
+export type bbq_guest = $Result.DefaultSelection<Prisma.$bbq_guestPayload>
+/**
+ * Model bbq_recipe
+ * 
+ */
+export type bbq_recipe = $Result.DefaultSelection<Prisma.$bbq_recipePayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const bbq_recipe_category: {
+  appetizer: 'appetizer',
+  meat_dish: 'meat_dish',
+  meat_side: 'meat_side',
+  starchy_side: 'starchy_side',
+  veggie_side: 'veggie_side',
+  salad: 'salad',
+  dessert: 'dessert',
+  pantry: 'pantry'
+};
+
+export type bbq_recipe_category = (typeof bbq_recipe_category)[keyof typeof bbq_recipe_category]
+
+
+export const bbq_recipe_effort: {
+  easy: 'easy',
+  medium: 'medium',
+  project: 'project'
+};
+
+export type bbq_recipe_effort = (typeof bbq_recipe_effort)[keyof typeof bbq_recipe_effort]
+
+
+export const bbq_recipe_source: {
+  family: 'family',
+  heb: 'heb'
+};
+
+export type bbq_recipe_source = (typeof bbq_recipe_source)[keyof typeof bbq_recipe_source]
+
+}
+
+export type bbq_recipe_category = $Enums.bbq_recipe_category
+
+export const bbq_recipe_category: typeof $Enums.bbq_recipe_category
+
+export type bbq_recipe_effort = $Enums.bbq_recipe_effort
+
+export const bbq_recipe_effort: typeof $Enums.bbq_recipe_effort
+
+export type bbq_recipe_source = $Enums.bbq_recipe_source
+
+export const bbq_recipe_source: typeof $Enums.bbq_recipe_source
 
 /**
  * ##  Prisma Client ʲˢ
@@ -173,24 +226,34 @@ export class PrismaClient<
   get users(): Prisma.usersDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.inventory`: Exposes CRUD operations for the **inventory** model.
+   * `prisma.bbq_claim`: Exposes CRUD operations for the **bbq_claim** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Inventories
-    * const inventories = await prisma.inventory.findMany()
+    * // Fetch zero or more Bbq_claims
+    * const bbq_claims = await prisma.bbq_claim.findMany()
     * ```
     */
-  get inventory(): Prisma.inventoryDelegate<ExtArgs, ClientOptions>;
+  get bbq_claim(): Prisma.bbq_claimDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.rfid`: Exposes CRUD operations for the **rfid** model.
+   * `prisma.bbq_guest`: Exposes CRUD operations for the **bbq_guest** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Rfids
-    * const rfids = await prisma.rfid.findMany()
+    * // Fetch zero or more Bbq_guests
+    * const bbq_guests = await prisma.bbq_guest.findMany()
     * ```
     */
-  get rfid(): Prisma.rfidDelegate<ExtArgs, ClientOptions>;
+  get bbq_guest(): Prisma.bbq_guestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bbq_recipe`: Exposes CRUD operations for the **bbq_recipe** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Bbq_recipes
+    * const bbq_recipes = await prisma.bbq_recipe.findMany()
+    * ```
+    */
+  get bbq_recipe(): Prisma.bbq_recipeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -634,8 +697,9 @@ export namespace Prisma {
   export const ModelName: {
     dogs: 'dogs',
     users: 'users',
-    inventory: 'inventory',
-    rfid: 'rfid'
+    bbq_claim: 'bbq_claim',
+    bbq_guest: 'bbq_guest',
+    bbq_recipe: 'bbq_recipe'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -654,7 +718,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "dogs" | "users" | "inventory" | "rfid"
+      modelProps: "dogs" | "users" | "bbq_claim" | "bbq_guest" | "bbq_recipe"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -790,135 +854,201 @@ export namespace Prisma {
           }
         }
       }
-      inventory: {
-        payload: Prisma.$inventoryPayload<ExtArgs>
-        fields: Prisma.inventoryFieldRefs
+      bbq_claim: {
+        payload: Prisma.$bbq_claimPayload<ExtArgs>
+        fields: Prisma.bbq_claimFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.inventoryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload> | null
+            args: Prisma.bbq_claimFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.inventoryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload>
+            args: Prisma.bbq_claimFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload>
           }
           findFirst: {
-            args: Prisma.inventoryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload> | null
+            args: Prisma.bbq_claimFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.inventoryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload>
+            args: Prisma.bbq_claimFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload>
           }
           findMany: {
-            args: Prisma.inventoryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload>[]
+            args: Prisma.bbq_claimFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload>[]
           }
           create: {
-            args: Prisma.inventoryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload>
+            args: Prisma.bbq_claimCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload>
           }
           createMany: {
-            args: Prisma.inventoryCreateManyArgs<ExtArgs>
+            args: Prisma.bbq_claimCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.inventoryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload>
+            args: Prisma.bbq_claimDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload>
           }
           update: {
-            args: Prisma.inventoryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload>
+            args: Prisma.bbq_claimUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload>
           }
           deleteMany: {
-            args: Prisma.inventoryDeleteManyArgs<ExtArgs>
+            args: Prisma.bbq_claimDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.inventoryUpdateManyArgs<ExtArgs>
+            args: Prisma.bbq_claimUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.inventoryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$inventoryPayload>
+            args: Prisma.bbq_claimUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_claimPayload>
           }
           aggregate: {
-            args: Prisma.InventoryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateInventory>
+            args: Prisma.Bbq_claimAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBbq_claim>
           }
           groupBy: {
-            args: Prisma.inventoryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<InventoryGroupByOutputType>[]
+            args: Prisma.bbq_claimGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Bbq_claimGroupByOutputType>[]
           }
           count: {
-            args: Prisma.inventoryCountArgs<ExtArgs>
-            result: $Utils.Optional<InventoryCountAggregateOutputType> | number
+            args: Prisma.bbq_claimCountArgs<ExtArgs>
+            result: $Utils.Optional<Bbq_claimCountAggregateOutputType> | number
           }
         }
       }
-      rfid: {
-        payload: Prisma.$rfidPayload<ExtArgs>
-        fields: Prisma.rfidFieldRefs
+      bbq_guest: {
+        payload: Prisma.$bbq_guestPayload<ExtArgs>
+        fields: Prisma.bbq_guestFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.rfidFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload> | null
+            args: Prisma.bbq_guestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.rfidFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload>
+            args: Prisma.bbq_guestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload>
           }
           findFirst: {
-            args: Prisma.rfidFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload> | null
+            args: Prisma.bbq_guestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.rfidFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload>
+            args: Prisma.bbq_guestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload>
           }
           findMany: {
-            args: Prisma.rfidFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload>[]
+            args: Prisma.bbq_guestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload>[]
           }
           create: {
-            args: Prisma.rfidCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload>
+            args: Prisma.bbq_guestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload>
           }
           createMany: {
-            args: Prisma.rfidCreateManyArgs<ExtArgs>
+            args: Prisma.bbq_guestCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.rfidDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload>
+            args: Prisma.bbq_guestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload>
           }
           update: {
-            args: Prisma.rfidUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload>
+            args: Prisma.bbq_guestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload>
           }
           deleteMany: {
-            args: Prisma.rfidDeleteManyArgs<ExtArgs>
+            args: Prisma.bbq_guestDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.rfidUpdateManyArgs<ExtArgs>
+            args: Prisma.bbq_guestUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.rfidUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rfidPayload>
+            args: Prisma.bbq_guestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_guestPayload>
           }
           aggregate: {
-            args: Prisma.RfidAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateRfid>
+            args: Prisma.Bbq_guestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBbq_guest>
           }
           groupBy: {
-            args: Prisma.rfidGroupByArgs<ExtArgs>
-            result: $Utils.Optional<RfidGroupByOutputType>[]
+            args: Prisma.bbq_guestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Bbq_guestGroupByOutputType>[]
           }
           count: {
-            args: Prisma.rfidCountArgs<ExtArgs>
-            result: $Utils.Optional<RfidCountAggregateOutputType> | number
+            args: Prisma.bbq_guestCountArgs<ExtArgs>
+            result: $Utils.Optional<Bbq_guestCountAggregateOutputType> | number
+          }
+        }
+      }
+      bbq_recipe: {
+        payload: Prisma.$bbq_recipePayload<ExtArgs>
+        fields: Prisma.bbq_recipeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.bbq_recipeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.bbq_recipeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload>
+          }
+          findFirst: {
+            args: Prisma.bbq_recipeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.bbq_recipeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload>
+          }
+          findMany: {
+            args: Prisma.bbq_recipeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload>[]
+          }
+          create: {
+            args: Prisma.bbq_recipeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload>
+          }
+          createMany: {
+            args: Prisma.bbq_recipeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.bbq_recipeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload>
+          }
+          update: {
+            args: Prisma.bbq_recipeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload>
+          }
+          deleteMany: {
+            args: Prisma.bbq_recipeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.bbq_recipeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.bbq_recipeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$bbq_recipePayload>
+          }
+          aggregate: {
+            args: Prisma.Bbq_recipeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBbq_recipe>
+          }
+          groupBy: {
+            args: Prisma.bbq_recipeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Bbq_recipeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.bbq_recipeCountArgs<ExtArgs>
+            result: $Utils.Optional<Bbq_recipeCountAggregateOutputType> | number
           }
         }
       }
@@ -1020,8 +1150,9 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     dogs?: dogsOmit
     users?: usersOmit
-    inventory?: inventoryOmit
-    rfid?: rfidOmit
+    bbq_claim?: bbq_claimOmit
+    bbq_guest?: bbq_guestOmit
+    bbq_recipe?: bbq_recipeOmit
   }
 
   /* Types for Logging */
@@ -1096,6 +1227,76 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type Bbq_guestCountOutputType
+   */
+
+  export type Bbq_guestCountOutputType = {
+    bbq_claim: number
+    bbq_recipe: number
+  }
+
+  export type Bbq_guestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bbq_claim?: boolean | Bbq_guestCountOutputTypeCountBbq_claimArgs
+    bbq_recipe?: boolean | Bbq_guestCountOutputTypeCountBbq_recipeArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Bbq_guestCountOutputType without action
+   */
+  export type Bbq_guestCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bbq_guestCountOutputType
+     */
+    select?: Bbq_guestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Bbq_guestCountOutputType without action
+   */
+  export type Bbq_guestCountOutputTypeCountBbq_claimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bbq_claimWhereInput
+  }
+
+  /**
+   * Bbq_guestCountOutputType without action
+   */
+  export type Bbq_guestCountOutputTypeCountBbq_recipeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bbq_recipeWhereInput
+  }
+
+
+  /**
+   * Count Type Bbq_recipeCountOutputType
+   */
+
+  export type Bbq_recipeCountOutputType = {
+    bbq_claim: number
+  }
+
+  export type Bbq_recipeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bbq_claim?: boolean | Bbq_recipeCountOutputTypeCountBbq_claimArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Bbq_recipeCountOutputType without action
+   */
+  export type Bbq_recipeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bbq_recipeCountOutputType
+     */
+    select?: Bbq_recipeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Bbq_recipeCountOutputType without action
+   */
+  export type Bbq_recipeCountOutputTypeCountBbq_claimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bbq_claimWhereInput
+  }
 
 
   /**
@@ -3057,357 +3258,370 @@ export namespace Prisma {
 
 
   /**
-   * Model inventory
+   * Model bbq_claim
    */
 
-  export type AggregateInventory = {
-    _count: InventoryCountAggregateOutputType | null
-    _avg: InventoryAvgAggregateOutputType | null
-    _sum: InventorySumAggregateOutputType | null
-    _min: InventoryMinAggregateOutputType | null
-    _max: InventoryMaxAggregateOutputType | null
+  export type AggregateBbq_claim = {
+    _count: Bbq_claimCountAggregateOutputType | null
+    _avg: Bbq_claimAvgAggregateOutputType | null
+    _sum: Bbq_claimSumAggregateOutputType | null
+    _min: Bbq_claimMinAggregateOutputType | null
+    _max: Bbq_claimMaxAggregateOutputType | null
   }
 
-  export type InventoryAvgAggregateOutputType = {
-    item_id: number | null
-    rfid: number | null
+  export type Bbq_claimAvgAggregateOutputType = {
+    id: number | null
+    recipe_id: number | null
+    guest_id: number | null
   }
 
-  export type InventorySumAggregateOutputType = {
-    item_id: number | null
-    rfid: number | null
+  export type Bbq_claimSumAggregateOutputType = {
+    id: number | null
+    recipe_id: number | null
+    guest_id: number | null
   }
 
-  export type InventoryMinAggregateOutputType = {
-    item_id: number | null
-    item: string | null
-    description: string | null
-    rfid: number | null
+  export type Bbq_claimMinAggregateOutputType = {
+    id: number | null
+    recipe_id: number | null
+    guest_id: number | null
+    created_at: Date | null
   }
 
-  export type InventoryMaxAggregateOutputType = {
-    item_id: number | null
-    item: string | null
-    description: string | null
-    rfid: number | null
+  export type Bbq_claimMaxAggregateOutputType = {
+    id: number | null
+    recipe_id: number | null
+    guest_id: number | null
+    created_at: Date | null
   }
 
-  export type InventoryCountAggregateOutputType = {
-    item_id: number
-    item: number
-    description: number
-    rfid: number
+  export type Bbq_claimCountAggregateOutputType = {
+    id: number
+    recipe_id: number
+    guest_id: number
+    created_at: number
     _all: number
   }
 
 
-  export type InventoryAvgAggregateInputType = {
-    item_id?: true
-    rfid?: true
+  export type Bbq_claimAvgAggregateInputType = {
+    id?: true
+    recipe_id?: true
+    guest_id?: true
   }
 
-  export type InventorySumAggregateInputType = {
-    item_id?: true
-    rfid?: true
+  export type Bbq_claimSumAggregateInputType = {
+    id?: true
+    recipe_id?: true
+    guest_id?: true
   }
 
-  export type InventoryMinAggregateInputType = {
-    item_id?: true
-    item?: true
-    description?: true
-    rfid?: true
+  export type Bbq_claimMinAggregateInputType = {
+    id?: true
+    recipe_id?: true
+    guest_id?: true
+    created_at?: true
   }
 
-  export type InventoryMaxAggregateInputType = {
-    item_id?: true
-    item?: true
-    description?: true
-    rfid?: true
+  export type Bbq_claimMaxAggregateInputType = {
+    id?: true
+    recipe_id?: true
+    guest_id?: true
+    created_at?: true
   }
 
-  export type InventoryCountAggregateInputType = {
-    item_id?: true
-    item?: true
-    description?: true
-    rfid?: true
+  export type Bbq_claimCountAggregateInputType = {
+    id?: true
+    recipe_id?: true
+    guest_id?: true
+    created_at?: true
     _all?: true
   }
 
-  export type InventoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Bbq_claimAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which inventory to aggregate.
+     * Filter which bbq_claim to aggregate.
      */
-    where?: inventoryWhereInput
+    where?: bbq_claimWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of inventories to fetch.
+     * Determine the order of bbq_claims to fetch.
      */
-    orderBy?: inventoryOrderByWithRelationInput | inventoryOrderByWithRelationInput[]
+    orderBy?: bbq_claimOrderByWithRelationInput | bbq_claimOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: inventoryWhereUniqueInput
+    cursor?: bbq_claimWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` inventories from the position of the cursor.
+     * Take `±n` bbq_claims from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` inventories.
+     * Skip the first `n` bbq_claims.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned inventories
+     * Count returned bbq_claims
     **/
-    _count?: true | InventoryCountAggregateInputType
+    _count?: true | Bbq_claimCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: InventoryAvgAggregateInputType
+    _avg?: Bbq_claimAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: InventorySumAggregateInputType
+    _sum?: Bbq_claimSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: InventoryMinAggregateInputType
+    _min?: Bbq_claimMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: InventoryMaxAggregateInputType
+    _max?: Bbq_claimMaxAggregateInputType
   }
 
-  export type GetInventoryAggregateType<T extends InventoryAggregateArgs> = {
-        [P in keyof T & keyof AggregateInventory]: P extends '_count' | 'count'
+  export type GetBbq_claimAggregateType<T extends Bbq_claimAggregateArgs> = {
+        [P in keyof T & keyof AggregateBbq_claim]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateInventory[P]>
-      : GetScalarType<T[P], AggregateInventory[P]>
+        : GetScalarType<T[P], AggregateBbq_claim[P]>
+      : GetScalarType<T[P], AggregateBbq_claim[P]>
   }
 
 
 
 
-  export type inventoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: inventoryWhereInput
-    orderBy?: inventoryOrderByWithAggregationInput | inventoryOrderByWithAggregationInput[]
-    by: InventoryScalarFieldEnum[] | InventoryScalarFieldEnum
-    having?: inventoryScalarWhereWithAggregatesInput
+  export type bbq_claimGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bbq_claimWhereInput
+    orderBy?: bbq_claimOrderByWithAggregationInput | bbq_claimOrderByWithAggregationInput[]
+    by: Bbq_claimScalarFieldEnum[] | Bbq_claimScalarFieldEnum
+    having?: bbq_claimScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: InventoryCountAggregateInputType | true
-    _avg?: InventoryAvgAggregateInputType
-    _sum?: InventorySumAggregateInputType
-    _min?: InventoryMinAggregateInputType
-    _max?: InventoryMaxAggregateInputType
+    _count?: Bbq_claimCountAggregateInputType | true
+    _avg?: Bbq_claimAvgAggregateInputType
+    _sum?: Bbq_claimSumAggregateInputType
+    _min?: Bbq_claimMinAggregateInputType
+    _max?: Bbq_claimMaxAggregateInputType
   }
 
-  export type InventoryGroupByOutputType = {
-    item_id: number
-    item: string | null
-    description: string | null
-    rfid: number | null
-    _count: InventoryCountAggregateOutputType | null
-    _avg: InventoryAvgAggregateOutputType | null
-    _sum: InventorySumAggregateOutputType | null
-    _min: InventoryMinAggregateOutputType | null
-    _max: InventoryMaxAggregateOutputType | null
+  export type Bbq_claimGroupByOutputType = {
+    id: number
+    recipe_id: number
+    guest_id: number
+    created_at: Date
+    _count: Bbq_claimCountAggregateOutputType | null
+    _avg: Bbq_claimAvgAggregateOutputType | null
+    _sum: Bbq_claimSumAggregateOutputType | null
+    _min: Bbq_claimMinAggregateOutputType | null
+    _max: Bbq_claimMaxAggregateOutputType | null
   }
 
-  type GetInventoryGroupByPayload<T extends inventoryGroupByArgs> = Prisma.PrismaPromise<
+  type GetBbq_claimGroupByPayload<T extends bbq_claimGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<InventoryGroupByOutputType, T['by']> &
+      PickEnumerable<Bbq_claimGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof InventoryGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Bbq_claimGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], InventoryGroupByOutputType[P]>
-            : GetScalarType<T[P], InventoryGroupByOutputType[P]>
+              : GetScalarType<T[P], Bbq_claimGroupByOutputType[P]>
+            : GetScalarType<T[P], Bbq_claimGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type inventorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    item_id?: boolean
-    item?: boolean
-    description?: boolean
-    rfid?: boolean
-  }, ExtArgs["result"]["inventory"]>
+  export type bbq_claimSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    recipe_id?: boolean
+    guest_id?: boolean
+    created_at?: boolean
+    bbq_guest?: boolean | bbq_guestDefaultArgs<ExtArgs>
+    bbq_recipe?: boolean | bbq_recipeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bbq_claim"]>
 
 
 
-  export type inventorySelectScalar = {
-    item_id?: boolean
-    item?: boolean
-    description?: boolean
-    rfid?: boolean
+  export type bbq_claimSelectScalar = {
+    id?: boolean
+    recipe_id?: boolean
+    guest_id?: boolean
+    created_at?: boolean
   }
 
-  export type inventoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"item_id" | "item" | "description" | "rfid", ExtArgs["result"]["inventory"]>
+  export type bbq_claimOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recipe_id" | "guest_id" | "created_at", ExtArgs["result"]["bbq_claim"]>
+  export type bbq_claimInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bbq_guest?: boolean | bbq_guestDefaultArgs<ExtArgs>
+    bbq_recipe?: boolean | bbq_recipeDefaultArgs<ExtArgs>
+  }
 
-  export type $inventoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "inventory"
-    objects: {}
+  export type $bbq_claimPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "bbq_claim"
+    objects: {
+      bbq_guest: Prisma.$bbq_guestPayload<ExtArgs>
+      bbq_recipe: Prisma.$bbq_recipePayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
-      item_id: number
-      item: string | null
-      description: string | null
-      rfid: number | null
-    }, ExtArgs["result"]["inventory"]>
+      id: number
+      recipe_id: number
+      guest_id: number
+      created_at: Date
+    }, ExtArgs["result"]["bbq_claim"]>
     composites: {}
   }
 
-  type inventoryGetPayload<S extends boolean | null | undefined | inventoryDefaultArgs> = $Result.GetResult<Prisma.$inventoryPayload, S>
+  type bbq_claimGetPayload<S extends boolean | null | undefined | bbq_claimDefaultArgs> = $Result.GetResult<Prisma.$bbq_claimPayload, S>
 
-  type inventoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<inventoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: InventoryCountAggregateInputType | true
+  type bbq_claimCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<bbq_claimFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Bbq_claimCountAggregateInputType | true
     }
 
-  export interface inventoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['inventory'], meta: { name: 'inventory' } }
+  export interface bbq_claimDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['bbq_claim'], meta: { name: 'bbq_claim' } }
     /**
-     * Find zero or one Inventory that matches the filter.
-     * @param {inventoryFindUniqueArgs} args - Arguments to find a Inventory
+     * Find zero or one Bbq_claim that matches the filter.
+     * @param {bbq_claimFindUniqueArgs} args - Arguments to find a Bbq_claim
      * @example
-     * // Get one Inventory
-     * const inventory = await prisma.inventory.findUnique({
+     * // Get one Bbq_claim
+     * const bbq_claim = await prisma.bbq_claim.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends inventoryFindUniqueArgs>(args: SelectSubset<T, inventoryFindUniqueArgs<ExtArgs>>): Prisma__inventoryClient<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends bbq_claimFindUniqueArgs>(args: SelectSubset<T, bbq_claimFindUniqueArgs<ExtArgs>>): Prisma__bbq_claimClient<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Inventory that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Bbq_claim that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {inventoryFindUniqueOrThrowArgs} args - Arguments to find a Inventory
+     * @param {bbq_claimFindUniqueOrThrowArgs} args - Arguments to find a Bbq_claim
      * @example
-     * // Get one Inventory
-     * const inventory = await prisma.inventory.findUniqueOrThrow({
+     * // Get one Bbq_claim
+     * const bbq_claim = await prisma.bbq_claim.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends inventoryFindUniqueOrThrowArgs>(args: SelectSubset<T, inventoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__inventoryClient<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends bbq_claimFindUniqueOrThrowArgs>(args: SelectSubset<T, bbq_claimFindUniqueOrThrowArgs<ExtArgs>>): Prisma__bbq_claimClient<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Inventory that matches the filter.
+     * Find the first Bbq_claim that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {inventoryFindFirstArgs} args - Arguments to find a Inventory
+     * @param {bbq_claimFindFirstArgs} args - Arguments to find a Bbq_claim
      * @example
-     * // Get one Inventory
-     * const inventory = await prisma.inventory.findFirst({
+     * // Get one Bbq_claim
+     * const bbq_claim = await prisma.bbq_claim.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends inventoryFindFirstArgs>(args?: SelectSubset<T, inventoryFindFirstArgs<ExtArgs>>): Prisma__inventoryClient<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends bbq_claimFindFirstArgs>(args?: SelectSubset<T, bbq_claimFindFirstArgs<ExtArgs>>): Prisma__bbq_claimClient<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Inventory that matches the filter or
+     * Find the first Bbq_claim that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {inventoryFindFirstOrThrowArgs} args - Arguments to find a Inventory
+     * @param {bbq_claimFindFirstOrThrowArgs} args - Arguments to find a Bbq_claim
      * @example
-     * // Get one Inventory
-     * const inventory = await prisma.inventory.findFirstOrThrow({
+     * // Get one Bbq_claim
+     * const bbq_claim = await prisma.bbq_claim.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends inventoryFindFirstOrThrowArgs>(args?: SelectSubset<T, inventoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__inventoryClient<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends bbq_claimFindFirstOrThrowArgs>(args?: SelectSubset<T, bbq_claimFindFirstOrThrowArgs<ExtArgs>>): Prisma__bbq_claimClient<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Inventories that matches the filter.
+     * Find zero or more Bbq_claims that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {inventoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {bbq_claimFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Inventories
-     * const inventories = await prisma.inventory.findMany()
+     * // Get all Bbq_claims
+     * const bbq_claims = await prisma.bbq_claim.findMany()
      * 
-     * // Get first 10 Inventories
-     * const inventories = await prisma.inventory.findMany({ take: 10 })
+     * // Get first 10 Bbq_claims
+     * const bbq_claims = await prisma.bbq_claim.findMany({ take: 10 })
      * 
-     * // Only select the `item_id`
-     * const inventoryWithItem_idOnly = await prisma.inventory.findMany({ select: { item_id: true } })
+     * // Only select the `id`
+     * const bbq_claimWithIdOnly = await prisma.bbq_claim.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends inventoryFindManyArgs>(args?: SelectSubset<T, inventoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends bbq_claimFindManyArgs>(args?: SelectSubset<T, bbq_claimFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Inventory.
-     * @param {inventoryCreateArgs} args - Arguments to create a Inventory.
+     * Create a Bbq_claim.
+     * @param {bbq_claimCreateArgs} args - Arguments to create a Bbq_claim.
      * @example
-     * // Create one Inventory
-     * const Inventory = await prisma.inventory.create({
+     * // Create one Bbq_claim
+     * const Bbq_claim = await prisma.bbq_claim.create({
      *   data: {
-     *     // ... data to create a Inventory
+     *     // ... data to create a Bbq_claim
      *   }
      * })
      * 
      */
-    create<T extends inventoryCreateArgs>(args: SelectSubset<T, inventoryCreateArgs<ExtArgs>>): Prisma__inventoryClient<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends bbq_claimCreateArgs>(args: SelectSubset<T, bbq_claimCreateArgs<ExtArgs>>): Prisma__bbq_claimClient<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Inventories.
-     * @param {inventoryCreateManyArgs} args - Arguments to create many Inventories.
+     * Create many Bbq_claims.
+     * @param {bbq_claimCreateManyArgs} args - Arguments to create many Bbq_claims.
      * @example
-     * // Create many Inventories
-     * const inventory = await prisma.inventory.createMany({
+     * // Create many Bbq_claims
+     * const bbq_claim = await prisma.bbq_claim.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends inventoryCreateManyArgs>(args?: SelectSubset<T, inventoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends bbq_claimCreateManyArgs>(args?: SelectSubset<T, bbq_claimCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Inventory.
-     * @param {inventoryDeleteArgs} args - Arguments to delete one Inventory.
+     * Delete a Bbq_claim.
+     * @param {bbq_claimDeleteArgs} args - Arguments to delete one Bbq_claim.
      * @example
-     * // Delete one Inventory
-     * const Inventory = await prisma.inventory.delete({
+     * // Delete one Bbq_claim
+     * const Bbq_claim = await prisma.bbq_claim.delete({
      *   where: {
-     *     // ... filter to delete one Inventory
+     *     // ... filter to delete one Bbq_claim
      *   }
      * })
      * 
      */
-    delete<T extends inventoryDeleteArgs>(args: SelectSubset<T, inventoryDeleteArgs<ExtArgs>>): Prisma__inventoryClient<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends bbq_claimDeleteArgs>(args: SelectSubset<T, bbq_claimDeleteArgs<ExtArgs>>): Prisma__bbq_claimClient<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Inventory.
-     * @param {inventoryUpdateArgs} args - Arguments to update one Inventory.
+     * Update one Bbq_claim.
+     * @param {bbq_claimUpdateArgs} args - Arguments to update one Bbq_claim.
      * @example
-     * // Update one Inventory
-     * const inventory = await prisma.inventory.update({
+     * // Update one Bbq_claim
+     * const bbq_claim = await prisma.bbq_claim.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3417,30 +3631,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends inventoryUpdateArgs>(args: SelectSubset<T, inventoryUpdateArgs<ExtArgs>>): Prisma__inventoryClient<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends bbq_claimUpdateArgs>(args: SelectSubset<T, bbq_claimUpdateArgs<ExtArgs>>): Prisma__bbq_claimClient<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Inventories.
-     * @param {inventoryDeleteManyArgs} args - Arguments to filter Inventories to delete.
+     * Delete zero or more Bbq_claims.
+     * @param {bbq_claimDeleteManyArgs} args - Arguments to filter Bbq_claims to delete.
      * @example
-     * // Delete a few Inventories
-     * const { count } = await prisma.inventory.deleteMany({
+     * // Delete a few Bbq_claims
+     * const { count } = await prisma.bbq_claim.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends inventoryDeleteManyArgs>(args?: SelectSubset<T, inventoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends bbq_claimDeleteManyArgs>(args?: SelectSubset<T, bbq_claimDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Inventories.
+     * Update zero or more Bbq_claims.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {inventoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {bbq_claimUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Inventories
-     * const inventory = await prisma.inventory.updateMany({
+     * // Update many Bbq_claims
+     * const bbq_claim = await prisma.bbq_claim.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3450,56 +3664,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends inventoryUpdateManyArgs>(args: SelectSubset<T, inventoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends bbq_claimUpdateManyArgs>(args: SelectSubset<T, bbq_claimUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Inventory.
-     * @param {inventoryUpsertArgs} args - Arguments to update or create a Inventory.
+     * Create or update one Bbq_claim.
+     * @param {bbq_claimUpsertArgs} args - Arguments to update or create a Bbq_claim.
      * @example
-     * // Update or create a Inventory
-     * const inventory = await prisma.inventory.upsert({
+     * // Update or create a Bbq_claim
+     * const bbq_claim = await prisma.bbq_claim.upsert({
      *   create: {
-     *     // ... data to create a Inventory
+     *     // ... data to create a Bbq_claim
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Inventory we want to update
+     *     // ... the filter for the Bbq_claim we want to update
      *   }
      * })
      */
-    upsert<T extends inventoryUpsertArgs>(args: SelectSubset<T, inventoryUpsertArgs<ExtArgs>>): Prisma__inventoryClient<$Result.GetResult<Prisma.$inventoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends bbq_claimUpsertArgs>(args: SelectSubset<T, bbq_claimUpsertArgs<ExtArgs>>): Prisma__bbq_claimClient<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Inventories.
+     * Count the number of Bbq_claims.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {inventoryCountArgs} args - Arguments to filter Inventories to count.
+     * @param {bbq_claimCountArgs} args - Arguments to filter Bbq_claims to count.
      * @example
-     * // Count the number of Inventories
-     * const count = await prisma.inventory.count({
+     * // Count the number of Bbq_claims
+     * const count = await prisma.bbq_claim.count({
      *   where: {
-     *     // ... the filter for the Inventories we want to count
+     *     // ... the filter for the Bbq_claims we want to count
      *   }
      * })
     **/
-    count<T extends inventoryCountArgs>(
-      args?: Subset<T, inventoryCountArgs>,
+    count<T extends bbq_claimCountArgs>(
+      args?: Subset<T, bbq_claimCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], InventoryCountAggregateOutputType>
+          : GetScalarType<T['select'], Bbq_claimCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Inventory.
+     * Allows you to perform aggregations operations on a Bbq_claim.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {InventoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Bbq_claimAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3519,13 +3733,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends InventoryAggregateArgs>(args: Subset<T, InventoryAggregateArgs>): Prisma.PrismaPromise<GetInventoryAggregateType<T>>
+    aggregate<T extends Bbq_claimAggregateArgs>(args: Subset<T, Bbq_claimAggregateArgs>): Prisma.PrismaPromise<GetBbq_claimAggregateType<T>>
 
     /**
-     * Group by Inventory.
+     * Group by Bbq_claim.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {inventoryGroupByArgs} args - Group by arguments.
+     * @param {bbq_claimGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3540,14 +3754,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends inventoryGroupByArgs,
+      T extends bbq_claimGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: inventoryGroupByArgs['orderBy'] }
-        : { orderBy?: inventoryGroupByArgs['orderBy'] },
+        ? { orderBy: bbq_claimGroupByArgs['orderBy'] }
+        : { orderBy?: bbq_claimGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3596,21 +3810,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, inventoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInventoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, bbq_claimGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBbq_claimGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the inventory model
+   * Fields of the bbq_claim model
    */
-  readonly fields: inventoryFieldRefs;
+  readonly fields: bbq_claimFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for inventory.
+   * The delegate class that acts as a "Promise-like" for bbq_claim.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__inventoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__bbq_claimClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    bbq_guest<T extends bbq_guestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, bbq_guestDefaultArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bbq_recipe<T extends bbq_recipeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, bbq_recipeDefaultArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3637,672 +3853,743 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the inventory model
+   * Fields of the bbq_claim model
    */
-  interface inventoryFieldRefs {
-    readonly item_id: FieldRef<"inventory", 'Int'>
-    readonly item: FieldRef<"inventory", 'String'>
-    readonly description: FieldRef<"inventory", 'String'>
-    readonly rfid: FieldRef<"inventory", 'Int'>
+  interface bbq_claimFieldRefs {
+    readonly id: FieldRef<"bbq_claim", 'Int'>
+    readonly recipe_id: FieldRef<"bbq_claim", 'Int'>
+    readonly guest_id: FieldRef<"bbq_claim", 'Int'>
+    readonly created_at: FieldRef<"bbq_claim", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * inventory findUnique
+   * bbq_claim findUnique
    */
-  export type inventoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * Filter, which inventory to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: inventoryWhereUniqueInput
+    include?: bbq_claimInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_claim to fetch.
+     */
+    where: bbq_claimWhereUniqueInput
   }
 
   /**
-   * inventory findUniqueOrThrow
+   * bbq_claim findUniqueOrThrow
    */
-  export type inventoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * Filter, which inventory to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: inventoryWhereUniqueInput
+    include?: bbq_claimInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_claim to fetch.
+     */
+    where: bbq_claimWhereUniqueInput
   }
 
   /**
-   * inventory findFirst
+   * bbq_claim findFirst
    */
-  export type inventoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * Filter, which inventory to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: inventoryWhereInput
+    include?: bbq_claimInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_claim to fetch.
+     */
+    where?: bbq_claimWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of inventories to fetch.
+     * Determine the order of bbq_claims to fetch.
      */
-    orderBy?: inventoryOrderByWithRelationInput | inventoryOrderByWithRelationInput[]
+    orderBy?: bbq_claimOrderByWithRelationInput | bbq_claimOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for inventories.
+     * Sets the position for searching for bbq_claims.
      */
-    cursor?: inventoryWhereUniqueInput
+    cursor?: bbq_claimWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` inventories from the position of the cursor.
+     * Take `±n` bbq_claims from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` inventories.
+     * Skip the first `n` bbq_claims.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of inventories.
+     * Filter by unique combinations of bbq_claims.
      */
-    distinct?: InventoryScalarFieldEnum | InventoryScalarFieldEnum[]
+    distinct?: Bbq_claimScalarFieldEnum | Bbq_claimScalarFieldEnum[]
   }
 
   /**
-   * inventory findFirstOrThrow
+   * bbq_claim findFirstOrThrow
    */
-  export type inventoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * Filter, which inventory to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: inventoryWhereInput
+    include?: bbq_claimInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_claim to fetch.
+     */
+    where?: bbq_claimWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of inventories to fetch.
+     * Determine the order of bbq_claims to fetch.
      */
-    orderBy?: inventoryOrderByWithRelationInput | inventoryOrderByWithRelationInput[]
+    orderBy?: bbq_claimOrderByWithRelationInput | bbq_claimOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for inventories.
+     * Sets the position for searching for bbq_claims.
      */
-    cursor?: inventoryWhereUniqueInput
+    cursor?: bbq_claimWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` inventories from the position of the cursor.
+     * Take `±n` bbq_claims from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` inventories.
+     * Skip the first `n` bbq_claims.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of inventories.
+     * Filter by unique combinations of bbq_claims.
      */
-    distinct?: InventoryScalarFieldEnum | InventoryScalarFieldEnum[]
+    distinct?: Bbq_claimScalarFieldEnum | Bbq_claimScalarFieldEnum[]
   }
 
   /**
-   * inventory findMany
+   * bbq_claim findMany
    */
-  export type inventoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * Filter, which inventories to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: inventoryWhereInput
+    include?: bbq_claimInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_claims to fetch.
+     */
+    where?: bbq_claimWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of inventories to fetch.
+     * Determine the order of bbq_claims to fetch.
      */
-    orderBy?: inventoryOrderByWithRelationInput | inventoryOrderByWithRelationInput[]
+    orderBy?: bbq_claimOrderByWithRelationInput | bbq_claimOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing inventories.
+     * Sets the position for listing bbq_claims.
      */
-    cursor?: inventoryWhereUniqueInput
+    cursor?: bbq_claimWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` inventories from the position of the cursor.
+     * Take `±n` bbq_claims from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` inventories.
+     * Skip the first `n` bbq_claims.
      */
     skip?: number
-    distinct?: InventoryScalarFieldEnum | InventoryScalarFieldEnum[]
+    distinct?: Bbq_claimScalarFieldEnum | Bbq_claimScalarFieldEnum[]
   }
 
   /**
-   * inventory create
+   * bbq_claim create
    */
-  export type inventoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * The data needed to create a inventory.
+     * Choose, which related nodes to fetch as well
      */
-    data?: XOR<inventoryCreateInput, inventoryUncheckedCreateInput>
+    include?: bbq_claimInclude<ExtArgs> | null
+    /**
+     * The data needed to create a bbq_claim.
+     */
+    data: XOR<bbq_claimCreateInput, bbq_claimUncheckedCreateInput>
   }
 
   /**
-   * inventory createMany
+   * bbq_claim createMany
    */
-  export type inventoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many inventories.
+     * The data used to create many bbq_claims.
      */
-    data: inventoryCreateManyInput | inventoryCreateManyInput[]
+    data: bbq_claimCreateManyInput | bbq_claimCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * inventory update
+   * bbq_claim update
    */
-  export type inventoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * The data needed to update a inventory.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<inventoryUpdateInput, inventoryUncheckedUpdateInput>
+    include?: bbq_claimInclude<ExtArgs> | null
     /**
-     * Choose, which inventory to update.
+     * The data needed to update a bbq_claim.
      */
-    where: inventoryWhereUniqueInput
+    data: XOR<bbq_claimUpdateInput, bbq_claimUncheckedUpdateInput>
+    /**
+     * Choose, which bbq_claim to update.
+     */
+    where: bbq_claimWhereUniqueInput
   }
 
   /**
-   * inventory updateMany
+   * bbq_claim updateMany
    */
-  export type inventoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update inventories.
+     * The data used to update bbq_claims.
      */
-    data: XOR<inventoryUpdateManyMutationInput, inventoryUncheckedUpdateManyInput>
+    data: XOR<bbq_claimUpdateManyMutationInput, bbq_claimUncheckedUpdateManyInput>
     /**
-     * Filter which inventories to update
+     * Filter which bbq_claims to update
      */
-    where?: inventoryWhereInput
+    where?: bbq_claimWhereInput
     /**
-     * Limit how many inventories to update.
+     * Limit how many bbq_claims to update.
      */
     limit?: number
   }
 
   /**
-   * inventory upsert
+   * bbq_claim upsert
    */
-  export type inventoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * The filter to search for the inventory to update in case it exists.
+     * Choose, which related nodes to fetch as well
      */
-    where: inventoryWhereUniqueInput
+    include?: bbq_claimInclude<ExtArgs> | null
     /**
-     * In case the inventory found by the `where` argument doesn't exist, create a new inventory with this data.
+     * The filter to search for the bbq_claim to update in case it exists.
      */
-    create: XOR<inventoryCreateInput, inventoryUncheckedCreateInput>
+    where: bbq_claimWhereUniqueInput
     /**
-     * In case the inventory was found with the provided `where` argument, update it with this data.
+     * In case the bbq_claim found by the `where` argument doesn't exist, create a new bbq_claim with this data.
      */
-    update: XOR<inventoryUpdateInput, inventoryUncheckedUpdateInput>
+    create: XOR<bbq_claimCreateInput, bbq_claimUncheckedCreateInput>
+    /**
+     * In case the bbq_claim was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<bbq_claimUpdateInput, bbq_claimUncheckedUpdateInput>
   }
 
   /**
-   * inventory delete
+   * bbq_claim delete
    */
-  export type inventoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
     /**
-     * Filter which inventory to delete.
+     * Choose, which related nodes to fetch as well
      */
-    where: inventoryWhereUniqueInput
+    include?: bbq_claimInclude<ExtArgs> | null
+    /**
+     * Filter which bbq_claim to delete.
+     */
+    where: bbq_claimWhereUniqueInput
   }
 
   /**
-   * inventory deleteMany
+   * bbq_claim deleteMany
    */
-  export type inventoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which inventories to delete
+     * Filter which bbq_claims to delete
      */
-    where?: inventoryWhereInput
+    where?: bbq_claimWhereInput
     /**
-     * Limit how many inventories to delete.
+     * Limit how many bbq_claims to delete.
      */
     limit?: number
   }
 
   /**
-   * inventory without action
+   * bbq_claim without action
    */
-  export type inventoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_claimDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the inventory
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: inventorySelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the inventory
+     * Omit specific fields from the bbq_claim
      */
-    omit?: inventoryOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_claimInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model rfid
+   * Model bbq_guest
    */
 
-  export type AggregateRfid = {
-    _count: RfidCountAggregateOutputType | null
-    _avg: RfidAvgAggregateOutputType | null
-    _sum: RfidSumAggregateOutputType | null
-    _min: RfidMinAggregateOutputType | null
-    _max: RfidMaxAggregateOutputType | null
+  export type AggregateBbq_guest = {
+    _count: Bbq_guestCountAggregateOutputType | null
+    _avg: Bbq_guestAvgAggregateOutputType | null
+    _sum: Bbq_guestSumAggregateOutputType | null
+    _min: Bbq_guestMinAggregateOutputType | null
+    _max: Bbq_guestMaxAggregateOutputType | null
   }
 
-  export type RfidAvgAggregateOutputType = {
-    rfid: number | null
+  export type Bbq_guestAvgAggregateOutputType = {
+    id: number | null
   }
 
-  export type RfidSumAggregateOutputType = {
-    rfid: number | null
+  export type Bbq_guestSumAggregateOutputType = {
+    id: number | null
   }
 
-  export type RfidMinAggregateOutputType = {
-    rfid: number | null
-    room: string | null
-    container: string | null
+  export type Bbq_guestMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    phone: string | null
+    token: string | null
+    created_at: Date | null
   }
 
-  export type RfidMaxAggregateOutputType = {
-    rfid: number | null
-    room: string | null
-    container: string | null
+  export type Bbq_guestMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    phone: string | null
+    token: string | null
+    created_at: Date | null
   }
 
-  export type RfidCountAggregateOutputType = {
-    rfid: number
-    room: number
-    container: number
+  export type Bbq_guestCountAggregateOutputType = {
+    id: number
+    name: number
+    phone: number
+    token: number
+    created_at: number
     _all: number
   }
 
 
-  export type RfidAvgAggregateInputType = {
-    rfid?: true
+  export type Bbq_guestAvgAggregateInputType = {
+    id?: true
   }
 
-  export type RfidSumAggregateInputType = {
-    rfid?: true
+  export type Bbq_guestSumAggregateInputType = {
+    id?: true
   }
 
-  export type RfidMinAggregateInputType = {
-    rfid?: true
-    room?: true
-    container?: true
+  export type Bbq_guestMinAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    token?: true
+    created_at?: true
   }
 
-  export type RfidMaxAggregateInputType = {
-    rfid?: true
-    room?: true
-    container?: true
+  export type Bbq_guestMaxAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    token?: true
+    created_at?: true
   }
 
-  export type RfidCountAggregateInputType = {
-    rfid?: true
-    room?: true
-    container?: true
+  export type Bbq_guestCountAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    token?: true
+    created_at?: true
     _all?: true
   }
 
-  export type RfidAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Bbq_guestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which rfid to aggregate.
+     * Filter which bbq_guest to aggregate.
      */
-    where?: rfidWhereInput
+    where?: bbq_guestWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of rfids to fetch.
+     * Determine the order of bbq_guests to fetch.
      */
-    orderBy?: rfidOrderByWithRelationInput | rfidOrderByWithRelationInput[]
+    orderBy?: bbq_guestOrderByWithRelationInput | bbq_guestOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: rfidWhereUniqueInput
+    cursor?: bbq_guestWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` rfids from the position of the cursor.
+     * Take `±n` bbq_guests from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` rfids.
+     * Skip the first `n` bbq_guests.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned rfids
+     * Count returned bbq_guests
     **/
-    _count?: true | RfidCountAggregateInputType
+    _count?: true | Bbq_guestCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: RfidAvgAggregateInputType
+    _avg?: Bbq_guestAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: RfidSumAggregateInputType
+    _sum?: Bbq_guestSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: RfidMinAggregateInputType
+    _min?: Bbq_guestMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: RfidMaxAggregateInputType
+    _max?: Bbq_guestMaxAggregateInputType
   }
 
-  export type GetRfidAggregateType<T extends RfidAggregateArgs> = {
-        [P in keyof T & keyof AggregateRfid]: P extends '_count' | 'count'
+  export type GetBbq_guestAggregateType<T extends Bbq_guestAggregateArgs> = {
+        [P in keyof T & keyof AggregateBbq_guest]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateRfid[P]>
-      : GetScalarType<T[P], AggregateRfid[P]>
+        : GetScalarType<T[P], AggregateBbq_guest[P]>
+      : GetScalarType<T[P], AggregateBbq_guest[P]>
   }
 
 
 
 
-  export type rfidGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: rfidWhereInput
-    orderBy?: rfidOrderByWithAggregationInput | rfidOrderByWithAggregationInput[]
-    by: RfidScalarFieldEnum[] | RfidScalarFieldEnum
-    having?: rfidScalarWhereWithAggregatesInput
+  export type bbq_guestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bbq_guestWhereInput
+    orderBy?: bbq_guestOrderByWithAggregationInput | bbq_guestOrderByWithAggregationInput[]
+    by: Bbq_guestScalarFieldEnum[] | Bbq_guestScalarFieldEnum
+    having?: bbq_guestScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: RfidCountAggregateInputType | true
-    _avg?: RfidAvgAggregateInputType
-    _sum?: RfidSumAggregateInputType
-    _min?: RfidMinAggregateInputType
-    _max?: RfidMaxAggregateInputType
+    _count?: Bbq_guestCountAggregateInputType | true
+    _avg?: Bbq_guestAvgAggregateInputType
+    _sum?: Bbq_guestSumAggregateInputType
+    _min?: Bbq_guestMinAggregateInputType
+    _max?: Bbq_guestMaxAggregateInputType
   }
 
-  export type RfidGroupByOutputType = {
-    rfid: number
-    room: string | null
-    container: string | null
-    _count: RfidCountAggregateOutputType | null
-    _avg: RfidAvgAggregateOutputType | null
-    _sum: RfidSumAggregateOutputType | null
-    _min: RfidMinAggregateOutputType | null
-    _max: RfidMaxAggregateOutputType | null
+  export type Bbq_guestGroupByOutputType = {
+    id: number
+    name: string
+    phone: string | null
+    token: string
+    created_at: Date
+    _count: Bbq_guestCountAggregateOutputType | null
+    _avg: Bbq_guestAvgAggregateOutputType | null
+    _sum: Bbq_guestSumAggregateOutputType | null
+    _min: Bbq_guestMinAggregateOutputType | null
+    _max: Bbq_guestMaxAggregateOutputType | null
   }
 
-  type GetRfidGroupByPayload<T extends rfidGroupByArgs> = Prisma.PrismaPromise<
+  type GetBbq_guestGroupByPayload<T extends bbq_guestGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<RfidGroupByOutputType, T['by']> &
+      PickEnumerable<Bbq_guestGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof RfidGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Bbq_guestGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], RfidGroupByOutputType[P]>
-            : GetScalarType<T[P], RfidGroupByOutputType[P]>
+              : GetScalarType<T[P], Bbq_guestGroupByOutputType[P]>
+            : GetScalarType<T[P], Bbq_guestGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type rfidSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    rfid?: boolean
-    room?: boolean
-    container?: boolean
-  }, ExtArgs["result"]["rfid"]>
+  export type bbq_guestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    token?: boolean
+    created_at?: boolean
+    bbq_claim?: boolean | bbq_guest$bbq_claimArgs<ExtArgs>
+    bbq_recipe?: boolean | bbq_guest$bbq_recipeArgs<ExtArgs>
+    _count?: boolean | Bbq_guestCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bbq_guest"]>
 
 
 
-  export type rfidSelectScalar = {
-    rfid?: boolean
-    room?: boolean
-    container?: boolean
+  export type bbq_guestSelectScalar = {
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    token?: boolean
+    created_at?: boolean
   }
 
-  export type rfidOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"rfid" | "room" | "container", ExtArgs["result"]["rfid"]>
+  export type bbq_guestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phone" | "token" | "created_at", ExtArgs["result"]["bbq_guest"]>
+  export type bbq_guestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bbq_claim?: boolean | bbq_guest$bbq_claimArgs<ExtArgs>
+    bbq_recipe?: boolean | bbq_guest$bbq_recipeArgs<ExtArgs>
+    _count?: boolean | Bbq_guestCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
-  export type $rfidPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "rfid"
-    objects: {}
+  export type $bbq_guestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "bbq_guest"
+    objects: {
+      bbq_claim: Prisma.$bbq_claimPayload<ExtArgs>[]
+      bbq_recipe: Prisma.$bbq_recipePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
-      rfid: number
-      room: string | null
-      container: string | null
-    }, ExtArgs["result"]["rfid"]>
+      id: number
+      name: string
+      phone: string | null
+      token: string
+      created_at: Date
+    }, ExtArgs["result"]["bbq_guest"]>
     composites: {}
   }
 
-  type rfidGetPayload<S extends boolean | null | undefined | rfidDefaultArgs> = $Result.GetResult<Prisma.$rfidPayload, S>
+  type bbq_guestGetPayload<S extends boolean | null | undefined | bbq_guestDefaultArgs> = $Result.GetResult<Prisma.$bbq_guestPayload, S>
 
-  type rfidCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<rfidFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: RfidCountAggregateInputType | true
+  type bbq_guestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<bbq_guestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Bbq_guestCountAggregateInputType | true
     }
 
-  export interface rfidDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['rfid'], meta: { name: 'rfid' } }
+  export interface bbq_guestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['bbq_guest'], meta: { name: 'bbq_guest' } }
     /**
-     * Find zero or one Rfid that matches the filter.
-     * @param {rfidFindUniqueArgs} args - Arguments to find a Rfid
+     * Find zero or one Bbq_guest that matches the filter.
+     * @param {bbq_guestFindUniqueArgs} args - Arguments to find a Bbq_guest
      * @example
-     * // Get one Rfid
-     * const rfid = await prisma.rfid.findUnique({
+     * // Get one Bbq_guest
+     * const bbq_guest = await prisma.bbq_guest.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends rfidFindUniqueArgs>(args: SelectSubset<T, rfidFindUniqueArgs<ExtArgs>>): Prisma__rfidClient<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends bbq_guestFindUniqueArgs>(args: SelectSubset<T, bbq_guestFindUniqueArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Rfid that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Bbq_guest that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {rfidFindUniqueOrThrowArgs} args - Arguments to find a Rfid
+     * @param {bbq_guestFindUniqueOrThrowArgs} args - Arguments to find a Bbq_guest
      * @example
-     * // Get one Rfid
-     * const rfid = await prisma.rfid.findUniqueOrThrow({
+     * // Get one Bbq_guest
+     * const bbq_guest = await prisma.bbq_guest.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends rfidFindUniqueOrThrowArgs>(args: SelectSubset<T, rfidFindUniqueOrThrowArgs<ExtArgs>>): Prisma__rfidClient<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends bbq_guestFindUniqueOrThrowArgs>(args: SelectSubset<T, bbq_guestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Rfid that matches the filter.
+     * Find the first Bbq_guest that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {rfidFindFirstArgs} args - Arguments to find a Rfid
+     * @param {bbq_guestFindFirstArgs} args - Arguments to find a Bbq_guest
      * @example
-     * // Get one Rfid
-     * const rfid = await prisma.rfid.findFirst({
+     * // Get one Bbq_guest
+     * const bbq_guest = await prisma.bbq_guest.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends rfidFindFirstArgs>(args?: SelectSubset<T, rfidFindFirstArgs<ExtArgs>>): Prisma__rfidClient<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends bbq_guestFindFirstArgs>(args?: SelectSubset<T, bbq_guestFindFirstArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Rfid that matches the filter or
+     * Find the first Bbq_guest that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {rfidFindFirstOrThrowArgs} args - Arguments to find a Rfid
+     * @param {bbq_guestFindFirstOrThrowArgs} args - Arguments to find a Bbq_guest
      * @example
-     * // Get one Rfid
-     * const rfid = await prisma.rfid.findFirstOrThrow({
+     * // Get one Bbq_guest
+     * const bbq_guest = await prisma.bbq_guest.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends rfidFindFirstOrThrowArgs>(args?: SelectSubset<T, rfidFindFirstOrThrowArgs<ExtArgs>>): Prisma__rfidClient<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends bbq_guestFindFirstOrThrowArgs>(args?: SelectSubset<T, bbq_guestFindFirstOrThrowArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Rfids that matches the filter.
+     * Find zero or more Bbq_guests that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {rfidFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {bbq_guestFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Rfids
-     * const rfids = await prisma.rfid.findMany()
+     * // Get all Bbq_guests
+     * const bbq_guests = await prisma.bbq_guest.findMany()
      * 
-     * // Get first 10 Rfids
-     * const rfids = await prisma.rfid.findMany({ take: 10 })
+     * // Get first 10 Bbq_guests
+     * const bbq_guests = await prisma.bbq_guest.findMany({ take: 10 })
      * 
-     * // Only select the `rfid`
-     * const rfidWithRfidOnly = await prisma.rfid.findMany({ select: { rfid: true } })
+     * // Only select the `id`
+     * const bbq_guestWithIdOnly = await prisma.bbq_guest.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends rfidFindManyArgs>(args?: SelectSubset<T, rfidFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends bbq_guestFindManyArgs>(args?: SelectSubset<T, bbq_guestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Rfid.
-     * @param {rfidCreateArgs} args - Arguments to create a Rfid.
+     * Create a Bbq_guest.
+     * @param {bbq_guestCreateArgs} args - Arguments to create a Bbq_guest.
      * @example
-     * // Create one Rfid
-     * const Rfid = await prisma.rfid.create({
+     * // Create one Bbq_guest
+     * const Bbq_guest = await prisma.bbq_guest.create({
      *   data: {
-     *     // ... data to create a Rfid
+     *     // ... data to create a Bbq_guest
      *   }
      * })
      * 
      */
-    create<T extends rfidCreateArgs>(args: SelectSubset<T, rfidCreateArgs<ExtArgs>>): Prisma__rfidClient<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends bbq_guestCreateArgs>(args: SelectSubset<T, bbq_guestCreateArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Rfids.
-     * @param {rfidCreateManyArgs} args - Arguments to create many Rfids.
+     * Create many Bbq_guests.
+     * @param {bbq_guestCreateManyArgs} args - Arguments to create many Bbq_guests.
      * @example
-     * // Create many Rfids
-     * const rfid = await prisma.rfid.createMany({
+     * // Create many Bbq_guests
+     * const bbq_guest = await prisma.bbq_guest.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends rfidCreateManyArgs>(args?: SelectSubset<T, rfidCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends bbq_guestCreateManyArgs>(args?: SelectSubset<T, bbq_guestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Rfid.
-     * @param {rfidDeleteArgs} args - Arguments to delete one Rfid.
+     * Delete a Bbq_guest.
+     * @param {bbq_guestDeleteArgs} args - Arguments to delete one Bbq_guest.
      * @example
-     * // Delete one Rfid
-     * const Rfid = await prisma.rfid.delete({
+     * // Delete one Bbq_guest
+     * const Bbq_guest = await prisma.bbq_guest.delete({
      *   where: {
-     *     // ... filter to delete one Rfid
+     *     // ... filter to delete one Bbq_guest
      *   }
      * })
      * 
      */
-    delete<T extends rfidDeleteArgs>(args: SelectSubset<T, rfidDeleteArgs<ExtArgs>>): Prisma__rfidClient<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends bbq_guestDeleteArgs>(args: SelectSubset<T, bbq_guestDeleteArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Rfid.
-     * @param {rfidUpdateArgs} args - Arguments to update one Rfid.
+     * Update one Bbq_guest.
+     * @param {bbq_guestUpdateArgs} args - Arguments to update one Bbq_guest.
      * @example
-     * // Update one Rfid
-     * const rfid = await prisma.rfid.update({
+     * // Update one Bbq_guest
+     * const bbq_guest = await prisma.bbq_guest.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4312,30 +4599,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends rfidUpdateArgs>(args: SelectSubset<T, rfidUpdateArgs<ExtArgs>>): Prisma__rfidClient<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends bbq_guestUpdateArgs>(args: SelectSubset<T, bbq_guestUpdateArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Rfids.
-     * @param {rfidDeleteManyArgs} args - Arguments to filter Rfids to delete.
+     * Delete zero or more Bbq_guests.
+     * @param {bbq_guestDeleteManyArgs} args - Arguments to filter Bbq_guests to delete.
      * @example
-     * // Delete a few Rfids
-     * const { count } = await prisma.rfid.deleteMany({
+     * // Delete a few Bbq_guests
+     * const { count } = await prisma.bbq_guest.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends rfidDeleteManyArgs>(args?: SelectSubset<T, rfidDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends bbq_guestDeleteManyArgs>(args?: SelectSubset<T, bbq_guestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Rfids.
+     * Update zero or more Bbq_guests.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {rfidUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {bbq_guestUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Rfids
-     * const rfid = await prisma.rfid.updateMany({
+     * // Update many Bbq_guests
+     * const bbq_guest = await prisma.bbq_guest.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4345,56 +4632,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends rfidUpdateManyArgs>(args: SelectSubset<T, rfidUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends bbq_guestUpdateManyArgs>(args: SelectSubset<T, bbq_guestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Rfid.
-     * @param {rfidUpsertArgs} args - Arguments to update or create a Rfid.
+     * Create or update one Bbq_guest.
+     * @param {bbq_guestUpsertArgs} args - Arguments to update or create a Bbq_guest.
      * @example
-     * // Update or create a Rfid
-     * const rfid = await prisma.rfid.upsert({
+     * // Update or create a Bbq_guest
+     * const bbq_guest = await prisma.bbq_guest.upsert({
      *   create: {
-     *     // ... data to create a Rfid
+     *     // ... data to create a Bbq_guest
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Rfid we want to update
+     *     // ... the filter for the Bbq_guest we want to update
      *   }
      * })
      */
-    upsert<T extends rfidUpsertArgs>(args: SelectSubset<T, rfidUpsertArgs<ExtArgs>>): Prisma__rfidClient<$Result.GetResult<Prisma.$rfidPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends bbq_guestUpsertArgs>(args: SelectSubset<T, bbq_guestUpsertArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Rfids.
+     * Count the number of Bbq_guests.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {rfidCountArgs} args - Arguments to filter Rfids to count.
+     * @param {bbq_guestCountArgs} args - Arguments to filter Bbq_guests to count.
      * @example
-     * // Count the number of Rfids
-     * const count = await prisma.rfid.count({
+     * // Count the number of Bbq_guests
+     * const count = await prisma.bbq_guest.count({
      *   where: {
-     *     // ... the filter for the Rfids we want to count
+     *     // ... the filter for the Bbq_guests we want to count
      *   }
      * })
     **/
-    count<T extends rfidCountArgs>(
-      args?: Subset<T, rfidCountArgs>,
+    count<T extends bbq_guestCountArgs>(
+      args?: Subset<T, bbq_guestCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], RfidCountAggregateOutputType>
+          : GetScalarType<T['select'], Bbq_guestCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Rfid.
+     * Allows you to perform aggregations operations on a Bbq_guest.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RfidAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Bbq_guestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -4414,13 +4701,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends RfidAggregateArgs>(args: Subset<T, RfidAggregateArgs>): Prisma.PrismaPromise<GetRfidAggregateType<T>>
+    aggregate<T extends Bbq_guestAggregateArgs>(args: Subset<T, Bbq_guestAggregateArgs>): Prisma.PrismaPromise<GetBbq_guestAggregateType<T>>
 
     /**
-     * Group by Rfid.
+     * Group by Bbq_guest.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {rfidGroupByArgs} args - Group by arguments.
+     * @param {bbq_guestGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -4435,14 +4722,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends rfidGroupByArgs,
+      T extends bbq_guestGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: rfidGroupByArgs['orderBy'] }
-        : { orderBy?: rfidGroupByArgs['orderBy'] },
+        ? { orderBy: bbq_guestGroupByArgs['orderBy'] }
+        : { orderBy?: bbq_guestGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -4491,21 +4778,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, rfidGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRfidGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, bbq_guestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBbq_guestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the rfid model
+   * Fields of the bbq_guest model
    */
-  readonly fields: rfidFieldRefs;
+  readonly fields: bbq_guestFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for rfid.
+   * The delegate class that acts as a "Promise-like" for bbq_guest.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__rfidClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__bbq_guestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    bbq_claim<T extends bbq_guest$bbq_claimArgs<ExtArgs> = {}>(args?: Subset<T, bbq_guest$bbq_claimArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    bbq_recipe<T extends bbq_guest$bbq_recipeArgs<ExtArgs> = {}>(args?: Subset<T, bbq_guest$bbq_recipeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4532,330 +4821,1543 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the rfid model
+   * Fields of the bbq_guest model
    */
-  interface rfidFieldRefs {
-    readonly rfid: FieldRef<"rfid", 'Int'>
-    readonly room: FieldRef<"rfid", 'String'>
-    readonly container: FieldRef<"rfid", 'String'>
+  interface bbq_guestFieldRefs {
+    readonly id: FieldRef<"bbq_guest", 'Int'>
+    readonly name: FieldRef<"bbq_guest", 'String'>
+    readonly phone: FieldRef<"bbq_guest", 'String'>
+    readonly token: FieldRef<"bbq_guest", 'String'>
+    readonly created_at: FieldRef<"bbq_guest", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * rfid findUnique
+   * bbq_guest findUnique
    */
-  export type rfidFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * Filter, which rfid to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: rfidWhereUniqueInput
+    include?: bbq_guestInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_guest to fetch.
+     */
+    where: bbq_guestWhereUniqueInput
   }
 
   /**
-   * rfid findUniqueOrThrow
+   * bbq_guest findUniqueOrThrow
    */
-  export type rfidFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * Filter, which rfid to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: rfidWhereUniqueInput
+    include?: bbq_guestInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_guest to fetch.
+     */
+    where: bbq_guestWhereUniqueInput
   }
 
   /**
-   * rfid findFirst
+   * bbq_guest findFirst
    */
-  export type rfidFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * Filter, which rfid to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: rfidWhereInput
+    include?: bbq_guestInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_guest to fetch.
+     */
+    where?: bbq_guestWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of rfids to fetch.
+     * Determine the order of bbq_guests to fetch.
      */
-    orderBy?: rfidOrderByWithRelationInput | rfidOrderByWithRelationInput[]
+    orderBy?: bbq_guestOrderByWithRelationInput | bbq_guestOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for rfids.
+     * Sets the position for searching for bbq_guests.
      */
-    cursor?: rfidWhereUniqueInput
+    cursor?: bbq_guestWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` rfids from the position of the cursor.
+     * Take `±n` bbq_guests from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` rfids.
+     * Skip the first `n` bbq_guests.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of rfids.
+     * Filter by unique combinations of bbq_guests.
      */
-    distinct?: RfidScalarFieldEnum | RfidScalarFieldEnum[]
+    distinct?: Bbq_guestScalarFieldEnum | Bbq_guestScalarFieldEnum[]
   }
 
   /**
-   * rfid findFirstOrThrow
+   * bbq_guest findFirstOrThrow
    */
-  export type rfidFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * Filter, which rfid to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: rfidWhereInput
+    include?: bbq_guestInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_guest to fetch.
+     */
+    where?: bbq_guestWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of rfids to fetch.
+     * Determine the order of bbq_guests to fetch.
      */
-    orderBy?: rfidOrderByWithRelationInput | rfidOrderByWithRelationInput[]
+    orderBy?: bbq_guestOrderByWithRelationInput | bbq_guestOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for rfids.
+     * Sets the position for searching for bbq_guests.
      */
-    cursor?: rfidWhereUniqueInput
+    cursor?: bbq_guestWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` rfids from the position of the cursor.
+     * Take `±n` bbq_guests from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` rfids.
+     * Skip the first `n` bbq_guests.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of rfids.
+     * Filter by unique combinations of bbq_guests.
      */
-    distinct?: RfidScalarFieldEnum | RfidScalarFieldEnum[]
+    distinct?: Bbq_guestScalarFieldEnum | Bbq_guestScalarFieldEnum[]
   }
 
   /**
-   * rfid findMany
+   * bbq_guest findMany
    */
-  export type rfidFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * Filter, which rfids to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: rfidWhereInput
+    include?: bbq_guestInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_guests to fetch.
+     */
+    where?: bbq_guestWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of rfids to fetch.
+     * Determine the order of bbq_guests to fetch.
      */
-    orderBy?: rfidOrderByWithRelationInput | rfidOrderByWithRelationInput[]
+    orderBy?: bbq_guestOrderByWithRelationInput | bbq_guestOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing rfids.
+     * Sets the position for listing bbq_guests.
      */
-    cursor?: rfidWhereUniqueInput
+    cursor?: bbq_guestWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` rfids from the position of the cursor.
+     * Take `±n` bbq_guests from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` rfids.
+     * Skip the first `n` bbq_guests.
      */
     skip?: number
-    distinct?: RfidScalarFieldEnum | RfidScalarFieldEnum[]
+    distinct?: Bbq_guestScalarFieldEnum | Bbq_guestScalarFieldEnum[]
   }
 
   /**
-   * rfid create
+   * bbq_guest create
    */
-  export type rfidCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * The data needed to create a rfid.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<rfidCreateInput, rfidUncheckedCreateInput>
+    include?: bbq_guestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a bbq_guest.
+     */
+    data: XOR<bbq_guestCreateInput, bbq_guestUncheckedCreateInput>
   }
 
   /**
-   * rfid createMany
+   * bbq_guest createMany
    */
-  export type rfidCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many rfids.
+     * The data used to create many bbq_guests.
      */
-    data: rfidCreateManyInput | rfidCreateManyInput[]
+    data: bbq_guestCreateManyInput | bbq_guestCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * rfid update
+   * bbq_guest update
    */
-  export type rfidUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * The data needed to update a rfid.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<rfidUpdateInput, rfidUncheckedUpdateInput>
+    include?: bbq_guestInclude<ExtArgs> | null
     /**
-     * Choose, which rfid to update.
+     * The data needed to update a bbq_guest.
      */
-    where: rfidWhereUniqueInput
+    data: XOR<bbq_guestUpdateInput, bbq_guestUncheckedUpdateInput>
+    /**
+     * Choose, which bbq_guest to update.
+     */
+    where: bbq_guestWhereUniqueInput
   }
 
   /**
-   * rfid updateMany
+   * bbq_guest updateMany
    */
-  export type rfidUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update rfids.
+     * The data used to update bbq_guests.
      */
-    data: XOR<rfidUpdateManyMutationInput, rfidUncheckedUpdateManyInput>
+    data: XOR<bbq_guestUpdateManyMutationInput, bbq_guestUncheckedUpdateManyInput>
     /**
-     * Filter which rfids to update
+     * Filter which bbq_guests to update
      */
-    where?: rfidWhereInput
+    where?: bbq_guestWhereInput
     /**
-     * Limit how many rfids to update.
+     * Limit how many bbq_guests to update.
      */
     limit?: number
   }
 
   /**
-   * rfid upsert
+   * bbq_guest upsert
    */
-  export type rfidUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * The filter to search for the rfid to update in case it exists.
+     * Choose, which related nodes to fetch as well
      */
-    where: rfidWhereUniqueInput
+    include?: bbq_guestInclude<ExtArgs> | null
     /**
-     * In case the rfid found by the `where` argument doesn't exist, create a new rfid with this data.
+     * The filter to search for the bbq_guest to update in case it exists.
      */
-    create: XOR<rfidCreateInput, rfidUncheckedCreateInput>
+    where: bbq_guestWhereUniqueInput
     /**
-     * In case the rfid was found with the provided `where` argument, update it with this data.
+     * In case the bbq_guest found by the `where` argument doesn't exist, create a new bbq_guest with this data.
      */
-    update: XOR<rfidUpdateInput, rfidUncheckedUpdateInput>
+    create: XOR<bbq_guestCreateInput, bbq_guestUncheckedCreateInput>
+    /**
+     * In case the bbq_guest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<bbq_guestUpdateInput, bbq_guestUncheckedUpdateInput>
   }
 
   /**
-   * rfid delete
+   * bbq_guest delete
    */
-  export type rfidDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_guest
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_guestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_guest
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_guestOmit<ExtArgs> | null
     /**
-     * Filter which rfid to delete.
+     * Choose, which related nodes to fetch as well
      */
-    where: rfidWhereUniqueInput
+    include?: bbq_guestInclude<ExtArgs> | null
+    /**
+     * Filter which bbq_guest to delete.
+     */
+    where: bbq_guestWhereUniqueInput
   }
 
   /**
-   * rfid deleteMany
+   * bbq_guest deleteMany
    */
-  export type rfidDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which rfids to delete
+     * Filter which bbq_guests to delete
      */
-    where?: rfidWhereInput
+    where?: bbq_guestWhereInput
     /**
-     * Limit how many rfids to delete.
+     * Limit how many bbq_guests to delete.
      */
     limit?: number
   }
 
   /**
-   * rfid without action
+   * bbq_guest.bbq_claim
    */
-  export type rfidDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type bbq_guest$bbq_claimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rfid
+     * Select specific fields to fetch from the bbq_claim
      */
-    select?: rfidSelect<ExtArgs> | null
+    select?: bbq_claimSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rfid
+     * Omit specific fields from the bbq_claim
      */
-    omit?: rfidOmit<ExtArgs> | null
+    omit?: bbq_claimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_claimInclude<ExtArgs> | null
+    where?: bbq_claimWhereInput
+    orderBy?: bbq_claimOrderByWithRelationInput | bbq_claimOrderByWithRelationInput[]
+    cursor?: bbq_claimWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Bbq_claimScalarFieldEnum | Bbq_claimScalarFieldEnum[]
+  }
+
+  /**
+   * bbq_guest.bbq_recipe
+   */
+  export type bbq_guest$bbq_recipeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    where?: bbq_recipeWhereInput
+    orderBy?: bbq_recipeOrderByWithRelationInput | bbq_recipeOrderByWithRelationInput[]
+    cursor?: bbq_recipeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Bbq_recipeScalarFieldEnum | Bbq_recipeScalarFieldEnum[]
+  }
+
+  /**
+   * bbq_guest without action
+   */
+  export type bbq_guestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_guest
+     */
+    select?: bbq_guestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_guest
+     */
+    omit?: bbq_guestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_guestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model bbq_recipe
+   */
+
+  export type AggregateBbq_recipe = {
+    _count: Bbq_recipeCountAggregateOutputType | null
+    _avg: Bbq_recipeAvgAggregateOutputType | null
+    _sum: Bbq_recipeSumAggregateOutputType | null
+    _min: Bbq_recipeMinAggregateOutputType | null
+    _max: Bbq_recipeMaxAggregateOutputType | null
+  }
+
+  export type Bbq_recipeAvgAggregateOutputType = {
+    id: number | null
+    claim_cap: number | null
+    reserved_for: number | null
+    sort_order: number | null
+  }
+
+  export type Bbq_recipeSumAggregateOutputType = {
+    id: number | null
+    claim_cap: number | null
+    reserved_for: number | null
+    sort_order: number | null
+  }
+
+  export type Bbq_recipeMinAggregateOutputType = {
+    id: number | null
+    slug: string | null
+    title: string | null
+    blurb: string | null
+    host_note: string | null
+    category: $Enums.bbq_recipe_category | null
+    effort: $Enums.bbq_recipe_effort | null
+    source: $Enums.bbq_recipe_source | null
+    recipe_url: string | null
+    body: string | null
+    claim_cap: number | null
+    pairs_with: string | null
+    reserved_for: number | null
+    sort_order: number | null
+  }
+
+  export type Bbq_recipeMaxAggregateOutputType = {
+    id: number | null
+    slug: string | null
+    title: string | null
+    blurb: string | null
+    host_note: string | null
+    category: $Enums.bbq_recipe_category | null
+    effort: $Enums.bbq_recipe_effort | null
+    source: $Enums.bbq_recipe_source | null
+    recipe_url: string | null
+    body: string | null
+    claim_cap: number | null
+    pairs_with: string | null
+    reserved_for: number | null
+    sort_order: number | null
+  }
+
+  export type Bbq_recipeCountAggregateOutputType = {
+    id: number
+    slug: number
+    title: number
+    blurb: number
+    host_note: number
+    category: number
+    effort: number
+    source: number
+    recipe_url: number
+    body: number
+    claim_cap: number
+    pairs_with: number
+    reserved_for: number
+    sort_order: number
+    _all: number
+  }
+
+
+  export type Bbq_recipeAvgAggregateInputType = {
+    id?: true
+    claim_cap?: true
+    reserved_for?: true
+    sort_order?: true
+  }
+
+  export type Bbq_recipeSumAggregateInputType = {
+    id?: true
+    claim_cap?: true
+    reserved_for?: true
+    sort_order?: true
+  }
+
+  export type Bbq_recipeMinAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    blurb?: true
+    host_note?: true
+    category?: true
+    effort?: true
+    source?: true
+    recipe_url?: true
+    body?: true
+    claim_cap?: true
+    pairs_with?: true
+    reserved_for?: true
+    sort_order?: true
+  }
+
+  export type Bbq_recipeMaxAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    blurb?: true
+    host_note?: true
+    category?: true
+    effort?: true
+    source?: true
+    recipe_url?: true
+    body?: true
+    claim_cap?: true
+    pairs_with?: true
+    reserved_for?: true
+    sort_order?: true
+  }
+
+  export type Bbq_recipeCountAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    blurb?: true
+    host_note?: true
+    category?: true
+    effort?: true
+    source?: true
+    recipe_url?: true
+    body?: true
+    claim_cap?: true
+    pairs_with?: true
+    reserved_for?: true
+    sort_order?: true
+    _all?: true
+  }
+
+  export type Bbq_recipeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which bbq_recipe to aggregate.
+     */
+    where?: bbq_recipeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bbq_recipes to fetch.
+     */
+    orderBy?: bbq_recipeOrderByWithRelationInput | bbq_recipeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: bbq_recipeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bbq_recipes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bbq_recipes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned bbq_recipes
+    **/
+    _count?: true | Bbq_recipeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Bbq_recipeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Bbq_recipeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Bbq_recipeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Bbq_recipeMaxAggregateInputType
+  }
+
+  export type GetBbq_recipeAggregateType<T extends Bbq_recipeAggregateArgs> = {
+        [P in keyof T & keyof AggregateBbq_recipe]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBbq_recipe[P]>
+      : GetScalarType<T[P], AggregateBbq_recipe[P]>
+  }
+
+
+
+
+  export type bbq_recipeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: bbq_recipeWhereInput
+    orderBy?: bbq_recipeOrderByWithAggregationInput | bbq_recipeOrderByWithAggregationInput[]
+    by: Bbq_recipeScalarFieldEnum[] | Bbq_recipeScalarFieldEnum
+    having?: bbq_recipeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Bbq_recipeCountAggregateInputType | true
+    _avg?: Bbq_recipeAvgAggregateInputType
+    _sum?: Bbq_recipeSumAggregateInputType
+    _min?: Bbq_recipeMinAggregateInputType
+    _max?: Bbq_recipeMaxAggregateInputType
+  }
+
+  export type Bbq_recipeGroupByOutputType = {
+    id: number
+    slug: string
+    title: string
+    blurb: string | null
+    host_note: string | null
+    category: $Enums.bbq_recipe_category
+    effort: $Enums.bbq_recipe_effort
+    source: $Enums.bbq_recipe_source
+    recipe_url: string | null
+    body: string | null
+    claim_cap: number | null
+    pairs_with: string | null
+    reserved_for: number | null
+    sort_order: number
+    _count: Bbq_recipeCountAggregateOutputType | null
+    _avg: Bbq_recipeAvgAggregateOutputType | null
+    _sum: Bbq_recipeSumAggregateOutputType | null
+    _min: Bbq_recipeMinAggregateOutputType | null
+    _max: Bbq_recipeMaxAggregateOutputType | null
+  }
+
+  type GetBbq_recipeGroupByPayload<T extends bbq_recipeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Bbq_recipeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Bbq_recipeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Bbq_recipeGroupByOutputType[P]>
+            : GetScalarType<T[P], Bbq_recipeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type bbq_recipeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    title?: boolean
+    blurb?: boolean
+    host_note?: boolean
+    category?: boolean
+    effort?: boolean
+    source?: boolean
+    recipe_url?: boolean
+    body?: boolean
+    claim_cap?: boolean
+    pairs_with?: boolean
+    reserved_for?: boolean
+    sort_order?: boolean
+    bbq_claim?: boolean | bbq_recipe$bbq_claimArgs<ExtArgs>
+    bbq_guest?: boolean | bbq_recipe$bbq_guestArgs<ExtArgs>
+    _count?: boolean | Bbq_recipeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bbq_recipe"]>
+
+
+
+  export type bbq_recipeSelectScalar = {
+    id?: boolean
+    slug?: boolean
+    title?: boolean
+    blurb?: boolean
+    host_note?: boolean
+    category?: boolean
+    effort?: boolean
+    source?: boolean
+    recipe_url?: boolean
+    body?: boolean
+    claim_cap?: boolean
+    pairs_with?: boolean
+    reserved_for?: boolean
+    sort_order?: boolean
+  }
+
+  export type bbq_recipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "blurb" | "host_note" | "category" | "effort" | "source" | "recipe_url" | "body" | "claim_cap" | "pairs_with" | "reserved_for" | "sort_order", ExtArgs["result"]["bbq_recipe"]>
+  export type bbq_recipeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bbq_claim?: boolean | bbq_recipe$bbq_claimArgs<ExtArgs>
+    bbq_guest?: boolean | bbq_recipe$bbq_guestArgs<ExtArgs>
+    _count?: boolean | Bbq_recipeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $bbq_recipePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "bbq_recipe"
+    objects: {
+      bbq_claim: Prisma.$bbq_claimPayload<ExtArgs>[]
+      bbq_guest: Prisma.$bbq_guestPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      slug: string
+      title: string
+      blurb: string | null
+      host_note: string | null
+      category: $Enums.bbq_recipe_category
+      effort: $Enums.bbq_recipe_effort
+      source: $Enums.bbq_recipe_source
+      recipe_url: string | null
+      body: string | null
+      claim_cap: number | null
+      pairs_with: string | null
+      reserved_for: number | null
+      sort_order: number
+    }, ExtArgs["result"]["bbq_recipe"]>
+    composites: {}
+  }
+
+  type bbq_recipeGetPayload<S extends boolean | null | undefined | bbq_recipeDefaultArgs> = $Result.GetResult<Prisma.$bbq_recipePayload, S>
+
+  type bbq_recipeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<bbq_recipeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Bbq_recipeCountAggregateInputType | true
+    }
+
+  export interface bbq_recipeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['bbq_recipe'], meta: { name: 'bbq_recipe' } }
+    /**
+     * Find zero or one Bbq_recipe that matches the filter.
+     * @param {bbq_recipeFindUniqueArgs} args - Arguments to find a Bbq_recipe
+     * @example
+     * // Get one Bbq_recipe
+     * const bbq_recipe = await prisma.bbq_recipe.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends bbq_recipeFindUniqueArgs>(args: SelectSubset<T, bbq_recipeFindUniqueArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Bbq_recipe that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {bbq_recipeFindUniqueOrThrowArgs} args - Arguments to find a Bbq_recipe
+     * @example
+     * // Get one Bbq_recipe
+     * const bbq_recipe = await prisma.bbq_recipe.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends bbq_recipeFindUniqueOrThrowArgs>(args: SelectSubset<T, bbq_recipeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Bbq_recipe that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bbq_recipeFindFirstArgs} args - Arguments to find a Bbq_recipe
+     * @example
+     * // Get one Bbq_recipe
+     * const bbq_recipe = await prisma.bbq_recipe.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends bbq_recipeFindFirstArgs>(args?: SelectSubset<T, bbq_recipeFindFirstArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Bbq_recipe that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bbq_recipeFindFirstOrThrowArgs} args - Arguments to find a Bbq_recipe
+     * @example
+     * // Get one Bbq_recipe
+     * const bbq_recipe = await prisma.bbq_recipe.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends bbq_recipeFindFirstOrThrowArgs>(args?: SelectSubset<T, bbq_recipeFindFirstOrThrowArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Bbq_recipes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bbq_recipeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Bbq_recipes
+     * const bbq_recipes = await prisma.bbq_recipe.findMany()
+     * 
+     * // Get first 10 Bbq_recipes
+     * const bbq_recipes = await prisma.bbq_recipe.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bbq_recipeWithIdOnly = await prisma.bbq_recipe.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends bbq_recipeFindManyArgs>(args?: SelectSubset<T, bbq_recipeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Bbq_recipe.
+     * @param {bbq_recipeCreateArgs} args - Arguments to create a Bbq_recipe.
+     * @example
+     * // Create one Bbq_recipe
+     * const Bbq_recipe = await prisma.bbq_recipe.create({
+     *   data: {
+     *     // ... data to create a Bbq_recipe
+     *   }
+     * })
+     * 
+     */
+    create<T extends bbq_recipeCreateArgs>(args: SelectSubset<T, bbq_recipeCreateArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Bbq_recipes.
+     * @param {bbq_recipeCreateManyArgs} args - Arguments to create many Bbq_recipes.
+     * @example
+     * // Create many Bbq_recipes
+     * const bbq_recipe = await prisma.bbq_recipe.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends bbq_recipeCreateManyArgs>(args?: SelectSubset<T, bbq_recipeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Bbq_recipe.
+     * @param {bbq_recipeDeleteArgs} args - Arguments to delete one Bbq_recipe.
+     * @example
+     * // Delete one Bbq_recipe
+     * const Bbq_recipe = await prisma.bbq_recipe.delete({
+     *   where: {
+     *     // ... filter to delete one Bbq_recipe
+     *   }
+     * })
+     * 
+     */
+    delete<T extends bbq_recipeDeleteArgs>(args: SelectSubset<T, bbq_recipeDeleteArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Bbq_recipe.
+     * @param {bbq_recipeUpdateArgs} args - Arguments to update one Bbq_recipe.
+     * @example
+     * // Update one Bbq_recipe
+     * const bbq_recipe = await prisma.bbq_recipe.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends bbq_recipeUpdateArgs>(args: SelectSubset<T, bbq_recipeUpdateArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Bbq_recipes.
+     * @param {bbq_recipeDeleteManyArgs} args - Arguments to filter Bbq_recipes to delete.
+     * @example
+     * // Delete a few Bbq_recipes
+     * const { count } = await prisma.bbq_recipe.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends bbq_recipeDeleteManyArgs>(args?: SelectSubset<T, bbq_recipeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Bbq_recipes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bbq_recipeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Bbq_recipes
+     * const bbq_recipe = await prisma.bbq_recipe.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends bbq_recipeUpdateManyArgs>(args: SelectSubset<T, bbq_recipeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Bbq_recipe.
+     * @param {bbq_recipeUpsertArgs} args - Arguments to update or create a Bbq_recipe.
+     * @example
+     * // Update or create a Bbq_recipe
+     * const bbq_recipe = await prisma.bbq_recipe.upsert({
+     *   create: {
+     *     // ... data to create a Bbq_recipe
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Bbq_recipe we want to update
+     *   }
+     * })
+     */
+    upsert<T extends bbq_recipeUpsertArgs>(args: SelectSubset<T, bbq_recipeUpsertArgs<ExtArgs>>): Prisma__bbq_recipeClient<$Result.GetResult<Prisma.$bbq_recipePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Bbq_recipes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bbq_recipeCountArgs} args - Arguments to filter Bbq_recipes to count.
+     * @example
+     * // Count the number of Bbq_recipes
+     * const count = await prisma.bbq_recipe.count({
+     *   where: {
+     *     // ... the filter for the Bbq_recipes we want to count
+     *   }
+     * })
+    **/
+    count<T extends bbq_recipeCountArgs>(
+      args?: Subset<T, bbq_recipeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Bbq_recipeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Bbq_recipe.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Bbq_recipeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Bbq_recipeAggregateArgs>(args: Subset<T, Bbq_recipeAggregateArgs>): Prisma.PrismaPromise<GetBbq_recipeAggregateType<T>>
+
+    /**
+     * Group by Bbq_recipe.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {bbq_recipeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends bbq_recipeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: bbq_recipeGroupByArgs['orderBy'] }
+        : { orderBy?: bbq_recipeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, bbq_recipeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBbq_recipeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the bbq_recipe model
+   */
+  readonly fields: bbq_recipeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for bbq_recipe.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__bbq_recipeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    bbq_claim<T extends bbq_recipe$bbq_claimArgs<ExtArgs> = {}>(args?: Subset<T, bbq_recipe$bbq_claimArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bbq_claimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    bbq_guest<T extends bbq_recipe$bbq_guestArgs<ExtArgs> = {}>(args?: Subset<T, bbq_recipe$bbq_guestArgs<ExtArgs>>): Prisma__bbq_guestClient<$Result.GetResult<Prisma.$bbq_guestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the bbq_recipe model
+   */
+  interface bbq_recipeFieldRefs {
+    readonly id: FieldRef<"bbq_recipe", 'Int'>
+    readonly slug: FieldRef<"bbq_recipe", 'String'>
+    readonly title: FieldRef<"bbq_recipe", 'String'>
+    readonly blurb: FieldRef<"bbq_recipe", 'String'>
+    readonly host_note: FieldRef<"bbq_recipe", 'String'>
+    readonly category: FieldRef<"bbq_recipe", 'bbq_recipe_category'>
+    readonly effort: FieldRef<"bbq_recipe", 'bbq_recipe_effort'>
+    readonly source: FieldRef<"bbq_recipe", 'bbq_recipe_source'>
+    readonly recipe_url: FieldRef<"bbq_recipe", 'String'>
+    readonly body: FieldRef<"bbq_recipe", 'String'>
+    readonly claim_cap: FieldRef<"bbq_recipe", 'Int'>
+    readonly pairs_with: FieldRef<"bbq_recipe", 'String'>
+    readonly reserved_for: FieldRef<"bbq_recipe", 'Int'>
+    readonly sort_order: FieldRef<"bbq_recipe", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * bbq_recipe findUnique
+   */
+  export type bbq_recipeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_recipe to fetch.
+     */
+    where: bbq_recipeWhereUniqueInput
+  }
+
+  /**
+   * bbq_recipe findUniqueOrThrow
+   */
+  export type bbq_recipeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_recipe to fetch.
+     */
+    where: bbq_recipeWhereUniqueInput
+  }
+
+  /**
+   * bbq_recipe findFirst
+   */
+  export type bbq_recipeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_recipe to fetch.
+     */
+    where?: bbq_recipeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bbq_recipes to fetch.
+     */
+    orderBy?: bbq_recipeOrderByWithRelationInput | bbq_recipeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for bbq_recipes.
+     */
+    cursor?: bbq_recipeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bbq_recipes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bbq_recipes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of bbq_recipes.
+     */
+    distinct?: Bbq_recipeScalarFieldEnum | Bbq_recipeScalarFieldEnum[]
+  }
+
+  /**
+   * bbq_recipe findFirstOrThrow
+   */
+  export type bbq_recipeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_recipe to fetch.
+     */
+    where?: bbq_recipeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bbq_recipes to fetch.
+     */
+    orderBy?: bbq_recipeOrderByWithRelationInput | bbq_recipeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for bbq_recipes.
+     */
+    cursor?: bbq_recipeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bbq_recipes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bbq_recipes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of bbq_recipes.
+     */
+    distinct?: Bbq_recipeScalarFieldEnum | Bbq_recipeScalarFieldEnum[]
+  }
+
+  /**
+   * bbq_recipe findMany
+   */
+  export type bbq_recipeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * Filter, which bbq_recipes to fetch.
+     */
+    where?: bbq_recipeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of bbq_recipes to fetch.
+     */
+    orderBy?: bbq_recipeOrderByWithRelationInput | bbq_recipeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing bbq_recipes.
+     */
+    cursor?: bbq_recipeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` bbq_recipes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` bbq_recipes.
+     */
+    skip?: number
+    distinct?: Bbq_recipeScalarFieldEnum | Bbq_recipeScalarFieldEnum[]
+  }
+
+  /**
+   * bbq_recipe create
+   */
+  export type bbq_recipeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a bbq_recipe.
+     */
+    data: XOR<bbq_recipeCreateInput, bbq_recipeUncheckedCreateInput>
+  }
+
+  /**
+   * bbq_recipe createMany
+   */
+  export type bbq_recipeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many bbq_recipes.
+     */
+    data: bbq_recipeCreateManyInput | bbq_recipeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * bbq_recipe update
+   */
+  export type bbq_recipeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a bbq_recipe.
+     */
+    data: XOR<bbq_recipeUpdateInput, bbq_recipeUncheckedUpdateInput>
+    /**
+     * Choose, which bbq_recipe to update.
+     */
+    where: bbq_recipeWhereUniqueInput
+  }
+
+  /**
+   * bbq_recipe updateMany
+   */
+  export type bbq_recipeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update bbq_recipes.
+     */
+    data: XOR<bbq_recipeUpdateManyMutationInput, bbq_recipeUncheckedUpdateManyInput>
+    /**
+     * Filter which bbq_recipes to update
+     */
+    where?: bbq_recipeWhereInput
+    /**
+     * Limit how many bbq_recipes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * bbq_recipe upsert
+   */
+  export type bbq_recipeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the bbq_recipe to update in case it exists.
+     */
+    where: bbq_recipeWhereUniqueInput
+    /**
+     * In case the bbq_recipe found by the `where` argument doesn't exist, create a new bbq_recipe with this data.
+     */
+    create: XOR<bbq_recipeCreateInput, bbq_recipeUncheckedCreateInput>
+    /**
+     * In case the bbq_recipe was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<bbq_recipeUpdateInput, bbq_recipeUncheckedUpdateInput>
+  }
+
+  /**
+   * bbq_recipe delete
+   */
+  export type bbq_recipeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
+    /**
+     * Filter which bbq_recipe to delete.
+     */
+    where: bbq_recipeWhereUniqueInput
+  }
+
+  /**
+   * bbq_recipe deleteMany
+   */
+  export type bbq_recipeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which bbq_recipes to delete
+     */
+    where?: bbq_recipeWhereInput
+    /**
+     * Limit how many bbq_recipes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * bbq_recipe.bbq_claim
+   */
+  export type bbq_recipe$bbq_claimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_claim
+     */
+    select?: bbq_claimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_claim
+     */
+    omit?: bbq_claimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_claimInclude<ExtArgs> | null
+    where?: bbq_claimWhereInput
+    orderBy?: bbq_claimOrderByWithRelationInput | bbq_claimOrderByWithRelationInput[]
+    cursor?: bbq_claimWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Bbq_claimScalarFieldEnum | Bbq_claimScalarFieldEnum[]
+  }
+
+  /**
+   * bbq_recipe.bbq_guest
+   */
+  export type bbq_recipe$bbq_guestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_guest
+     */
+    select?: bbq_guestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_guest
+     */
+    omit?: bbq_guestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_guestInclude<ExtArgs> | null
+    where?: bbq_guestWhereInput
+  }
+
+  /**
+   * bbq_recipe without action
+   */
+  export type bbq_recipeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the bbq_recipe
+     */
+    select?: bbq_recipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the bbq_recipe
+     */
+    omit?: bbq_recipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: bbq_recipeInclude<ExtArgs> | null
   }
 
 
@@ -4905,23 +6407,45 @@ export namespace Prisma {
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
-  export const InventoryScalarFieldEnum: {
-    item_id: 'item_id',
-    item: 'item',
-    description: 'description',
-    rfid: 'rfid'
+  export const Bbq_claimScalarFieldEnum: {
+    id: 'id',
+    recipe_id: 'recipe_id',
+    guest_id: 'guest_id',
+    created_at: 'created_at'
   };
 
-  export type InventoryScalarFieldEnum = (typeof InventoryScalarFieldEnum)[keyof typeof InventoryScalarFieldEnum]
+  export type Bbq_claimScalarFieldEnum = (typeof Bbq_claimScalarFieldEnum)[keyof typeof Bbq_claimScalarFieldEnum]
 
 
-  export const RfidScalarFieldEnum: {
-    rfid: 'rfid',
-    room: 'room',
-    container: 'container'
+  export const Bbq_guestScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    phone: 'phone',
+    token: 'token',
+    created_at: 'created_at'
   };
 
-  export type RfidScalarFieldEnum = (typeof RfidScalarFieldEnum)[keyof typeof RfidScalarFieldEnum]
+  export type Bbq_guestScalarFieldEnum = (typeof Bbq_guestScalarFieldEnum)[keyof typeof Bbq_guestScalarFieldEnum]
+
+
+  export const Bbq_recipeScalarFieldEnum: {
+    id: 'id',
+    slug: 'slug',
+    title: 'title',
+    blurb: 'blurb',
+    host_note: 'host_note',
+    category: 'category',
+    effort: 'effort',
+    source: 'source',
+    recipe_url: 'recipe_url',
+    body: 'body',
+    claim_cap: 'claim_cap',
+    pairs_with: 'pairs_with',
+    reserved_for: 'reserved_for',
+    sort_order: 'sort_order'
+  };
+
+  export type Bbq_recipeScalarFieldEnum = (typeof Bbq_recipeScalarFieldEnum)[keyof typeof Bbq_recipeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4967,20 +6491,26 @@ export namespace Prisma {
   export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
 
 
-  export const inventoryOrderByRelevanceFieldEnum: {
-    item: 'item',
-    description: 'description'
+  export const bbq_guestOrderByRelevanceFieldEnum: {
+    name: 'name',
+    phone: 'phone',
+    token: 'token'
   };
 
-  export type inventoryOrderByRelevanceFieldEnum = (typeof inventoryOrderByRelevanceFieldEnum)[keyof typeof inventoryOrderByRelevanceFieldEnum]
+  export type bbq_guestOrderByRelevanceFieldEnum = (typeof bbq_guestOrderByRelevanceFieldEnum)[keyof typeof bbq_guestOrderByRelevanceFieldEnum]
 
 
-  export const rfidOrderByRelevanceFieldEnum: {
-    room: 'room',
-    container: 'container'
+  export const bbq_recipeOrderByRelevanceFieldEnum: {
+    slug: 'slug',
+    title: 'title',
+    blurb: 'blurb',
+    host_note: 'host_note',
+    recipe_url: 'recipe_url',
+    body: 'body',
+    pairs_with: 'pairs_with'
   };
 
-  export type rfidOrderByRelevanceFieldEnum = (typeof rfidOrderByRelevanceFieldEnum)[keyof typeof rfidOrderByRelevanceFieldEnum]
+  export type bbq_recipeOrderByRelevanceFieldEnum = (typeof bbq_recipeOrderByRelevanceFieldEnum)[keyof typeof bbq_recipeOrderByRelevanceFieldEnum]
 
 
   /**
@@ -4999,6 +6529,34 @@ export namespace Prisma {
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'bbq_recipe_category'
+   */
+  export type Enumbbq_recipe_categoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'bbq_recipe_category'>
+    
+
+
+  /**
+   * Reference to a field of type 'bbq_recipe_effort'
+   */
+  export type Enumbbq_recipe_effortFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'bbq_recipe_effort'>
+    
+
+
+  /**
+   * Reference to a field of type 'bbq_recipe_source'
+   */
+  export type Enumbbq_recipe_sourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'bbq_recipe_source'>
     
 
 
@@ -5050,10 +6608,10 @@ export namespace Prisma {
 
   export type dogsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    src?: string
     AND?: dogsWhereInput | dogsWhereInput[]
     OR?: dogsWhereInput[]
     NOT?: dogsWhereInput | dogsWhereInput[]
-    src?: StringNullableFilter<"dogs"> | string | null
     type?: StringNullableFilter<"dogs"> | string | null
     alt?: StringNullableFilter<"dogs"> | string | null
     width?: IntNullableFilter<"dogs"> | number | null
@@ -5065,7 +6623,7 @@ export namespace Prisma {
     category?: StringNullableFilter<"dogs"> | string | null
     active?: IntNullableFilter<"dogs"> | number | null
     poster?: StringNullableFilter<"dogs"> | string | null
-  }, "id" | "id">
+  }, "id" | "id" | "src">
 
   export type dogsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5172,99 +6730,227 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"users"> | string | null
   }
 
-  export type inventoryWhereInput = {
-    AND?: inventoryWhereInput | inventoryWhereInput[]
-    OR?: inventoryWhereInput[]
-    NOT?: inventoryWhereInput | inventoryWhereInput[]
-    item_id?: IntFilter<"inventory"> | number
-    item?: StringNullableFilter<"inventory"> | string | null
-    description?: StringNullableFilter<"inventory"> | string | null
-    rfid?: IntNullableFilter<"inventory"> | number | null
+  export type bbq_claimWhereInput = {
+    AND?: bbq_claimWhereInput | bbq_claimWhereInput[]
+    OR?: bbq_claimWhereInput[]
+    NOT?: bbq_claimWhereInput | bbq_claimWhereInput[]
+    id?: IntFilter<"bbq_claim"> | number
+    recipe_id?: IntFilter<"bbq_claim"> | number
+    guest_id?: IntFilter<"bbq_claim"> | number
+    created_at?: DateTimeFilter<"bbq_claim"> | Date | string
+    bbq_guest?: XOR<Bbq_guestScalarRelationFilter, bbq_guestWhereInput>
+    bbq_recipe?: XOR<Bbq_recipeScalarRelationFilter, bbq_recipeWhereInput>
   }
 
-  export type inventoryOrderByWithRelationInput = {
-    item_id?: SortOrder
-    item?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
-    rfid?: SortOrderInput | SortOrder
-    _relevance?: inventoryOrderByRelevanceInput
+  export type bbq_claimOrderByWithRelationInput = {
+    id?: SortOrder
+    recipe_id?: SortOrder
+    guest_id?: SortOrder
+    created_at?: SortOrder
+    bbq_guest?: bbq_guestOrderByWithRelationInput
+    bbq_recipe?: bbq_recipeOrderByWithRelationInput
   }
 
-  export type inventoryWhereUniqueInput = Prisma.AtLeast<{
-    item_id?: number
-    AND?: inventoryWhereInput | inventoryWhereInput[]
-    OR?: inventoryWhereInput[]
-    NOT?: inventoryWhereInput | inventoryWhereInput[]
-    item?: StringNullableFilter<"inventory"> | string | null
-    description?: StringNullableFilter<"inventory"> | string | null
-    rfid?: IntNullableFilter<"inventory"> | number | null
-  }, "item_id" | "item_id">
+  export type bbq_claimWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    recipe_id_guest_id?: bbq_claimRecipe_idGuest_idCompoundUniqueInput
+    AND?: bbq_claimWhereInput | bbq_claimWhereInput[]
+    OR?: bbq_claimWhereInput[]
+    NOT?: bbq_claimWhereInput | bbq_claimWhereInput[]
+    recipe_id?: IntFilter<"bbq_claim"> | number
+    guest_id?: IntFilter<"bbq_claim"> | number
+    created_at?: DateTimeFilter<"bbq_claim"> | Date | string
+    bbq_guest?: XOR<Bbq_guestScalarRelationFilter, bbq_guestWhereInput>
+    bbq_recipe?: XOR<Bbq_recipeScalarRelationFilter, bbq_recipeWhereInput>
+  }, "id" | "recipe_id_guest_id">
 
-  export type inventoryOrderByWithAggregationInput = {
-    item_id?: SortOrder
-    item?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
-    rfid?: SortOrderInput | SortOrder
-    _count?: inventoryCountOrderByAggregateInput
-    _avg?: inventoryAvgOrderByAggregateInput
-    _max?: inventoryMaxOrderByAggregateInput
-    _min?: inventoryMinOrderByAggregateInput
-    _sum?: inventorySumOrderByAggregateInput
+  export type bbq_claimOrderByWithAggregationInput = {
+    id?: SortOrder
+    recipe_id?: SortOrder
+    guest_id?: SortOrder
+    created_at?: SortOrder
+    _count?: bbq_claimCountOrderByAggregateInput
+    _avg?: bbq_claimAvgOrderByAggregateInput
+    _max?: bbq_claimMaxOrderByAggregateInput
+    _min?: bbq_claimMinOrderByAggregateInput
+    _sum?: bbq_claimSumOrderByAggregateInput
   }
 
-  export type inventoryScalarWhereWithAggregatesInput = {
-    AND?: inventoryScalarWhereWithAggregatesInput | inventoryScalarWhereWithAggregatesInput[]
-    OR?: inventoryScalarWhereWithAggregatesInput[]
-    NOT?: inventoryScalarWhereWithAggregatesInput | inventoryScalarWhereWithAggregatesInput[]
-    item_id?: IntWithAggregatesFilter<"inventory"> | number
-    item?: StringNullableWithAggregatesFilter<"inventory"> | string | null
-    description?: StringNullableWithAggregatesFilter<"inventory"> | string | null
-    rfid?: IntNullableWithAggregatesFilter<"inventory"> | number | null
+  export type bbq_claimScalarWhereWithAggregatesInput = {
+    AND?: bbq_claimScalarWhereWithAggregatesInput | bbq_claimScalarWhereWithAggregatesInput[]
+    OR?: bbq_claimScalarWhereWithAggregatesInput[]
+    NOT?: bbq_claimScalarWhereWithAggregatesInput | bbq_claimScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"bbq_claim"> | number
+    recipe_id?: IntWithAggregatesFilter<"bbq_claim"> | number
+    guest_id?: IntWithAggregatesFilter<"bbq_claim"> | number
+    created_at?: DateTimeWithAggregatesFilter<"bbq_claim"> | Date | string
   }
 
-  export type rfidWhereInput = {
-    AND?: rfidWhereInput | rfidWhereInput[]
-    OR?: rfidWhereInput[]
-    NOT?: rfidWhereInput | rfidWhereInput[]
-    rfid?: IntFilter<"rfid"> | number
-    room?: StringNullableFilter<"rfid"> | string | null
-    container?: StringNullableFilter<"rfid"> | string | null
+  export type bbq_guestWhereInput = {
+    AND?: bbq_guestWhereInput | bbq_guestWhereInput[]
+    OR?: bbq_guestWhereInput[]
+    NOT?: bbq_guestWhereInput | bbq_guestWhereInput[]
+    id?: IntFilter<"bbq_guest"> | number
+    name?: StringFilter<"bbq_guest"> | string
+    phone?: StringNullableFilter<"bbq_guest"> | string | null
+    token?: StringFilter<"bbq_guest"> | string
+    created_at?: DateTimeFilter<"bbq_guest"> | Date | string
+    bbq_claim?: Bbq_claimListRelationFilter
+    bbq_recipe?: Bbq_recipeListRelationFilter
   }
 
-  export type rfidOrderByWithRelationInput = {
-    rfid?: SortOrder
-    room?: SortOrderInput | SortOrder
-    container?: SortOrderInput | SortOrder
-    _relevance?: rfidOrderByRelevanceInput
+  export type bbq_guestOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    token?: SortOrder
+    created_at?: SortOrder
+    bbq_claim?: bbq_claimOrderByRelationAggregateInput
+    bbq_recipe?: bbq_recipeOrderByRelationAggregateInput
+    _relevance?: bbq_guestOrderByRelevanceInput
   }
 
-  export type rfidWhereUniqueInput = Prisma.AtLeast<{
-    rfid?: number
-    AND?: rfidWhereInput | rfidWhereInput[]
-    OR?: rfidWhereInput[]
-    NOT?: rfidWhereInput | rfidWhereInput[]
-    room?: StringNullableFilter<"rfid"> | string | null
-    container?: StringNullableFilter<"rfid"> | string | null
-  }, "rfid" | "rfid">
+  export type bbq_guestWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    token?: string
+    AND?: bbq_guestWhereInput | bbq_guestWhereInput[]
+    OR?: bbq_guestWhereInput[]
+    NOT?: bbq_guestWhereInput | bbq_guestWhereInput[]
+    name?: StringFilter<"bbq_guest"> | string
+    phone?: StringNullableFilter<"bbq_guest"> | string | null
+    created_at?: DateTimeFilter<"bbq_guest"> | Date | string
+    bbq_claim?: Bbq_claimListRelationFilter
+    bbq_recipe?: Bbq_recipeListRelationFilter
+  }, "id" | "token">
 
-  export type rfidOrderByWithAggregationInput = {
-    rfid?: SortOrder
-    room?: SortOrderInput | SortOrder
-    container?: SortOrderInput | SortOrder
-    _count?: rfidCountOrderByAggregateInput
-    _avg?: rfidAvgOrderByAggregateInput
-    _max?: rfidMaxOrderByAggregateInput
-    _min?: rfidMinOrderByAggregateInput
-    _sum?: rfidSumOrderByAggregateInput
+  export type bbq_guestOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    token?: SortOrder
+    created_at?: SortOrder
+    _count?: bbq_guestCountOrderByAggregateInput
+    _avg?: bbq_guestAvgOrderByAggregateInput
+    _max?: bbq_guestMaxOrderByAggregateInput
+    _min?: bbq_guestMinOrderByAggregateInput
+    _sum?: bbq_guestSumOrderByAggregateInput
   }
 
-  export type rfidScalarWhereWithAggregatesInput = {
-    AND?: rfidScalarWhereWithAggregatesInput | rfidScalarWhereWithAggregatesInput[]
-    OR?: rfidScalarWhereWithAggregatesInput[]
-    NOT?: rfidScalarWhereWithAggregatesInput | rfidScalarWhereWithAggregatesInput[]
-    rfid?: IntWithAggregatesFilter<"rfid"> | number
-    room?: StringNullableWithAggregatesFilter<"rfid"> | string | null
-    container?: StringNullableWithAggregatesFilter<"rfid"> | string | null
+  export type bbq_guestScalarWhereWithAggregatesInput = {
+    AND?: bbq_guestScalarWhereWithAggregatesInput | bbq_guestScalarWhereWithAggregatesInput[]
+    OR?: bbq_guestScalarWhereWithAggregatesInput[]
+    NOT?: bbq_guestScalarWhereWithAggregatesInput | bbq_guestScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"bbq_guest"> | number
+    name?: StringWithAggregatesFilter<"bbq_guest"> | string
+    phone?: StringNullableWithAggregatesFilter<"bbq_guest"> | string | null
+    token?: StringWithAggregatesFilter<"bbq_guest"> | string
+    created_at?: DateTimeWithAggregatesFilter<"bbq_guest"> | Date | string
+  }
+
+  export type bbq_recipeWhereInput = {
+    AND?: bbq_recipeWhereInput | bbq_recipeWhereInput[]
+    OR?: bbq_recipeWhereInput[]
+    NOT?: bbq_recipeWhereInput | bbq_recipeWhereInput[]
+    id?: IntFilter<"bbq_recipe"> | number
+    slug?: StringFilter<"bbq_recipe"> | string
+    title?: StringFilter<"bbq_recipe"> | string
+    blurb?: StringNullableFilter<"bbq_recipe"> | string | null
+    host_note?: StringNullableFilter<"bbq_recipe"> | string | null
+    category?: Enumbbq_recipe_categoryFilter<"bbq_recipe"> | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFilter<"bbq_recipe"> | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFilter<"bbq_recipe"> | $Enums.bbq_recipe_source
+    recipe_url?: StringNullableFilter<"bbq_recipe"> | string | null
+    body?: StringNullableFilter<"bbq_recipe"> | string | null
+    claim_cap?: IntNullableFilter<"bbq_recipe"> | number | null
+    pairs_with?: StringNullableFilter<"bbq_recipe"> | string | null
+    reserved_for?: IntNullableFilter<"bbq_recipe"> | number | null
+    sort_order?: IntFilter<"bbq_recipe"> | number
+    bbq_claim?: Bbq_claimListRelationFilter
+    bbq_guest?: XOR<Bbq_guestNullableScalarRelationFilter, bbq_guestWhereInput> | null
+  }
+
+  export type bbq_recipeOrderByWithRelationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    blurb?: SortOrderInput | SortOrder
+    host_note?: SortOrderInput | SortOrder
+    category?: SortOrder
+    effort?: SortOrder
+    source?: SortOrder
+    recipe_url?: SortOrderInput | SortOrder
+    body?: SortOrderInput | SortOrder
+    claim_cap?: SortOrderInput | SortOrder
+    pairs_with?: SortOrderInput | SortOrder
+    reserved_for?: SortOrderInput | SortOrder
+    sort_order?: SortOrder
+    bbq_claim?: bbq_claimOrderByRelationAggregateInput
+    bbq_guest?: bbq_guestOrderByWithRelationInput
+    _relevance?: bbq_recipeOrderByRelevanceInput
+  }
+
+  export type bbq_recipeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    slug?: string
+    AND?: bbq_recipeWhereInput | bbq_recipeWhereInput[]
+    OR?: bbq_recipeWhereInput[]
+    NOT?: bbq_recipeWhereInput | bbq_recipeWhereInput[]
+    title?: StringFilter<"bbq_recipe"> | string
+    blurb?: StringNullableFilter<"bbq_recipe"> | string | null
+    host_note?: StringNullableFilter<"bbq_recipe"> | string | null
+    category?: Enumbbq_recipe_categoryFilter<"bbq_recipe"> | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFilter<"bbq_recipe"> | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFilter<"bbq_recipe"> | $Enums.bbq_recipe_source
+    recipe_url?: StringNullableFilter<"bbq_recipe"> | string | null
+    body?: StringNullableFilter<"bbq_recipe"> | string | null
+    claim_cap?: IntNullableFilter<"bbq_recipe"> | number | null
+    pairs_with?: StringNullableFilter<"bbq_recipe"> | string | null
+    reserved_for?: IntNullableFilter<"bbq_recipe"> | number | null
+    sort_order?: IntFilter<"bbq_recipe"> | number
+    bbq_claim?: Bbq_claimListRelationFilter
+    bbq_guest?: XOR<Bbq_guestNullableScalarRelationFilter, bbq_guestWhereInput> | null
+  }, "id" | "slug">
+
+  export type bbq_recipeOrderByWithAggregationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    blurb?: SortOrderInput | SortOrder
+    host_note?: SortOrderInput | SortOrder
+    category?: SortOrder
+    effort?: SortOrder
+    source?: SortOrder
+    recipe_url?: SortOrderInput | SortOrder
+    body?: SortOrderInput | SortOrder
+    claim_cap?: SortOrderInput | SortOrder
+    pairs_with?: SortOrderInput | SortOrder
+    reserved_for?: SortOrderInput | SortOrder
+    sort_order?: SortOrder
+    _count?: bbq_recipeCountOrderByAggregateInput
+    _avg?: bbq_recipeAvgOrderByAggregateInput
+    _max?: bbq_recipeMaxOrderByAggregateInput
+    _min?: bbq_recipeMinOrderByAggregateInput
+    _sum?: bbq_recipeSumOrderByAggregateInput
+  }
+
+  export type bbq_recipeScalarWhereWithAggregatesInput = {
+    AND?: bbq_recipeScalarWhereWithAggregatesInput | bbq_recipeScalarWhereWithAggregatesInput[]
+    OR?: bbq_recipeScalarWhereWithAggregatesInput[]
+    NOT?: bbq_recipeScalarWhereWithAggregatesInput | bbq_recipeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"bbq_recipe"> | number
+    slug?: StringWithAggregatesFilter<"bbq_recipe"> | string
+    title?: StringWithAggregatesFilter<"bbq_recipe"> | string
+    blurb?: StringNullableWithAggregatesFilter<"bbq_recipe"> | string | null
+    host_note?: StringNullableWithAggregatesFilter<"bbq_recipe"> | string | null
+    category?: Enumbbq_recipe_categoryWithAggregatesFilter<"bbq_recipe"> | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortWithAggregatesFilter<"bbq_recipe"> | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceWithAggregatesFilter<"bbq_recipe"> | $Enums.bbq_recipe_source
+    recipe_url?: StringNullableWithAggregatesFilter<"bbq_recipe"> | string | null
+    body?: StringNullableWithAggregatesFilter<"bbq_recipe"> | string | null
+    claim_cap?: IntNullableWithAggregatesFilter<"bbq_recipe"> | number | null
+    pairs_with?: StringNullableWithAggregatesFilter<"bbq_recipe"> | string | null
+    reserved_for?: IntNullableWithAggregatesFilter<"bbq_recipe"> | number | null
+    sort_order?: IntWithAggregatesFilter<"bbq_recipe"> | number
   }
 
   export type dogsCreateInput = {
@@ -5443,92 +7129,228 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type inventoryCreateInput = {
-    item?: string | null
-    description?: string | null
-    rfid?: number | null
+  export type bbq_claimCreateInput = {
+    created_at?: Date | string
+    bbq_guest: bbq_guestCreateNestedOneWithoutBbq_claimInput
+    bbq_recipe: bbq_recipeCreateNestedOneWithoutBbq_claimInput
   }
 
-  export type inventoryUncheckedCreateInput = {
-    item_id?: number
-    item?: string | null
-    description?: string | null
-    rfid?: number | null
+  export type bbq_claimUncheckedCreateInput = {
+    id?: number
+    recipe_id: number
+    guest_id: number
+    created_at?: Date | string
   }
 
-  export type inventoryUpdateInput = {
-    item?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    rfid?: NullableIntFieldUpdateOperationsInput | number | null
+  export type bbq_claimUpdateInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_guest?: bbq_guestUpdateOneRequiredWithoutBbq_claimNestedInput
+    bbq_recipe?: bbq_recipeUpdateOneRequiredWithoutBbq_claimNestedInput
   }
 
-  export type inventoryUncheckedUpdateInput = {
-    item_id?: IntFieldUpdateOperationsInput | number
-    item?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    rfid?: NullableIntFieldUpdateOperationsInput | number | null
+  export type bbq_claimUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    recipe_id?: IntFieldUpdateOperationsInput | number
+    guest_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type inventoryCreateManyInput = {
-    item_id?: number
-    item?: string | null
-    description?: string | null
-    rfid?: number | null
+  export type bbq_claimCreateManyInput = {
+    id?: number
+    recipe_id: number
+    guest_id: number
+    created_at?: Date | string
   }
 
-  export type inventoryUpdateManyMutationInput = {
-    item?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    rfid?: NullableIntFieldUpdateOperationsInput | number | null
+  export type bbq_claimUpdateManyMutationInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type inventoryUncheckedUpdateManyInput = {
-    item_id?: IntFieldUpdateOperationsInput | number
-    item?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    rfid?: NullableIntFieldUpdateOperationsInput | number | null
+  export type bbq_claimUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    recipe_id?: IntFieldUpdateOperationsInput | number
+    guest_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type rfidCreateInput = {
-    rfid: number
-    room?: string | null
-    container?: string | null
+  export type bbq_guestCreateInput = {
+    name: string
+    phone?: string | null
+    token: string
+    created_at?: Date | string
+    bbq_claim?: bbq_claimCreateNestedManyWithoutBbq_guestInput
+    bbq_recipe?: bbq_recipeCreateNestedManyWithoutBbq_guestInput
   }
 
-  export type rfidUncheckedCreateInput = {
-    rfid: number
-    room?: string | null
-    container?: string | null
+  export type bbq_guestUncheckedCreateInput = {
+    id?: number
+    name: string
+    phone?: string | null
+    token: string
+    created_at?: Date | string
+    bbq_claim?: bbq_claimUncheckedCreateNestedManyWithoutBbq_guestInput
+    bbq_recipe?: bbq_recipeUncheckedCreateNestedManyWithoutBbq_guestInput
   }
 
-  export type rfidUpdateInput = {
-    rfid?: IntFieldUpdateOperationsInput | number
-    room?: NullableStringFieldUpdateOperationsInput | string | null
-    container?: NullableStringFieldUpdateOperationsInput | string | null
+  export type bbq_guestUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_claim?: bbq_claimUpdateManyWithoutBbq_guestNestedInput
+    bbq_recipe?: bbq_recipeUpdateManyWithoutBbq_guestNestedInput
   }
 
-  export type rfidUncheckedUpdateInput = {
-    rfid?: IntFieldUpdateOperationsInput | number
-    room?: NullableStringFieldUpdateOperationsInput | string | null
-    container?: NullableStringFieldUpdateOperationsInput | string | null
+  export type bbq_guestUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_claim?: bbq_claimUncheckedUpdateManyWithoutBbq_guestNestedInput
+    bbq_recipe?: bbq_recipeUncheckedUpdateManyWithoutBbq_guestNestedInput
   }
 
-  export type rfidCreateManyInput = {
-    rfid: number
-    room?: string | null
-    container?: string | null
+  export type bbq_guestCreateManyInput = {
+    id?: number
+    name: string
+    phone?: string | null
+    token: string
+    created_at?: Date | string
   }
 
-  export type rfidUpdateManyMutationInput = {
-    rfid?: IntFieldUpdateOperationsInput | number
-    room?: NullableStringFieldUpdateOperationsInput | string | null
-    container?: NullableStringFieldUpdateOperationsInput | string | null
+  export type bbq_guestUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type rfidUncheckedUpdateManyInput = {
-    rfid?: IntFieldUpdateOperationsInput | number
-    room?: NullableStringFieldUpdateOperationsInput | string | null
-    container?: NullableStringFieldUpdateOperationsInput | string | null
+  export type bbq_guestUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type bbq_recipeCreateInput = {
+    slug: string
+    title: string
+    blurb?: string | null
+    host_note?: string | null
+    category: $Enums.bbq_recipe_category
+    effort?: $Enums.bbq_recipe_effort
+    source?: $Enums.bbq_recipe_source
+    recipe_url?: string | null
+    body?: string | null
+    claim_cap?: number | null
+    pairs_with?: string | null
+    sort_order?: number
+    bbq_claim?: bbq_claimCreateNestedManyWithoutBbq_recipeInput
+    bbq_guest?: bbq_guestCreateNestedOneWithoutBbq_recipeInput
+  }
+
+  export type bbq_recipeUncheckedCreateInput = {
+    id?: number
+    slug: string
+    title: string
+    blurb?: string | null
+    host_note?: string | null
+    category: $Enums.bbq_recipe_category
+    effort?: $Enums.bbq_recipe_effort
+    source?: $Enums.bbq_recipe_source
+    recipe_url?: string | null
+    body?: string | null
+    claim_cap?: number | null
+    pairs_with?: string | null
+    reserved_for?: number | null
+    sort_order?: number
+    bbq_claim?: bbq_claimUncheckedCreateNestedManyWithoutBbq_recipeInput
+  }
+
+  export type bbq_recipeUpdateInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    sort_order?: IntFieldUpdateOperationsInput | number
+    bbq_claim?: bbq_claimUpdateManyWithoutBbq_recipeNestedInput
+    bbq_guest?: bbq_guestUpdateOneWithoutBbq_recipeNestedInput
+  }
+
+  export type bbq_recipeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    reserved_for?: NullableIntFieldUpdateOperationsInput | number | null
+    sort_order?: IntFieldUpdateOperationsInput | number
+    bbq_claim?: bbq_claimUncheckedUpdateManyWithoutBbq_recipeNestedInput
+  }
+
+  export type bbq_recipeCreateManyInput = {
+    id?: number
+    slug: string
+    title: string
+    blurb?: string | null
+    host_note?: string | null
+    category: $Enums.bbq_recipe_category
+    effort?: $Enums.bbq_recipe_effort
+    source?: $Enums.bbq_recipe_source
+    recipe_url?: string | null
+    body?: string | null
+    claim_cap?: number | null
+    pairs_with?: string | null
+    reserved_for?: number | null
+    sort_order?: number
+  }
+
+  export type bbq_recipeUpdateManyMutationInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    sort_order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type bbq_recipeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    reserved_for?: NullableIntFieldUpdateOperationsInput | number | null
+    sort_order?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5735,73 +7557,295 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type inventoryOrderByRelevanceInput = {
-    fields: inventoryOrderByRelevanceFieldEnum | inventoryOrderByRelevanceFieldEnum[]
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type Bbq_guestScalarRelationFilter = {
+    is?: bbq_guestWhereInput
+    isNot?: bbq_guestWhereInput
+  }
+
+  export type Bbq_recipeScalarRelationFilter = {
+    is?: bbq_recipeWhereInput
+    isNot?: bbq_recipeWhereInput
+  }
+
+  export type bbq_claimRecipe_idGuest_idCompoundUniqueInput = {
+    recipe_id: number
+    guest_id: number
+  }
+
+  export type bbq_claimCountOrderByAggregateInput = {
+    id?: SortOrder
+    recipe_id?: SortOrder
+    guest_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type bbq_claimAvgOrderByAggregateInput = {
+    id?: SortOrder
+    recipe_id?: SortOrder
+    guest_id?: SortOrder
+  }
+
+  export type bbq_claimMaxOrderByAggregateInput = {
+    id?: SortOrder
+    recipe_id?: SortOrder
+    guest_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type bbq_claimMinOrderByAggregateInput = {
+    id?: SortOrder
+    recipe_id?: SortOrder
+    guest_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type bbq_claimSumOrderByAggregateInput = {
+    id?: SortOrder
+    recipe_id?: SortOrder
+    guest_id?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type Bbq_claimListRelationFilter = {
+    every?: bbq_claimWhereInput
+    some?: bbq_claimWhereInput
+    none?: bbq_claimWhereInput
+  }
+
+  export type Bbq_recipeListRelationFilter = {
+    every?: bbq_recipeWhereInput
+    some?: bbq_recipeWhereInput
+    none?: bbq_recipeWhereInput
+  }
+
+  export type bbq_claimOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type bbq_recipeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type bbq_guestOrderByRelevanceInput = {
+    fields: bbq_guestOrderByRelevanceFieldEnum | bbq_guestOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
 
-  export type inventoryCountOrderByAggregateInput = {
-    item_id?: SortOrder
-    item?: SortOrder
-    description?: SortOrder
-    rfid?: SortOrder
+  export type bbq_guestCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    token?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type inventoryAvgOrderByAggregateInput = {
-    item_id?: SortOrder
-    rfid?: SortOrder
+  export type bbq_guestAvgOrderByAggregateInput = {
+    id?: SortOrder
   }
 
-  export type inventoryMaxOrderByAggregateInput = {
-    item_id?: SortOrder
-    item?: SortOrder
-    description?: SortOrder
-    rfid?: SortOrder
+  export type bbq_guestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    token?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type inventoryMinOrderByAggregateInput = {
-    item_id?: SortOrder
-    item?: SortOrder
-    description?: SortOrder
-    rfid?: SortOrder
+  export type bbq_guestMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    token?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type inventorySumOrderByAggregateInput = {
-    item_id?: SortOrder
-    rfid?: SortOrder
+  export type bbq_guestSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
-  export type rfidOrderByRelevanceInput = {
-    fields: rfidOrderByRelevanceFieldEnum | rfidOrderByRelevanceFieldEnum[]
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type Enumbbq_recipe_categoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_category | Enumbbq_recipe_categoryFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_category[]
+    notIn?: $Enums.bbq_recipe_category[]
+    not?: NestedEnumbbq_recipe_categoryFilter<$PrismaModel> | $Enums.bbq_recipe_category
+  }
+
+  export type Enumbbq_recipe_effortFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_effort | Enumbbq_recipe_effortFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_effort[]
+    notIn?: $Enums.bbq_recipe_effort[]
+    not?: NestedEnumbbq_recipe_effortFilter<$PrismaModel> | $Enums.bbq_recipe_effort
+  }
+
+  export type Enumbbq_recipe_sourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_source | Enumbbq_recipe_sourceFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_source[]
+    notIn?: $Enums.bbq_recipe_source[]
+    not?: NestedEnumbbq_recipe_sourceFilter<$PrismaModel> | $Enums.bbq_recipe_source
+  }
+
+  export type Bbq_guestNullableScalarRelationFilter = {
+    is?: bbq_guestWhereInput | null
+    isNot?: bbq_guestWhereInput | null
+  }
+
+  export type bbq_recipeOrderByRelevanceInput = {
+    fields: bbq_recipeOrderByRelevanceFieldEnum | bbq_recipeOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
 
-  export type rfidCountOrderByAggregateInput = {
-    rfid?: SortOrder
-    room?: SortOrder
-    container?: SortOrder
+  export type bbq_recipeCountOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    blurb?: SortOrder
+    host_note?: SortOrder
+    category?: SortOrder
+    effort?: SortOrder
+    source?: SortOrder
+    recipe_url?: SortOrder
+    body?: SortOrder
+    claim_cap?: SortOrder
+    pairs_with?: SortOrder
+    reserved_for?: SortOrder
+    sort_order?: SortOrder
   }
 
-  export type rfidAvgOrderByAggregateInput = {
-    rfid?: SortOrder
+  export type bbq_recipeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    claim_cap?: SortOrder
+    reserved_for?: SortOrder
+    sort_order?: SortOrder
   }
 
-  export type rfidMaxOrderByAggregateInput = {
-    rfid?: SortOrder
-    room?: SortOrder
-    container?: SortOrder
+  export type bbq_recipeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    blurb?: SortOrder
+    host_note?: SortOrder
+    category?: SortOrder
+    effort?: SortOrder
+    source?: SortOrder
+    recipe_url?: SortOrder
+    body?: SortOrder
+    claim_cap?: SortOrder
+    pairs_with?: SortOrder
+    reserved_for?: SortOrder
+    sort_order?: SortOrder
   }
 
-  export type rfidMinOrderByAggregateInput = {
-    rfid?: SortOrder
-    room?: SortOrder
-    container?: SortOrder
+  export type bbq_recipeMinOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    blurb?: SortOrder
+    host_note?: SortOrder
+    category?: SortOrder
+    effort?: SortOrder
+    source?: SortOrder
+    recipe_url?: SortOrder
+    body?: SortOrder
+    claim_cap?: SortOrder
+    pairs_with?: SortOrder
+    reserved_for?: SortOrder
+    sort_order?: SortOrder
   }
 
-  export type rfidSumOrderByAggregateInput = {
-    rfid?: SortOrder
+  export type bbq_recipeSumOrderByAggregateInput = {
+    id?: SortOrder
+    claim_cap?: SortOrder
+    reserved_for?: SortOrder
+    sort_order?: SortOrder
+  }
+
+  export type Enumbbq_recipe_categoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_category | Enumbbq_recipe_categoryFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_category[]
+    notIn?: $Enums.bbq_recipe_category[]
+    not?: NestedEnumbbq_recipe_categoryWithAggregatesFilter<$PrismaModel> | $Enums.bbq_recipe_category
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumbbq_recipe_categoryFilter<$PrismaModel>
+    _max?: NestedEnumbbq_recipe_categoryFilter<$PrismaModel>
+  }
+
+  export type Enumbbq_recipe_effortWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_effort | Enumbbq_recipe_effortFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_effort[]
+    notIn?: $Enums.bbq_recipe_effort[]
+    not?: NestedEnumbbq_recipe_effortWithAggregatesFilter<$PrismaModel> | $Enums.bbq_recipe_effort
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumbbq_recipe_effortFilter<$PrismaModel>
+    _max?: NestedEnumbbq_recipe_effortFilter<$PrismaModel>
+  }
+
+  export type Enumbbq_recipe_sourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_source | Enumbbq_recipe_sourceFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_source[]
+    notIn?: $Enums.bbq_recipe_source[]
+    not?: NestedEnumbbq_recipe_sourceWithAggregatesFilter<$PrismaModel> | $Enums.bbq_recipe_source
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumbbq_recipe_sourceFilter<$PrismaModel>
+    _max?: NestedEnumbbq_recipe_sourceFilter<$PrismaModel>
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -5822,6 +7866,196 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type bbq_guestCreateNestedOneWithoutBbq_claimInput = {
+    create?: XOR<bbq_guestCreateWithoutBbq_claimInput, bbq_guestUncheckedCreateWithoutBbq_claimInput>
+    connectOrCreate?: bbq_guestCreateOrConnectWithoutBbq_claimInput
+    connect?: bbq_guestWhereUniqueInput
+  }
+
+  export type bbq_recipeCreateNestedOneWithoutBbq_claimInput = {
+    create?: XOR<bbq_recipeCreateWithoutBbq_claimInput, bbq_recipeUncheckedCreateWithoutBbq_claimInput>
+    connectOrCreate?: bbq_recipeCreateOrConnectWithoutBbq_claimInput
+    connect?: bbq_recipeWhereUniqueInput
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type bbq_guestUpdateOneRequiredWithoutBbq_claimNestedInput = {
+    create?: XOR<bbq_guestCreateWithoutBbq_claimInput, bbq_guestUncheckedCreateWithoutBbq_claimInput>
+    connectOrCreate?: bbq_guestCreateOrConnectWithoutBbq_claimInput
+    upsert?: bbq_guestUpsertWithoutBbq_claimInput
+    connect?: bbq_guestWhereUniqueInput
+    update?: XOR<XOR<bbq_guestUpdateToOneWithWhereWithoutBbq_claimInput, bbq_guestUpdateWithoutBbq_claimInput>, bbq_guestUncheckedUpdateWithoutBbq_claimInput>
+  }
+
+  export type bbq_recipeUpdateOneRequiredWithoutBbq_claimNestedInput = {
+    create?: XOR<bbq_recipeCreateWithoutBbq_claimInput, bbq_recipeUncheckedCreateWithoutBbq_claimInput>
+    connectOrCreate?: bbq_recipeCreateOrConnectWithoutBbq_claimInput
+    upsert?: bbq_recipeUpsertWithoutBbq_claimInput
+    connect?: bbq_recipeWhereUniqueInput
+    update?: XOR<XOR<bbq_recipeUpdateToOneWithWhereWithoutBbq_claimInput, bbq_recipeUpdateWithoutBbq_claimInput>, bbq_recipeUncheckedUpdateWithoutBbq_claimInput>
+  }
+
+  export type bbq_claimCreateNestedManyWithoutBbq_guestInput = {
+    create?: XOR<bbq_claimCreateWithoutBbq_guestInput, bbq_claimUncheckedCreateWithoutBbq_guestInput> | bbq_claimCreateWithoutBbq_guestInput[] | bbq_claimUncheckedCreateWithoutBbq_guestInput[]
+    connectOrCreate?: bbq_claimCreateOrConnectWithoutBbq_guestInput | bbq_claimCreateOrConnectWithoutBbq_guestInput[]
+    createMany?: bbq_claimCreateManyBbq_guestInputEnvelope
+    connect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+  }
+
+  export type bbq_recipeCreateNestedManyWithoutBbq_guestInput = {
+    create?: XOR<bbq_recipeCreateWithoutBbq_guestInput, bbq_recipeUncheckedCreateWithoutBbq_guestInput> | bbq_recipeCreateWithoutBbq_guestInput[] | bbq_recipeUncheckedCreateWithoutBbq_guestInput[]
+    connectOrCreate?: bbq_recipeCreateOrConnectWithoutBbq_guestInput | bbq_recipeCreateOrConnectWithoutBbq_guestInput[]
+    createMany?: bbq_recipeCreateManyBbq_guestInputEnvelope
+    connect?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+  }
+
+  export type bbq_claimUncheckedCreateNestedManyWithoutBbq_guestInput = {
+    create?: XOR<bbq_claimCreateWithoutBbq_guestInput, bbq_claimUncheckedCreateWithoutBbq_guestInput> | bbq_claimCreateWithoutBbq_guestInput[] | bbq_claimUncheckedCreateWithoutBbq_guestInput[]
+    connectOrCreate?: bbq_claimCreateOrConnectWithoutBbq_guestInput | bbq_claimCreateOrConnectWithoutBbq_guestInput[]
+    createMany?: bbq_claimCreateManyBbq_guestInputEnvelope
+    connect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+  }
+
+  export type bbq_recipeUncheckedCreateNestedManyWithoutBbq_guestInput = {
+    create?: XOR<bbq_recipeCreateWithoutBbq_guestInput, bbq_recipeUncheckedCreateWithoutBbq_guestInput> | bbq_recipeCreateWithoutBbq_guestInput[] | bbq_recipeUncheckedCreateWithoutBbq_guestInput[]
+    connectOrCreate?: bbq_recipeCreateOrConnectWithoutBbq_guestInput | bbq_recipeCreateOrConnectWithoutBbq_guestInput[]
+    createMany?: bbq_recipeCreateManyBbq_guestInputEnvelope
+    connect?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type bbq_claimUpdateManyWithoutBbq_guestNestedInput = {
+    create?: XOR<bbq_claimCreateWithoutBbq_guestInput, bbq_claimUncheckedCreateWithoutBbq_guestInput> | bbq_claimCreateWithoutBbq_guestInput[] | bbq_claimUncheckedCreateWithoutBbq_guestInput[]
+    connectOrCreate?: bbq_claimCreateOrConnectWithoutBbq_guestInput | bbq_claimCreateOrConnectWithoutBbq_guestInput[]
+    upsert?: bbq_claimUpsertWithWhereUniqueWithoutBbq_guestInput | bbq_claimUpsertWithWhereUniqueWithoutBbq_guestInput[]
+    createMany?: bbq_claimCreateManyBbq_guestInputEnvelope
+    set?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    disconnect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    delete?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    connect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    update?: bbq_claimUpdateWithWhereUniqueWithoutBbq_guestInput | bbq_claimUpdateWithWhereUniqueWithoutBbq_guestInput[]
+    updateMany?: bbq_claimUpdateManyWithWhereWithoutBbq_guestInput | bbq_claimUpdateManyWithWhereWithoutBbq_guestInput[]
+    deleteMany?: bbq_claimScalarWhereInput | bbq_claimScalarWhereInput[]
+  }
+
+  export type bbq_recipeUpdateManyWithoutBbq_guestNestedInput = {
+    create?: XOR<bbq_recipeCreateWithoutBbq_guestInput, bbq_recipeUncheckedCreateWithoutBbq_guestInput> | bbq_recipeCreateWithoutBbq_guestInput[] | bbq_recipeUncheckedCreateWithoutBbq_guestInput[]
+    connectOrCreate?: bbq_recipeCreateOrConnectWithoutBbq_guestInput | bbq_recipeCreateOrConnectWithoutBbq_guestInput[]
+    upsert?: bbq_recipeUpsertWithWhereUniqueWithoutBbq_guestInput | bbq_recipeUpsertWithWhereUniqueWithoutBbq_guestInput[]
+    createMany?: bbq_recipeCreateManyBbq_guestInputEnvelope
+    set?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+    disconnect?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+    delete?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+    connect?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+    update?: bbq_recipeUpdateWithWhereUniqueWithoutBbq_guestInput | bbq_recipeUpdateWithWhereUniqueWithoutBbq_guestInput[]
+    updateMany?: bbq_recipeUpdateManyWithWhereWithoutBbq_guestInput | bbq_recipeUpdateManyWithWhereWithoutBbq_guestInput[]
+    deleteMany?: bbq_recipeScalarWhereInput | bbq_recipeScalarWhereInput[]
+  }
+
+  export type bbq_claimUncheckedUpdateManyWithoutBbq_guestNestedInput = {
+    create?: XOR<bbq_claimCreateWithoutBbq_guestInput, bbq_claimUncheckedCreateWithoutBbq_guestInput> | bbq_claimCreateWithoutBbq_guestInput[] | bbq_claimUncheckedCreateWithoutBbq_guestInput[]
+    connectOrCreate?: bbq_claimCreateOrConnectWithoutBbq_guestInput | bbq_claimCreateOrConnectWithoutBbq_guestInput[]
+    upsert?: bbq_claimUpsertWithWhereUniqueWithoutBbq_guestInput | bbq_claimUpsertWithWhereUniqueWithoutBbq_guestInput[]
+    createMany?: bbq_claimCreateManyBbq_guestInputEnvelope
+    set?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    disconnect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    delete?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    connect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    update?: bbq_claimUpdateWithWhereUniqueWithoutBbq_guestInput | bbq_claimUpdateWithWhereUniqueWithoutBbq_guestInput[]
+    updateMany?: bbq_claimUpdateManyWithWhereWithoutBbq_guestInput | bbq_claimUpdateManyWithWhereWithoutBbq_guestInput[]
+    deleteMany?: bbq_claimScalarWhereInput | bbq_claimScalarWhereInput[]
+  }
+
+  export type bbq_recipeUncheckedUpdateManyWithoutBbq_guestNestedInput = {
+    create?: XOR<bbq_recipeCreateWithoutBbq_guestInput, bbq_recipeUncheckedCreateWithoutBbq_guestInput> | bbq_recipeCreateWithoutBbq_guestInput[] | bbq_recipeUncheckedCreateWithoutBbq_guestInput[]
+    connectOrCreate?: bbq_recipeCreateOrConnectWithoutBbq_guestInput | bbq_recipeCreateOrConnectWithoutBbq_guestInput[]
+    upsert?: bbq_recipeUpsertWithWhereUniqueWithoutBbq_guestInput | bbq_recipeUpsertWithWhereUniqueWithoutBbq_guestInput[]
+    createMany?: bbq_recipeCreateManyBbq_guestInputEnvelope
+    set?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+    disconnect?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+    delete?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+    connect?: bbq_recipeWhereUniqueInput | bbq_recipeWhereUniqueInput[]
+    update?: bbq_recipeUpdateWithWhereUniqueWithoutBbq_guestInput | bbq_recipeUpdateWithWhereUniqueWithoutBbq_guestInput[]
+    updateMany?: bbq_recipeUpdateManyWithWhereWithoutBbq_guestInput | bbq_recipeUpdateManyWithWhereWithoutBbq_guestInput[]
+    deleteMany?: bbq_recipeScalarWhereInput | bbq_recipeScalarWhereInput[]
+  }
+
+  export type bbq_claimCreateNestedManyWithoutBbq_recipeInput = {
+    create?: XOR<bbq_claimCreateWithoutBbq_recipeInput, bbq_claimUncheckedCreateWithoutBbq_recipeInput> | bbq_claimCreateWithoutBbq_recipeInput[] | bbq_claimUncheckedCreateWithoutBbq_recipeInput[]
+    connectOrCreate?: bbq_claimCreateOrConnectWithoutBbq_recipeInput | bbq_claimCreateOrConnectWithoutBbq_recipeInput[]
+    createMany?: bbq_claimCreateManyBbq_recipeInputEnvelope
+    connect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+  }
+
+  export type bbq_guestCreateNestedOneWithoutBbq_recipeInput = {
+    create?: XOR<bbq_guestCreateWithoutBbq_recipeInput, bbq_guestUncheckedCreateWithoutBbq_recipeInput>
+    connectOrCreate?: bbq_guestCreateOrConnectWithoutBbq_recipeInput
+    connect?: bbq_guestWhereUniqueInput
+  }
+
+  export type bbq_claimUncheckedCreateNestedManyWithoutBbq_recipeInput = {
+    create?: XOR<bbq_claimCreateWithoutBbq_recipeInput, bbq_claimUncheckedCreateWithoutBbq_recipeInput> | bbq_claimCreateWithoutBbq_recipeInput[] | bbq_claimUncheckedCreateWithoutBbq_recipeInput[]
+    connectOrCreate?: bbq_claimCreateOrConnectWithoutBbq_recipeInput | bbq_claimCreateOrConnectWithoutBbq_recipeInput[]
+    createMany?: bbq_claimCreateManyBbq_recipeInputEnvelope
+    connect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+  }
+
+  export type Enumbbq_recipe_categoryFieldUpdateOperationsInput = {
+    set?: $Enums.bbq_recipe_category
+  }
+
+  export type Enumbbq_recipe_effortFieldUpdateOperationsInput = {
+    set?: $Enums.bbq_recipe_effort
+  }
+
+  export type Enumbbq_recipe_sourceFieldUpdateOperationsInput = {
+    set?: $Enums.bbq_recipe_source
+  }
+
+  export type bbq_claimUpdateManyWithoutBbq_recipeNestedInput = {
+    create?: XOR<bbq_claimCreateWithoutBbq_recipeInput, bbq_claimUncheckedCreateWithoutBbq_recipeInput> | bbq_claimCreateWithoutBbq_recipeInput[] | bbq_claimUncheckedCreateWithoutBbq_recipeInput[]
+    connectOrCreate?: bbq_claimCreateOrConnectWithoutBbq_recipeInput | bbq_claimCreateOrConnectWithoutBbq_recipeInput[]
+    upsert?: bbq_claimUpsertWithWhereUniqueWithoutBbq_recipeInput | bbq_claimUpsertWithWhereUniqueWithoutBbq_recipeInput[]
+    createMany?: bbq_claimCreateManyBbq_recipeInputEnvelope
+    set?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    disconnect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    delete?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    connect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    update?: bbq_claimUpdateWithWhereUniqueWithoutBbq_recipeInput | bbq_claimUpdateWithWhereUniqueWithoutBbq_recipeInput[]
+    updateMany?: bbq_claimUpdateManyWithWhereWithoutBbq_recipeInput | bbq_claimUpdateManyWithWhereWithoutBbq_recipeInput[]
+    deleteMany?: bbq_claimScalarWhereInput | bbq_claimScalarWhereInput[]
+  }
+
+  export type bbq_guestUpdateOneWithoutBbq_recipeNestedInput = {
+    create?: XOR<bbq_guestCreateWithoutBbq_recipeInput, bbq_guestUncheckedCreateWithoutBbq_recipeInput>
+    connectOrCreate?: bbq_guestCreateOrConnectWithoutBbq_recipeInput
+    upsert?: bbq_guestUpsertWithoutBbq_recipeInput
+    disconnect?: bbq_guestWhereInput | boolean
+    delete?: bbq_guestWhereInput | boolean
+    connect?: bbq_guestWhereUniqueInput
+    update?: XOR<XOR<bbq_guestUpdateToOneWithWhereWithoutBbq_recipeInput, bbq_guestUpdateWithoutBbq_recipeInput>, bbq_guestUncheckedUpdateWithoutBbq_recipeInput>
+  }
+
+  export type bbq_claimUncheckedUpdateManyWithoutBbq_recipeNestedInput = {
+    create?: XOR<bbq_claimCreateWithoutBbq_recipeInput, bbq_claimUncheckedCreateWithoutBbq_recipeInput> | bbq_claimCreateWithoutBbq_recipeInput[] | bbq_claimUncheckedCreateWithoutBbq_recipeInput[]
+    connectOrCreate?: bbq_claimCreateOrConnectWithoutBbq_recipeInput | bbq_claimCreateOrConnectWithoutBbq_recipeInput[]
+    upsert?: bbq_claimUpsertWithWhereUniqueWithoutBbq_recipeInput | bbq_claimUpsertWithWhereUniqueWithoutBbq_recipeInput[]
+    createMany?: bbq_claimCreateManyBbq_recipeInputEnvelope
+    set?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    disconnect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    delete?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    connect?: bbq_claimWhereUniqueInput | bbq_claimWhereUniqueInput[]
+    update?: bbq_claimUpdateWithWhereUniqueWithoutBbq_recipeInput | bbq_claimUpdateWithWhereUniqueWithoutBbq_recipeInput[]
+    updateMany?: bbq_claimUpdateManyWithWhereWithoutBbq_recipeInput | bbq_claimUpdateManyWithWhereWithoutBbq_recipeInput[]
+    deleteMany?: bbq_claimScalarWhereInput | bbq_claimScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -5931,6 +8165,571 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedEnumbbq_recipe_categoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_category | Enumbbq_recipe_categoryFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_category[]
+    notIn?: $Enums.bbq_recipe_category[]
+    not?: NestedEnumbbq_recipe_categoryFilter<$PrismaModel> | $Enums.bbq_recipe_category
+  }
+
+  export type NestedEnumbbq_recipe_effortFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_effort | Enumbbq_recipe_effortFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_effort[]
+    notIn?: $Enums.bbq_recipe_effort[]
+    not?: NestedEnumbbq_recipe_effortFilter<$PrismaModel> | $Enums.bbq_recipe_effort
+  }
+
+  export type NestedEnumbbq_recipe_sourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_source | Enumbbq_recipe_sourceFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_source[]
+    notIn?: $Enums.bbq_recipe_source[]
+    not?: NestedEnumbbq_recipe_sourceFilter<$PrismaModel> | $Enums.bbq_recipe_source
+  }
+
+  export type NestedEnumbbq_recipe_categoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_category | Enumbbq_recipe_categoryFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_category[]
+    notIn?: $Enums.bbq_recipe_category[]
+    not?: NestedEnumbbq_recipe_categoryWithAggregatesFilter<$PrismaModel> | $Enums.bbq_recipe_category
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumbbq_recipe_categoryFilter<$PrismaModel>
+    _max?: NestedEnumbbq_recipe_categoryFilter<$PrismaModel>
+  }
+
+  export type NestedEnumbbq_recipe_effortWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_effort | Enumbbq_recipe_effortFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_effort[]
+    notIn?: $Enums.bbq_recipe_effort[]
+    not?: NestedEnumbbq_recipe_effortWithAggregatesFilter<$PrismaModel> | $Enums.bbq_recipe_effort
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumbbq_recipe_effortFilter<$PrismaModel>
+    _max?: NestedEnumbbq_recipe_effortFilter<$PrismaModel>
+  }
+
+  export type NestedEnumbbq_recipe_sourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.bbq_recipe_source | Enumbbq_recipe_sourceFieldRefInput<$PrismaModel>
+    in?: $Enums.bbq_recipe_source[]
+    notIn?: $Enums.bbq_recipe_source[]
+    not?: NestedEnumbbq_recipe_sourceWithAggregatesFilter<$PrismaModel> | $Enums.bbq_recipe_source
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumbbq_recipe_sourceFilter<$PrismaModel>
+    _max?: NestedEnumbbq_recipe_sourceFilter<$PrismaModel>
+  }
+
+  export type bbq_guestCreateWithoutBbq_claimInput = {
+    name: string
+    phone?: string | null
+    token: string
+    created_at?: Date | string
+    bbq_recipe?: bbq_recipeCreateNestedManyWithoutBbq_guestInput
+  }
+
+  export type bbq_guestUncheckedCreateWithoutBbq_claimInput = {
+    id?: number
+    name: string
+    phone?: string | null
+    token: string
+    created_at?: Date | string
+    bbq_recipe?: bbq_recipeUncheckedCreateNestedManyWithoutBbq_guestInput
+  }
+
+  export type bbq_guestCreateOrConnectWithoutBbq_claimInput = {
+    where: bbq_guestWhereUniqueInput
+    create: XOR<bbq_guestCreateWithoutBbq_claimInput, bbq_guestUncheckedCreateWithoutBbq_claimInput>
+  }
+
+  export type bbq_recipeCreateWithoutBbq_claimInput = {
+    slug: string
+    title: string
+    blurb?: string | null
+    host_note?: string | null
+    category: $Enums.bbq_recipe_category
+    effort?: $Enums.bbq_recipe_effort
+    source?: $Enums.bbq_recipe_source
+    recipe_url?: string | null
+    body?: string | null
+    claim_cap?: number | null
+    pairs_with?: string | null
+    sort_order?: number
+    bbq_guest?: bbq_guestCreateNestedOneWithoutBbq_recipeInput
+  }
+
+  export type bbq_recipeUncheckedCreateWithoutBbq_claimInput = {
+    id?: number
+    slug: string
+    title: string
+    blurb?: string | null
+    host_note?: string | null
+    category: $Enums.bbq_recipe_category
+    effort?: $Enums.bbq_recipe_effort
+    source?: $Enums.bbq_recipe_source
+    recipe_url?: string | null
+    body?: string | null
+    claim_cap?: number | null
+    pairs_with?: string | null
+    reserved_for?: number | null
+    sort_order?: number
+  }
+
+  export type bbq_recipeCreateOrConnectWithoutBbq_claimInput = {
+    where: bbq_recipeWhereUniqueInput
+    create: XOR<bbq_recipeCreateWithoutBbq_claimInput, bbq_recipeUncheckedCreateWithoutBbq_claimInput>
+  }
+
+  export type bbq_guestUpsertWithoutBbq_claimInput = {
+    update: XOR<bbq_guestUpdateWithoutBbq_claimInput, bbq_guestUncheckedUpdateWithoutBbq_claimInput>
+    create: XOR<bbq_guestCreateWithoutBbq_claimInput, bbq_guestUncheckedCreateWithoutBbq_claimInput>
+    where?: bbq_guestWhereInput
+  }
+
+  export type bbq_guestUpdateToOneWithWhereWithoutBbq_claimInput = {
+    where?: bbq_guestWhereInput
+    data: XOR<bbq_guestUpdateWithoutBbq_claimInput, bbq_guestUncheckedUpdateWithoutBbq_claimInput>
+  }
+
+  export type bbq_guestUpdateWithoutBbq_claimInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_recipe?: bbq_recipeUpdateManyWithoutBbq_guestNestedInput
+  }
+
+  export type bbq_guestUncheckedUpdateWithoutBbq_claimInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_recipe?: bbq_recipeUncheckedUpdateManyWithoutBbq_guestNestedInput
+  }
+
+  export type bbq_recipeUpsertWithoutBbq_claimInput = {
+    update: XOR<bbq_recipeUpdateWithoutBbq_claimInput, bbq_recipeUncheckedUpdateWithoutBbq_claimInput>
+    create: XOR<bbq_recipeCreateWithoutBbq_claimInput, bbq_recipeUncheckedCreateWithoutBbq_claimInput>
+    where?: bbq_recipeWhereInput
+  }
+
+  export type bbq_recipeUpdateToOneWithWhereWithoutBbq_claimInput = {
+    where?: bbq_recipeWhereInput
+    data: XOR<bbq_recipeUpdateWithoutBbq_claimInput, bbq_recipeUncheckedUpdateWithoutBbq_claimInput>
+  }
+
+  export type bbq_recipeUpdateWithoutBbq_claimInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    sort_order?: IntFieldUpdateOperationsInput | number
+    bbq_guest?: bbq_guestUpdateOneWithoutBbq_recipeNestedInput
+  }
+
+  export type bbq_recipeUncheckedUpdateWithoutBbq_claimInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    reserved_for?: NullableIntFieldUpdateOperationsInput | number | null
+    sort_order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type bbq_claimCreateWithoutBbq_guestInput = {
+    created_at?: Date | string
+    bbq_recipe: bbq_recipeCreateNestedOneWithoutBbq_claimInput
+  }
+
+  export type bbq_claimUncheckedCreateWithoutBbq_guestInput = {
+    id?: number
+    recipe_id: number
+    created_at?: Date | string
+  }
+
+  export type bbq_claimCreateOrConnectWithoutBbq_guestInput = {
+    where: bbq_claimWhereUniqueInput
+    create: XOR<bbq_claimCreateWithoutBbq_guestInput, bbq_claimUncheckedCreateWithoutBbq_guestInput>
+  }
+
+  export type bbq_claimCreateManyBbq_guestInputEnvelope = {
+    data: bbq_claimCreateManyBbq_guestInput | bbq_claimCreateManyBbq_guestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type bbq_recipeCreateWithoutBbq_guestInput = {
+    slug: string
+    title: string
+    blurb?: string | null
+    host_note?: string | null
+    category: $Enums.bbq_recipe_category
+    effort?: $Enums.bbq_recipe_effort
+    source?: $Enums.bbq_recipe_source
+    recipe_url?: string | null
+    body?: string | null
+    claim_cap?: number | null
+    pairs_with?: string | null
+    sort_order?: number
+    bbq_claim?: bbq_claimCreateNestedManyWithoutBbq_recipeInput
+  }
+
+  export type bbq_recipeUncheckedCreateWithoutBbq_guestInput = {
+    id?: number
+    slug: string
+    title: string
+    blurb?: string | null
+    host_note?: string | null
+    category: $Enums.bbq_recipe_category
+    effort?: $Enums.bbq_recipe_effort
+    source?: $Enums.bbq_recipe_source
+    recipe_url?: string | null
+    body?: string | null
+    claim_cap?: number | null
+    pairs_with?: string | null
+    sort_order?: number
+    bbq_claim?: bbq_claimUncheckedCreateNestedManyWithoutBbq_recipeInput
+  }
+
+  export type bbq_recipeCreateOrConnectWithoutBbq_guestInput = {
+    where: bbq_recipeWhereUniqueInput
+    create: XOR<bbq_recipeCreateWithoutBbq_guestInput, bbq_recipeUncheckedCreateWithoutBbq_guestInput>
+  }
+
+  export type bbq_recipeCreateManyBbq_guestInputEnvelope = {
+    data: bbq_recipeCreateManyBbq_guestInput | bbq_recipeCreateManyBbq_guestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type bbq_claimUpsertWithWhereUniqueWithoutBbq_guestInput = {
+    where: bbq_claimWhereUniqueInput
+    update: XOR<bbq_claimUpdateWithoutBbq_guestInput, bbq_claimUncheckedUpdateWithoutBbq_guestInput>
+    create: XOR<bbq_claimCreateWithoutBbq_guestInput, bbq_claimUncheckedCreateWithoutBbq_guestInput>
+  }
+
+  export type bbq_claimUpdateWithWhereUniqueWithoutBbq_guestInput = {
+    where: bbq_claimWhereUniqueInput
+    data: XOR<bbq_claimUpdateWithoutBbq_guestInput, bbq_claimUncheckedUpdateWithoutBbq_guestInput>
+  }
+
+  export type bbq_claimUpdateManyWithWhereWithoutBbq_guestInput = {
+    where: bbq_claimScalarWhereInput
+    data: XOR<bbq_claimUpdateManyMutationInput, bbq_claimUncheckedUpdateManyWithoutBbq_guestInput>
+  }
+
+  export type bbq_claimScalarWhereInput = {
+    AND?: bbq_claimScalarWhereInput | bbq_claimScalarWhereInput[]
+    OR?: bbq_claimScalarWhereInput[]
+    NOT?: bbq_claimScalarWhereInput | bbq_claimScalarWhereInput[]
+    id?: IntFilter<"bbq_claim"> | number
+    recipe_id?: IntFilter<"bbq_claim"> | number
+    guest_id?: IntFilter<"bbq_claim"> | number
+    created_at?: DateTimeFilter<"bbq_claim"> | Date | string
+  }
+
+  export type bbq_recipeUpsertWithWhereUniqueWithoutBbq_guestInput = {
+    where: bbq_recipeWhereUniqueInput
+    update: XOR<bbq_recipeUpdateWithoutBbq_guestInput, bbq_recipeUncheckedUpdateWithoutBbq_guestInput>
+    create: XOR<bbq_recipeCreateWithoutBbq_guestInput, bbq_recipeUncheckedCreateWithoutBbq_guestInput>
+  }
+
+  export type bbq_recipeUpdateWithWhereUniqueWithoutBbq_guestInput = {
+    where: bbq_recipeWhereUniqueInput
+    data: XOR<bbq_recipeUpdateWithoutBbq_guestInput, bbq_recipeUncheckedUpdateWithoutBbq_guestInput>
+  }
+
+  export type bbq_recipeUpdateManyWithWhereWithoutBbq_guestInput = {
+    where: bbq_recipeScalarWhereInput
+    data: XOR<bbq_recipeUpdateManyMutationInput, bbq_recipeUncheckedUpdateManyWithoutBbq_guestInput>
+  }
+
+  export type bbq_recipeScalarWhereInput = {
+    AND?: bbq_recipeScalarWhereInput | bbq_recipeScalarWhereInput[]
+    OR?: bbq_recipeScalarWhereInput[]
+    NOT?: bbq_recipeScalarWhereInput | bbq_recipeScalarWhereInput[]
+    id?: IntFilter<"bbq_recipe"> | number
+    slug?: StringFilter<"bbq_recipe"> | string
+    title?: StringFilter<"bbq_recipe"> | string
+    blurb?: StringNullableFilter<"bbq_recipe"> | string | null
+    host_note?: StringNullableFilter<"bbq_recipe"> | string | null
+    category?: Enumbbq_recipe_categoryFilter<"bbq_recipe"> | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFilter<"bbq_recipe"> | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFilter<"bbq_recipe"> | $Enums.bbq_recipe_source
+    recipe_url?: StringNullableFilter<"bbq_recipe"> | string | null
+    body?: StringNullableFilter<"bbq_recipe"> | string | null
+    claim_cap?: IntNullableFilter<"bbq_recipe"> | number | null
+    pairs_with?: StringNullableFilter<"bbq_recipe"> | string | null
+    reserved_for?: IntNullableFilter<"bbq_recipe"> | number | null
+    sort_order?: IntFilter<"bbq_recipe"> | number
+  }
+
+  export type bbq_claimCreateWithoutBbq_recipeInput = {
+    created_at?: Date | string
+    bbq_guest: bbq_guestCreateNestedOneWithoutBbq_claimInput
+  }
+
+  export type bbq_claimUncheckedCreateWithoutBbq_recipeInput = {
+    id?: number
+    guest_id: number
+    created_at?: Date | string
+  }
+
+  export type bbq_claimCreateOrConnectWithoutBbq_recipeInput = {
+    where: bbq_claimWhereUniqueInput
+    create: XOR<bbq_claimCreateWithoutBbq_recipeInput, bbq_claimUncheckedCreateWithoutBbq_recipeInput>
+  }
+
+  export type bbq_claimCreateManyBbq_recipeInputEnvelope = {
+    data: bbq_claimCreateManyBbq_recipeInput | bbq_claimCreateManyBbq_recipeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type bbq_guestCreateWithoutBbq_recipeInput = {
+    name: string
+    phone?: string | null
+    token: string
+    created_at?: Date | string
+    bbq_claim?: bbq_claimCreateNestedManyWithoutBbq_guestInput
+  }
+
+  export type bbq_guestUncheckedCreateWithoutBbq_recipeInput = {
+    id?: number
+    name: string
+    phone?: string | null
+    token: string
+    created_at?: Date | string
+    bbq_claim?: bbq_claimUncheckedCreateNestedManyWithoutBbq_guestInput
+  }
+
+  export type bbq_guestCreateOrConnectWithoutBbq_recipeInput = {
+    where: bbq_guestWhereUniqueInput
+    create: XOR<bbq_guestCreateWithoutBbq_recipeInput, bbq_guestUncheckedCreateWithoutBbq_recipeInput>
+  }
+
+  export type bbq_claimUpsertWithWhereUniqueWithoutBbq_recipeInput = {
+    where: bbq_claimWhereUniqueInput
+    update: XOR<bbq_claimUpdateWithoutBbq_recipeInput, bbq_claimUncheckedUpdateWithoutBbq_recipeInput>
+    create: XOR<bbq_claimCreateWithoutBbq_recipeInput, bbq_claimUncheckedCreateWithoutBbq_recipeInput>
+  }
+
+  export type bbq_claimUpdateWithWhereUniqueWithoutBbq_recipeInput = {
+    where: bbq_claimWhereUniqueInput
+    data: XOR<bbq_claimUpdateWithoutBbq_recipeInput, bbq_claimUncheckedUpdateWithoutBbq_recipeInput>
+  }
+
+  export type bbq_claimUpdateManyWithWhereWithoutBbq_recipeInput = {
+    where: bbq_claimScalarWhereInput
+    data: XOR<bbq_claimUpdateManyMutationInput, bbq_claimUncheckedUpdateManyWithoutBbq_recipeInput>
+  }
+
+  export type bbq_guestUpsertWithoutBbq_recipeInput = {
+    update: XOR<bbq_guestUpdateWithoutBbq_recipeInput, bbq_guestUncheckedUpdateWithoutBbq_recipeInput>
+    create: XOR<bbq_guestCreateWithoutBbq_recipeInput, bbq_guestUncheckedCreateWithoutBbq_recipeInput>
+    where?: bbq_guestWhereInput
+  }
+
+  export type bbq_guestUpdateToOneWithWhereWithoutBbq_recipeInput = {
+    where?: bbq_guestWhereInput
+    data: XOR<bbq_guestUpdateWithoutBbq_recipeInput, bbq_guestUncheckedUpdateWithoutBbq_recipeInput>
+  }
+
+  export type bbq_guestUpdateWithoutBbq_recipeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_claim?: bbq_claimUpdateManyWithoutBbq_guestNestedInput
+  }
+
+  export type bbq_guestUncheckedUpdateWithoutBbq_recipeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_claim?: bbq_claimUncheckedUpdateManyWithoutBbq_guestNestedInput
+  }
+
+  export type bbq_claimCreateManyBbq_guestInput = {
+    id?: number
+    recipe_id: number
+    created_at?: Date | string
+  }
+
+  export type bbq_recipeCreateManyBbq_guestInput = {
+    id?: number
+    slug: string
+    title: string
+    blurb?: string | null
+    host_note?: string | null
+    category: $Enums.bbq_recipe_category
+    effort?: $Enums.bbq_recipe_effort
+    source?: $Enums.bbq_recipe_source
+    recipe_url?: string | null
+    body?: string | null
+    claim_cap?: number | null
+    pairs_with?: string | null
+    sort_order?: number
+  }
+
+  export type bbq_claimUpdateWithoutBbq_guestInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_recipe?: bbq_recipeUpdateOneRequiredWithoutBbq_claimNestedInput
+  }
+
+  export type bbq_claimUncheckedUpdateWithoutBbq_guestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    recipe_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type bbq_claimUncheckedUpdateManyWithoutBbq_guestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    recipe_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type bbq_recipeUpdateWithoutBbq_guestInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    sort_order?: IntFieldUpdateOperationsInput | number
+    bbq_claim?: bbq_claimUpdateManyWithoutBbq_recipeNestedInput
+  }
+
+  export type bbq_recipeUncheckedUpdateWithoutBbq_guestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    sort_order?: IntFieldUpdateOperationsInput | number
+    bbq_claim?: bbq_claimUncheckedUpdateManyWithoutBbq_recipeNestedInput
+  }
+
+  export type bbq_recipeUncheckedUpdateManyWithoutBbq_guestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    blurb?: NullableStringFieldUpdateOperationsInput | string | null
+    host_note?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: Enumbbq_recipe_categoryFieldUpdateOperationsInput | $Enums.bbq_recipe_category
+    effort?: Enumbbq_recipe_effortFieldUpdateOperationsInput | $Enums.bbq_recipe_effort
+    source?: Enumbbq_recipe_sourceFieldUpdateOperationsInput | $Enums.bbq_recipe_source
+    recipe_url?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    claim_cap?: NullableIntFieldUpdateOperationsInput | number | null
+    pairs_with?: NullableStringFieldUpdateOperationsInput | string | null
+    sort_order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type bbq_claimCreateManyBbq_recipeInput = {
+    id?: number
+    guest_id: number
+    created_at?: Date | string
+  }
+
+  export type bbq_claimUpdateWithoutBbq_recipeInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bbq_guest?: bbq_guestUpdateOneRequiredWithoutBbq_claimNestedInput
+  }
+
+  export type bbq_claimUncheckedUpdateWithoutBbq_recipeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guest_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type bbq_claimUncheckedUpdateManyWithoutBbq_recipeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guest_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

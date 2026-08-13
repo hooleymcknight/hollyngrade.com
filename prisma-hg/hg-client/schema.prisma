@@ -10,7 +10,7 @@ datasource db {
 
 model dogs {
   id          Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  src         String? @db.VarChar(245)
+  src         String? @unique(map: "src_UNIQUE") @db.VarChar(245)
   type        String? @db.VarChar(45)
   alt         String? @db.VarChar(145)
   width       Int?
@@ -34,15 +34,69 @@ model users {
   email    String? @unique(map: "email_UNIQUE") @db.VarChar(255)
 }
 
-model inventory {
-  item_id     Int     @id @unique(map: "item_id_UNIQUE") @default(autoincrement())
-  item        String? @db.Text
-  description String? @db.Text
-  rfid        Int?
+model bbq_claim {
+  id         Int        @id @default(autoincrement()) @db.UnsignedInt
+  recipe_id  Int        @db.UnsignedInt
+  guest_id   Int        @db.UnsignedInt
+  created_at DateTime   @default(now()) @db.Timestamp(0)
+  bbq_guest  bbq_guest  @relation(fields: [guest_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_claim_guest")
+  bbq_recipe bbq_recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_claim_recipe")
+
+  @@unique([recipe_id, guest_id], map: "uniq_recipe_guest")
+  @@index([guest_id], map: "fk_claim_guest")
+  @@index([recipe_id], map: "idx_recipe")
 }
 
-model rfid {
-  rfid      Int     @id @unique(map: "rfid_UNIQUE")
-  room      String? @db.VarChar(45)
-  container String? @db.VarChar(145)
+model bbq_guest {
+  id         Int          @id @default(autoincrement()) @db.UnsignedInt
+  name       String       @db.VarChar(80)
+  phone      String?      @db.VarChar(24)
+  token      String       @unique(map: "uniq_token") @db.Char(24)
+  created_at DateTime     @default(now()) @db.Timestamp(0)
+  bbq_claim  bbq_claim[]
+  bbq_recipe bbq_recipe[]
+}
+
+model bbq_recipe {
+  id           Int                 @id @default(autoincrement()) @db.UnsignedInt
+  slug         String              @unique(map: "uniq_slug") @db.VarChar(60)
+  title        String              @db.VarChar(120)
+  blurb        String?             @db.VarChar(240)
+  host_note    String?             @db.VarChar(300)
+  category     bbq_recipe_category
+  effort       bbq_recipe_effort   @default(medium)
+  source       bbq_recipe_source   @default(heb)
+  recipe_url   String?             @db.VarChar(255)
+  body         String?             @db.MediumText
+  claim_cap    Int?                @default(2) @db.UnsignedTinyInt
+  pairs_with   String?             @db.VarChar(60)
+  reserved_for Int?                @db.UnsignedInt
+  sort_order   Int                 @default(0)
+  bbq_claim    bbq_claim[]
+  bbq_guest    bbq_guest?          @relation(fields: [reserved_for], references: [id], onUpdate: NoAction, map: "fk_recipe_reserved")
+
+  @@index([reserved_for], map: "fk_recipe_reserved")
+  @@index([category, sort_order], map: "idx_category")
+}
+
+enum bbq_recipe_category {
+  appetizer
+  meat_dish
+  meat_side
+  starchy_side
+  veggie_side
+  salad
+  dessert
+  pantry
+}
+
+enum bbq_recipe_effort {
+  easy
+  medium
+  project
+}
+
+enum bbq_recipe_source {
+  family
+  heb
 }
