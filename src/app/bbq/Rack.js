@@ -4,6 +4,11 @@
 // The recipe rack. Styling lives in the `css` string in page.js so the whole
 // route keeps one stylesheet scoped under #bbq.
 //
+// Collapsed by default, on purpose: the rack is the loudest thing on the page,
+// and open by default means people claim before they've read anything else.
+// The closed state still reports what's inside (how many open, how many duels)
+// so it reads as a door rather than a hidden section.
+//
 // Card states:
 //   open    -- nobody's claimed it
 //   taken   -- one claim. Greyed. Still challengeable.
@@ -11,26 +16,40 @@
 //   pantry  -- claim_cap null. Unlimited, never greys, never duels.
 //   mine    -- you're one of the claimers; you get a way back out.
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+// Order is how somebody actually eats, not alphabetical and not by count.
+// Labels are separate from the database values on purpose -- `meat_side` is a
+// precise column value and a terrible thing to show a guest.
 const GROUPS = [
-  { key: 'main',   label: 'Mains' },
-  { key: 'side',   label: 'Sides' },
-  { key: 'sweet',  label: 'Something sweet' },
-  { key: 'drink',  label: 'To drink' },
-  { key: 'pantry', label: 'Always in stock' },
+  { key: 'appetizer',    label: 'To start' },
+  { key: 'meat_dish',    label: 'More meat' },
+  { key: 'meat_side',    label: "Sides with meat in 'em" },
+  { key: 'starchy_side', label: 'Bread & starchy sides' },
+  { key: 'veggie_side',  label: 'Veggie sides' },
+  { key: 'salad',        label: 'Salads' },
+  { key: 'dessert',      label: 'Desserts' },
+  { key: 'pantry',       label: 'Always in stock' },
 ];
 
 const EFFORT = { easy: 'Easy', medium: 'Some doing', project: 'A project' };
 
 export default function Rack({ recipes, guest, token }) {
   const router = useRouter();
-  const [pending, setPending] = useState(null);   // recipe id mid-request
+  const [openRack, setOpenRack] = useState(false);
+  const [pending, setPending] = useState(null);     // recipe id mid-request
   const [error, setError] = useState('');
   const [challenge, setChallenge] = useState(null); // recipe awaiting confirm
 
   const signedIn = Boolean(guest);
+
+  // The nav's Recipes pill fires this, so it doesn't scroll you to a closed door.
+  useEffect(() => {
+    const open = () => setOpenRack(true);
+    window.addEventListener('bbq:open-rack', open);
+    return () => window.removeEventListener('bbq:open-rack', open);
+  }, []);
 
   async function send(path, recipeId) {
     setPending(recipeId);
@@ -55,43 +74,118 @@ export default function Rack({ recipes, guest, token }) {
     }
   }
 
-  const groups = GROUPS
-    .map((g) => ({ ...g, items: recipes.filter((r) => r.category === g.key) }))
-    .filter((g) => g.items.length > 0);
+  const bySlug = new Map(recipes.map((r) => [r.slug, r]));
+  const mine = guest
+    ? recipes.filter((r) => (r.claims || []).some((c) => c.guestId === guest.id))
+    : [];
+
+  const capped = recipes.filter((r) => r.claim_cap !== null);
+  const stillOpen = capped.filter((r) => (r.claims || []).length === 0).length;
+  const duels = capped.filter((r) => (r.claims || []).length >= 2).length;
+
+  // Reserved recipes get pulled out of their normal category and shown in one
+  // group at the top. They keep their real category in the database, so
+  // clearing reserved_for puts them back where they belong.
+  const reserved = recipes.filter((r) => r.reserved_for);
+  const open = recipes.filter((r) => !r.reserved_for);
+
+  const groups = [
+    ...(reserved.length
+      ? [{ key: '__reserved', label: 'Saved for you', items: reserved }]
+      : []),
+    ...GROUPS
+      .map((g) => ({ ...g, items: open.filter((r) => r.category === g.key) }))
+      .filter((g) => g.items.length > 0),
+  ];
 
   return (
     <div className="rack-wrap">
+      {/* ---------- how the links work: said once, not on every card ---------- */}
       {signedIn ? (
         <p className="rack-hello">
           Hey {guest.name} &mdash; take one off the rack and it&rsquo;s yours.
         </p>
       ) : (
-        <p className="rack-hello rack-hello-anon">
-          You&rsquo;re just browsing &mdash; text me and I&rsquo;ll send you your own link so you can claim one.
-        </p>
+        <div className="rack-anon">
+          <p className="rack-anon-lead">Have a look around &mdash; this is the whole board.</p>
+          <p className="rack-anon-note">
+            Everybody gets their own link so the rack knows who claimed what. Text me and
+            I&rsquo;ll send you yours.
+          </p>
+          <a className="rbtn" href="sms:+19364251225?&body=Can%20I%20get%20my%20recipe%20link%3F">
+            Text me for my link
+          </a>
+        </div>
       )}
 
-      {error && <p className="rack-error">{error}</p>}
-
-      {groups.map((g) => (
-        <section key={g.key} className="rack-group">
-          <p className="rack-group-head">{g.label}</p>
-          <div className="rack-grid">
-            {g.items.map((r) => (
-              <Card
-                key={r.id}
-                recipe={r}
-                guest={guest}
-                signedIn={signedIn}
-                busy={pending === r.id}
-                onClaim={() => send('claim', r.id)}
-                onRelease={() => send('unclaim', r.id)}
-                onChallenge={() => setChallenge(r)}
-              />
+      {/* ---------- what you've already got ----------
+          Lives OUTSIDE the collapsed rack deliberately. The rack is closed by
+          default, so without this a returning guest would have to open it and
+          scan every card to remember what they signed up for. */}
+      {mine.length > 0 && (
+        <div className="mylist">
+          <p className="mylist-head">You&rsquo;re bringing</p>
+          <ul className="mylist-items">
+            {mine.map((r) => (
+              <li key={r.id}>
+                <span className="ml-name">{r.title}</span>
+                <button
+                  className="ml-drop"
+                  onClick={() => send('unclaim', r.id)}
+                  disabled={pending === r.id}
+                  aria-label={`Put ${r.title} back on the rack`}
+                >
+                  {pending === r.id ? '\u2026' : '\u00d7'}
+                </button>
+              </li>
             ))}
-          </div>
-        </section>
-      ))}
+          </ul>
+        </div>
+      )}
+
+      {/* ---------- the door ---------- */}
+      <button
+        className={`rack-gate${openRack ? ' is-open' : ''}`}
+        onClick={() => setOpenRack((v) => !v)}
+        aria-expanded={openRack}
+        aria-controls="rack-body"
+      >
+        <span className="gate-label">{openRack ? 'Close the rack' : 'Open the rack'}</span>
+        <span className="gate-count">
+          {recipes.length} recipes &middot; {stillOpen} still open
+          {duels > 0 ? ` · ${duels} head to head` : ''}
+        </span>
+        <span className="gate-chev" aria-hidden="true">{openRack ? '\u25B2' : '\u25BC'}</span>
+      </button>
+
+      <div id="rack-body" hidden={!openRack}>
+        {error && <p className="rack-error">{error}</p>}
+
+        {groups.map((g) => (
+          <section
+            key={g.key}
+            className={`rack-group${g.key === '__reserved' ? ' is-reserved' : ''}`}
+          >
+            <p className="rack-group-head">{g.label}</p>
+            <div className="rack-grid">
+              {g.items.map((r) => (
+                <Card
+                  key={r.id}
+                  recipe={r}
+                  guest={guest}
+                  signedIn={signedIn}
+                  addOn={r.pairs_with ? bySlug.get(r.pairs_with) : null}
+                  onAddOn={(id) => send('claim', id)}
+                  busy={pending === r.id}
+                  onClaim={() => send('claim', r.id)}
+                  onRelease={() => send('unclaim', r.id)}
+                  onChallenge={() => setChallenge(r)}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
 
       {challenge && (
         <ChallengeModal
@@ -106,13 +200,12 @@ export default function Rack({ recipes, guest, token }) {
   );
 }
 
-function Card({ recipe, guest, signedIn, busy, onClaim, onRelease, onChallenge }) {
+function Card({ recipe, guest, signedIn, busy, addOn, onAddOn, onClaim, onRelease, onChallenge }) {
   const unlimited = recipe.claim_cap === null;
   const claims = recipe.claims || [];
   const mine = guest ? claims.some((c) => c.guestId === guest.id) : false;
   const others = guest ? claims.filter((c) => c.guestId !== guest.id) : claims;
 
-  const full = !unlimited && claims.length >= recipe.claim_cap;
   const duel = !unlimited && claims.length >= 2;
   const taken = !unlimited && claims.length === 1;
 
@@ -124,6 +217,18 @@ function Card({ recipe, guest, signedIn, busy, onClaim, onRelease, onChallenge }
     mine ? 'mine' : '',
   ].filter(Boolean).join(' ');
 
+  // What a browsing (tokenless) visitor sees in the action slot -- the one
+  // thing they actually want to know, which is whether it's still available.
+  const addOnClaimed = Boolean(
+    addOn && guest && (addOn.claims || []).some((c) => c.guestId === guest.id)
+  );
+
+  const status = unlimited ? 'Always open'
+    : duel ? 'Head to head'
+    : taken ? 'Claimed'
+    : 'Open';
+  const statusClass = status.toLowerCase().replace(/\s+/g, '-');
+
   return (
     <article className={cls}>
       {duel && <span className="duel-flag">Head to head</span>}
@@ -131,6 +236,7 @@ function Card({ recipe, guest, signedIn, busy, onClaim, onRelease, onChallenge }
 
       <h3 className="rcard-title">{recipe.title}</h3>
       {recipe.blurb && <p className="rcard-blurb">{recipe.blurb}</p>}
+      {recipe.host_note && <p className="rcard-note">{recipe.host_note}</p>}
 
       <p className="rcard-meta">
         <span className="effort">{EFFORT[recipe.effort]}</span>
@@ -155,22 +261,30 @@ function Card({ recipe, guest, signedIn, busy, onClaim, onRelease, onChallenge }
 
       <div className="rcard-action">
         {!signedIn ? (
-          <span className="rcard-locked">
-            {full ? 'Spoken for' : 'Text me for your link'}
-          </span>
+          <span className={`rcard-status st-${statusClass}`}>{status}</span>
         ) : mine ? (
-          <button className="rbtn ghost" onClick={onRelease} disabled={busy}>
-            {busy ? '…' : 'Never mind, put it back'}
-          </button>
+          <>
+            <button className="rbtn ghost" onClick={onRelease} disabled={busy}>
+              {busy ? '\u2026' : 'Never mind, put it back'}
+            </button>
+            {addOn && !addOnClaimed && (
+              <button className="addon" onClick={() => onAddOn(addOn.id)}>
+                + Add {addOn.title.toLowerCase()}
+              </button>
+            )}
+            {addOn && addOnClaimed && (
+              <span className="addon-done">{addOn.title} added</span>
+            )}
+          </>
         ) : unlimited || claims.length === 0 ? (
           <button className="rbtn" onClick={onClaim} disabled={busy}>
-            {busy ? '…' : unlimited ? "I'll bring this" : 'Take it off the rack'}
+            {busy ? '\u2026' : unlimited ? "I'll bring this" : 'Take it off the rack'}
           </button>
         ) : duel ? (
-          <span className="rcard-locked">This duel&rsquo;s full</span>
+          <span className="rcard-status st-head-to-head">This duel&rsquo;s full</span>
         ) : (
           <button className="rbtn challenge" onClick={onChallenge} disabled={busy}>
-            {busy ? '…' : `Challenge ${others[0]?.name || 'them'}`}
+            {busy ? '\u2026' : `Challenge ${others[0]?.name || 'them'}`}
           </button>
         )}
       </div>
@@ -202,7 +316,7 @@ function ChallengeModal({ recipe, guest, busy, onCancel, onConfirm }) {
             Back down
           </button>
           <button className="rbtn challenge" onClick={onConfirm} disabled={busy}>
-            {busy ? '…' : "Let's go"}
+            {busy ? '\u2026' : "Let's go"}
           </button>
         </div>
       </div>

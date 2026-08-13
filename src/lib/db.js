@@ -35,11 +35,17 @@ export async function guestByToken(token) {
  * One query for recipes, one for claims, stitched in JS -- simpler to read
  * than a join you then have to un-flatten, and it's two round trips total.
  */
-export async function getRack() {
+export async function getRack(guestId = null) {
+  // Reserved recipes are filtered here rather than in the component. Hiding
+  // them client-side would still ship every one of them to every visitor in
+  // the HTML, which defeats the point of reserving them.
   const [recipes] = await pool.query(
-    `SELECT id, slug, title, blurb, category, effort, recipe_url, claim_cap
+    `SELECT id, slug, title, blurb, host_note, category, effort, source,
+            recipe_url, claim_cap, pairs_with, reserved_for
        FROM bbq_recipe
-      ORDER BY sort_order, title`
+      WHERE reserved_for IS NULL OR reserved_for = ?
+      ORDER BY sort_order, title`,
+    [guestId]
   );
 
   const [claims] = await pool.query(

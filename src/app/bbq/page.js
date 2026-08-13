@@ -4,11 +4,15 @@
 // styles don't leak elsewhere.
 //
 // Magic links are /bbq?k=TOKEN. No token still renders the whole page and the
-// whole rack -- you just can't claim anything, which is right, since the URL
-// printed on the invite card has no token on it.
+// whole rack, read-only -- except the street address and the parking map,
+// which are held back. The URL on the invite card has no token on it, so the
+// tokenless view is the one most people hit first and it needs to be good.
 
 import { getRack, guestByToken } from '@/lib/db';
 import Rack from './Rack';
+import Nav from './Nav';
+import ParkingMap from './ParkingMap';
+import Signoff from './Signoff';
 
 export const dynamic = 'force-dynamic'; // claims change; never cache this
 
@@ -16,10 +20,10 @@ export default async function BbqPage({ searchParams }) {
   const sp = await searchParams;
   const token = typeof sp?.k === 'string' ? sp.k : null;
 
-  const [guest, recipes] = await Promise.all([
-    guestByToken(token),
-    getRack(),
-  ]);
+  // The guest has to resolve before the rack query, since reserved recipes are
+  // filtered by guest id in SQL.
+  const guest = await guestByToken(token);
+  const recipes = await getRack(guest?.id ?? null);
 
   return (
     <>
@@ -28,14 +32,8 @@ export default async function BbqPage({ searchParams }) {
       <div id="bbq">
         <div className="sheet">
 
-          {/* ---------- the lid ---------- */}
-          <div className="banner">
-            <div className="kicker">
-              <span>Sat 8/22 only</span>
-              <span>Tacoma, WA</span>
-            </div>
-            <div className="line">Y&rsquo;all are invited</div>
-          </div>
+          {/* lid + section nav, both sticky, both in here */}
+          <Nav />
 
           <div className="body">
 
@@ -44,7 +42,15 @@ export default async function BbqPage({ searchParams }) {
             <h1 className="title">Backyard <span className="red">BBQ</span></h1>
 
             <p className="when">Saturday, Aug 22<small>2 pm &rsquo;til late</small></p>
-            <p className="where">1012 E 53rd Street &middot; Tacoma, Washington</p>
+
+            {/* Address only for people holding a link. */}
+            {guest ? (
+              <p className="where">1012 E 53rd Street &middot; Tacoma, Washington</p>
+            ) : (
+              <p className="where where-soft">
+                Tacoma, Washington &mdash; the address is on your invite
+              </p>
+            )}
 
             <div className="premise">
               <p className="lead">I&rsquo;ll bring brisket. Take a recipe off the rack<br />and let&rsquo;s fill the table together.</p>
@@ -60,7 +66,7 @@ export default async function BbqPage({ searchParams }) {
             </div>
 
             {/* ---------- recipe rack ---------- */}
-            <div className="rule">The recipe rack</div>
+            <div id="sec-recipes" className="rule">The recipe rack</div>
 
             <div className="rack-intro">
               <p className="rack-lead">Take a recipe off the rack and bring that dish.</p>
@@ -81,7 +87,7 @@ export default async function BbqPage({ searchParams }) {
             <Rack recipes={recipes} guest={guest} token={token} />
 
             {/* ---------- parking ---------- */}
-            <div className="rule">Parking</div>
+            <div id="sec-parking" className="rule">Parking</div>
 
             <p className="ssub">Drop off first, then park</p>
             <ul className="notes">
@@ -91,10 +97,16 @@ export default async function BbqPage({ searchParams }) {
               <li>The alley is residents-only. You&rsquo;ll see it, but please leave it clear.</li>
             </ul>
 
-            <img className="map" src="https://hollyngrade.com/bbq/parking-map_8-2026.jpg" alt="Parking map: pull into the driveway on 53rd to drop off, then park on I St one block west." />
+            {/* The map names the streets and stars the driveway, so it's the
+                address by other means -- same gate as the address itself. */}
+            {guest ? (
+              <ParkingMap />
+            ) : (
+              <p className="map-hold">The map comes with your link.</p>
+            )}
 
             {/* ---------- pool ---------- */}
-            <div className="rule">The pool</div>
+            <div id="sec-pool" className="rule">The pool</div>
 
             <p className="pool-lead">
               The pool&rsquo;s open in blocks throughout the afternoon, not all day. Between blocks the
@@ -131,7 +143,7 @@ export default async function BbqPage({ searchParams }) {
             </ul>
 
             {/* ---------- other doings ---------- */}
-            <div className="rule">Other doings</div>
+            <div id="sec-doings" className="rule">Other doings</div>
 
             <ul className="act">
               <li>
@@ -146,23 +158,23 @@ export default async function BbqPage({ searchParams }) {
             </ul>
 
             {/* ---------- food ---------- */}
-            <div className="rule">Food</div>
+            <div id="sec-food" className="rule">Food</div>
 
             <p className="course">Off the grill</p>
             <ul className="menu">
               <li><span className="name">Brisket</span> <span className="mnote">&mdash; that part&rsquo;s on me</span></li>
-              <li><span className="name">Burgers</span> <span className="mnote">&mdash; beef &amp; Beyond</span><Badge kind="vegan" label="vegan option" /></li>
+              <li><span className="name">Burgers</span> <span className="mnote">&mdash; beef or Beyond</span><Badge kind="vegan" label="vegan option" /></li>
             </ul>
 
             <p className="course">To drink</p>
             <ul className="menu">
-              <li><span className="name">Water &amp; sweet tea</span> <span className="mnote">&mdash; or bring your own</span></li>
+              <li><span className="name">Water &amp; sweet tea</span></li>
             </ul>
+            <p className="menunote"><Cup /> Anything else you&rsquo;d like to drink, bring it along.</p>
 
             <div className="key">
               <span className="k"><Leaf className="sw-vegan" /> vegan</span>
               <span className="k"><Leaf className="sw-veg" /> vegetarian</span>
-              <span className="k"><b>vegan option</b>&nbsp;= also made without meat</span>
             </div>
 
             <p className="accnote">
@@ -170,8 +182,8 @@ export default async function BbqPage({ searchParams }) {
               <a href="sms:+19364251225?&body=Hi Hollyn, a heads-up:">Text me</a> and I&rsquo;ll take care of it.
             </p>
 
-            {/* <div className="rule">&nbsp;&middot;&nbsp;</div>
-            <p className="signoff">come hungry, park on I St, don&rsquo;t run by the pool</p> */}
+            <div className="rule">&nbsp;&middot;&nbsp;</div>
+            <Signoff />
 
           </div>
         </div>
@@ -184,6 +196,18 @@ function Leaf({ className }) {
   return (
     <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
       <path d="M5 21C5 12 12 4 20 4c0 9-7 17-15 17zM8.5 17.5C12 14 15.5 9 17.5 6.5" />
+    </svg>
+  );
+}
+
+// Fountain drink -- tapered cup, domed lid, straw. Deliberately not a can or
+// a bottle, both of which read as beer at this size.
+function Cup() {
+  return (
+    <svg className="cup" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M13.6 6.4 L17.2 1.4" strokeWidth="1.9" strokeLinecap="round" fill="none" />
+      <rect x="4.6" y="5.9" width="14.8" height="3.1" rx="1.2" />
+      <path d="M6.4 10.4 L17.6 10.4 L16.1 21.6 Q16 22.6 15 22.6 L9 22.6 Q8 22.6 7.9 21.6 Z" />
     </svg>
   );
 }
@@ -203,6 +227,34 @@ const css = `
 /* neutralize the site's body styling for this route only */
 body { margin:0; padding:0; background:#1b1613; }
 
+/* The site footer lives outside #bbq, so it needs its own tokens and its own
+   unscoped selector. Like the body reset above, this only applies while this
+   route is mounted. The footer p rule hides the byline -- it's the smallest
+   thing on the page and the name already appears in the sticker. */
+footer {
+  --paper:#FBF4E6;
+  --paper-2:#F5EAD6;
+  --ink:#1E1A17;
+  --ink-soft:#6E5B49;
+  max-width:660px;
+  color:var(--ink-soft);
+  font-family:'Oswald','Arial Narrow',sans-serif;
+  border-radius:6px;
+  background-color:var(--paper);
+  background-image:
+    radial-gradient(circle at 15% 6%, rgba(255,255,255,.5), rgba(255,255,255,0) 38%),
+    radial-gradient(circle at 85% 94%, rgba(150,110,60,.13), rgba(150,110,60,0) 40%),
+    repeating-linear-gradient(90deg, var(--paper) 0 4px, var(--paper-2) 4px 8px);
+  background-blend-mode:normal,normal,soft-light;
+  box-shadow:0 26px 60px rgba(0,0,0,.55);
+}
+footer a { color:var(--ink); }
+footer p { display:none; }
+
+/* The extra Texas stops on the closing graphic (San Antonio, Denton, Waco,
+   Dallardsville). Set display:none to leave just Austin and simplify it. */
+#bbq .tx-stars { display: inline; }
+
 #bbq{
   /* tokens are the invite's, verbatim */
   --paper:#FBF4E6;
@@ -215,7 +267,9 @@ body { margin:0; padding:0; background:#1b1613; }
   --ribbon:#2E6E8E;
   --veg-bg:#EAF3DE; --veg-fg:#4E7A12;
   --vegan-bg:#D9F0E7; --vegan-fg:#0F6E56;
+  --stickyH:104px;   /* lid + nav when stuck; used for scroll offsets */
 
+  width: 100%;
   min-height:100vh;
   background:#221c19;
   background-image:radial-gradient(circle at 50% 0%, #342c26 0%, #1b1613 70%);
@@ -227,8 +281,10 @@ body { margin:0; padding:0; background:#1b1613; }
 #bbq *{box-sizing:border-box;}
 #bbq p, #bbq h1, #bbq h2, #bbq h3, #bbq ul{margin:0; padding:0;}
 
+/* NOTE: no overflow:hidden here -- it would break position:sticky on the lid.
+   The banner carries its own top radius instead so the corners still clip. */
 #bbq .sheet{
-  position:relative; max-width:660px; margin:0 auto; overflow:hidden;
+  position:relative; max-width:660px; margin:0 auto;
   border-radius:6px;
   background-color:var(--paper);
   background-image:
@@ -239,9 +295,14 @@ body { margin:0; padding:0; background:#1b1613; }
   box-shadow:0 26px 60px rgba(0,0,0,.55);
 }
 
+/* ---------- sticky bar: lid + nav travel together ---------- */
+#bbq .sticky-sentinel{position:absolute; top:0; height:1px; width:100%;}
+#bbq .stickybar{position:sticky; top:0; z-index:40;}
+
 /* ---------- ribbed screw-top lid ---------- */
 #bbq .banner{
   position:relative;
+  border-radius:6px 6px 0 0;
   background-color:var(--red);
   background-image:
     linear-gradient(180deg, rgba(113,38,38,.34) 0%, rgba(255,255,255,.10) 26%,
@@ -255,6 +316,7 @@ body { margin:0; padding:0; background:#1b1613; }
   background-repeat:no-repeat, repeat-x;
   color:#fff; padding:15px 28px 18px;
   box-shadow:0 4px 9px rgba(0,0,0,.20);
+  transition:padding .18s ease;
 }
 #bbq .banner .kicker{
   display:flex; justify-content:space-between; align-items:baseline;
@@ -268,6 +330,46 @@ body { margin:0; padding:0; background:#1b1613; }
   content:""; position:absolute; left:0; right:0; bottom:0; height:8px;
   background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 45%, rgba(0,0,0,.32) 100%);
 }
+
+/* two lid states: full at rest, one compact row once you scroll */
+#bbq .lid-compact{display:none;}
+#bbq .stuck .banner{padding:10px 20px 12px; border-radius:0;}
+#bbq .stuck .lid-full{display:none;}
+#bbq .stuck .lid-compact{
+  display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+}
+#bbq .lid-compact .lc-title{
+  font-family:'Ultra',Georgia,serif; font-size:17px; line-height:1; white-space:nowrap;
+}
+#bbq .lid-compact .lc-side{
+  font-weight:500; font-size:9.5px; letter-spacing:.15em; text-transform:uppercase;
+  opacity:.9; white-space:nowrap; flex:1;
+}
+#bbq .lid-compact .lc-right{text-align:right;}
+
+/* ---------- section nav ---------- */
+#bbq .secnav{
+  background:rgba(251,244,230,.97);
+  border-bottom:2px dashed rgba(156,23,33,.4);
+  box-shadow:0 6px 12px rgba(30,26,23,.07);
+  overflow-x: hidden;
+}
+#bbq .secnav ul{
+  list-style:none; display:flex; gap:8px; padding:10px 14px;
+  overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+  width: min-content; margin: 0 auto; max-width: 100%;
+}
+#bbq .secnav ul::-webkit-scrollbar{display:none;}
+#bbq .secnav li{flex:none;}
+#bbq .secnav a{
+  display:block; text-decoration:none; white-space:nowrap;
+  padding:6px 14px; border-radius:999px;
+  border:1.5px dashed var(--red); color:var(--red-deep); background:transparent;
+  font-weight:600; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  transition:background .12s ease, color .12s ease;
+}
+#bbq .secnav a:hover{background:rgba(210,38,48,.09);}
+#bbq .secnav a.on{background:var(--red); border-style:solid; color:#FFF9EE;}
 
 #bbq .body{padding:30px 34px 32px;}
 
@@ -296,6 +398,7 @@ body { margin:0; padding:0; background:#1b1613; }
   text-align:center; font-weight:400; font-size:15px; letter-spacing:.03em;
   line-height:1.4; margin-top:12px;
 }
+#bbq .where-soft{font-weight:300; font-size:13.5px; color:var(--ink-soft);}
 
 #bbq .premise{margin-top:22px; text-align:center;}
 #bbq .premise .lead{
@@ -331,6 +434,7 @@ body { margin:0; padding:0; background:#1b1613; }
   display:flex; align-items:center; gap:12px; margin:38px 0 18px;
   font-weight:500; font-size:10.5px; letter-spacing:.24em; text-transform:uppercase;
   color:var(--red-deep); white-space:nowrap;
+  scroll-margin-top:var(--stickyH);   /* so the nav doesn't cover the heading */
 }
 #bbq .rule::before, #bbq .rule::after{
   content:""; flex:1; border-top:2px dashed rgba(156,23,33,.45);
@@ -373,14 +477,91 @@ body { margin:0; padding:0; background:#1b1613; }
 #bbq .burst .b3{font-weight:500; font-size:8px; letter-spacing:.1em; text-transform:uppercase; line-height:1.3;}
 
 /* ---------- the rack ---------- */
-#bbq .rack-wrap{margin-top:22px;}
+#bbq .rack-wrap{margin-top:20px;}
 #bbq .rack-hello{
-  text-align:center; margin-bottom:6px;
+  text-align:center; margin-bottom:14px;
   font-family:'Caveat',cursive; font-weight:700; font-size:20px; color:var(--ink-soft);
 }
-#bbq .rack-hello-anon{font-size:18px;}
+#bbq .rack-anon{
+  max-width:460px; margin:0 auto 16px; text-align:center;
+  padding:16px 18px; border-radius:5px;
+  background:rgba(46,110,142,.08); border:1px solid rgba(46,110,142,.28);
+}
+#bbq .rack-anon-lead{
+  font-family:'Caveat',cursive; font-weight:700; font-size:20px; color:var(--ink);
+}
+#bbq .rack-anon-note{
+  margin-top:6px; font-size:13.5px; line-height:1.55; color:var(--ink-soft);
+}
+#bbq .rack-anon .rbtn{
+  display:inline-block; width:auto; margin-top:12px; text-decoration:none;
+}
+
+/* Your list -- sits above the gate so a returning guest can see what they
+   claimed without opening the rack. */
+#bbq .mylist{
+  max-width:460px; margin:0 auto 14px; padding:12px 16px 14px;
+  border-radius:5px; text-align:center;
+  background:rgba(46,110,142,.09); border:1px solid rgba(46,110,142,.3);
+}
+#bbq .mylist-head{
+  font-weight:600; font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ribbon);
+}
+#bbq .mylist-items{
+  list-style:none; display:flex; flex-wrap:wrap; gap:7px; justify-content:center;
+  margin-top:9px;
+}
+#bbq .mylist-items li{
+  display:inline-flex; align-items:center; gap:5px;
+  padding:4px 6px 4px 11px; border-radius:999px;
+  background:var(--paper); border:1px solid rgba(46,110,142,.35);
+}
+#bbq .ml-name{font-size:13px; color:var(--ink);}
+#bbq .ml-drop{
+  cursor:pointer; font-family:inherit; line-height:1;
+  width:17px; height:17px; padding:0; border-radius:50%;
+  background:rgba(30,26,23,.08); border:none; color:var(--ink-soft); font-size:13px;
+}
+#bbq .ml-drop:hover:not(:disabled){background:rgba(210,38,48,.16); color:var(--red-deep);}
+#bbq .ml-drop:disabled{opacity:.5; cursor:default;}
+
+/* The add-on. Reads as an upsell, so it's deliberately quieter than a real
+   button -- underlined text, no fill. Only appears once you own the card. */
+#bbq .addon{
+  display:block; width:100%; margin-top:7px; padding:4px 0;
+  cursor:pointer; font-family:inherit; background:none; border:none;
+  font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ribbon); text-decoration:underline; text-underline-offset:3px;
+}
+#bbq .addon:hover{color:var(--red);}
+#bbq .addon-done{
+  display:block; margin-top:7px; padding:4px 0; text-align:center;
+  font-size:10px; font-weight:500; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+/* the door */
+#bbq .rack-gate{
+  display:flex; align-items:center; gap:12px; width:100%; cursor:pointer;
+  font-family:inherit; text-align:left;
+  padding:14px 18px; border-radius:5px;
+  background:var(--tag); border:2px solid var(--red-deep);
+  color:var(--red-deep);
+  box-shadow:0 4px 12px rgba(156,23,33,.16);
+}
+#bbq .rack-gate .gate-label{
+  font-family:'Ultra',Georgia,serif; font-size:16px; line-height:1; flex:none;
+}
+#bbq .rack-gate .gate-count{
+  flex:1; font-weight:500; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  opacity:.85; text-align:right;
+}
+#bbq .rack-gate .gate-chev{flex:none; font-size:10px;}
+#bbq .rack-gate.is-open{background:transparent; box-shadow:none;}
+
 #bbq .rack-error{
-  max-width:460px; margin:10px auto 0; padding:9px 14px; border-radius:4px;
+  max-width:460px; margin:14px auto 0; padding:9px 14px; border-radius:4px;
   background:rgba(210,38,48,.1); border:1px solid rgba(156,23,33,.35);
   color:var(--red-deep); font-size:13.5px; text-align:center;
 }
@@ -391,6 +572,14 @@ body { margin:0; padding:0; background:#1b1613; }
   font-weight:600; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase;
   color:var(--red-deep);
 }
+/* Saved-for-you group. Tinted and boxed so it reads as addressed to you
+   rather than as just another category heading. */
+#bbq .rack-group.is-reserved{
+  padding:16px 14px 18px; border-radius:6px;
+  background:rgba(246,197,68,.2); border:2px dashed rgba(156,23,33,.4);
+}
+#bbq .rack-group.is-reserved .rack-group-head{color:var(--red-deep);}
+
 #bbq .rack-grid{
   display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px;
 }
@@ -405,6 +594,16 @@ body { margin:0; padding:0; background:#1b1613; }
   font-family:'Ultra',Georgia,serif; font-weight:400; font-size:17px; line-height:1.12;
 }
 #bbq .rcard-blurb{margin-top:6px; font-size:13px; line-height:1.5; color:var(--ink-soft);}
+/* Host note -- script face and a red rule so it reads as Hollyn talking,
+   not as more of the dish description above it. */
+#bbq .rcard-note{
+  margin-top:8px; padding-left:9px;
+  border-left:2px solid rgba(210,38,48,.5);
+  font-family:'Caveat',cursive; font-weight:700; font-size:16px; line-height:1.25;
+  color:var(--ink);
+}
+#bbq .rcard.taken .rcard-note{opacity:.6;}
+
 #bbq .rcard-meta{
   margin-top:8px; font-size:10px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
   color:var(--ink-soft);
@@ -416,10 +615,16 @@ body { margin:0; padding:0; background:#1b1613; }
   line-height:1.2; color:var(--ink);
 }
 #bbq .rcard-action{margin-top:auto; padding-top:12px;}
-#bbq .rcard-locked{
-  display:block; font-size:10.5px; font-weight:500; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--ink-soft); padding:6px 0;
+
+/* status chip -- what browsers without a link see */
+#bbq .rcard-status{
+  display:inline-block; padding:4px 11px; border-radius:999px;
+  font-size:9.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
 }
+#bbq .st-open{background:rgba(63,125,46,.14); color:#3F7D2E; border:1px solid rgba(63,125,46,.4);}
+#bbq .st-claimed{background:rgba(30,26,23,.07); color:var(--ink-soft); border:1px solid rgba(30,26,23,.2);}
+#bbq .st-head-to-head{background:var(--red); color:#FFF9EE; border:1px solid var(--red-deep);}
+#bbq .st-always-open{background:rgba(46,110,142,.12); color:var(--ribbon); border:1px solid rgba(46,110,142,.4);}
 
 /* state: one claim. Greyed, but still challengeable. */
 #bbq .rcard.taken{background:rgba(120,110,95,.11); border-color:rgba(30,26,23,.12);}
@@ -502,9 +707,60 @@ body { margin:0; padding:0; background:#1b1613; }
 #bbq .notes li::before{content:"\\2022"; position:absolute; left:4px; color:var(--red); font-weight:700;}
 #bbq .notes b{font-weight:600;}
 
+#bbq .mapfig{margin:18px 0 0;}
+#bbq .map-btn{
+  display:block; width:100%; padding:0; border:none; background:none;
+  cursor:zoom-in; position:relative; font-family:inherit;
+}
 #bbq .map{
-  display:block; width:100%; height:auto; margin:18px auto 0;
+  display:block; width:100%; height:auto;
   border-radius:5px; box-shadow:0 6px 16px rgba(0,0,0,.14);
+}
+#bbq .map-zoom{
+  position:absolute; right:10px; bottom:10px;
+  background:rgba(30,26,23,.72); color:#FFF9EE;
+  padding:4px 10px; border-radius:999px;
+  font-size:9px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+}
+#bbq .map-cap{
+  display:flex; flex-direction:column; align-items:center; gap:5px;
+  margin-top:14px; text-align:center;
+}
+#bbq .map-dir{
+  display:inline-block; text-decoration:none;
+  background:var(--ribbon); color:#FFF9EE;
+  padding:9px 20px; border-radius:999px;
+  font-weight:600; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+}
+#bbq .map-dir-note{font-size:12px; color:var(--ink-soft); line-height:1.4;}
+
+/* enlarged */
+#bbq .map-scrim{
+  position:fixed; inset:0; z-index:70; padding:16px;
+  background:rgba(20,14,12,.86);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  overflow-y:auto; overscroll-behavior:contain;
+}
+#bbq .map-big{
+  width:100%; max-width:900px;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+}
+/* Targets .map on the inline <svg>, not an <img>. preserveAspectRatio
+   letterboxes inside the box, so max-height can't squash it. */
+#bbq .map-big .map{
+  width:100%; height:auto; max-height:76vh;
+  border-radius:6px; box-shadow:0 20px 44px rgba(0,0,0,.5);
+}
+/* .rbtn.map-close, not .map-close -- it has to out-specify .rbtn.ghost */
+#bbq .rbtn.map-close{
+  width:auto; flex:none; padding:10px 30px;
+  background:var(--paper); color:var(--ink); border-color:var(--paper);
+}
+#bbq .map-hold{
+  max-width:460px; margin:18px auto 0; padding:18px; text-align:center;
+  border:2px dashed rgba(30,26,23,.22); border-radius:5px;
+  font-size:12px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-soft);
 }
 
 /* ---------- pool ---------- */
@@ -565,6 +821,15 @@ body { margin:0; padding:0; background:#1b1613; }
 #bbq .menu li{text-align:center; font-size:18px; line-height:1.4; color:var(--ink); padding:5px 0;}
 #bbq .menu .name{font-weight:500;}
 #bbq .menu .mnote{color:var(--ink-soft); font-size:14px;}
+#bbq .menunote{
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  text-align:center; max-width:460px; margin:10px auto 0;
+  font-size:13.5px; line-height:1.5; color:var(--ink-soft);
+}
+#bbq .cup{
+  width:15px; height:15px; vertical-align:-2px; margin-right:2px;
+  fill:currentColor; stroke:currentColor;
+}
 
 #bbq .badge{
   display:inline-flex; align-items:center; gap:4px; vertical-align:middle;
@@ -574,12 +839,6 @@ body { margin:0; padding:0; background:#1b1613; }
 #bbq .badge svg{width:12px; height:12px; fill:currentColor; flex:none;}
 #bbq .b-veg{background:var(--veg-bg); color:var(--veg-fg);}
 #bbq .b-vegan{background:var(--vegan-bg); color:var(--vegan-fg);}
-
-#bbq .foodnote{
-  text-align:center; max-width:520px; margin:14px auto 0;
-  font-family:'Caveat',cursive; font-weight:700; font-size:19px;
-  color:var(--ink-soft); line-height:1.2;
-}
 
 #bbq .key{
   margin:18px auto 0; max-width:520px; padding-top:14px;
@@ -599,17 +858,26 @@ body { margin:0; padding:0; background:#1b1613; }
 }
 #bbq .accnote a{color:var(--red); font-weight:600; text-decoration:underline; text-underline-offset:2px;}
 
+#bbq .signoff-art{
+  display:block; width:100%; height:auto; max-width:540px; margin:6px auto 0;
+}
 #bbq .signoff{
   text-align:center;
   font-family:'Caveat',cursive; font-weight:700; font-size:20px; color:var(--ink-soft);
 }
 
 @media (max-width:560px){
-  #bbq{padding:22px 8px 48px;}
-  #bbq .body{padding:24px 20px 26px;}
+  #bbq{padding:0 0 40px; --stickyH:92px;}
+  #bbq .sheet{border-radius:0;}
+  #bbq .banner{border-radius:0;}
+  #bbq .body{padding:24px 18px 26px;}
   #bbq .banner{padding:12px 16px 15px;}
   #bbq .banner .kicker{font-size:9px; letter-spacing:.14em;}
   #bbq .banner .line{font-size:16px; letter-spacing:.22em; padding-left:.22em;}
+  #bbq .lid-compact .lc-right{display:none;}
+  #bbq .lid-compact .lc-title{font-size:15px;}
+  #bbq .secnav ul{padding:8px 12px;}
+  #bbq .secnav a{font-size:10px; padding:5px 12px;}
   #bbq .title{font-size:38px;}
   #bbq .when{font-size:25px;}
   #bbq .rule{font-size:9.5px; letter-spacing:.18em; gap:8px; margin:32px 0 16px;}
@@ -620,6 +888,8 @@ body { margin:0; padding:0; background:#1b1613; }
     position:static; transform:rotate(4deg);
     width:104px; height:104px; margin:16px auto 0;
   }
+  #bbq .rack-gate{flex-wrap:wrap; gap:4px 10px;}
+  #bbq .rack-gate .gate-count{text-align:left; width:100%; order:3;}
   #bbq .rack-grid{grid-template-columns:1fr;}
   #bbq .sched li{gap:8px; padding:8px 4px;}
   #bbq .sched .t{width:46px; font-size:14px;}
@@ -628,7 +898,7 @@ body { margin:0; padding:0; background:#1b1613; }
 }
 
 @media (prefers-reduced-motion:reduce){
-  #bbq .btn, #bbq .rbtn{transition:none;}
+  #bbq .btn, #bbq .rbtn, #bbq .banner{transition:none;}
   #bbq .btn:hover, #bbq .rbtn:hover{transform:none;}
 }
 `;
