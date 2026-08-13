@@ -1,26 +1,15 @@
 // app/bbq/page.js
 // Self-contained BBQ details page. All styling is scoped under #bbq so the
 // site's global styles (from layout.js) don't apply here, and this page's
-// styles don't leak elsewhere.
+// styles don't leak elsewhere. The `body` reset only affects this route while
+// it's mounted.
 //
-// Magic links are /bbq?k=TOKEN. No token still renders the whole page and the
-// whole rack -- you just can't claim anything, which is right, since the URL
-// printed on the invite card has no token on it.
+// Design tokens, the ribbed lid banner, the dashed section rules and the
+// starburst are lifted straight from bbq-invite-aug22-v11 so the card and the
+// page read as the same piece of print. Spots marked << EDIT >> are the ones
+// most likely to change.
 
-import { getRack, guestByToken } from '@/lib/db';
-import Rack from './Rack';
-
-export const dynamic = 'force-dynamic'; // claims change; never cache this
-
-export default async function BbqPage({ searchParams }) {
-  const sp = await searchParams;
-  const token = typeof sp?.k === 'string' ? sp.k : null;
-
-  const [guest, recipes] = await Promise.all([
-    guestByToken(token),
-    getRack(),
-  ]);
-
+export default function BbqPage() {
   return (
     <>
       <style>{css}</style>
@@ -44,7 +33,6 @@ export default async function BbqPage({ searchParams }) {
             <h1 className="title">Backyard <span className="red">BBQ</span></h1>
 
             <p className="when">Saturday, Aug 22<small>2 pm &rsquo;til late</small></p>
-            <p className="where">1012 E 53rd Street &middot; Tacoma, Washington</p>
 
             <div className="premise">
               <p className="lead">I&rsquo;ll bring brisket. Take a recipe off the rack<br />and let&rsquo;s fill the table together.</p>
@@ -59,26 +47,25 @@ export default async function BbqPage({ searchParams }) {
               <span>Kids welcome</span>
             </div>
 
-            {/* ---------- recipe rack ---------- */}
+            {/* ---------- recipe rack  << EDIT: swap for the real rack >> ---------- */}
             <div className="rule">The recipe rack</div>
 
-            <div className="rack-intro">
-              <p className="rack-lead">Take a recipe off the rack and bring that dish.</p>
+            <div className="rack">
+              <p className="rack-lead">Take a recipe off the rack and bring that&nbsp;dish.</p>
               <p className="rack-note">
-                Claimed recipes gray out so you can see what&rsquo;s already spoken for. Changed your
-                mind? Put it back, no hard feelings. And if somebody already took the one you wanted,
-                you can always challenge them for it.
+                Recipes go up here soon &mdash; I&rsquo;ll text you a link when they do. Pick one,
+                print it, bring it. Claimed recipes gray out, so you can always see what&rsquo;s
+                already spoken for.
               </p>
               <div className="burst">
                 <div className="text-content">
-                  <div className="b1">Take</div>
-                  <div className="b2">ONE</div>
-                  <div className="b3">off the rack</div>
+                  <div className="b1">Recipes</div>
+                  <div className="b2">SOON</div>
+                  <div className="b3">check back<br />this week</div>
                 </div>
               </div>
             </div>
-
-            <Rack recipes={recipes} guest={guest} token={token} />
+            <p className="rack-fine">Not into cooking? A case of A&amp;W root beer counts and always will.</p>
 
             {/* ---------- parking ---------- */}
             <div className="rule">Parking</div>
@@ -91,7 +78,7 @@ export default async function BbqPage({ searchParams }) {
               <li>The alley is residents-only. You&rsquo;ll see it, but please leave it clear.</li>
             </ul>
 
-            <img className="map" src="https://hollyngrade.com/bbq/parking-map_8-2026.jpg" alt="Parking map: pull into the driveway on 53rd to drop off, then park on I St one block west." />
+            <img className="map" src="https://hollyngrade.com/bbq/parking-map_8-2026.jpg" alt="Parking map for the block" />
 
             {/* ---------- pool ---------- */}
             <div className="rule">The pool</div>
@@ -225,7 +212,7 @@ body { margin:0; padding:0; background:#1b1613; }
   -webkit-font-smoothing:antialiased;
 }
 #bbq *{box-sizing:border-box;}
-#bbq p, #bbq h1, #bbq h2, #bbq h3, #bbq ul{margin:0; padding:0;}
+#bbq p, #bbq h1, #bbq h2, #bbq ul{margin:0; padding:0;}
 
 #bbq .sheet{
   position:relative; max-width:660px; margin:0 auto; overflow:hidden;
@@ -317,7 +304,7 @@ body { margin:0; padding:0; background:#1b1613; }
 }
 #bbq .btn:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(156,23,33,.4);}
 #bbq .btn:active{transform:translateY(0);}
-#bbq a:focus-visible, #bbq button:focus-visible{outline:2.5px solid var(--ribbon); outline-offset:3px;}
+#bbq a:focus-visible{outline:2.5px solid var(--ribbon); outline-offset:3px;}
 
 #bbq .logistics{
   display:flex; justify-content:center; flex-wrap:wrap; margin-top:16px;
@@ -341,8 +328,8 @@ body { margin:0; padding:0; background:#1b1613; }
   font-family:'Caveat',cursive; font-weight:700; font-size:22px; color:var(--ink-soft);
 }
 
-/* ---------- rack intro ---------- */
-#bbq .rack-intro{
+/* ---------- recipe rack ---------- */
+#bbq .rack{
   position:relative; max-width:520px; margin:0 auto;
   border:2px dashed rgba(156,23,33,.4); border-radius:5px;
   padding:24px 128px 22px 24px;   /* right gutter parks the burst */
@@ -354,6 +341,11 @@ body { margin:0; padding:0; background:#1b1613; }
   color:var(--ink); line-height:1.15; margin-bottom:8px;
 }
 #bbq .rack-note{font-size:14px; line-height:1.6; color:var(--ink);}
+#bbq .rack-fine{
+  text-align:center; max-width:520px; margin:12px auto 0;
+  font-weight:300; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--ink-soft);
+}
 
 #bbq .burst{
   position:absolute; right:-6px; top:50%;
@@ -372,128 +364,6 @@ body { margin:0; padding:0; background:#1b1613; }
 #bbq .burst .b2{font-family:'Ultra',Georgia,serif; font-size:20px; line-height:1; margin:2px 0;}
 #bbq .burst .b3{font-weight:500; font-size:8px; letter-spacing:.1em; text-transform:uppercase; line-height:1.3;}
 
-/* ---------- the rack ---------- */
-#bbq .rack-wrap{margin-top:22px;}
-#bbq .rack-hello{
-  text-align:center; margin-bottom:6px;
-  font-family:'Caveat',cursive; font-weight:700; font-size:20px; color:var(--ink-soft);
-}
-#bbq .rack-hello-anon{font-size:18px;}
-#bbq .rack-error{
-  max-width:460px; margin:10px auto 0; padding:9px 14px; border-radius:4px;
-  background:rgba(210,38,48,.1); border:1px solid rgba(156,23,33,.35);
-  color:var(--red-deep); font-size:13.5px; text-align:center;
-}
-
-#bbq .rack-group{margin-top:26px;}
-#bbq .rack-group-head{
-  text-align:center; margin-bottom:12px;
-  font-weight:600; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase;
-  color:var(--red-deep);
-}
-#bbq .rack-grid{
-  display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px;
-}
-
-#bbq .rcard{
-  position:relative; display:flex; flex-direction:column;
-  padding:16px 16px 14px; border-radius:5px;
-  background:rgba(255,255,255,.55);
-  border:1.5px solid rgba(30,26,23,.18);
-}
-#bbq .rcard-title{
-  font-family:'Ultra',Georgia,serif; font-weight:400; font-size:17px; line-height:1.12;
-}
-#bbq .rcard-blurb{margin-top:6px; font-size:13px; line-height:1.5; color:var(--ink-soft);}
-#bbq .rcard-meta{
-  margin-top:8px; font-size:10px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--ink-soft);
-}
-#bbq .rcard-meta .dot{padding:0 6px;}
-#bbq .rcard-meta a{color:var(--red); text-decoration:underline; text-underline-offset:2px;}
-#bbq .rcard-who{
-  margin-top:10px; font-family:'Caveat',cursive; font-weight:700; font-size:17px;
-  line-height:1.2; color:var(--ink);
-}
-#bbq .rcard-action{margin-top:auto; padding-top:12px;}
-#bbq .rcard-locked{
-  display:block; font-size:10.5px; font-weight:500; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--ink-soft); padding:6px 0;
-}
-
-/* state: one claim. Greyed, but still challengeable. */
-#bbq .rcard.taken{background:rgba(120,110,95,.11); border-color:rgba(30,26,23,.12);}
-#bbq .rcard.taken .rcard-title{color:#7A7161;}
-#bbq .rcard.taken .rcard-blurb, #bbq .rcard.taken .rcard-meta{opacity:.6;}
-#bbq .rcard.taken .rcard-who{color:var(--ink-soft);}
-
-/* state: yours */
-#bbq .rcard.mine{border-color:var(--ribbon); box-shadow:0 0 0 2px rgba(46,110,142,.16) inset;}
-
-/* state: head to head. Loudest thing on the board. */
-#bbq .rcard.duel{
-  background:rgba(246,197,68,.26); border:2px solid var(--red);
-  box-shadow:0 4px 14px rgba(156,23,33,.16);
-}
-#bbq .rcard.duel .rcard-who{
-  font-family:'Ultra',Georgia,serif; font-size:15px; color:var(--red-deep); line-height:1.25;
-}
-
-/* state: pantry. Never greys. */
-#bbq .rcard.pantry{background:rgba(255,255,255,.35); border-style:dashed;}
-
-#bbq .duel-flag, #bbq .mine-flag{
-  position:absolute; top:-9px; left:12px; padding:2px 9px; border-radius:999px;
-  font-size:9px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#FFF9EE;
-}
-#bbq .duel-flag{background:var(--red);}
-#bbq .mine-flag{background:var(--ribbon);}
-
-#bbq .rbtn{
-  width:100%; cursor:pointer; font-family:inherit;
-  background:var(--red); color:#FFF9EE; border:1.5px solid var(--red);
-  font-weight:600; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
-  padding:9px 12px; border-radius:999px;
-  transition:transform .08s ease, opacity .12s ease;
-}
-#bbq .rbtn:hover:not(:disabled){transform:translateY(-1px);}
-#bbq .rbtn:disabled{opacity:.5; cursor:default;}
-#bbq .rbtn.ghost{
-  background:transparent; color:var(--ink-soft); border-color:rgba(30,26,23,.3);
-}
-#bbq .rbtn.challenge{background:var(--tag); color:var(--red-deep); border-color:var(--red-deep);}
-
-/* ---------- challenge modal ---------- */
-#bbq .modal-scrim{
-  position:fixed; inset:0; z-index:60; padding:20px;
-  background:rgba(20,14,12,.68);
-  display:flex; align-items:center; justify-content:center;
-}
-#bbq .modal{
-  width:100%; max-width:380px; text-align:center;
-  background:var(--paper); border-radius:6px; padding:28px 24px 22px;
-  border:2px solid var(--red);
-  box-shadow:0 24px 50px rgba(0,0,0,.5);
-}
-#bbq .modal-kicker{
-  font-weight:600; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--red-deep);
-}
-#bbq .modal-dish{
-  margin-top:14px; font-family:'Ultra',Georgia,serif; font-size:26px; line-height:1.05;
-}
-#bbq .modal-vs{
-  margin-top:12px; font-family:'Ultra',Georgia,serif; font-size:20px; color:var(--red);
-  line-height:1.1;
-}
-#bbq .modal-vs span{
-  display:block; font-family:'Caveat',cursive; font-size:18px; color:var(--ink-soft); margin:2px 0;
-}
-#bbq .modal-fine{
-  margin-top:14px; font-size:13px; line-height:1.55; color:var(--ink-soft);
-}
-#bbq .modal-actions{display:flex; gap:10px; margin-top:20px;}
-
 /* ---------- parking ---------- */
 #bbq .notes{list-style:none; margin:0 auto; max-width:540px;}
 #bbq .notes li{
@@ -504,7 +374,8 @@ body { margin:0; padding:0; background:#1b1613; }
 
 #bbq .map{
   display:block; width:100%; height:auto; margin:18px auto 0;
-  border-radius:5px; box-shadow:0 6px 16px rgba(0,0,0,.14);
+  border-radius:5px; background:#fff; padding:8px;
+  box-shadow:0 6px 16px rgba(0,0,0,.18);
 }
 
 /* ---------- pool ---------- */
@@ -615,12 +486,11 @@ body { margin:0; padding:0; background:#1b1613; }
   #bbq .rule{font-size:9.5px; letter-spacing:.18em; gap:8px; margin:32px 0 16px;}
 
   /* burst drops below the copy instead of squeezing the gutter */
-  #bbq .rack-intro{padding:22px 20px; min-height:0;}
+  #bbq .rack{padding:22px 20px; min-height:0;}
   #bbq .burst{
     position:static; transform:rotate(4deg);
     width:104px; height:104px; margin:16px auto 0;
   }
-  #bbq .rack-grid{grid-template-columns:1fr;}
   #bbq .sched li{gap:8px; padding:8px 4px;}
   #bbq .sched .t{width:46px; font-size:14px;}
   #bbq .sched .s{width:58px; font-size:10.5px; letter-spacing:.1em;}
@@ -628,7 +498,7 @@ body { margin:0; padding:0; background:#1b1613; }
 }
 
 @media (prefers-reduced-motion:reduce){
-  #bbq .btn, #bbq .rbtn{transition:none;}
-  #bbq .btn:hover, #bbq .rbtn:hover{transform:none;}
+  #bbq .btn{transition:none;}
+  #bbq .btn:hover{transform:none;}
 }
 `;
