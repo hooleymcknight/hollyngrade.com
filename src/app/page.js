@@ -44,7 +44,11 @@ export default async function Home() {
                 <div className="flex flex-column flex-wrap justify-start gap-6 text-left sm:text-left sm:flex-nowrap mb-8 !max-w-[60ch]">
                     <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Coming Up</h2>
 
-                    <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>HEB Backyard BBQ</h3>
+                    <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>
+                        <Link href="/bbq">
+                            HEB Backyard BBQ
+                        </Link>
+                    </h3>
                     <p className="ml-0 block w-full"><time dateTime="2026-08-22">Saturday, August 22nd</time></p>
                     <p className="mt-6 !max-w-[60ch] ml-0 mr-auto">
                         Come eat, swim, play cornhole, sing karaoke! I’ll post what to bring closer to the date. <a href="sms:+19364251225?&body=I%27ll%20be%20there%21" style={{ fontWeight: 'normal' }} className="underline decoration-1 underline-offset-4 !text-slate-800 hover:text-slate-900 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2">Text me if you’re interested</a>.{" "}
