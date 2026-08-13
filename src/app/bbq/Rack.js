@@ -174,6 +174,7 @@ export default function Rack({ recipes, guest, token }) {
                   recipe={r}
                   guest={guest}
                   signedIn={signedIn}
+                  token={token}
                   addOn={r.pairs_with ? bySlug.get(r.pairs_with) : null}
                   onAddOn={(id) => send('claim', id)}
                   busy={pending === r.id}
@@ -200,7 +201,7 @@ export default function Rack({ recipes, guest, token }) {
   );
 }
 
-function Card({ recipe, guest, signedIn, busy, addOn, onAddOn, onClaim, onRelease, onChallenge }) {
+function Card({ recipe, guest, signedIn, token, busy, addOn, onAddOn, onClaim, onRelease, onChallenge }) {
   const unlimited = recipe.claim_cap === null;
   const claims = recipe.claims || [];
   const mine = guest ? claims.some((c) => c.guestId === guest.id) : false;
@@ -219,6 +220,11 @@ function Card({ recipe, guest, signedIn, busy, addOn, onAddOn, onClaim, onReleas
 
   // What a browsing (tokenless) visitor sees in the action slot -- the one
   // thing they actually want to know, which is whether it's still available.
+  // H-E-B recipes link out; family recipes render at /bbq/r/[slug], which needs
+  // the token passed along since that page is gated.
+  const recipeHref = recipe.recipe_url
+    || (recipe.has_body ? `/bbq/r/${recipe.slug}?k=${encodeURIComponent(token || '')}` : null);
+
   const addOnClaimed = Boolean(
     addOn && guest && (addOn.claims || []).some((c) => c.guestId === guest.id)
   );
@@ -240,14 +246,15 @@ function Card({ recipe, guest, signedIn, busy, addOn, onAddOn, onClaim, onReleas
 
       <p className="rcard-meta">
         <span className="effort">{EFFORT[recipe.effort]}</span>
-        {recipe.recipe_url && (
+        {recipeHref && (
           <>
             <span className="dot">&middot;</span>
-            <a href={recipe.recipe_url} target="_blank" rel="noopener noreferrer">
+            <a href={recipeHref} target="_blank" rel="noopener noreferrer">
               the recipe
             </a>
           </>
         )}
+        {recipe.source === 'family' && <span className="fam">family</span>}
       </p>
 
       {claims.length > 0 && (
@@ -323,3 +330,4 @@ function ChallengeModal({ recipe, guest, busy, onCancel, onConfirm }) {
     </div>
   );
 }
+
