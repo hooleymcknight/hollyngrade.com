@@ -156,8 +156,9 @@ export default async function BbqPage({ searchParams }) {
               </li>
               <li><span className="act-name">Cornhole.</span> Set up in the yard.</li>
               <li>
-                <span className="act-name">Firepit, after dark.</span> Evening-time friends, come by after
-                work &mdash; you won&rsquo;t have missed anything. Feel free to bring some s&rsquo;mores stuff; I&rsquo;ve got a few roasting sticks.
+                <span className="act-name">Firepit, after dark.</span> <span>Evening-time friends, come by after
+                work &mdash; you won&rsquo;t have missed anything. Feel free to bring some s&rsquo;mores stuff; I&rsquo;ve got a few roasting sticks.</span>
+                <span style="display: block; color: var(--red-deep); margin-top: 3px; font-weight: bold;">&nbsp;&nbsp; &cross; &nbsp; No firepit, due to statewide burning ban through September 30</span>
               </li>
             </ul>
 
