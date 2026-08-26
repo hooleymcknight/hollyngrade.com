@@ -156,8 +156,14 @@ export default async function BbqPage({ searchParams }) {
               </li>
               <li><span className="act-name">Cornhole.</span> Set up in the yard.</li>
               <li>
-                <span className="act-name">Firepit, after dark.</span> Evening-time friends, come by after
-                work &mdash; you won&rsquo;t have missed anything. Feel free to bring some s&rsquo;mores stuff; I&rsquo;ve got a few roasting sticks.
+                <span className="act-name" style={{ textDecoration: 'line-through' }}>Firepit, after dark.</span> <span style={{ textDecoration: 'line-through' }}>Evening-time friends, come by after
+                work &mdash; you won&rsquo;t have missed anything. Feel free to bring some s&rsquo;mores stuff; I&rsquo;ve got a few roasting sticks.</span>
+                <span
+                    style={{ display: 'block', color: 'var(--red-deep)', marginTop: '3px', marginBottom: '3px', fontWeight: 'bold' }}
+                >
+                    &nbsp;&nbsp; ✗ &nbsp; No firepit, due to statewide burn ban through September 30
+                </span>
+                There will be blankets if anyone gets chilly.
               </li>
             </ul>
 
