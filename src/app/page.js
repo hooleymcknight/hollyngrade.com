@@ -44,16 +44,20 @@ export default async function Home() {
                 <div className="flex flex-column flex-wrap justify-start gap-6 text-left sm:text-left sm:flex-nowrap mb-8 !max-w-[60ch]">
                     <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Coming Up</h2>
 
+                    <p className="ml-0 block w-full" style={{ fontSize: 17, marginBottom: 42, fontStyle: "italic" }}>
+                        A nice long break after BBQ season... Stay tuned for fall shenanigans.
+                    </p>
+
+                    <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Past Events</h2>
+
                     <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>
-                        <Link href="/bbq">
+                        {/* <Link href="/bbq"> */}
                             HEB Backyard BBQ
-                        </Link>
+                        {/* </Link> */}
                     </h3>
-                    <p className="ml-0 block w-full"><time dateTime="2026-08-22">Saturday, August 22nd</time></p>
-                    <p className="mt-6 !max-w-[60ch] ml-0 mr-auto">
-                        Come eat, swim, play cornhole, sing karaoke! I’ll post what to bring closer to the date. <a href="sms:+19364251225?&body=I%27ll%20be%20there%21" style={{ fontWeight: 'normal' }} className="underline decoration-1 underline-offset-4 !text-slate-800 hover:text-slate-900 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2">Text me if you’re interested</a>.{" "}
-                        <br /><br />
-                        The karaoke is homemade! Send me your song requests and I’ll do my best to get it turned into karaoke format for the BBQ!
+                    <p className="ml-0 block w-full mb-0"><time dateTime="2026-08-22">Saturday, August 22nd</time></p>
+                    <p className="mt-4 !max-w-[60ch] ml-0 mr-auto">
+                        Eating, swimming, cornhole, and singing proudly into the night. StarCat Karaoke, built from scratch for the occasion.
                     </p>
                 </div>
             </Main>
