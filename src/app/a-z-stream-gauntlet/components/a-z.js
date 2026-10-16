@@ -2,7 +2,7 @@ export default async function AzLogo(props) {
 
     return (
         <>
-            <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'inline-block', width: props.width, height: 'auto' }} viewBox="0 0 1784.63 826.00" width="1785" height="826" role="img" aria-label="A-Z" xmlnsC2pa="http://c2pa.org/manifest">
+            <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'inline-block', width: props.width, height: 'auto' }} viewBox="0 0 1784.63 826.00" width="1785" height="826" role="img" aria-label="A-Z" xmlnsc2pa="http://c2pa.org/manifest">
                 <title>A-Z</title>
                 <desc>A-Z</desc>
                 <g fill="#000000">

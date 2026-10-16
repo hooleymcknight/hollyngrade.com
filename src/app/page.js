@@ -46,9 +46,9 @@ export default async function Home() {
                         <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Coming Up</h2>
 
                         <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>
-                            {/* <Link href="/a-z-stream-gauntlet"> */}
+                            <Link href="/a-z-stream-gauntlet">
                                 A-Z Stream Gauntlet
-                            {/* </Link> */}
+                            </Link>
                         </h3>
                         <p className="ml-0 block w-full mb-0">
                             <time dateTime="2026-10-23">Friday, October 23rd</time> &ndash;{' '}
