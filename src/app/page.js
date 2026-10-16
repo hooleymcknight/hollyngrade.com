@@ -42,23 +42,40 @@ export default async function Home() {
 
             <Main id="coming-up" classes={'mb-8'} style={{ marginBottom: 8 }}>
                 <div className="flex flex-column flex-wrap justify-start gap-6 text-left sm:text-left sm:flex-nowrap mb-8 !max-w-[60ch]">
-                    <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Coming Up</h2>
+                    <div className="events-section">
+                        <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Coming Up</h2>
 
-                    <p className="ml-0 block w-full" style={{ fontSize: 17, marginBottom: 42, fontStyle: "italic" }}>
-                        A nice long break after BBQ season... Stay tuned for fall shenanigans.
-                    </p>
+                        <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>
+                            {/* <Link href="/a-z-stream-gauntlet"> */}
+                                A-Z Stream Gauntlet
+                            {/* </Link> */}
+                        </h3>
+                        <p className="ml-0 block w-full mb-0">
+                            <time dateTime="2026-10-23">Friday, October 23rd</time> &ndash;{' '}
+                            <time dateTime="2026-10-23">Friday, October 23rd</time>
+                        </p>
+                        <p className="mt-4 !max-w-[60ch] ml-0 mr-auto">
+                            Eating, swimming, cornhole, and singing proudly into the night. StarCat Karaoke, built from scratch for the occasion.
+                        </p>
 
-                    <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Past Events</h2>
+                        {/* <p className="ml-0 block w-full" style={{ fontSize: 17, fontStyle: "italic" }}>
+                            A nice long break after BBQ season... Stay tuned for fall shenanigans.
+                        </p> */}
+                    </div>
+                    
+                    <div className="events-section">
+                        <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Past Events</h2>
 
-                    <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>
-                        {/* <Link href="/bbq"> */}
-                            HEB Backyard BBQ
-                        {/* </Link> */}
-                    </h3>
-                    <p className="ml-0 block w-full mb-0"><time dateTime="2026-08-22">Saturday, August 22nd</time></p>
-                    <p className="mt-4 !max-w-[60ch] ml-0 mr-auto">
-                        Eating, swimming, cornhole, and singing proudly into the night. StarCat Karaoke, built from scratch for the occasion.
-                    </p>
+                        <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>
+                            {/* <Link href="/bbq"> */}
+                                HEB Backyard BBQ
+                            {/* </Link> */}
+                        </h3>
+                        <p className="ml-0 block w-full mb-0"><time dateTime="2026-08-22">Saturday, August 22nd</time></p>
+                        <p className="mt-4 !max-w-[60ch] ml-0 mr-auto">
+                            Eating, swimming, cornhole, and singing proudly into the night. StarCat Karaoke, built from scratch for the occasion.
+                        </p>
+                    </div>
                 </div>
             </Main>
         </>

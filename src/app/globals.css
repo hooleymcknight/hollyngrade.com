@@ -5,6 +5,7 @@
     --foreground: #171717;
     --chasm:#B0342A;
     --koda:#2E6E8E;
+    --hollyngrade-red: #5f0000;
 }
 
 .allerta-regular {
@@ -70,11 +71,13 @@ ul, menu, dir {
 }
 
 /* link in a paragraph */
-p a {
-    color: #5f0000;
+p a,
+a.red-link {
+    color: var(--hollyngrade-red);
     font-weight: 700;
 }
-p a:hover {
+p a:hover,
+a.red-link:hover {
     text-decoration: underline;
     text-underline-offset: 2px;
 }
@@ -101,6 +104,10 @@ a, button {
 
 .twitch-embed-container[data-active="false"] #twitch-embed {
     display: none;
+}
+
+.events-section {
+    margin-bottom: 40px;
 }
 
 /* photos gallery */
