@@ -12,7 +12,7 @@
     "K": ["Kingdom Hearts: Birth by Sleep"],
     "L": ["Lords of the Fallen", "Life Is Strange"],
     "M": ["Monster Hunter: World", "Mass Effect", "Marathon"],
-    "N": ["Neva"],
+    "N": ["Neva", "Nier:Automata"],
     "O": ["One Hour One Life", "Ori and the Blind Forest"],
     "P": ["Pathologic", "PEAK"],
     "Q": ["The Quarry"],
@@ -21,8 +21,8 @@
     "T": ["Trash Day", "Timelie"],
     "U": ["Undertale"],
     "V": ["Venba", "VALORANT"],
-    "W": ["<Witcher 3>", "The Witness"],
+    "W": ["The Witcher 3: Wild Hunt", "The Witness"],
     "X": ["X8", "X-MODE", "X-Ray 2D"],
-    "Y": ["YAPYAP"],
+    "Y": ["YAPYAP", "Yomawari: Night Alone"],
     "Z": ["Zero-K", "Zenless Zone Zero"]
 }
