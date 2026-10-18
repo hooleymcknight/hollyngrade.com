@@ -70,6 +70,12 @@ ul, menu, dir {
     -webkit-padding-start: 40px;
 }
 
+hr {
+    /* background-color: black; */
+    width: 100%;
+    margin: 20px 0;
+}
+
 /* link in a paragraph */
 p a,
 a.red-link {

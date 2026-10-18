@@ -1,0 +1,10 @@
+.azBlock {
+    --az-accent: #F2A93B;
+
+    background: rgba(5, 5, 5, 0.6);
+    color: #f7e9e0;
+}
+
+.azAccent {
+    color: var(--az-accent);
+}

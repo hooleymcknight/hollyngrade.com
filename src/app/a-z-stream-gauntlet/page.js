@@ -7,6 +7,20 @@ import Main from '../components/mainWrapper';
 
 import AzLogo from "./components/a-z";
 import GameListing from "./components/gameListing";
+import styles from "./az.module.css";
+import data from './az_data.json';
+
+const today = new Date('10/31/2026');
+
+const startDay = new Date('10/23/2026');
+const offDay = new Date('10/30/2026');
+const endDay = new Date('11/18/2026');
+
+const daysUntilBreak = Math.round((offDay - today) / 1000 / 60 / 60 / 24);
+const daysPassed = today < offDay ? Math.round((today - startDay) / 1000 / 60 / 60 / 24) + 1
+    : 26 - (Math.round((endDay - today) / 1000 / 60 / 60 / 24));
+
+// .toLocaleDateString('en-US', {timezone: 'America/Los_Angeles', 'month': 'numeric', 'day': '2-digit' });
 
 export default async function AzGauntlet() {
     let isLive = false;
@@ -17,64 +31,53 @@ export default async function AzGauntlet() {
 
     return (
         <>
-            <Main classes={'flex-row flex-wrap justify-start gap-4 items-end'} id="coming-soon">
+            <Main classes={styles.azBlock + ' flex-row flex-wrap justify-start gap-4 items-end'} id="heading">
                 <div className="flex flex-row flex-wrap justify-center items-center gap-6 text-center sm:text-left">
-                    <AzLogo width="calc(90% - 320px)" />
-                    <h1 style={{ fontSize: 40 }} className="max-w-xs font-semibold leading-10 tracking-tight text-black">
+                    <AzLogo width="calc(90% - 320px)" color="#fff" />
+                    <h1 style={{ fontSize: 40 }} className={styles.azAccent + " max-w-xs font-semibold leading-10 tracking-tight"}>
                         Stream Gauntlet
                     </h1>
 
                     <div className="flex flex-col flex-nowrap">
-                        <p className=" text-[18px] leading-7 text-zinc-800 my-0 mt-4 md:block">
+                        <p className=" text-[18px] leading-7 my-0 mt-4 md:block">
                             Each day, I'll play a game whose title starts with the next letter of the alphabet. Experience the gauntlet with me!
                         </p>
+                    </div>
+
+                    <div className={styles.azProgressBar + ' flex flex-col w-full'}>
+                        <div className="flex justify-between w-full">
+                            <span className="uppercase font-semibold tracking-wide text-sm">Day {daysPassed}</span>
+                            <span className="uppercase font-semibold tracking-wide text-sm">26 Letters</span>
+                        </div>
+                        <div style={{ background: 'rgba(255, 255, 255, 0.4)' }} className="h-[5px] w-full rounded-[8px] mt-2">
+                            <div className="w-0 bg-[var(--az-accent)] h-[5px] rounded-[8px]" style={{ width: `${(daysPassed / 26) * 100}%` }} ></div>
+                        </div>
+                    </div>
+                </div>
+            </Main>
+
+            <Main classes={styles.azBlock + ' flex-row flex-wrap justify-start gap-4 items-end'} id="current-letter">
+                <div className="flex flex-row flex-wrap justify-center items-center gap-6 text-center sm:text-left">
+
+                    <div className={' flex'}>
+                        <div className="text-[150px]" style={{ fontFamily: 'Stencil', lineHeight: 1 }}>
+                            {Object.keys(data)[daysPassed - 1]}
+                        </div>
+                        
+                        <div className={' flex flex-col flex-start'}>
+                            <p>
+                                <span className={styles.azToday}>Today</span>
+                                <span>{ today.toLocaleDateString('en-US', {timezone: 'America/Los_Angeles', 'weekday': 'short', 'month': 'short', 'day': 'numeric' }) }</span>
+                            </p>
+                        </div>
                     </div>
 
                     <TwitchEmbed live={isLive} />
                 </div>
             </Main>
 
-            <Main id="coming-up" classes={'mb-8'} style={{ marginBottom: 8 }}>
-                <div className="flex flex-column flex-wrap justify-start gap-6 text-left sm:text-left sm:flex-nowrap mb-8 !max-w-[60ch]">
-
-                    <GameListing date="10/23" title="Alien Isolation / Arc Raiders" />
-                    <GameListing date="10/24" title="Big Walk / Beat Saber / Baldur's Gate 3" />
-                    <GameListing date="10/25" title="Cyberpunk 2077 / Coral Island" />
-                    <GameListing date="10/26" title="Dead by Daylight / Death Stranding 2" />
-                    <GameListing date="10/27" title="<Elden Ring> / <ESO>" />
-                        <meta content=" / <Eternal Threads>" />
-                    <GameListing date="10/28" title="Fortnite / <Fallout 76>" />
-                        <meta content=" / <Funger>" />
-                    <GameListing date="10/29" title="GTFO" />
-                        <meta content=" / <Ghostwire: Tokyo>" />
-
-                    <hr/>
-
-                    <GameListing date="10/31" title="Hollow Knight" />
-                    <GameListing date="11/1" title="ICO" />
-                    <GameListing date="11/2" title="{{ J }}" />
-                        <meta content="<Jusant>" />
-                    <GameListing date="11/3" title="Keplerth" />
-                    <GameListing date="11/4" title="Lords of the Fallen / Life Is Strange" />
-                    <GameListing date="11/5" title="Monster Hunter: World / Mass Effect / Marathon" />
-                    <GameListing date="11/6" title="Neva" />
-                    <GameListing date="11/7" title="One Hour One Life / Ori and the Blind Forest" />
-                    <GameListing date="11/8" title="Pathologic / PEAK" />
-                    <GameListing date="11/9" title="{{ Q }}" />
-                        <meta content="<The Quarry>" />
-                    <GameListing date="11/10" title="RiME / R.E.P.O." />
-                    <GameListing date="11/11" title="Silent Hill f / Shadow of the Colossus" />
-                    <GameListing date="11/12" title="Trash Day" />
-                        <meta content=" / <Timelie>" />
-                    <GameListing date="11/13" title="Undertale" />
-                    <GameListing date="11/14" title="Venba / VALORANT" />
-                    <GameListing date="11/15" title="{{ W }}" />
-                        <meta content="Witcher 3 / The Witness / <Warframe>" />
-                    <GameListing date="11/16" title="X8 / X-MODE / X-Ray 2D" />
-                    <GameListing date="11/17" title="YAPYAP" />
-                    <GameListing date="11/18" title="Zero-K / Zenless Zone Zero" />
-
-                </div>
+            <Main id="upcoming-letters" classes={styles.azBlock + ' mb-8'} style={{ marginBottom: 8 }}>
+                <p>asdf</p>
             </Main>
         </>
     );
