@@ -41,7 +41,7 @@ export default async function Home() {
             </Main>
 
             <Main id="coming-up" classes={'mb-8'} style={{ marginBottom: 8 }}>
-                <div className="flex flex-column flex-wrap justify-start gap-6 text-left sm:text-left sm:flex-nowrap mb-8 !max-w-[60ch]">
+                <div className="flex flex-col flex-wrap justify-start gap-6 text-left sm:text-left sm:flex-nowrap mb-8 !max-w-[60ch]">
                     <div className="events-section">
                         <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Coming Up</h2>
 

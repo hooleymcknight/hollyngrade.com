@@ -1,28 +1,106 @@
 {
-    "A": ["Alien Isolation", "ARC Raiders"],
-    "B": ["Big Walk", "Beat Saber", "Baldur's Gate 3"],
-    "C": ["Cyberpunk 2077", "Coral Island"],
-    "D": ["Dead by Daylight", "Death Stranding 2"],
-    "E": ["<Elden Ring>", "<ESO>", "<Eternal Threads>"],
-    "F": ["Fortnite", "<Fallout 76>", "<Funger>"],
-    "G": ["GTFO", "<Ghostwire: Tokyo>"],
-    "H": ["Hollow Knight"],
-    "I": ["ICO"],
-    "J": ["Jusant"],
-    "K": ["Kingdom Hearts: Birth by Sleep"],
-    "L": ["Lords of the Fallen", "Life Is Strange"],
-    "M": ["Monster Hunter: World", "Mass Effect", "Marathon"],
-    "N": ["Neva", "Nier:Automata"],
-    "O": ["One Hour One Life", "Ori and the Blind Forest"],
-    "P": ["Pathologic", "PEAK"],
-    "Q": ["The Quarry"],
-    "R": ["RiME", "R.E.P.O."],
-    "S": ["Silent Hill f", "Shadow of the Colossus"],
-    "T": ["Trash Day", "Timelie"],
-    "U": ["Undertale"],
-    "V": ["Venba", "VALORANT"],
-    "W": ["The Witcher 3: Wild Hunt", "The Witness"],
-    "X": ["X8", "X-MODE", "X-Ray 2D"],
-    "Y": ["YAPYAP", "Yomawari: Night Alone"],
-    "Z": ["Zero-K", "Zenless Zone Zero"]
+    "A": {
+        "date": "Oct 23",
+        "games": ["Alien Isolation", "ARC Raiders"]
+    },
+    "B": {
+        "date": "Oct 24",
+        "games": ["Big Walk", "Beat Saber", "Baldur's Gate 3"]
+    },
+    "C": {
+        "date": "Oct 25",
+        "games": ["Cyberpunk 2077", "Coral Island"]
+    },
+    "D": {
+        "date": "Oct 26",
+        "games": ["Dead by Daylight", "Death Stranding 2"]
+    },
+    "E": {
+        "date": "Oct 27",
+        "games": ["<Elden Ring>", "<ESO>", "<Eternal Threads>"]
+    },
+    "F": {
+        "date": "Oct 28",
+        "games": ["Fortnite", "<Fallout 76>", "<Funger>"]
+    },
+    "G": {
+        "date": "Oct 29",
+        "games": ["GTFO", "<Ghostwire: Tokyo>"]
+    },
+    "H": {
+        "date": "Oct 31",
+        "games": ["Hollow Knight"]
+    },
+    "I": {
+        "date": "Nov 1",
+        "games": ["ICO"]
+    },
+    "J": {
+        "date": "Nov 2",
+        "games": ["Jusant"]
+    },
+    "K": {
+        "date": "Nov 3",
+        "games": ["Kingdom Hearts: Birth by Sleep"]
+    },
+    "L": {
+        "date": "Nov 4",
+        "games": ["Lords of the Fallen", "Life Is Strange"]
+    },
+    "M": {
+        "date": "Nov 5",
+        "games": ["Monster Hunter: World", "Mass Effect", "Marathon"]
+    },
+    "N": {
+        "date": "Nov 6",
+        "games": ["Neva", "Nier:Automata"]
+    },
+    "O": {
+        "date": "Nov 7",
+        "games": ["One Hour One Life", "Ori and the Blind Forest"]
+    },
+    "P": {
+        "date": "Nov 8",
+        "games": ["Pathologic", "PEAK"]
+    },
+    "Q": {
+        "date": "Nov 9",
+        "games": ["The Quarry"]
+    },
+    "R": {
+        "date": "Nov 10",
+        "games": ["RiME", "R.E.P.O."]
+    },
+    "S": {
+        "date": "Nov 11",
+        "games": ["Silent Hill f", "Shadow of the Colossus"]
+    },
+    "T": {
+        "date": "Nov 12",
+        "games": ["Trash Day", "Timelie"]
+    },
+    "U": {
+        "date": "Nov 13",
+        "games": ["Undertale"]
+    },
+    "V": {
+        "date": "Nov 14",
+        "games": ["Venba", "VALORANT"]
+    },
+    "W": {
+        "date": "Nov 15",
+        "games": ["The Witcher 3: Wild Hunt", "The Witness"]
+    },
+    "X": {
+        "date": "Nov 16",
+        "games": ["X8", "X-MODE", "X-Ray 2D"]
+    },
+    "Y": {
+        "date": "Nov 17",
+        "games": ["YAPYAP", "Yomawari: Night Alone"]
+    },
+    "Z": {
+        "date": "Nov 18",
+        "games": ["Zero-K", "Zenless Zone Zero"]
+    }
 }

@@ -14,7 +14,7 @@ export default function Main({ id, classes, styles, children }) {
             className={`${classes || ''} main-child flex flex-col w-[95%] max-w-3xl items-center justify-between py-8 px-4 sm:p-16 bg-[#fafafa99] mt-8 ${idx > 0 ? 'mb-8' : '0'}`}
             style={{ ...styles }}
         >
-            {children.props.children}
+            {children}
         </div>
     );
 }

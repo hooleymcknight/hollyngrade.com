@@ -1,10 +1,79 @@
 .azBlock {
     --az-accent: #F2A93B;
+    --cream-color: #f7e9e0;
+    --dark-cream: #CBB8B0;
 
-    background: rgba(5, 5, 5, 0.6);
-    color: #f7e9e0;
+    background: rgba(5, 5, 5, 0.8);
+    color: var(--cream-color);
+    padding: 40px;
 }
 
 .azAccent {
     color: var(--az-accent);
+}
+
+.azToday {
+    background: var(--az-accent);
+    color: #111;
+    padding: 4px 12px;
+    border-radius: 30px;
+}
+
+.azTodaysGame {
+    font-size: 40px;
+    font-family: 'Allerta', Arial, Helvetica, sans-serif;
+}
+
+.letterBox {
+    position: relative;
+    padding: 6px;
+    margin: 4px;
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    width: calc(100% / 6 - 8px);
+    border-radius: 8px;
+    /* background: rgba(5, 5, 5, 0.4); */
+    background: rgba(255, 255, 255, 0.16);
+    align-items: center;
+}
+
+.letterBox .letter {
+    font-family: 'Saira Stencil One';
+    font-size: 52px;
+    color: var(--cream-color);
+    line-height: 1;
+}
+
+.letterBox.highlighted {
+    border-color: var(--az-accent);
+    box-shadow: 0 0 0 1px #F2A93B, 0 0 26px #F2A93B73;
+    background: rgba(255, 255, 255, 0.25);
+    color: var(--az-accent);
+}
+
+.letterBox.highlighted span {
+    color: var(--az-accent);
+}
+
+.letterBox.passed {
+    opacity: 0.7;
+}
+
+.letterBox.passed span {
+    color: var(--dark-cream);
+}
+
+.letterBox svg {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: none;
+}
+
+.letterBox.passed svg {
+    display: block;
 }

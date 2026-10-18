@@ -1,4 +1,4 @@
-export default async function AzLogo(props) {
+export default function AzLogo(props) {
 
     return (
         <>
