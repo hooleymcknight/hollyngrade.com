@@ -46,16 +46,16 @@ export default async function Home() {
                         <h2 className="mb-4 ml-0 block w-full text-sm" style={{ textTransform: 'uppercase', letterSpacing: '0.75px', fontSize: 18, fontWeight: 500 }}>Coming Up</h2>
 
                         <h3 className="ml-0 block w-full" style={{ fontSize: 24 }}>
-                            <Link href="/a-z-stream-gauntlet">
+                            <Link href="/a-z-stream-gauntlet" className="red-link">
                                 A-Z Stream Gauntlet
                             </Link>
                         </h3>
                         <p className="ml-0 block w-full mb-0">
                             <time dateTime="2026-10-23">Friday, October 23rd</time> &ndash;{' '}
-                            <time dateTime="2026-10-23">Friday, October 23rd</time>
+                            <time dateTime="2026-10-23">Wednesday, November 18th</time>
                         </p>
                         <p className="mt-4 !max-w-[60ch] ml-0 mr-auto">
-                            Eating, swimming, cornhole, and singing proudly into the night. StarCat Karaoke, built from scratch for the occasion.
+                            Each day, I'll play a game whose title starts with the next letter of the alphabet. Experience the gauntlet with me!
                         </p>
 
                         {/* <p className="ml-0 block w-full" style={{ fontSize: 17, fontStyle: "italic" }}>
