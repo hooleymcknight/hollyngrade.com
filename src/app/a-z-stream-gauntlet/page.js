@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 const today = new Date();
 
 const startDay = new Date('10/23/2026');
-// const offDay = new Date('10/30/2026');
+const offDay = new Date('10/30/2026');
 // const endDay = new Date('11/18/2026');
 // const daysUntilBreak = Math.round((offDay - today) / 1000 / 60 / 60 / 24);
 
@@ -70,7 +70,7 @@ export default function AzGauntlet() {
                     <div className={styles.azProgressBar + ' flex flex-col w-full'}>
                         <div className="flex justify-between w-full">
                             <span className="uppercase font-semibold tracking-wide text-sm">
-                                {daysPassed ? `Day ${daysPassed}` : 'Starting Oct 23'}
+                                {daysPassed ? `Day ${today < offDay ? daysPassed : daysPassed - 1}` : 'Starting Oct 23'}
                             </span>
                             <span className="uppercase font-semibold tracking-wide text-sm">
                                 26 Letters
