@@ -5,7 +5,8 @@
     },
     "B": {
         "date": "Oct 24",
-        "games": ["Big Walk", "Beat Saber", "Baldur's Gate 3"]
+        "games": ["Big Walk", "Beat Saber"],
+        "backup_games": ["Baldur's Gate 3"]
     },
     "C": {
         "date": "Oct 25",
@@ -17,15 +18,17 @@
     },
     "E": {
         "date": "Oct 27",
-        "games": ["<Elden Ring>", "<ESO>", "<Eternal Threads>"]
+        "games": ["Eternal Threads"],
+        "backup_games": ["<ESO>", "<Elden Ring>"]
     },
     "F": {
         "date": "Oct 28",
-        "games": ["Fortnite", "<Fallout 76>", "<Funger>"]
+        "games": ["Fortnite", "<Funger>"],
+        "backup_games": ["<Fallout 76>"]
     },
     "G": {
         "date": "Oct 29",
-        "games": ["GTFO", "<Ghostwire: Tokyo>"]
+        "games": ["GTFO", "Ghostwire: Tokyo"]
     },
     "H": {
         "date": "Oct 31",
@@ -49,7 +52,8 @@
     },
     "M": {
         "date": "Nov 5",
-        "games": ["Monster Hunter: World", "Mass Effect", "Marathon"]
+        "games": ["Mass Effect", "Monster Hunter: World"],
+        "backup_games": ["Marathon"]
     },
     "N": {
         "date": "Nov 6",
@@ -89,11 +93,12 @@
     },
     "W": {
         "date": "Nov 15",
-        "games": ["The Witcher 3: Wild Hunt", "The Witness"]
+        "games": ["The Witcher 3", "The Witness"]
     },
     "X": {
         "date": "Nov 16",
-        "games": ["X8", "X-MODE", "X-Ray 2D"]
+        "games": ["X8", "X-MODE"],
+        "backup_games": ["X-Ray 2D"]
     },
     "Y": {
         "date": "Nov 17",

@@ -13,10 +13,23 @@
 }
 
 .azToday {
+    border: 1px solid var(--az-accent);
     background: var(--az-accent);
     color: #111;
     padding: 4px 12px;
     border-radius: 30px;
+}
+
+.azToday.done {
+    background: transparent;
+    color: var(--dark-cream);
+    border: 1px solid var(--dark-cream);
+}
+
+.azToday.future {
+    background: transparent;
+    color: #fff;
+    border: 1px solid var(--dark-cream);
 }
 
 .azTodaysGame {
@@ -76,4 +89,45 @@
 
 .letterBox.passed svg {
     display: block;
+}
+
+.letterBox.future {
+    visibility: visible;
+}
+
+.letterBox.selected:not(.highlighted) {
+    border-color: #fff;
+}
+
+@media only screen and (max-width: 700px) {
+    .letterBox {
+        width: calc(100% / 4 - 8px)
+    }
+}
+
+/** mobile display of letter boxes **/
+
+@media only screen and (max-width: 700px) {
+    .azBlock.upcomingLetters {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        overflow-x: hidden;
+        padding: 12px 0;
+        margin: 0;
+    }
+    .allLetters {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 0 12px;
+    }
+    .letterBox {
+        min-width: 70px;
+    }
+    .azBlock.currentLetter {
+        margin-bottom: 32px;
+    }
 }

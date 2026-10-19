@@ -62,6 +62,7 @@ export default async function RootLayout({ children }) {
     const searchParams = Object.fromEntries(
         new URLSearchParams(headerStore.get('searchParams') || '')
     );
+    const pathname = headerStore.get('hg-pathname');
 
     return (
         <html lang="en">
@@ -74,12 +75,12 @@ export default async function RootLayout({ children }) {
             </head>
             <body className={`antialiased`}>
                 <SessionProvider session={session}>
-                    <main className={`flex flex-col min-h-screen items-center justify-center`}>
+                    <main pathname={pathname.replace('/', '')} className={`flex flex-col min-h-screen items-center justify-center`}>
                         {children}
                     </main>
 
                     <footer className="flex flex-col w-[85%] max-w-2xl items-center justify-between mx-auto py-2 px-2 sm:p-4 bg-zinc-50 mt-8 mb-10">
-                        <ul className="!list-none !pl-0 !flex flex-row w-full justify-center gap-8">
+                        <ul className="!list-none !pl-0 !flex flex-wrap flex-row w-full justify-center sm:gap-x-8 gap-x-4 gap-y-4">
                             <li><Link href="https://twitch.tv/hollyngrade"
                                 className="underline decoration-1 underline-offset-4 text-slate-800 hover:text-slate-900 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2">
                                     Twitch</Link></li>

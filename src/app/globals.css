@@ -26,6 +26,10 @@
     } */
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     /* background: var(--background); */
     background-image: url('../../public/nasa-space.jpg');
@@ -240,4 +244,10 @@ footer {
 
 footer ul, footer li, footer a, footer p {
     font-size: 14px;
+}
+
+@media only screen and (max-width: 700px) {
+    main[pathname="a-z-stream-gauntlet"] + footer {
+        margin-bottom: 150px;
+    }
 }
