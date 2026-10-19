@@ -22,7 +22,7 @@ const endDay = new Date('11/18/2026');
 // .toLocaleDateString('en-US', {timezone: 'America/Los_Angeles', 'month': 'numeric', 'day': '2-digit' });
 
 export default function AzGauntlet() {
-    const [selectedDay, setSelectedDay] = useState(today);
+    const [selectedDay, setSelectedDay] = useState(today < startDay ? startDay : today);
     
     const daysUntilBreak = Math.round((offDay - today) / 1000 / 60 / 60 / 24);
     const daysPassed = today < startDay ? 0 : today < offDay ? Math.round((today - startDay) / 1000 / 60 / 60 / 24) + 1
@@ -51,8 +51,6 @@ export default function AzGauntlet() {
             : 26 - (Math.round((endDay - selectedDay) / 1000 / 60 / 60 / 24));
         sdDataObj = data[Object.keys(data)[sdDaysPassed - 1]];
         sdLetter = Object.keys(data)[Object.values(data).indexOf(sdDataObj)];
-
-        console.log(selectedDay)
     }, [selectedDay]);
 
     return (

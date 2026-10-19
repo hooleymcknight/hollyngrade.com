@@ -12,6 +12,10 @@ import "./globals.css";
 //   description: "full website coming soon",
 // };
 
+export const viewport = {
+    viewportFit: 'cover',
+};
+
 export async function generateMetadata({}, parent) {
     const headersList = await headers();
     const pathname = headersList.get("hg-pathname") || "";
