@@ -13,7 +13,7 @@ import styles from "./az.module.css";
 import data from './az_data.json';
 import { useEffect, useState } from "react";
 
-const today = new Date('10/24/2026');
+const today = new Date();
 
 const startDay = new Date('10/23/2026');
 const offDay = new Date('10/30/2026');
