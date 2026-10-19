@@ -116,6 +116,10 @@ a, button {
     display: none;
 }
 
+[pathname="a-z-stream-gauntlet"] #twitch-embed {
+    margin-top: 0;
+}
+
 .events-section {
     margin-bottom: 40px;
 }
