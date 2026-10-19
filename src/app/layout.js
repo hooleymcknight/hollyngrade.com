@@ -43,7 +43,7 @@ export async function generateMetadata({}, parent) {
     }
     else if (pathname.startsWith('/a-z-stream-gauntlet')) {
         pageTitle = 'A-Z Stream Gauntlet | hollyngrade';
-        pageDesc = 'A game for every letter. Oct 23 through Nov 18.';
+        pageDesc = 'Each day, I\'ll play a game whose title starts with the next letter of the alphabet. Join the gauntlet on Twitch!';
         metaImg = [{ url: '/meta/az-discord-embed.png', width: 1200, height: 630, alt: 'A-Z Stream Gauntlet: a game for every letter, Oct 23 through Nov 18, on twitch.tv/hollyngrade' }];
     }
     
