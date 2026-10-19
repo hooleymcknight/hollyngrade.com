@@ -1,7 +1,6 @@
 import GhostyBoy from "./ghostyBoy";
 
 export default function DetailCard(props) {
-    console.log(props)
 
     return (
         <>

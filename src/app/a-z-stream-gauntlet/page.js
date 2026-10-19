@@ -1,9 +1,7 @@
 'use client'
 
-import Image from "next/image";
 import TwitchEmbed from '../components/TwitchEmbed/twitchEmbed';
 import DonationButtons from "../components/TwitchEmbed/donationButtons";
-import Link from "next/link";
 import Main from '../components/mainWrapper';
 
 import AzLogo from "./components/a-z";
@@ -15,39 +13,26 @@ import styles from "./az.module.css";
 import data from './az_data.json';
 import { useEffect, useState } from "react";
 
-const today = new Date('10/31/2026');
+const today = new Date();
 
 const startDay = new Date('10/23/2026');
-const offDay = new Date('10/30/2026');
-const endDay = new Date('11/18/2026');
-
-const spookyDataObj = {
-    "date": "Oct 30",
-    "games": ["Spooky games day", "[Games TBD]"]
-}
+// const offDay = new Date('10/30/2026');
+// const endDay = new Date('11/18/2026');
+// const daysUntilBreak = Math.round((offDay - today) / 1000 / 60 / 60 / 24);
 
 // .toLocaleDateString('en-US', {timezone: 'America/Los_Angeles', 'month': 'numeric', 'day': '2-digit' });
 
 export default function AzGauntlet() {
     const [selectedDay, setSelectedDay] = useState(today < startDay ? startDay : today);
-    
-    const daysUntilBreak = Math.round((offDay - today) / 1000 / 60 / 60 / 24);
-    const daysPassed = today < startDay ? 0 //: today < offDay ? Math.round((today - startDay) / 1000 / 60 / 60 / 24) + 1
-        // : 26 - (Math.round((endDay - today) / 1000 / 60 / 60 / 24));
-        : Math.round((today - startDay) / 1000 / 60 / 60 / 24) + 1;
 
+    const daysPassed = today < startDay ? 0 : Math.round((today - startDay) / 1000 / 60 / 60 / 24) + 1;
     const todayDataObj = data[Object.keys(data)[daysPassed - 1]];
     const todayLetter = Object.keys(data)[Object.values(data).indexOf(todayDataObj)];
 
     // if earlier than start, select day 1.
-    let sdDaysPassed = selectedDay < startDay ? 1 // : selectedDay < offDay ? Math.round((selectedDay - startDay) / 1000 / 60 / 60 / 24) + 1
-            // : 26 - (Math.round((endDay - selectedDay) / 1000 / 60 / 60 / 24));
-            : Math.round((selectedDay - startDay) / 1000 / 60 / 60 / 24) + 1;
-            console.log(sdDaysPassed)
+    let sdDaysPassed = selectedDay < startDay ? 1 : Math.round((selectedDay - startDay) / 1000 / 60 / 60 / 24) + 1;
     let sdDataObj = data[Object.keys(data)[sdDaysPassed - 1]];
     let sdLetter = Object.keys(data)[Object.values(data).indexOf(sdDataObj)];
-    
-    console.log(sdDataObj);
 
     const switchHandler = (e) => {
         let newSelectedDay = new Date(`${e.target.closest('button').dataset.value}, 2026`);
@@ -59,12 +44,9 @@ export default function AzGauntlet() {
     }
 
     useEffect(() => { // sd = selected day
-        sdDaysPassed = selectedDay < startDay ? 1 // : selectedDay < offDay ? Math.round((selectedDay - startDay) / 1000 / 60 / 60 / 24) + 1
-            // : 26 - (Math.round((endDay - selectedDay) / 1000 / 60 / 60 / 24));
-            : Math.round((selectedDay - startDay) / 1000 / 60 / 60 / 24) + 1;
+        sdDaysPassed = selectedDay < startDay ? 1 : Math.round((selectedDay - startDay) / 1000 / 60 / 60 / 24) + 1;
         sdDataObj = data[Object.keys(data)[sdDaysPassed - 1]];
         sdLetter = Object.keys(data)[Object.values(data).indexOf(sdDataObj)];
-        console.log(sdDataObj);
     }, [selectedDay]);
 
     return (
@@ -132,11 +114,6 @@ export default function AzGauntlet() {
                 <h2 className="mb-4 text-left w-full">Backup Games</h2>
                 <div className={'flex flex-row flex-wrap justify-start w-full'}>
                     {Object.keys(data).map((key) => data[key]['backup_games']).filter(buGame => buGame).flat().join(', ')}
-                    {/* <ul>
-                        {Object.keys(data).map((key) => data[key]['backup_games']).filter(buGame => buGame).flat().map((buGame) =>
-                            <li key={buGame}>{buGame}</li>
-                        )}
-                    </ul> */}
                 </div>
             </Main>
         </>
