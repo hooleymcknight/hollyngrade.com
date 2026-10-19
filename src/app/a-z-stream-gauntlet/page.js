@@ -9,6 +9,8 @@ import Main from '../components/mainWrapper';
 import AzLogo from "./components/a-z";
 import DetailCard from "./components/detailCard";
 import LetterBoxes from "./components/letterBoxes";
+import WatchOnTwitch from "./components/watchOnTwitch";
+
 import styles from "./az.module.css";
 import data from './az_data.json';
 import { useEffect, useState } from "react";
@@ -66,6 +68,9 @@ export default function AzGauntlet() {
                         <p className=" text-[18px] leading-7 my-0 mt-4 md:block">
                             Each day, I'll play a game whose title starts with the next letter of the alphabet. Experience the gauntlet with me!
                         </p>
+                    </div>
+                    <div className="ml-0 w-full">
+                        <WatchOnTwitch styles={styles} />
                     </div>
 
                     <div className={styles.azProgressBar + ' flex flex-col w-full'}>

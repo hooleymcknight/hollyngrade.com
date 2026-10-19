@@ -41,6 +41,11 @@ export async function generateMetadata({}, parent) {
         pageTitle = 'Backyard BBQ | hollyngrade';
         pageDesc = 'Saturday, August 22nd. Food, swimming, cornhole, and homemade karaoke.';
     }
+    else if (pathname.startsWith('/a-z-stream-gauntlet')) {
+        pageTitle = 'A-Z Stream Gauntlet | hollyngrade';
+        pageDesc = 'A game for every letter. Oct 23 through Nov 18.';
+        metaImg = [{ url: '/meta/az-discord-embed.png', width: 1200, height: 630, alt: 'A-Z Stream Gauntlet: a game for every letter, Oct 23 through Nov 18, on twitch.tv/hollyngrade' }];
+    }
     
     // optionally access and extend (rather than replace) parent metadata
     //   const previousImages = (await parent).openGraph?.images || [];
@@ -54,6 +59,9 @@ export async function generateMetadata({}, parent) {
             description: pageDesc,
             url: `https://hollyngrade.com${pathname}`,
             images: metaImg,
+        },
+        twitter: {
+            card: 'summary_large_image',
         },
     }
     

@@ -1,5 +1,4 @@
 export default function letterBoxes(props) {
-    console.log(props.switchHandler)
 
     return (
         <>

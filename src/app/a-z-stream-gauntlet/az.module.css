@@ -105,6 +105,19 @@
     }
 }
 
+.twitchBtn:hover,
+.twitchBtn:focus-visible {
+    /* border-color: #fff; */
+    background-color: var(--hollyngrade-red);
+    color: #fff;
+    text-decoration: none;
+}
+
+.twitchBtn:hover svg,
+.twitchBtn:focus-visible svg {
+    stroke: #fff;
+}
+
 /** mobile display of letter boxes **/
 
 @media only screen and (max-width: 700px) {
