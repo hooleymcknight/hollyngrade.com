@@ -19,16 +19,20 @@
     "E": {
         "date": "Oct 27",
         "games": ["Eternal Threads"],
-        "backup_games": ["<ESO>", "<Elden Ring>"]
+        "backup_games": ["Elder Scrolls Online", "Elden Ring"]
     },
     "F": {
         "date": "Oct 28",
-        "games": ["Fortnite", "<Funger>"],
-        "backup_games": ["<Fallout 76>"]
+        "games": ["Fortnite", "Funger"],
+        "backup_games": ["Fallout 76"]
     },
     "G": {
         "date": "Oct 29",
         "games": ["GTFO", "Ghostwire: Tokyo"]
+    },
+    "GHOST": {
+        "date": "Oct 30",
+        "games": ["Spooky games day", "[Games TBD]"]
     },
     "H": {
         "date": "Oct 31",

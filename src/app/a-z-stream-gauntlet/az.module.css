@@ -1,7 +1,11 @@
+/** samsung s21 viewport: 360px × 800px **/
+
 .azBlock {
     --az-accent: #F2A93B;
     --cream-color: #f7e9e0;
     --dark-cream: #CBB8B0;
+    --lavender: #CDB4F0;
+    --dark-lavender: #bb92f4;
 
     background: rgba(5, 5, 5, 0.8);
     color: var(--cream-color);
@@ -20,6 +24,12 @@
     border-radius: 30px;
 }
 
+.azToday.spooky {
+    background: transparent;
+    color: var(--lavender);
+    border: 1px solid var(--lavender);
+}
+
 .azToday.done {
     background: transparent;
     color: var(--dark-cream);
@@ -35,6 +45,12 @@
 .azTodaysGame {
     font-size: 40px;
     font-family: 'Allerta', Arial, Helvetica, sans-serif;
+}
+
+.spookyDetails svg {
+    width: 200px;
+    height: auto;
+    margin: 0 auto;
 }
 
 .letterBox {
@@ -80,14 +96,43 @@
     color: var(--dark-cream);
 }
 
-.letterBox svg {
+/* 
+  SPOOKY!
+*/
+.letterBox[data-value="Oct 30"] {
+    border-style: dashed;
+    border-color: var(--lavender);
+    background: rgba(25, 25, 25, 0.25);
+}
+.letterBox[data-value="Oct 30"],
+.letterBox[data-value="Oct 30"] .letter,
+.letterBox[data-value="Oct 30"].highlighted span,
+.letterBox[data-value="Oct 30"].passed span {
+    color: var(--lavender);
+}
+.letterBox[data-value="Oct 30"].highlighted {
+    border-style: solid;
+    box-shadow:
+        0 0 0 1px var(--lavender),
+        0 0 12px rgba(205, 180, 240, 0.55),
+        0 0 32px rgba(205, 180, 240, 0.3);
+    /* box-shadow: 0 0 0 1px var(--lavender), 0 0 26px var(--dark-lavender); */
+    background: rgba(25, 25, 25, 0.25);
+}
+
+.letterBox[data-value="Oct 30"] span svg {
+    height: 52px;
+    width: auto;
+}
+
+.letterBox .checkMark {
     position: absolute;
     top: 8px;
     right: 8px;
     display: none;
 }
 
-.letterBox.passed svg {
+.letterBox.passed .checkMark {
     display: block;
 }
 
@@ -97,12 +142,6 @@
 
 .letterBox.selected:not(.highlighted) {
     border-color: #fff;
-}
-
-@media only screen and (max-width: 700px) {
-    .letterBox {
-        width: calc(100% / 4 - 8px)
-    }
 }
 
 .twitchBtn:hover,
@@ -120,14 +159,23 @@
 
 /** mobile display of letter boxes **/
 
-@media only screen and (max-width: 700px) {
+@media (max-height: 800px) {
+    .letterBox .letter {
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 700px), (max-height: 800px) {
     .azBlock.upcomingLetters {
         position: fixed;
         bottom: 0;
-        width: 100%;
+        width: 100vw;
+        max-width: unset;
+        margin: 0 calc(50% - 50vw);
+        left: 0;
         overflow-x: hidden;
         padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
-        margin: 0;
+        background-color: rgba(5, 5, 5, 0.9);
     }
     .allLetters {
         flex-direction: row;
@@ -140,7 +188,20 @@
     .letterBox {
         min-width: 70px;
     }
-    .azBlock.currentLetter {
+    .azBlock.backupGames {
         margin-bottom: 32px;
+    }
+    .azBigLetter {
+        font-size: 150px;
+    }
+    .spookyDetails svg {
+        width: 150px;
+    }
+    .azTodaysGame {
+        font-size: 30px;
+        text-wrap: balance;
+    }
+    .letterBox[data-value="Oct 30"] svg {
+        filter: drop-shadow(0 0 6px rgba(205, 180, 240, 0.8));
     }
 }
