@@ -11,12 +11,21 @@ import WatchOnTwitch from "./components/watchOnTwitch";
 
 import styles from "./az.module.css";
 import data from './az_data.json';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const today = new Date();
 
-const startDay = new Date('10/23/2026');
-const offDay = new Date('10/30/2026');
+const startDay = new Date('2026-10-23T00:00:00-07:00');
+const offDay = new Date('2026-10-30T00:00:00-07:00');
+
+const dayKeys = Object.keys(data);
+
+// calendar date in Pacific time, e.g. "2026-10-23"
+const pacificDate = (d) => d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+
+// which entry in az_data.json falls on this date (-1 if none)
+const dayIndexOf = (d) => dayKeys.findIndex((k) => pacificDate(new Date(data[k].start)) === pacificDate(d));
+
 // const endDay = new Date('11/18/2026');
 // const daysUntilBreak = Math.round((offDay - today) / 1000 / 60 / 60 / 24);
 
@@ -25,29 +34,23 @@ const offDay = new Date('10/30/2026');
 export default function AzGauntlet() {
     const [selectedDay, setSelectedDay] = useState(today < startDay ? startDay : today);
 
-    const daysPassed = today < startDay ? 0 : Math.round((today - startDay) / 1000 / 60 / 60 / 24) + 1;
-    const todayDataObj = data[Object.keys(data)[daysPassed - 1]];
-    const todayLetter = Object.keys(data)[Object.values(data).indexOf(todayDataObj)];
+    // today's place in the schedule (0 = not started yet)
+    const todayIndex = dayIndexOf(today);
+    const daysPassed = today < startDay ? 0 : todayIndex === -1 ? dayKeys.length : todayIndex + 1;
+    const todayLetter = dayKeys[daysPassed - 1];
 
-    // if earlier than start, select day 1.
-    let sdDaysPassed = selectedDay < startDay ? 1 : Math.round((selectedDay - startDay) / 1000 / 60 / 60 / 24) + 1;
-    let sdDataObj = data[Object.keys(data)[sdDaysPassed - 1]];
-    let sdLetter = Object.keys(data)[Object.values(data).indexOf(sdDataObj)];
+    // selected day's letter (falls back to the first day if nothing matches)
+    const sdLetter = dayKeys[Math.max(dayIndexOf(selectedDay), 0)];
+    const sdDataObj = data[sdLetter];
 
     const switchHandler = (e) => {
-        let newSelectedDay = new Date(`${e.target.closest('button').dataset.value}, 2026`);
+        const newSelectedDay = new Date(e.target.closest('button').dataset.start);
         // scroll up to letter on smaller screens
         if (window.innerWidth <= 700) {
             document.querySelector('#current-letter').scrollIntoView();
         }
         setSelectedDay(newSelectedDay);
     }
-
-    useEffect(() => { // sd = selected day
-        sdDaysPassed = selectedDay < startDay ? 1 : Math.round((selectedDay - startDay) / 1000 / 60 / 60 / 24) + 1;
-        sdDataObj = data[Object.keys(data)[sdDaysPassed - 1]];
-        sdLetter = Object.keys(data)[Object.values(data).indexOf(sdDataObj)];
-    }, [selectedDay]);
 
     return (
         <>
@@ -88,8 +91,9 @@ export default function AzGauntlet() {
 
                     <DetailCard 
                         styles={styles}
-                        letter={Object.keys(data)[sdDaysPassed - 1]}
+                        letter={sdLetter}
                         games={sdDataObj?.games || []}
+                        start={sdDataObj?.start}
                         day={selectedDay}
                         today={today}
                     />

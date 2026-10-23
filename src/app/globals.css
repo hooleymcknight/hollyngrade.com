@@ -32,10 +32,10 @@ html {
 
 body {
     /* background: var(--background); */
-    background-image: url('../../public/nasa-space.jpg');
+    background-image: url('../../public/nasa-space.webp');
     background-attachment: fixed;
     background-size: cover;
-    background-position: center center;
+    background-position: center 40%;
     color: var(--foreground);
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
     scroll-behavior: smooth;

@@ -5,7 +5,7 @@ export default function letterBoxes(props) {
     return (
         <>
             { Object.keys(props.data).map((letter) => 
-                <button key={letter} onClick={(e) => {props.switchHandler(e)}} data-value={props.data[letter].date} className={
+                <button key={letter} onClick={(e) => {props.switchHandler(e)}} data-letter={letter} data-start={props.data[letter].start} className={
                     props.styles.letterBox + ' ' +
                     (props.todayLetter === letter ? props.styles.highlighted : 
                         Object.keys(props.data).indexOf(props.todayLetter) > Object.keys(props.data).indexOf(letter) ? props.styles.passed : props.styles.future)

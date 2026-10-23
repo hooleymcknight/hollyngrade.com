@@ -99,18 +99,18 @@
 /* 
   SPOOKY!
 */
-.letterBox[data-value="Oct 30"] {
+.letterBox[data-letter="GHOST"] {
     border-style: dashed;
     border-color: var(--lavender);
     background: rgba(25, 25, 25, 0.25);
 }
-.letterBox[data-value="Oct 30"],
-.letterBox[data-value="Oct 30"] .letter,
-.letterBox[data-value="Oct 30"].highlighted span,
-.letterBox[data-value="Oct 30"].passed span {
+.letterBox[data-letter="GHOST"],
+.letterBox[data-letter="GHOST"] .letter,
+.letterBox[data-letter="GHOST"].highlighted span,
+.letterBox[data-letter="GHOST"].passed span {
     color: var(--lavender);
 }
-.letterBox[data-value="Oct 30"].highlighted {
+.letterBox[data-letter="GHOST"].highlighted {
     border-style: solid;
     box-shadow:
         0 0 0 1px var(--lavender),
@@ -120,7 +120,7 @@
     background: rgba(25, 25, 25, 0.25);
 }
 
-.letterBox[data-value="Oct 30"] span svg {
+.letterBox[data-letter="GHOST"] span svg {
     height: 52px;
     width: auto;
 }
@@ -201,7 +201,7 @@
         font-size: 30px;
         text-wrap: balance;
     }
-    .letterBox[data-value="Oct 30"] svg {
+    .letterBox[data-letter="GHOST"] svg {
         filter: drop-shadow(0 0 6px rgba(205, 180, 240, 0.8));
     }
 }
