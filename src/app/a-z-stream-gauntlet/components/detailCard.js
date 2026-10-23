@@ -1,30 +1,29 @@
 import { useState, useEffect } from "react";
 import GhostyBoy from "./ghostyBoy";
 
-// calendar date in Pacific time, e.g. "2026-10-23" (sorts correctly as text)
-const pacificDate = (d) => d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+// calendar date like "2026-10-23" in the given time zone (undefined = the visitor's own)
+const calendarDate = (d, timeZone) => d.toLocaleDateString('en-CA', { timeZone });
 
 export default function DetailCard(props) {
     const start = props.start ? new Date(props.start) : null;
+    const shownDay = start || props.day;
 
-    // The first render (server + browser) uses Pacific time so both match.
-    // Right after that, switch to the visitor's own timezone.
     const [useLocal, setUseLocal] = useState(false);
     useEffect(() => { setUseLocal(true); }, []);
     const timeZone = useLocal ? undefined : 'America/Los_Angeles';
 
-    // Build the label from start when we have it, so the date and time always agree
-    const shownDay = start || props.day;
-
-    // Done / Today / Upcoming, judged by Pacific calendar dates
-    const dayStr = pacificDate(shownDay);
-    const todayStr = pacificDate(props.today);
+    const dayStr = calendarDate(new Date(shownDay), timeZone);
+    const todayStr = calendarDate(new Date(props.today), timeZone);
     const status = dayStr < todayStr ? 'Done' : dayStr > todayStr ? 'Upcoming' : 'Today';
 
     return (
         <>
             <div className={' flex gap-10 w-full'}>
-                <div className={`${props.styles.azAccent} ${props.styles.azBigLetter} text-[200px] min-w-[20%] text-center hidden sm:block ` + (props.letter === 'GHOST' ? props.styles.spookyDetails : '')} style={{ fontFamily: 'Saira Stencil One', lineHeight: 1, fontWeight: 'normal' }}>
+                <div style={{ fontFamily: 'Saira Stencil One', lineHeight: 1, fontWeight: 'normal' }} className={
+                    `${props.styles.azAccent} ${props.styles.azBigLetter}` + 
+                    ` text-[200px] min-w-[20%] text-center hidden sm:block ` + 
+                    (props.letter === 'GHOST' ? props.styles.spookyDetails : '')
+                }>
                     {props.letter === 'GHOST' ? <GhostyBoy /> : props.letter }
                 </div>
                 
