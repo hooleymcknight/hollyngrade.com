@@ -35,7 +35,8 @@
     "G": {
         "date": "Oct 29",
         "start": "2026-10-29T19:00:00-07:00",
-        "games": ["GTFO", "Ghostwire: Tokyo"]
+        "games": ["Guild Wars 2", "GTFO"],
+        "backup_games": ["Ghostwire: Tokyo"]
     },
     "GHOST": {
         "date": "Oct 30",
@@ -121,7 +122,8 @@
     "W": {
         "date": "Nov 15",
         "start": "2026-11-15T19:00:00-08:00",
-        "games": ["The Witcher 3", "The Witness"]
+        "games": ["The Witcher 3", "The Witness"],
+        "backup_games": ["World of Warcraft"]
     },
     "X": {
         "date": "Nov 16",
