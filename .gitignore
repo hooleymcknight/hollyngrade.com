@@ -39,9 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-src/scripts/guests.txt
-
-# prisma generated clients
-/prisma-gl/gl-client
-/prisma-hg/hg-client
