@@ -41,12 +41,12 @@
     "GHOST": {
         "date": "Oct 30",
         "start": "2026-10-30T17:00:00-07:00",
-        "games": ["Spooky games day", "[Games TBD]"]
+        "games": ["Phasmophobia", "Cursed Companions", "Content Warning"]
     },
     "H": {
         "date": "Oct 31",
         "start": "2026-10-31T17:00:00-07:00",
-        "games": ["Hollow Knight"]
+        "games": ["Hollow Knight", "Heart Flipper"]
     },
     "I": {
         "date": "Nov 1",
