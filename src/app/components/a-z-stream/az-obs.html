@@ -29,11 +29,40 @@
                 </div>
             </div>
             <div class="gauntlet-letters">
-                <span class="on">A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span>
+                <span class="completed">A</span>
+                <span class="completed">B</span>
+                <span class="completed">C</span>
+                <span class="completed">D</span>
+                <span class="completed">E</span>
+                <span class="completed">F</span>
+                <span class="on">G</span>
+                <span class="">H</span>
+                <span class="">I</span>
+                <span class="">J</span>
+                <span class="">K</span>
+                <span class="">L</span>
+                <span class="">M</span>
+                <span class="">N</span>
+                <span class="">O</span>
+                <span class="">P</span>
+                <span class="">Q</span>
+                <span class="">R</span>
+                <span class="">S</span>
+                <span class="">T</span>
+                <span class="">U</span>
+                <span class="">V</span>
+                <span class="">W</span>
+                <span class="">X</span>
+                <span class="">Y</span>
+                <span class="">Z</span>
             </div>
             </div>
 
             <style>
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                }
                 .gauntlet-panel {
                     --accent: #F2A93B;
                     width: 592px;
@@ -46,7 +75,7 @@
                     border: 1px solid rgba(255, 255, 255, 0.14);
                     border-radius: 6px;
                     color: #F6EDE6;
-                    font-family: 'Saira Semi Condensed', system-ui, sans-serif;
+                    font-family: "Saira Semi Condensed", system-ui, sans-serif;
                 }
                 .gauntlet-row {
                     flex: 1;
@@ -84,10 +113,17 @@
                 .gauntlet-letters {
                     display: flex;
                     justify-content: space-between;
-                    font-family: 'Saira Stencil One', sans-serif;
+                    font-family: "Saira Stencil One", sans-serif;
                     font-size: 22px;
                     line-height: 1;
                     color: #9C8880;
+                }
+                .gauntlet-letters span:not(.completed):not(.on) {
+                    filter: brightness(1.3);
+                }
+                .gauntlet-letters .completed {
+                    opacity: 0.7;
+                    text-decoration: line-through;
                 }
                 .gauntlet-letters .on {
                     color: var(--accent);

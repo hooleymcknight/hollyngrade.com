@@ -40,48 +40,48 @@
     },
     "GHOST": {
         "date": "Oct 30",
-        "start": "2026-10-30T19:00:00-07:00",
+        "start": "2026-10-30T17:00:00-07:00",
         "games": ["Spooky games day", "[Games TBD]"]
     },
     "H": {
         "date": "Oct 31",
-        "start": "2026-10-31T19:00:00-07:00",
+        "start": "2026-10-31T17:00:00-07:00",
         "games": ["Hollow Knight"]
     },
     "I": {
         "date": "Nov 1",
-        "start": "2026-11-01T19:00:00-08:00",
+        "start": "2026-11-01T17:00:00-08:00",
         "games": ["ICO"]
     },
     "J": {
         "date": "Nov 2",
-        "start": "2026-11-02T19:00:00-08:00",
+        "start": "2026-11-02T17:00:00-08:00",
         "games": ["Jusant", "Jackbox Party Pack 12"]
     },
     "K": {
         "date": "Nov 3",
-        "start": "2026-11-03T19:00:00-08:00",
+        "start": "2026-11-03T17:00:00-08:00",
         "games": ["Kingdom Hearts: Birth by Sleep"]
     },
     "L": {
         "date": "Nov 4",
-        "start": "2026-11-04T19:00:00-08:00",
+        "start": "2026-11-04T17:00:00-08:00",
         "games": ["Lords of the Fallen", "Life Is Strange"]
     },
     "M": {
         "date": "Nov 5",
-        "start": "2026-11-05T19:00:00-08:00",
+        "start": "2026-11-05T17:00:00-08:00",
         "games": ["Mass Effect", "Monster Hunter: World"],
         "backup_games": ["Marathon"]
     },
     "N": {
         "date": "Nov 6",
-        "start": "2026-11-06T19:00:00-08:00",
+        "start": "2026-11-06T17:00:00-08:00",
         "games": ["Neva", "Nier:Automata"]
     },
     "O": {
         "date": "Nov 7",
-        "start": "2026-11-07T19:00:00-08:00",
+        "start": "2026-11-07T17:00:00-08:00",
         "games": ["One Hour One Life", "Ori and the Blind Forest"]
     },
     "P": {
@@ -96,22 +96,22 @@
     },
     "R": {
         "date": "Nov 10",
-        "start": "2026-11-10T19:00:00-08:00",
+        "start": "2026-11-10T17:00:00-08:00",
         "games": ["RiME", "R.E.P.O."]
     },
     "S": {
         "date": "Nov 11",
-        "start": "2026-11-11T19:00:00-08:00",
+        "start": "2026-11-11T15:00:00-08:00",
         "games": ["Silent Hill f", "Shadow of the Colossus"]
     },
     "T": {
         "date": "Nov 12",
-        "start": "2026-11-12T19:00:00-08:00",
+        "start": "2026-11-12T17:00:00-08:00",
         "games": ["Trash Day", "Timelie"]
     },
     "U": {
         "date": "Nov 13",
-        "start": "2026-11-13T19:00:00-08:00",
+        "start": "2026-11-13T17:00:00-08:00",
         "games": ["Undertale"]
     },
     "V": {
@@ -121,24 +121,24 @@
     },
     "W": {
         "date": "Nov 15",
-        "start": "2026-11-15T19:00:00-08:00",
+        "start": "2026-11-15T17:00:00-08:00",
         "games": ["The Witcher 3", "The Witness"],
         "backup_games": ["World of Warcraft"]
     },
     "X": {
         "date": "Nov 16",
-        "start": "2026-11-16T19:00:00-08:00",
+        "start": "2026-11-16T17:00:00-08:00",
         "games": ["X8", "X-MODE"],
         "backup_games": ["X-Ray 2D"]
     },
     "Y": {
         "date": "Nov 17",
-        "start": "2026-11-17T19:00:00-08:00",
+        "start": "2026-11-17T17:00:00-08:00",
         "games": ["YAPYAP", "Yomawari: Night Alone"]
     },
     "Z": {
         "date": "Nov 18",
-        "start": "2026-11-18T19:00:00-08:00",
+        "start": "2026-11-18T17:00:00-08:00",
         "games": ["Zero-K", "Zenless Zone Zero"]
     }
 }
