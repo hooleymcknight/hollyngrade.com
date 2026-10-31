@@ -35,8 +35,8 @@
                 <span class="completed">D</span>
                 <span class="completed">E</span>
                 <span class="completed">F</span>
-                <span class="on">G</span>
-                <span class="">H</span>
+                <span class="completed">G</span>
+                <span class="on">H</span>
                 <span class="">I</span>
                 <span class="">J</span>
                 <span class="">K</span>
@@ -56,78 +56,97 @@
                 <span class="">Y</span>
                 <span class="">Z</span>
             </div>
+            <div class="spooky-day-line">
+                SPOOKY DAY
             </div>
+        </div>
 
-            <style>
-                html, body {
-                    margin: 0;
-                    padding: 0;
-                }
-                .gauntlet-panel {
-                    --accent: #F2A93B;
-                    width: 592px;
-                    height: 260px;
-                    box-sizing: border-box;
-                    padding: 28px;
-                    display: flex;
-                    flex-direction: column;
-                    background: rgba(24, 10, 14, 0.78);
-                    border: 1px solid rgba(255, 255, 255, 0.14);
-                    border-radius: 6px;
-                    color: #F6EDE6;
-                    font-family: "Saira Semi Condensed", system-ui, sans-serif;
-                }
-                .gauntlet-row {
-                    flex: 1;
-                    display: flex;
-                    align-items: stretch;
-                    gap: 22px;
-                    padding: 13px 0 42px;
-                    box-sizing: border-box;
-                }
-                .gauntlet-row > svg {
-                    display: block;
-                    width: 270px;
-                    height: auto;
-                    flex: none;
-                }
-                .gauntlet-col {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                }
-                .gauntlet-title {
-                    font-size: 48px;
-                    font-weight: 700;
-                    line-height: 0.95;
-                    color: var(--accent);
-                    margin-top: -5px;
-                }
-                .gauntlet-dates {
-                    font-size: 22px;
-                    font-weight: 600;
-                    line-height: 1;
-                    color: #E4D5CC;
-                    margin-bottom: -4px;
-                }
-                .gauntlet-letters {
-                    display: flex;
-                    justify-content: space-between;
-                    font-family: "Saira Stencil One", sans-serif;
-                    font-size: 22px;
-                    line-height: 1;
-                    color: #9C8880;
-                }
-                .gauntlet-letters span:not(.completed):not(.on) {
-                    filter: brightness(1.3);
-                }
-                .gauntlet-letters .completed {
-                    opacity: 0.7;
-                    text-decoration: line-through;
-                }
-                .gauntlet-letters .on {
-                    color: var(--accent);
-                }
-            </style>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+            .gauntlet-panel {
+                --accent: #F2A93B;
+                --spooky: #bb92f4;
+                position: relative;
+                width: 592px;
+                height: 260px;
+                box-sizing: border-box;
+                padding: 28px;
+                display: flex;
+                flex-direction: column;
+                background: rgba(24, 10, 14, 0.78);
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                border-radius: 6px;
+                color: #F6EDE6;
+                font-family: "Saira Semi Condensed", system-ui, sans-serif;
+            }
+            .gauntlet-row {
+                flex: 1;
+                display: flex;
+                align-items: stretch;
+                gap: 22px;
+                padding: 13px 0 42px;
+                box-sizing: border-box;
+            }
+            .gauntlet-row > svg {
+                display: block;
+                width: 270px;
+                height: auto;
+                flex: none;
+            }
+            .gauntlet-col {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            .gauntlet-title {
+                font-size: 48px;
+                font-weight: 700;
+                line-height: 0.95;
+                /* color: var(--accent); */
+                color: var(--spooky);
+                margin-top: -5px;
+            }
+            .gauntlet-dates {
+                font-size: 22px;
+                font-weight: 600;
+                line-height: 1;
+                color: #E4D5CC;
+                margin-bottom: -4px;
+            }
+            .gauntlet-letters {
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                font-family: "Saira Stencil One", sans-serif;
+                font-size: 22px;
+                line-height: 1;
+                color: #9C8880;
+                filter: blur(5px);
+            }
+            .gauntlet-letters span:not(.completed):not(.on) {
+                filter: brightness(1.3);
+            }
+            .gauntlet-letters .completed {
+                opacity: 0.7;
+                text-decoration: line-through;
+            }
+            .gauntlet-letters .on {
+                /* color: var(--accent); */
+                color: var(--spooky);
+            }
+            .spooky-day-line {
+                position: absolute;
+                bottom: 16px;
+                width: 100%;
+                text-align: center;
+                left: 0;
+                font-size: 30px;
+                color: white;
+                background: radial-gradient(#9d6ede 0%, transparent 62%);
+            }
+        </style>
     </body>
 </html>

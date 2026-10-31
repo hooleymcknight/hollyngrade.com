@@ -6,6 +6,7 @@
     --dark-cream: #CBB8B0;
     --lavender: #CDB4F0;
     --dark-lavender: #bb92f4;
+    --bg-lavender: #9d6ede;
 
     background: rgba(5, 5, 5, 0.8);
     color: var(--cream-color);
