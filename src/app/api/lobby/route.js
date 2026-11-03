@@ -28,11 +28,16 @@ export async function GET(req) {
     const user = (p.get('user') || '').trim().replace(/^@/, '').toLowerCase();
     const lobby = await load();
     const i = lobby.indexOf(user);
+    const target = (p.get('target') || '').trim().replace(/^@/, '').toLowerCase();
+    const isMod = p.get('mod') === '1';
+    if ((action === 'remove' || action === 'clear') && !isMod) {
+        return say('Mods only hollyngSmileybutt');
+    }
     const count = () => `${lobby.length}/${maxLobbyCt}`;
 
     switch (action) {
         case 'join': {
-            if (!user) return say('Missing name.');
+            if (!user) return say('Missing name videovPAlN');
             if (i !== -1) return say(`@${user} you're already in the ${lobbyTitle} lobby. If you need to bail: !lobby leave`);
             if (lobby.length >= maxLobbyCt) {
                 return say(`@${user} the ${lobbyTitle} lobby is full (${count()}).`);
@@ -54,11 +59,13 @@ export async function GET(req) {
             await save(lobby);
             return say(`@${user} left the lobby (${count()}).`);
 
-        case 'remove':
-            if (i === -1) return say(`${user || 'That person'} isn't in the lobby.`);
-            lobby.splice(i, 1);
+        case 'remove': {
+            const ti = lobby.indexOf(target);
+            if (ti === -1) return say(`${target || 'That person'} isn't in the lobby.`);
+            lobby.splice(ti, 1);
             await save(lobby);
-            return say(`Removed ${user} (${count()}).`);
+            return say(`Removed ${target} (${count()}).`);
+        }
 
         case 'list':
             if (!lobby.length) return say(`The ${lobbyTitle} lobby is empty.`);
