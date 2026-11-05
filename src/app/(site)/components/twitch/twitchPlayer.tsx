@@ -2,6 +2,10 @@
 import { useEffect } from "react";
 import Script from 'next/script';
 
+type TwitchPlayerProps = {
+    reportLive: (status: boolean) => void;
+}
+
 const resizePlayer = () => {
     const iframe = document.querySelector('#twitch-player iframe');
     if (!iframe) return;
@@ -10,7 +14,7 @@ const resizePlayer = () => {
     (iframe as HTMLIFrameElement).height = String(Number(playerWidth[0]) * 9 / 16);
 }
 
-export default function TwitchPlayer () {
+export default function TwitchPlayer ({reportLive}: TwitchPlayerProps) {
     const initPlayer = (Twitch: Window["Twitch"]) => {
         if (!document.querySelectorAll('#twitch-player *').length && Twitch) {
             const hgTwitch = new Twitch.Player('twitch-player', {
@@ -26,11 +30,13 @@ export default function TwitchPlayer () {
                 document.querySelector('#twitch-offline')?.classList.add('hidden');
                 document.querySelector('.twitch-player-container')?.classList.remove('hidden');
                 resizePlayer();
+                reportLive(true);
             });
 
             hgTwitch.addEventListener(Twitch.Player.OFFLINE, () => {
                 document.querySelector('.twitch-player-container')?.classList.add('hidden');
                 document.querySelector('#twitch-offline')?.classList.remove('hidden');
+                reportLive(false);
             });
         }
     }

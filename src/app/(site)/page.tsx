@@ -1,6 +1,7 @@
+'use client';
 import Image from "next/image";
 import BentoBoxCompartment from "./components/bentoBoxCompartment";
-import React from "react";
+import React, { useState } from "react";
 import TwitchPlayer from "./components/twitch/twitchPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
@@ -8,9 +9,11 @@ import Link from "next/link";
 
 
 export default function Home() {
+    const [twitchLive, setTwitchLive] = useState<boolean>(false);
+
     return (
-        <main className="grid grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-full max-w-[95%] mx-auto py-32 px-16 gap-4">
-            <BentoBoxCompartment startCol={1} endCol={3} startRow={1} endRow={3} vAlign="bottom">
+        <main data-page="index" className="grid grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[1360px] mx-auto py-32 px-16 gap-4">
+            <BentoBoxCompartment startCol={1} endCol={3} startRow={1} endRow={twitchLive ? 1 : 3} vAlign="bottom">
                 <span className="bento-eyebrow">Hi, I'm</span>
                 <h1>Hollyn.</h1>
                 <p className="text-[length:var(--fontHeight)] text-[color:var(--faded-white)] mt-0" style={{ '--fontHeight': '20px' } as React.CSSProperties}>
@@ -23,12 +26,12 @@ export default function Home() {
                 </p>
             </BentoBoxCompartment>
 
-            <BentoBoxCompartment startCol={3} endCol={5} startRow={1} endRow={2}>
+            <BentoBoxCompartment startCol={3} endCol={5} startRow={1} endRow={1}>
                 <span className="bento-eyebrow">Twitch</span>
                 <div id="twitch-offline">
                     <h2 className="text-[color:var(--faded-white)] mt-4">Offline right now</h2>
                 </div>
-                <TwitchPlayer />
+                <TwitchPlayer reportLive={(status) => {setTwitchLive(status)}} />
                 <Link href="https://twitch.tv/hollyngrade"
                     className={"text-[color:var(--faded-white)] font-[family-name:var(--font-bricolage)] font-bold " +
                         "rounded-4xl border border-[var(--faded-white)] border-1px " + 
@@ -38,6 +41,23 @@ export default function Home() {
                 >
                     Follow hollyngrade
                 </Link>
+            </BentoBoxCompartment>
+
+            <BentoBoxCompartment startCol={1} endCol={3} startRow={twitchLive ? 2 : 3} endRow={3}>
+                <div className="flex justify-between items-center">
+                    <h2>A-Z Stream Gauntlet</h2>
+                    <p>Oct 23 - Nov 18</p>
+                </div>
+
+                <div id="letters-simple" className="flex flex-wrap gap-4">
+                    <div className="az-tiles">
+                        A
+                    </div>
+                    <div className="az-tiles">
+                        B
+                    </div>
+                </div>
+
             </BentoBoxCompartment>
         </main>
     );

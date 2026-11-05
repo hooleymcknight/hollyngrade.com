@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Literata } from "next/font/google";
 import "./globals.css";
+import "./site.css";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",

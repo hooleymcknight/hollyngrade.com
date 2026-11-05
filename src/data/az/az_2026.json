@@ -1,0 +1,253 @@
+{
+    "title": "A-Z Stream Gauntlet",
+    "days": [
+        {
+            "type": "letter",
+            "label": "A",
+            "start": "2026-10-23T19:00:00-07:00",
+            "games": ["Alien Isolation", "ARC Raiders"],
+            "games_played": ["Alien Isolation", "ARC Raiders"],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "B",
+            "start": "2026-10-24T09:00:00-07:00",
+            "games": ["Big Walk", "Beat Saber"],
+            "backup_games": ["Baldur's Gate 3"],
+            "games_played": ["Big Walk", "Beat Saber", "The Bridge"],
+            "vod": "https://www.twitch.tv/videos/2911427014?collection=yEa2b9tP4hgVjQ",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "C",
+            "start": "2026-10-25T19:00:00-07:00",
+            "games": ["Cyberpunk 2077", "Coral Island"],
+            "games_played": ["Cyberpunk 2077", "Coral Island"],
+            "vod": "https://www.twitch.tv/videos/2911430286?collection=yEa2b9tP4hgVjQ",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "D",
+            "start": "2026-10-26T19:00:00-07:00",
+            "games": ["Dead by Daylight", "Death Stranding 2"],
+            "games_played": ["Dead by Daylight", "Death Stranding 2"],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "E",
+            "start": "2026-10-27T19:00:00-07:00",
+            "games": ["Eternal Threads"],
+            "games_played": ["Eternal Threads"],
+            "vod": "https://www.twitch.tv/videos/2914714329?collection=yEa2b9tP4hgVjQ",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "F",
+            "start": "2026-10-28T19:00:00-07:00",
+            "games": ["Fortnite", "Funger"],
+            "backup_games": ["Fallout 76"],
+            "games_played": ["Fortnite"],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "G",
+            "start": "2026-10-29T09:00:00-07:00",
+            "games": ["Guild Wars 2", "Ghostwire: Tokyo"],
+            "games_played": ["Guild Wars 2", "GTFO", "Ghostwire: Tokyo"],
+            "vod": "https://www.twitch.tv/videos/2914719083?collection=yEa2b9tP4hgVjQ",
+            "post_summary": ""
+        },
+        {
+            "type": "special",
+            "label": "GHOST",
+            "start": "2026-10-30T17:00:00-07:00",
+            "games": ["Phasmophobia", "Cursed Companions", "Content Warning"],
+            "games_played": ["Phasmophobia", "Content Warning"],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "H",
+            "start": "2026-10-31T17:00:00-07:00",
+            "games": ["Hollow Knight", "Heart Flipper"],
+            "games_played": ["Hollow Knight", "Heart Flipper"],
+            "vod": "https://www.twitch.tv/videos/2917573722?collection=yEa2b9tP4hgVjQ",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "I",
+            "start": "2026-11-01T17:00:00-08:00",
+            "games": ["ICO"],
+            "games_played": ["ICO"],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "J",
+            "start": "2026-11-02T17:00:00-08:00",
+            "games": ["Jusant", "Jackbox Party Pack 12"],
+            "games_played": ["Jusant", "Jackbox Party Pack 12"],
+            "vod": "https://www.twitch.tv/videos/2918354395?collection=yEa2b9tP4hgVjQ",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "K",
+            "start": "2026-11-03T17:00:00-08:00",
+            "games": ["Kingdom Hearts: Birth by Sleep"],
+            "games_played": ["Kingdom Hearts: Birth by Sleep"],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "L",
+            "start": "2026-11-04T17:00:00-08:00",
+            "games": ["Lords of the Fallen", "Life Is Strange"],
+            "games_played": ["Lords of the Fallen", "Life Is Strange"],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "M",
+            "start": "2026-11-05T17:00:00-08:00",
+            "games": ["Mass Effect", "Monster Hunter: World"],
+            "backup_games": ["Marathon"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "N",
+            "start": "2026-11-06T17:00:00-08:00",
+            "games": ["Neva", "Nier:Automata"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "O",
+            "start": "2026-11-07T17:00:00-08:00",
+            "games": ["One Hour One Life", "Ori and the Blind Forest"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "P",
+            "start": "2026-11-08T09:00:00-08:00",
+            "games": ["Pathologic", "PEAK"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "Q",
+            "start": "2026-11-09T17:00:00-08:00",
+            "games": ["The Quarry"],
+            "games_played": [""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "R",
+            "start": "2026-11-10T17:00:00-08:00",
+            "games": ["RiME", "R.E.P.O."],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "S",
+            "start": "2026-11-11T17:00:00-08:00",
+            "games": ["Silent Hill f", "Shadow of the Colossus"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "T",
+            "start": "2026-11-12T17:00:00-08:00",
+            "games": ["Trash Day", "Timelie"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "U",
+            "start": "2026-11-13T17:00:00-08:00",
+            "games": ["Undertale"],
+            "games_played": [""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "V",
+            "start": "2026-11-14T17:00:00-08:00",
+            "games": ["Venba", "VALORANT"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "W",
+            "start": "2026-11-15T17:00:00-08:00",
+            "games": ["The Witcher 3", "The Witness"],
+            "backup_games": ["World of Warcraft"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "X",
+            "start": "2026-11-16T17:00:00-08:00",
+            "games": ["X8", "X-MODE"],
+            "backup_games": ["X-Ray 2D"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "Y",
+            "start": "2026-11-17T17:00:00-08:00",
+            "games": ["YAPYAP", "Yomawari: Night Alone"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        },
+        {
+            "type": "letter",
+            "label": "Z",
+            "start": "2026-11-18T17:00:00-08:00",
+            "games": ["Zero-K", "Zenless Zone Zero"],
+            "games_played": ["", ""],
+            "vod": "",
+            "post_summary": ""
+        }
+    ]
+}
