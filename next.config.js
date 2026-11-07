@@ -5,9 +5,7 @@ const nextConfig = {
         serverActions: {
             bodySizeLimit: '150mb',
         },
-        proxyClientMaxBodySize: '150mb',
         middlewareClientMaxBodySize: '150mb',
-        windowHistorySupport: true,
     },
     reactStrictMode: false,
     distDir: 'build',
@@ -20,5 +18,4 @@ const nextConfig = {
     },
 }
 
-// module.exports = nextConfig;
-export default nextConfig;
+module.exports = nextConfig;

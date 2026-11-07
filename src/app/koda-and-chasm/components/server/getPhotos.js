@@ -1,6 +1,6 @@
 'use server'
 // import { PrismaClient } from "@prisma/client";
-import { Prisma, PrismaClient as PrismaClientHG } from "@/../prisma-hg/hg-client/client"
+import { Prisma, PrismaClient as PrismaClientHG } from ".prisma-hg/client"
 import reportError from '@/app/api/reportError';
 
 const db = new PrismaClientHG();

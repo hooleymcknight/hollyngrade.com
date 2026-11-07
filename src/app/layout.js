@@ -19,6 +19,9 @@ export const viewport = {
 export async function generateMetadata({}, parent) {
     const headersList = await headers();
     const pathname = headersList.get("hg-pathname") || "";
+    const query = headersList.get('hg-search-params') || null;
+    const loggableHeaders = Object.fromEntries(headersList.entries());
+    console.log(loggableHeaders);
     
     // fetch data
     let pageTitle = 'hollyngrade';
@@ -47,11 +50,10 @@ export async function generateMetadata({}, parent) {
         pageDesc = 'Each day, I\'ll play a game whose title starts with the next letter of the alphabet. Join the gauntlet on Twitch!';
         metaImg = [{ url: '/meta/az-discord-embed.png', width: 1200, height: 630, alt: azAlt }];
 
-        // if (pathname.includes('?letter=')) {
-        //     let letter = pathname.split('?letter=')?.[1];
-        //     metaImg = [{ url: `/meta/az-discord-embed_${letter.toLowerCase()}.png`, width: 1200, height: 630, alt: azAlt}]
-        //     console.log(metaImg.url);
-        // }
+        if (query?.match(/letter=[a-z]/g)?.length) {
+            let letter = query.match(/letter=[a-z]/g)[0].charAt(7);
+            metaImg = [{ url: `/meta/az-discord-embed_${letter.toLowerCase()}.png`, width: 1200, height: 630, alt: azAlt}]
+        }
     }
     
     // optionally access and extend (rather than replace) parent metadata

@@ -1,6 +1,6 @@
 'use server'
 import { parseEntryDate } from "@/app/garden/helpers/gardenHelpers";
-import { PrismaClient as PrismaClientGL } from "@/../prisma-gl/gl-client/client"
+import { PrismaClient as PrismaClientGL } from ".prisma-gl/client"
 
 const garden_db = new PrismaClientGL();
 

@@ -14,8 +14,8 @@
 // ---------------------------------------------------------------------------
 
 // import { PrismaClient } from "@prisma/client"; //  .\node_modules\@prisma\client
-import { PrismaClient as PrismaClientHG } from "@/../prisma-hg/hg-client/client"
-import { PrismaClient as PrismaClientGL } from "@/../prisma-gl/gl-client/client"
+import { PrismaClient as PrismaClientHG } from ".prisma-hg/client"
+import { PrismaClient as PrismaClientGL } from ".prisma-gl/client"
 
 const db = new PrismaClientHG();
 const garden_db = new PrismaClientGL();

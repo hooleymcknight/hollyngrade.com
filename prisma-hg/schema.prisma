@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./hg-client"
+  output   = "../node_modules/.prisma-hg"
 }
 
 datasource db {

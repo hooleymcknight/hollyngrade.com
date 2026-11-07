@@ -1,5 +1,5 @@
 'use server';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '.prisma-hg/client';
 import bcrypt from 'bcryptjs';
 
 const salt = bcrypt.genSaltSync(10);
