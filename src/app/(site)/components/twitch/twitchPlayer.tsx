@@ -42,7 +42,7 @@ export default function TwitchPlayer ({reportLive}: TwitchPlayerProps) {
     }
 
     useEffect(() => {
-        if (!window.Twitch) {
+        if (window.Twitch) {
             initPlayer(window.Twitch);
         }
 

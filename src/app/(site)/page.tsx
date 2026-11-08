@@ -50,7 +50,7 @@ export default function Home() {
                 </div>
 
                 <div id="letters-simple" className="flex flex-wrap gap-4">
-                    <div className="az-tiles">
+                    <div className="az-tiles text-[var(--faded-white)]">
                         A
                     </div>
                     <div className="az-tiles">
