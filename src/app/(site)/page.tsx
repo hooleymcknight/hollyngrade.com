@@ -12,9 +12,9 @@ export default function Home() {
     const [twitchLive, setTwitchLive] = useState<boolean>(false);
 
     return (
-        <main data-page="index" className="grid grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[1360px] mx-auto py-32 px-16 gap-4">
+        <main data-page="index" className="grid grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[var(--max-page-width)] mx-auto pb-32 gap-4">
             <BentoBoxCompartment startCol={1} endCol={3} startRow={1} endRow={twitchLive ? 1 : 3} vAlign="bottom">
-                <span className="bento-eyebrow">Hi, I'm</span>
+                <span className="bento-eyebrow">Hi, I&apos;m</span>
                 <h1>Hollyn.</h1>
                 <p className="text-[length:var(--fontHeight)] text-[color:var(--faded-white)] mt-0" style={{ '--fontHeight': '20px' } as React.CSSProperties}>
                     <FontAwesomeIcon icon={faWaveSquare} className="inline-block mr-3 w-auto h-[var(--fontHeight)]" />
@@ -44,16 +44,16 @@ export default function Home() {
             </BentoBoxCompartment>
 
             <BentoBoxCompartment startCol={1} endCol={3} startRow={twitchLive ? 2 : 3} endRow={3}>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center flex-wrap mb-4">
                     <h2>A-Z Stream Gauntlet</h2>
-                    <p>Oct 23 - Nov 18</p>
+                    <p className="text-[var(--faded-white)]">Oct 23 – Nov 18</p>
                 </div>
 
                 <div id="letters-simple" className="flex flex-wrap gap-4">
                     <div className="az-tiles text-[var(--faded-white)]">
                         A
                     </div>
-                    <div className="az-tiles">
+                    <div className="az-tiles text-[var(--faded-white)]">
                         B
                     </div>
                 </div>

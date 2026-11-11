@@ -8,11 +8,13 @@ h2 {
 
     backdrop-filter: blur(14px);
     border-radius: 24px;
+    font-family: var(--font-sans);
 }
 
 .bento-eyebrow {
     text-transform: uppercase;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
+    /* font-family: var(--font-sans); */
     font-size: 13px;
     color: var(--faded-white);
 }
@@ -29,7 +31,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-sans);
+    /* font-family: var(--font-sans); */
     font-size: 28px;
     font-weight: bold;
 }
