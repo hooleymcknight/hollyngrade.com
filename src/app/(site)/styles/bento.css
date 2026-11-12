@@ -22,16 +22,3 @@ h2 {
 .bottom {
     justify-content: flex-end;
 }
-
-.az-tiles {
-    border: 1px solid var(--faded-white);
-    border-radius: 8px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* font-family: var(--font-sans); */
-    font-size: 28px;
-    font-weight: bold;
-}

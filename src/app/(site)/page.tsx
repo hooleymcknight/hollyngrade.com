@@ -6,6 +6,9 @@ import TwitchPlayer from "./components/twitch/twitchPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import AzBentoIndex from "./components/az/bentoAz";
+
+import "@/app/(site)/styles/az.css";
 
 
 export default function Home() {
@@ -44,20 +47,27 @@ export default function Home() {
             </BentoBoxCompartment>
 
             <BentoBoxCompartment startCol={1} endCol={3} startRow={twitchLive ? 2 : 3} endRow={3}>
-                <div className="flex justify-between items-center flex-wrap mb-4">
+                <div className="az flex justify-between items-center flex-wrap mb-4">
                     <h2>A-Z Stream Gauntlet</h2>
                     <p className="text-[var(--faded-white)]">Oct 23 – Nov 18</p>
                 </div>
 
-                <div id="letters-simple" className="flex flex-wrap gap-4">
-                    <div className="az-tiles text-[var(--faded-white)]">
-                        A
-                    </div>
-                    <div className="az-tiles text-[var(--faded-white)]">
-                        B
-                    </div>
-                </div>
+                <AzBentoIndex />
 
+            </BentoBoxCompartment>
+
+            <BentoBoxCompartment startCol={3} endCol={5} startRow={2} endRow={4}>
+                <span className="bento-eyebrow">Garden</span>
+                <div id="twitch-offline">
+                    <h2 className="text-[color:var(--faded-white)] mt-4">Coming soon</h2>
+                </div>
+            </BentoBoxCompartment>
+
+            <BentoBoxCompartment startCol={1} endCol={5} startRow={twitchLive ? 5 : 4} endRow={5}>
+                <span className="bento-eyebrow">Koda + Chasm</span>
+                <div id="twitch-offline">
+                    <h2 className="text-[color:var(--faded-white)] mt-4">Coming soon</h2>
+                </div>
             </BentoBoxCompartment>
         </main>
     );

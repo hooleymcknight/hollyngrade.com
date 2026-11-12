@@ -1,0 +1,50 @@
+.az {
+    --az-accent: #F2A93B;
+    --cream-color: #f7e9e0;
+    --dark-cream: #CBB8B0;
+    --lavender: #CDB4F0;
+    --dark-lavender: #bb92f4;
+    --bg-lavender: #9d6ede;
+}
+
+#letters-simple {
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.az-tiles {
+    border: 1px solid var(--faded-white);
+    border-radius: 8px;
+    /* width: 60px;
+    height: 60px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-family: var(--font-sans); */
+    font-size: 18px;
+    font-weight: bold;
+    aspect-ratio: 1;
+
+    svg {
+        width: auto;
+        height: 80%;
+    }
+
+    &.upcoming {
+        color: #fff;
+    }
+
+    &.active {
+        border-color: var(--az-accent);
+        box-shadow: 0 0 0 1px #F2A93B, 0 0 12px #F2A93B73;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--az-accent);
+    }
+
+    &[data-label="GHOST"] {
+        border-style: dashed;
+        border-color: var(--lavender);
+        background: rgba(25, 25, 25, .25);
+    }
+}
