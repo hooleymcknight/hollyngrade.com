@@ -26,9 +26,20 @@ const saira = Saira_Semi_Condensed({
     subsets: ["latin"],
 });
 
+const siteDesc = "Streams, fundraisers, backyard events, and the projects in between.";
+
 export const metadata: Metadata = {
-    title: "hollyngrade | STAGING",
-    description: "Streams, fundraisers, backyard events, and the projects in between.",
+    metadataBase: new URL("https://hollyngrade.com"),
+    title: "hollyngrade",
+    description: siteDesc,
+    openGraph: {
+        title: "hollyngrade",
+        description: siteDesc,
+        images: [{ url: "/meta/hollyngrade-meta-img.png", width: 1200, height: 630, alt: "hollyngrade" }],
+    },
+    twitter: {
+        card: "summary_large_image",
+    },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
