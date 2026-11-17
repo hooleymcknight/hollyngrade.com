@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React from 'react';
 import '@/app/(site)/styles/bento.css';
 
 type BentoProps = {
@@ -8,15 +8,17 @@ type BentoProps = {
     startRow?: number;
     endRow?: number;
     vAlign?: "top" | "middle" | "bottom";
+    style?: React.CSSProperties;
+    classes?: string;
 }
 
-export default function BentoBoxCompartment ({children, startCol, endCol, startRow, endRow, vAlign}: BentoProps) {
+export default function BentoBoxCompartment ({children, startCol, endCol, startRow, endRow, vAlign, style, classes}: BentoProps) {
 
     return (
-        <div className={"bento-box-compartment p-[40px] flex flex-col" + 
+        <div className={"bento-box-compartment p-[40px] flex flex-col " + classes +
             (vAlign ? ` ${vAlign}` : '')
         }
-            style={{ gridColumn: `${startCol} / ${endCol}`, gridRow: `${startRow} / ${endRow}` }}
+            style={{ '--col': `${startCol} / ${endCol}`, '--row': `${startRow} / ${endRow}`, ...style } as React.CSSProperties }
         >
             {children}
         </div>

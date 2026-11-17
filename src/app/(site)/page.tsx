@@ -1,12 +1,12 @@
 'use client';
 import Image from "next/image";
-import BentoBoxCompartment from "./components/bentoBoxCompartment";
+import BentoBoxCompartment from "@/app/(site)/components/bentoBoxCompartment";
 import React, { useState } from "react";
-import TwitchPlayer from "./components/twitch/twitchPlayer";
+import TwitchPlayer from "@/app/(site)/components/twitch/twitchPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import AzBentoIndex from "./components/az/bentoAz";
+import AzBentoIndex from "@/app/(site)/components/az/bentoAz";
 
 import "@/app/(site)/styles/az.css";
 
@@ -15,7 +15,7 @@ export default function Home() {
     const [twitchLive, setTwitchLive] = useState<boolean>(false);
 
     return (
-        <main data-page="index" className="grid grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[var(--max-page-width)] mx-auto pb-32 gap-4">
+        <main data-page="index" className="grid grid-cols-[1fr] sm:grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[var(--max-page-width)] mx-auto pb-32 gap-4">
             <BentoBoxCompartment startCol={1} endCol={3} startRow={1} endRow={twitchLive ? 1 : 3} vAlign="bottom">
                 <span className="bento-eyebrow">Hi, I&apos;m</span>
                 <h1>Hollyn.</h1>
@@ -48,7 +48,9 @@ export default function Home() {
 
             <BentoBoxCompartment startCol={1} endCol={3} startRow={twitchLive ? 2 : 3} endRow={3}>
                 <div className="az flex justify-between items-center flex-wrap mb-4">
-                    <h2>A-Z Stream Gauntlet</h2>
+                    <Link href="/az-gauntlet" className="hover:underline underline-offset-[3px] az-accent">
+                        <h2>A-Z Stream Gauntlet</h2>
+                    </Link>
                     <p className="text-[var(--faded-white)]">Oct 23 – Nov 18</p>
                 </div>
 
@@ -56,16 +58,16 @@ export default function Home() {
 
             </BentoBoxCompartment>
 
-            <BentoBoxCompartment startCol={3} endCol={5} startRow={2} endRow={4}>
+            <BentoBoxCompartment startCol={3} endCol={5} startRow={2} endRow={twitchLive ? 3 : 4}>
                 <span className="bento-eyebrow">Garden</span>
-                <div id="twitch-offline">
+                <div>
                     <h2 className="text-[color:var(--faded-white)] mt-4">Coming soon</h2>
                 </div>
             </BentoBoxCompartment>
 
-            <BentoBoxCompartment startCol={1} endCol={5} startRow={twitchLive ? 5 : 4} endRow={5}>
+            <BentoBoxCompartment startCol={1} endCol={5} startRow={twitchLive ? 3 : 4} endRow={twitchLive ? 4 : 5}>
                 <span className="bento-eyebrow">Koda + Chasm</span>
-                <div id="twitch-offline">
+                <div>
                     <h2 className="text-[color:var(--faded-white)] mt-4">Coming soon</h2>
                 </div>
             </BentoBoxCompartment>

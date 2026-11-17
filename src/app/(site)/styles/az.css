@@ -13,7 +13,7 @@
     gap: 8px;
 }
 
-.az-tiles {
+.az-tiles-index {
     border: 1px solid var(--faded-white);
     border-radius: 8px;
     /* width: 60px;
@@ -21,14 +21,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* font-family: var(--font-sans); */
-    font-size: 18px;
+    font-family: var(--font-stencil);
+    font-size: 24px;
     font-weight: bold;
     aspect-ratio: 1;
 
     svg {
         width: auto;
         height: 80%;
+    }
+
+    &.completed {
+        opacity: 0.7;
     }
 
     &.upcoming {
@@ -46,5 +50,222 @@
         border-style: dashed;
         border-color: var(--lavender);
         background: rgba(25, 25, 25, .25);
+    }
+}
+
+/** from the old one: **/
+
+/** samsung s21 viewport: 360px × 800px **/
+
+.az-block {
+    --az-accent: #F2A93B;
+    --cream-color: #f7e9e0;
+    --dark-cream: #CBB8B0;
+    --lavender: #CDB4F0;
+    --dark-lavender: #bb92f4;
+    --bg-lavender: #9d6ede;
+
+    color: var(--cream-color);
+    /* padding: 40px; */
+}
+
+.az-accent {
+    color: var(--az-accent);
+}
+
+.az-today {
+    border: 1px solid var(--az-accent);
+    background: var(--az-accent);
+    color: #111;
+    padding: 4px 12px;
+    border-radius: 30px;
+}
+
+.az-today.spooky {
+    background: transparent;
+    color: var(--lavender);
+    border: 1px solid var(--lavender);
+}
+
+.az-today.done {
+    background: transparent;
+    color: var(--dark-cream);
+    border: 1px solid var(--dark-cream);
+}
+
+.az-today.future {
+    background: transparent;
+    color: #fff;
+    border: 1px solid var(--dark-cream);
+}
+
+.az-todays-game {
+    font-size: 40px;
+    font-family: var(--font-sans);
+}
+
+.spooky-details svg {
+    width: 200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.letter-box {
+    position: relative;
+    padding: 6px;
+    margin: 4px;
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    width: calc(100% / 6 - 8px);
+    border-radius: 8px;
+    /* background: rgba(5, 5, 5, 0.4); */
+    background: rgba(255, 255, 255, 0.16);
+    align-items: center;
+}
+
+.letter-box .letter {
+    font-family: var(--font-stencil);
+    font-weight: bold;
+    font-size: 52px;
+    color: var(--cream-color);
+    line-height: 1;
+}
+
+.letter-box.highlighted {
+    border-color: var(--az-accent);
+    box-shadow: 0 0 0 1px #F2A93B, 0 0 26px #F2A93B73;
+    background: rgba(255, 255, 255, 0.25);
+    color: var(--az-accent);
+}
+
+.letter-box.highlighted span {
+    color: var(--az-accent);
+}
+
+.letter-box.passed {
+    opacity: 0.7;
+}
+
+.letter-box.passed span {
+    color: var(--dark-cream);
+}
+
+/* 
+  SPOOKY!
+*/
+.letter-box[data-letter="GHOST"] {
+    border-style: dashed;
+    border-color: var(--lavender);
+    background: rgba(25, 25, 25, 0.25);
+}
+.letter-box[data-letter="GHOST"],
+.letter-box[data-letter="GHOST"] .letter,
+.letter-box[data-letter="GHOST"].highlighted span,
+.letter-box[data-letter="GHOST"].passed span {
+    color: var(--lavender);
+}
+.letter-box[data-letter="GHOST"].highlighted {
+    border-style: solid;
+    box-shadow:
+        0 0 0 1px var(--lavender),
+        0 0 12px rgba(205, 180, 240, 0.55),
+        0 0 32px rgba(205, 180, 240, 0.3);
+    /* box-shadow: 0 0 0 1px var(--lavender), 0 0 26px var(--dark-lavender); */
+    background: rgba(25, 25, 25, 0.25);
+}
+
+.letter-box[data-letter="GHOST"] span svg {
+    height: 52px;
+    width: auto;
+}
+
+.letter-box .checkmark {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    display: none;
+}
+
+.letter-box.passed .checkmark {
+    display: block;
+}
+
+.letter-box.future {
+    visibility: visible;
+}
+
+.letter-box.selected:not(.highlighted) {
+    border-color: #fff;
+}
+
+.twitch-btn:hover,
+.twitch-btn:focus-visible {
+    /* border-color: #fff; */
+    background-color: var(--hollyngrade-red);
+    color: #fff;
+    text-decoration: none;
+}
+
+.twitch-btn:hover svg,
+.twitch-btn:focus-visible svg {
+    stroke: #fff;
+}
+
+.az-big-letter {
+    font-family: var(--font-stencil);
+    font-weight: bold;
+}
+
+/** mobile display of letter boxes **/
+
+@media (max-height: 800px) {
+    .letter-box .letter {
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 700px), (max-height: 800px) {
+    .upcoming-letters {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        max-width: unset;
+        margin: 0 calc(50% - 50vw);
+        left: 0;
+        overflow-x: hidden;
+        padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
+        background-color: rgba(5, 5, 5, 0.9);
+        border-radius: 0;
+    }
+    .all-letters {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 6px 12px;
+    }
+    .letter-box {
+        min-width: 70px;
+    }
+    .backup-games {
+        margin-bottom: 32px;
+    }
+    .az-big-letter {
+        font-size: 150px;
+    }
+    .spooky-details svg {
+        width: 150px;
+    }
+    .az-todays-game {
+        font-size: 30px;
+        text-wrap: balance;
+    }
+    .letter-box[data-letter="GHOST"] svg {
+        filter: drop-shadow(0 0 6px rgba(205, 180, 240, 0.8));
     }
 }

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Script from 'next/script';
 
 type TwitchPlayerProps = {
-    reportLive: (status: boolean) => void;
+    reportLive?: (status: boolean) => void;
 }
 
 const resizePlayer = () => {
@@ -30,13 +30,13 @@ export default function TwitchPlayer ({reportLive}: TwitchPlayerProps) {
                 document.querySelector('#twitch-offline')?.classList.add('hidden');
                 document.querySelector('.twitch-player-container')?.classList.remove('hidden');
                 resizePlayer();
-                reportLive(true);
+                if (reportLive) reportLive(true);
             });
 
             hgTwitch.addEventListener(Twitch.Player.OFFLINE, () => {
                 document.querySelector('.twitch-player-container')?.classList.add('hidden');
                 document.querySelector('#twitch-offline')?.classList.remove('hidden');
-                reportLive(false);
+                if (reportLive) reportLive(false);
             });
         }
     }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Literata } from "next/font/google";
+import { Bricolage_Grotesque, Literata, Saira_Stencil, Saira_Semi_Condensed } from "next/font/google";
 import "./globals.css";
 import "./site.css";
 import "./(site)/styles/navigation.css";
@@ -15,6 +15,17 @@ const literata = Literata({
     subsets: ["latin"],
 });
 
+const stencil = Saira_Stencil({
+    variable: "--font-stencil",
+    subsets: ["latin"],
+});
+
+const saira = Saira_Semi_Condensed({
+    variable: "--font-saira",
+    weight: ['400', '600', '700'],
+    subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
     title: "hollyngrade | STAGING",
     description: "Streams, fundraisers, backyard events, and the projects in between.",
@@ -24,17 +35,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
         <html
             lang="en"
-            className={`${bricolage.variable} ${literata.variable} h-full antialiased scroll-smooth`}
+            className={`${bricolage.variable} ${literata.variable} ${saira.variable} ${stencil.variable} h-full antialiased scroll-smooth`}
         >
             <body className="min-h-full flex flex-col nebula">
                 <nav>
                     <div className="nav-inner">
-                        <span className="site-name">hollyngrade</span>
+                        <a className="site-name" href="/">hollyngrade</a>
                         <div className="nav-links-container">
                             <ul>
                                 <li><Link href="#">Garden</Link></li>
                                 <li><Link href="#">Koda + Chasm</Link></li>
-                                <li><Link href="/a-z-stream-gauntlet">A-Z</Link></li>
+                                <li><Link href="/az-gauntlet">A-Z</Link></li>
                                 {/* <li><Link href="/events">Events</Link></li> */}
                             </ul>
                         </div>

@@ -14,7 +14,7 @@ export default function AzBentoIndex() {
             { data.days.map(x => {
                 const startDate = new Date(x.start);
                 return (<div key={x.label} data-label={x.label}
-                    className={"az-tiles text-[var(--faded-white)] " + 
+                    className={"az-tiles-index text-[var(--faded-white)] " + 
                         (isSameDay(today, startDate) ? "active" : 
                         today < startDate ? "upcoming" :
                         today > startDate ? "completed" : "")
