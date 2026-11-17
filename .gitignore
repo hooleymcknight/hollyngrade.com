@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# chat bot lists (/api/queue, /api/lobby) live only on the server
+/data/
