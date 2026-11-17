@@ -80,6 +80,7 @@
             "label": "H",
             "start": "2026-10-31T17:00:00-07:00",
             "games": ["Hollow Knight", "Heart Flipper"],
+            "backup_games": ["Her Story"],
             "games_played": ["Hollow Knight", "Heart Flipper"],
             "vod": "https://www.twitch.tv/videos/2917573722?collection=yEa2b9tP4hgVjQ",
             "post_summary": ""
@@ -126,7 +127,7 @@
             "start": "2026-11-05T17:00:00-08:00",
             "games": ["Mass Effect", "Monster Hunter: World"],
             "backup_games": ["Marathon"],
-            "games_played": ["", ""],
+            "games_played": ["Mass Effect", "Monster Hunter: World"],
             "vod": "",
             "post_summary": ""
         },
@@ -135,7 +136,7 @@
             "label": "N",
             "start": "2026-11-06T17:00:00-08:00",
             "games": ["Neva", "Nier:Automata"],
-            "games_played": ["", ""],
+            "games_played": ["Neva", "Nier:Automata"],
             "vod": "",
             "post_summary": ""
         },
@@ -144,7 +145,7 @@
             "label": "O",
             "start": "2026-11-07T17:00:00-08:00",
             "games": ["One Hour One Life", "Ori and the Blind Forest"],
-            "games_played": ["", ""],
+            "games_played": ["One Hour One Life"],
             "vod": "",
             "post_summary": ""
         },
@@ -153,7 +154,7 @@
             "label": "P",
             "start": "2026-11-08T09:00:00-08:00",
             "games": ["Pathologic", "PEAK"],
-            "games_played": ["", ""],
+            "games_played": ["PEAK", "Pathologic"],
             "vod": "",
             "post_summary": ""
         },
@@ -162,7 +163,7 @@
             "label": "Q",
             "start": "2026-11-09T17:00:00-08:00",
             "games": ["The Quarry"],
-            "games_played": [""],
+            "games_played": ["The Quarry"],
             "vod": "",
             "post_summary": ""
         },
@@ -171,7 +172,7 @@
             "label": "R",
             "start": "2026-11-10T17:00:00-08:00",
             "games": ["RiME", "R.E.P.O."],
-            "games_played": ["", ""],
+            "games_played": ["R.E.P.O."],
             "vod": "",
             "post_summary": ""
         },
@@ -180,7 +181,7 @@
             "label": "S",
             "start": "2026-11-11T17:00:00-08:00",
             "games": ["Silent Hill f", "Shadow of the Colossus"],
-            "games_played": ["", ""],
+            "games_played": ["Silent Hill f"],
             "vod": "",
             "post_summary": ""
         },
@@ -189,7 +190,8 @@
             "label": "T",
             "start": "2026-11-12T17:00:00-08:00",
             "games": ["Trash Day", "Timelie"],
-            "games_played": ["", ""],
+            "backup_games": ["Tell Me Why"],
+            "games_played": ["Trash Day"],
             "vod": "",
             "post_summary": ""
         },
@@ -197,8 +199,8 @@
             "type": "letter",
             "label": "U",
             "start": "2026-11-13T17:00:00-08:00",
-            "games": ["Undertale"],
-            "games_played": [""],
+            "games": ["Undertale", "Until Dawn"],
+            "games_played": ["Until Dawn"],
             "vod": "",
             "post_summary": ""
         },
@@ -207,7 +209,7 @@
             "label": "V",
             "start": "2026-11-14T17:00:00-08:00",
             "games": ["Venba", "VALORANT"],
-            "games_played": ["", ""],
+            "games_played": ["Venba", "VALORANT"],
             "vod": "",
             "post_summary": ""
         },
@@ -217,7 +219,7 @@
             "start": "2026-11-15T17:00:00-08:00",
             "games": ["The Witcher 3", "The Witness"],
             "backup_games": ["World of Warcraft"],
-            "games_played": ["", ""],
+            "games_played": ["The Witcher 3", "The Witness"],
             "vod": "",
             "post_summary": ""
         },
@@ -227,7 +229,7 @@
             "start": "2026-11-16T17:00:00-08:00",
             "games": ["X8", "X-MODE"],
             "backup_games": ["X-Ray 2D"],
-            "games_played": ["", ""],
+            "games_played": ["X-MODE", "X-Ray 2D"],
             "vod": "",
             "post_summary": ""
         },

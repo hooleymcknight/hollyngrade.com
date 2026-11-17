@@ -48,3 +48,7 @@ h2 {
     font-family: var(--font-sans);
     font-weight: bold;
 }
+
+button {
+    cursor: pointer;
+}
