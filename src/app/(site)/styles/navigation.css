@@ -50,7 +50,7 @@ nav {
                 border-bottom: 2px solid #fff;
             }
 
-            &[href="#"] {
+            &.coming-soon {
                 color: rgb(246, 238, 241, 0.45);
                 pointer-events: none;
                 cursor: default;
