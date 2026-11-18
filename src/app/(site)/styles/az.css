@@ -274,6 +274,12 @@
 
 .awards-box {
     /* display: grid; */
+    button .checkmark {
+        position: absolute;
+        top: 4px;
+        right: 3px;
+        display: none;
+    }
 }
 
 .award-tile {
@@ -324,7 +330,7 @@
         background-color: var(--az-accent);
     }
 
-    button.previous {
+    button.previous:not(.selected) {
         color: #111;
         background-color: var(--az-accent);
         filter: grayscale(0.5);

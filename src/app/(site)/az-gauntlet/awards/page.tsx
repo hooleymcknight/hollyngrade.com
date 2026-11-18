@@ -40,19 +40,30 @@ export default function AzAwards() {
                 <h2>A-Z Awards</h2>
 
                 <p className="mb-8">
-                    Total Awards: {awards.length}
+                    Awards you have voted for: {votesSubmitted.length} of {awards.length}
                 </p>
                 voting category: {votingCategory}
                 
-                <div className="awards-box grid grid-cols-[1fr] sm:grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] gap-4">
+                <div className="awards-box grid grid-cols-[1fr] sm:grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] gap-4 mt-8">
                     {awards.map(x => 
                         <button key={x.award}
                             aria-roledescription="click to open voting modal"
                             onClick={() => {setVotingCategory(x.award);}}
-                            className="award-tile text-center flex flex-col w-full items-center justify-center rounded-[8px] p-2"
+                            className="award-tile text-center flex flex-col w-full items-center justify-between rounded-[8px] py-8 px-6"
                         >
-                            <span className="award-name">{x.award}</span>
-                            <span className="award-desc">{x.description}</span>
+                            <svg className="checkmark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F6EDE6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <path d="M5 12.5l4.5 4.5L19 7.5"/>
+                            </svg>
+                            
+                            <div className="flex flex-col mt-2">
+                                <span className="award-name">{x.award}</span>
+                                <span className="award-desc">{x.description}</span>
+                            </div>
+
+                            <span>
+                                {votesSubmitted.find(y => y.award === x.award) ? votesSubmitted.find(y => y.award === x.award)?.votee : 'Click to vote'}
+                            </span>
+
                         </button>
                     )}
                 </div>
@@ -60,10 +71,7 @@ export default function AzAwards() {
             </BentoBoxCompartment>
 
             {votingCategory ? 
-                // {
-                //     let thisAward = awards.filter(x => x.award === votingCategory);
-                //     return 
-                // }
+                // ================ MODAL ================
 
                 <div className="voting-modal fixed top-0 left-0 w-full h-full flex justify-center items-center">
                     <div className="overlay absolute w-full h-full" onClick={() => { submitVote(votingCategory); }}></div>
@@ -77,7 +85,7 @@ export default function AzAwards() {
                             {awards.find(x => x.award === votingCategory)?.games.map(game =>
                                 <button key={game}
                                     className={
-                                        (selectedVote === game || (votesSubmitted.find(x => x.award === votingCategory && x.votee === game)) ? 'selected ' : '')
+                                        (selectedVote === game || (votesSubmitted.find(x => x.award === votingCategory && x.votee === game) && !selectedVote) ? 'selected ' : '')
                                         + (prevSubmittedVote === game ? 'previous ' : '')
                                         + "px-[20px] py-[8px] border-solid border-[1px] rounded-[8px] text-lg bg-[var(--glass)]"}
                                     onClick={() => { selectGame(votingCategory, game, votesSubmitted.find(x => x.award === votingCategory && x.votee === game)?.votee); }}
