@@ -16,7 +16,6 @@ h2 {
     .bento-eyebrow {
         text-transform: uppercase;
         letter-spacing: 0.16em;
-        /* font-family: var(--font-sans); */
         font-size: 13px;
         color: var(--faded-white);
     }

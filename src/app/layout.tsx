@@ -54,8 +54,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                         <a className="site-name" href="/">hollyngrade</a>
                         <div className="nav-links-container">
                             <ul>
-                                <li><Link href="/garden">Garden</Link></li>
-                                <li><Link href="/koda-and-chasm">Koda + Chasm</Link></li>
+                                <li><Link className="coming-soon" href="/garden">Garden</Link></li>
+                                <li><Link className="coming-soon" href="/koda-and-chasm">Koda + Chasm</Link></li>
                                 <li><Link href="/az-gauntlet">A-Z</Link></li>
                                 {/* <li><Link href="/events">Events</Link></li> */}
                             </ul>
