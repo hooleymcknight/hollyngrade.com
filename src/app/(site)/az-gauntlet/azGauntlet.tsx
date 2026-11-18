@@ -128,14 +128,14 @@ export default function AzGauntlet() {
                 </div>
             </BentoBoxCompartment>
 
-            <BentoBoxCompartment startCol={twitchLive ? 3 : 1} endCol={twitchLive ? 5 : 3} startRow={twitchLive ? 4 : 3} endRow={twitchLive ? 4 : 5}>
+            {/* <BentoBoxCompartment startCol={twitchLive ? 3 : 1} endCol={twitchLive ? 5 : 3} startRow={twitchLive ? 4 : 3} endRow={twitchLive ? 4 : 5}>
                 <Link href="/az-gauntlet/awards" className="hover:underline underline-offset-[3px] az-accent">
                     <h2>A-Z Awards</h2>
                 </Link>
                 
                 <p>Total games played: {azData.map(x => x.games_played).flat().filter(y => y && y.length).length}</p>
                 
-            </BentoBoxCompartment>
+            </BentoBoxCompartment> */}
 
             <BentoBoxCompartment startCol={twitchLive ? 1 : 3} endCol={twitchLive ? 3 : 5} startRow={twitchLive ? 5 : 4} endRow={twitchLive ? 5 : 6}>
                 <h2>Backup Games</h2>
