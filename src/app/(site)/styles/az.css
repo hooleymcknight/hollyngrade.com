@@ -299,19 +299,19 @@
 
 /** awards **/
 
-.awards-box {
-    /* display: grid; */
-    button .checkmark {
-        position: absolute;
-        top: 4px;
-        right: 3px;
-        display: none;
-    }
-}
-
 .award-tile {
     border: 1px solid #fff;
     color: #fff;
+    position: relative;
+
+    .checkmark {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        display: none;
+        width: 20px;
+        height: 20px;
+    }
     
     .award-name {
         font-size: 28px;
@@ -322,6 +322,10 @@
         border-color: var(--cream-color);
         color: var(--cream-color);
         opacity: 0.7;
+
+        .checkmark {
+            display: block;
+        }
     }
 
     &:hover {
