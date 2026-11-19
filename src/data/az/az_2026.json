@@ -238,7 +238,7 @@
             "label": "Y",
             "start": "2026-11-17T17:00:00-08:00",
             "games": ["YAPYAP", "Yomawari: Night Alone"],
-            "games_played": ["", ""],
+            "games_played": ["YAPYAP", "Yomawari: Night Alone"],
             "vod": "",
             "post_summary": ""
         },
@@ -247,7 +247,7 @@
             "label": "Z",
             "start": "2026-11-18T17:00:00-08:00",
             "games": ["Zero-K", "Zenless Zone Zero"],
-            "games_played": ["", ""],
+            "games_played": ["Zero-K", "Zenless Zone Zero"],
             "vod": "",
             "post_summary": ""
         }

@@ -104,7 +104,7 @@ export default function AzGauntlet() {
                 <h2>A-Z Awards</h2>
 
                 <p className="my-4">
-                    {awards.length} awards, {azData.map(x => x.games_played).flat().filter(y => y && y.length).length} games. You pick the winners. Vote with your Twitch login.
+                    {awards.length} awards, {azData.filter(y => y.type === 'letter').map(x => x.games_played).flat().filter(y => y && y.length).length} games. You pick the winners. Vote with your Twitch login.
                 </p>
 
                 <Link href="/az-gauntlet/awards" className="twitch-btn !w-auto mr-auto mt-4">
