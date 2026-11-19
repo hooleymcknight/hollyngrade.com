@@ -10,6 +10,7 @@ import LetterBoxes from "./components/letterBoxes";
 import WatchOnTwitch from "./components/watchOnTwitch";
 
 import data from '@/data/az/az_2026.json';
+import awards from '@/data/az/az_awards_2026.json';
 import TwitchPlayer from "../components/twitch/twitchPlayer";
 
 import '@/app/(site)/styles/az.css';
@@ -99,7 +100,20 @@ export default function AzGauntlet() {
                 </div>
             </BentoBoxCompartment>
 
-            <BentoBoxCompartment startCol={3} endCol={5} startRow={1} endRow={twitchLive ? 4 : 1}>
+            <BentoBoxCompartment startCol={3} endCol={5} startRow={1} endRow={1}>
+                <h2>A-Z Awards</h2>
+
+                <p className="my-4">
+                    {awards.length} awards, {azData.map(x => x.games_played).flat().filter(y => y && y.length).length} games. You pick the winners. Vote with your Twitch login.
+                </p>
+
+                <Link href="/az-gauntlet/awards" className="twitch-btn !w-auto mr-auto mt-4">
+                    Vote now
+                </Link>
+                
+            </BentoBoxCompartment>
+
+            <BentoBoxCompartment startCol={3} endCol={5} startRow={2} endRow={twitchLive ? 4 : 3}>
                 <div className="flex flex-row flex-wrap justify-start items-center w-full gap-6 text-center sm:text-left">
 
                     <DetailCard 
@@ -114,7 +128,7 @@ export default function AzGauntlet() {
                 </div>
             </BentoBoxCompartment>
 
-            <BentoBoxCompartment startCol={twitchLive ? 1 : 3} endCol={twitchLive ? 3 : 5} startRow={twitchLive ? 3 : 2} endRow={twitchLive ? 5 : 4}
+            <BentoBoxCompartment startCol={1} endCol={3} startRow={3} endRow={5}
                 // style={{ position: 'fixed', bottom: 0, left: 0, width: '100%', borderRadius: 0, padding: '10px 0px' }}
                 classes="upcoming-letters"
             >
@@ -128,16 +142,7 @@ export default function AzGauntlet() {
                 </div>
             </BentoBoxCompartment>
 
-            {/* <BentoBoxCompartment startCol={twitchLive ? 3 : 1} endCol={twitchLive ? 5 : 3} startRow={twitchLive ? 4 : 3} endRow={twitchLive ? 4 : 5}>
-                <Link href="/az-gauntlet/awards" className="hover:underline underline-offset-[3px] az-accent">
-                    <h2>A-Z Awards</h2>
-                </Link>
-                
-                <p>Total games played: {azData.map(x => x.games_played).flat().filter(y => y && y.length).length}</p>
-                
-            </BentoBoxCompartment> */}
-
-            <BentoBoxCompartment startCol={twitchLive ? 1 : 3} endCol={twitchLive ? 3 : 5} startRow={twitchLive ? 5 : 4} endRow={twitchLive ? 5 : 6}>
+            <BentoBoxCompartment startCol={3} endCol={5} startRow={twitchLive ? 4 : 3} endRow={twitchLive ? 4 : 3}>
                 <h2>Backup Games</h2>
                 {azData.map(x => x.backup_games).flat().filter(y => y && y.length).join(' \u00a0|\u00a0 ')}
                 

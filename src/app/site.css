@@ -16,6 +16,10 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+
+    &.no-scroll {
+        overflow: hidden;
+    }
 }
 
 body {

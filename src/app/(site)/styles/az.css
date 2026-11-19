@@ -202,6 +202,32 @@
     border-color: #fff;
 }
 
+.twitch-btn {
+    border: 1px solid var(--az-accent);
+    background: var(--az-accent);
+    color: #241014;
+    border-radius: 30px;
+    padding: 4px 12px;
+    font-weight: bold;
+    padding-block: 12px;
+    display: flex;
+    align-items: center;
+    padding-inline: 20px;
+}
+
+.twitch-btn.twitch-signin {
+    margin-bottom: 0;
+    margin-top: 8px;
+
+    path {
+        fill: #241014;
+    }
+
+    &:hover path {
+        fill: #fff;
+    }
+}
+
 .twitch-btn:hover,
 .twitch-btn:focus-visible {
     /* border-color: #fff; */
@@ -240,6 +266,7 @@
         padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
         background-color: rgba(5, 5, 5, 0.9);
         border-radius: 0;
+        z-index: 40;
     }
     .all-letters {
         flex-direction: row;
@@ -283,11 +310,30 @@
 }
 
 .award-tile {
-    border: 1px solid var(--cream-color);
+    border: 1px solid #fff;
+    color: #fff;
     
     .award-name {
         font-size: 28px;
         font-weight: bold;
+    }
+
+    &.voted {
+        border-color: var(--cream-color);
+        color: var(--cream-color);
+        opacity: 0.7;
+    }
+
+    &:hover {
+        opacity: 1;
+        border-color: var(--az-accent);
+        box-shadow: 0 0 0 1px #F2A93B, 0 0 26px #F2A93B73;
+        background: rgba(255, 255, 255, 0.25);
+        color: var(--az-accent);
+    }
+
+    .needs-vote {
+        color: var(--az-accent);
     }
 }
 
@@ -317,8 +363,10 @@
 }
 
 .voting-tiles {
-    max-height: calc(calc(85svh - 100px) - 300px);
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding-bottom: 28px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
 
     button:hover {
         color: #111;
@@ -352,4 +400,23 @@
 .submit-vote:hover {
     background-color: #153715;
     border: 1px solid var(--cream-color);
+}
+
+
+@media (max-width: 40rem) {
+    main[data-page="az"] .bento-box-compartment:not(.upcoming-letters) {
+        padding: 40px 20px;
+    }
+
+    .voting-modal-inner {
+        max-height: 85dvh;
+    }
+
+    .voting-modal-title {
+        font-size: 32px;
+    }
+
+    .award-tile .award-name {
+        font-size: 20px;
+    }
 }

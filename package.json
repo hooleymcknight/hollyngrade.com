@@ -20,7 +20,9 @@
     "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@fortawesome/react-fontawesome": "^3.5.0",
     "@tailwindcss/postcss": "^4.3.4",
+    "mysql2": "^3.24.6",
     "next": "^16.4.5",
+    "next-auth": "^4.24.15",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
