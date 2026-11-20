@@ -1,4 +1,4 @@
-import { say } from "@/lib/chatList";
+import { chatList, cleanName, say } from "@/lib/chatList";
 
 export const dynamic = "force-dynamic"; // never cache this route
 
@@ -9,8 +9,12 @@ export async function GET(req: Request) {
     const p = new URL(req.url).searchParams;
     if (p.get("key") !== process.env.QUEUE_KEY) return say("Not allowed.");
 
-    // setTimeout(() => {
-    //     return say(folRaidMsg);
-    // })
-    return [say(subRaidMsg), say(folRaidMsg)];
+    const action = p.get("action");
+
+    if (action === "subRaid") {
+        setTimeout(() => {
+            return say(folRaidMsg);
+        }, 1000);
+        return say(subRaidMsg);
+    }
 }
