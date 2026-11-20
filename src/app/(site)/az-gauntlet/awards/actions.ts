@@ -10,6 +10,10 @@ export async function castVote(award: string, game: string): Promise<CastVoteRes
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) return { ok: false, error: "Not signed in" };
 
+    const loadTime = new Date();
+    const deadlineDate = new Date('2026-11-23T23:59:00-08:00');
+    if (loadTime.getTime() > deadlineDate.getTime()) return { ok: false, error: "Deadline passed" };
+
     const found = awards.find(x => x.award === award);
     if (!found || !found.games.includes(game)) return { ok: false, error: "Invalid vote" };
 
