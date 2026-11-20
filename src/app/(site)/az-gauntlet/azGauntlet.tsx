@@ -46,6 +46,7 @@ export default function AzGauntlet() {
     const [twitchLive, setTwitchLive] = useState<boolean>(false);
     const [selectedDay, setSelectedDay] = useState(today < startDay ? startDay : today);
     const [voteDeadline, setVoteDeadline] = useState('');
+    const [deadlinePassed, setDeadlinePassed] = useState<boolean>(false);
 
     // today's place in the schedule (0 = not started yet)
     const todayIndex = dayIndexOf(today);
@@ -72,7 +73,10 @@ export default function AzGauntlet() {
     const progressPerc = ((daysPassed / 26) * 100) > 100 ? 100 : (daysPassed / 26) * 100;
 
     useEffect(() => {
-        setVoteDeadline((new Date(voteDeadlineStr)).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'}));
+        const loadTime = new Date();
+        const deadlineDate = new Date(voteDeadlineStr);
+        setDeadlinePassed(loadTime.getTime() > deadlineDate.getTime());
+        setVoteDeadline(deadlineDate.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'}));
     });
 
     return (
@@ -113,16 +117,28 @@ export default function AzGauntlet() {
             <BentoBoxCompartment startCol={3} endCol={5} startRow={1} endRow={1}>
                 <h2>A-Z Awards</h2>
 
-                <p className="my-4">
-                    {awards.length} awards, {azData.filter(y => y.type === 'letter').map(x => x.games_played).flat().filter(y => y && y.length).length} games. You pick the winners. Vote with your Twitch login.
-                </p>
-
-                <Link href="/az-gauntlet/awards" className="twitch-btn !w-auto mr-auto mt-4">
-                    Vote now
-                </Link>
-                <span className="mt-4 uppercase font-bold tracking-[2px] text-sm" style={{ color: 'var(--dark-cream)' }}>
-                    Voting ends on {voteDeadline}
-                </span>
+                { deadlinePassed ? 
+                    <>
+                        <p className="my-4">
+                            {awards.length} awards, {azData.filter(y => y.type === 'letter').map(x => x.games_played).flat().filter(y => y && y.length).length} games. You picked the winners. Stay tuned for the results.
+                        </p>
+                        <span className="mt-4 uppercase font-bold tracking-[2px] text-sm" style={{ color: 'var(--dark-cream)' }}>
+                            Voting has closed.
+                        </span>
+                    </>
+                : 
+                    <>
+                        <p className="my-4">
+                            {awards.length} awards, {azData.filter(y => y.type === 'letter').map(x => x.games_played).flat().filter(y => y && y.length).length} games. You pick the winners. Vote with your Twitch login.
+                        </p>
+                        <Link href="/az-gauntlet/awards" className="twitch-btn !w-auto mr-auto mt-4">
+                            Vote now
+                        </Link>
+                        <span className="mt-4 uppercase font-bold tracking-[2px] text-sm" style={{ color: 'var(--dark-cream)' }}>
+                            Voting ends on {voteDeadline}
+                        </span>
+                    </>
+                }
                 
             </BentoBoxCompartment>
 
