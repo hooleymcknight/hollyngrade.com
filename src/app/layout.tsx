@@ -47,6 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <html
             lang="en"
             className={`${bricolage.variable} ${literata.variable} ${saira.variable} ${stencil.variable} h-full antialiased scroll-smooth`}
+            data-scroll-behavior="smooth"
         >
             <body className="min-h-full flex flex-col nebula">
                 <nav>

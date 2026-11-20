@@ -241,6 +241,12 @@
     stroke: #fff;
 }
 
+@media (min-width: 40rem) {
+    .twitch-btn.twitch-signin {
+        margin: 0;
+    }
+}
+
 .az-big-letter {
     font-family: var(--font-stencil);
     font-weight: bold;

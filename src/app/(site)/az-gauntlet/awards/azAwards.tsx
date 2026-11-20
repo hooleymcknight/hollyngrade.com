@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn, signOut } from "next-auth/react";
 import BentoBoxCompartment from "@/app/(site)/components/bentoBoxCompartment";
 import awards from '@/data/az/az_awards_2026.json';
@@ -27,12 +27,14 @@ type AzAwardsProps = {
 }
 
 const awardsUrl: string = "/az-gauntlet/awards";
+const voteDeadlineStr: string = '2026-11-23T23:59:00-08:00';
 
 export default function AzAwards({ initialVotes, signedIn, userName }: AzAwardsProps) {
     const [votingCategory, setVotingCategory] = useState<string|null>(null);
     const [selectedVote, setSelectedVote] = useState<string|null>(null);
     const [votesSubmitted, setVotesSubmitted] = useState<Vote[]>(initialVotes);
     const [errorMessage, setErrorMessage] = useState<string|null>(null);
+    const [voteDeadline, setVoteDeadline] = useState<string>('');
 
     const submitVote = async (award: string): Promise<void> => {
         const choice: string|null = selectedVote;
@@ -73,6 +75,10 @@ export default function AzAwards({ initialVotes, signedIn, userName }: AzAwardsP
         ? awards.find(x => x.award === votingCategory)
         : undefined;
 
+    useEffect(() => {
+        setVoteDeadline((new Date(voteDeadlineStr)).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'}));
+    });
+
     return (
         <main data-page="az" className="relative az-block grid grid-cols-[1fr] sm:grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[var(--max-page-width)] mx-auto px-0 pb-48 sm:pb-32 gap-4">
 
@@ -80,17 +86,20 @@ export default function AzAwards({ initialVotes, signedIn, userName }: AzAwardsP
                 <h2>A-Z Awards</h2>
 
                 <div className="flex flex-col sm:flex-row w-full justify-center items-center sm:justify-between mt-3 gap-1">
-                    <p className="flex items-center">
+                    <p className="flex items-start flex-col" style={{ fontSize: '18px' }}>
                         Awards you have voted for: {votesSubmitted.length} of {awards.length}
+                        <span className="mt-2 uppercase font-bold tracking-[2px] text-sm" style={{ color: 'var(--dark-cream)' }}>
+                            Voting ends on {voteDeadline}
+                        </span>
                     </p>
 
                     {signedIn ? (
-                        <p className="mb-2">
+                        <p className="mb-2 sm:mb-0">
                             Signed in as <b>{userName}</b> ·{" "}
                             <button className="underline" onClick={() => { signOut({ callbackUrl: awardsUrl }); }}>Sign out</button>
                         </p>
                     ) : (
-                        <button className="twitch-btn twitch-signin mb-4" onClick={() => { signIn("twitch", { callbackUrl: awardsUrl }); }}>
+                        <button className="twitch-btn twitch-signin mb-4 sm:mb-0" onClick={() => { signIn("twitch", { callbackUrl: awardsUrl }); }}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="inline-block mr-2" width="22" height="22" viewBox="0 0 640 640">
                                 {/* Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc. */}
                                 <path d="M455.4 167.5L416.8 167.5L416.8 277.2L455.4 277.2L455.4 167.5zM349.2 167L310.6 167L310.6 276.8L349.2 276.8L349.2 167zM185 64L88.5 155.4L88.5 484.6L204.3 484.6L204.3 576L300.8 484.6L378.1 484.6L551.9 320L551.9 64L185 64zM513.3 301.8L436.1 374.9L358.9 374.9L291.3 438.9L291.3 374.9L204.4 374.9L204.4 100.6L513.3 100.6L513.3 301.8z"/>

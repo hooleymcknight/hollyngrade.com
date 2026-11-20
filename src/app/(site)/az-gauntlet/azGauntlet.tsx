@@ -1,5 +1,5 @@
 'use client';
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BentoBoxCompartment from "@/app/(site)/components/bentoBoxCompartment";
@@ -31,8 +31,11 @@ const today = new Date();
 
 const startDay = new Date('2026-10-23T00:00:00-07:00');
 const offDay = new Date('2026-10-30T00:00:00-07:00');
+const endDay = new Date('2026-11-19T00:00:00-07:00');
 
 const dayKeys = azData.map(x => x.label);
+
+const voteDeadlineStr = '2026-11-23T23:59:00-08:00';
 
 // calendar date in Pacific - "2026-10-23"
 const pacificDate = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
@@ -42,6 +45,7 @@ const dayIndexOf = (d: Date) => azData.findIndex(x => pacificDate(new Date(x.sta
 export default function AzGauntlet() {
     const [twitchLive, setTwitchLive] = useState<boolean>(false);
     const [selectedDay, setSelectedDay] = useState(today < startDay ? startDay : today);
+    const [voteDeadline, setVoteDeadline] = useState('');
 
     // today's place in the schedule (0 = not started yet)
     const todayIndex = dayIndexOf(today);
@@ -64,6 +68,12 @@ export default function AzGauntlet() {
             setSelectedDay(newSelectedDay);
         }
     }
+
+    const progressPerc = ((daysPassed / 26) * 100) > 100 ? 100 : (daysPassed / 26) * 100;
+
+    useEffect(() => {
+        setVoteDeadline((new Date(voteDeadlineStr)).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'}));
+    });
 
     return (
         <main data-page="az" className="relative az-block grid grid-cols-[1fr] sm:grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[var(--max-page-width)] mx-auto px-0 pb-48 sm:pb-32 gap-4">
@@ -94,7 +104,7 @@ export default function AzGauntlet() {
                             </span>
                         </div>
                         <div style={{ background: 'rgba(255, 255, 255, 0.4)' }} className="h-[5px] w-full rounded-[8px] mt-2">
-                            <div className="w-0 bg-[var(--az-accent)] h-[5px] rounded-[8px]" style={{ width: `${(daysPassed / 26) * 100}%` }} ></div>
+                            <div className="w-0 bg-[var(--az-accent)] h-[5px] rounded-[8px]" style={{ width: `${progressPerc}%` }} ></div>
                         </div>
                     </div>
                 </div>
@@ -110,6 +120,9 @@ export default function AzGauntlet() {
                 <Link href="/az-gauntlet/awards" className="twitch-btn !w-auto mr-auto mt-4">
                     Vote now
                 </Link>
+                <span className="mt-4 uppercase font-bold tracking-[2px] text-sm" style={{ color: 'var(--dark-cream)' }}>
+                    Voting ends on {voteDeadline}
+                </span>
                 
             </BentoBoxCompartment>
 
@@ -137,6 +150,7 @@ export default function AzGauntlet() {
                         data={azData}
                         sdLetter={sdLetter}
                         todayLetter={todayLetter}
+                        ended={today > endDay}
                         switchHandler={switchHandler}
                     />
                 </div>
