@@ -40,7 +40,7 @@ const voteDeadlineStr = '2026-11-23T23:59:00-08:00';
 // calendar date in Pacific - "2026-10-23"
 const pacificDate = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
 // const dayIndexOf = (d: Date) => dayKeys.findIndex((val, k) => pacificDate(new Date(azData[k].start)) === pacificDate(d));
-const dayIndexOf = (d: Date) => azData.findIndex(x => pacificDate(new Date(x.start)) === pacificDate(d))
+const dayIndexOf = (d: Date) => azData.findIndex(x => pacificDate(new Date(x.start)) === pacificDate(d));
 
 export default function AzGauntlet() {
     const [twitchLive, setTwitchLive] = useState<boolean>(false);
