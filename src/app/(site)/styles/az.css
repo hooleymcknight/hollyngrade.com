@@ -324,6 +324,21 @@
         font-weight: bold;
     }
 
+    .needs-vote {
+        color: var(--az-accent);
+    }
+
+    hr {
+        border-color: var(--cream-color);
+        border-style: dashed;
+        opacity: 0.7;
+        height: 0.5px;
+        width: 100%;
+        margin: 6px 0;
+    }
+}
+
+button.award-tile {
     &.voted {
         border-color: var(--cream-color);
         color: var(--cream-color);
@@ -339,10 +354,6 @@
         border-color: var(--az-accent);
         box-shadow: 0 0 0 1px #F2A93B, 0 0 26px #F2A93B73;
         background: rgba(255, 255, 255, 0.25);
-        color: var(--az-accent);
-    }
-
-    .needs-vote {
         color: var(--az-accent);
     }
 }
@@ -414,7 +425,7 @@
 
 
 @media (max-width: 40rem) {
-    main[data-page="az"] .bento-box-compartment:not(.upcoming-letters) {
+    main[data-page*="az"] .bento-box-compartment:not(.upcoming-letters) {
         padding: 40px 20px;
     }
 
