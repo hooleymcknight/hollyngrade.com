@@ -9,7 +9,7 @@ const azTitle = "A-Z Awards | hollyngrade";
 const azDesc = "Vote for the A-Z Stream Gauntlet awards. 22 categories, 44 games. Sign in with Twitch and pick the winners.";
 const azAlt = "A-Z Awards: 22 awards, you pick the winners. Vote now at hollyngrade.com/az-gauntlet/awards";
 
-type Vote = { award: string; votee: string };
+type Vote = { twitchId?: string; award: string; votee: string };
 type VoteRow = RowDataPacket & { award: string; game: string };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -39,5 +39,9 @@ export default async function Page() {
         initialVotes = rows.map((r: VoteRow): Vote => ({ award: r.award, votee: r.game }));
     }
 
-    return <AzAwards initialVotes={initialVotes} signedIn={!!session} userName={session?.user?.name ?? null} />;
+    let allVotes: Vote[] = [];
+    const [allRows] = await db.execute<VoteRow[]>("SELECT twitch_id, award, game FROM az_votes");
+    allVotes = allRows.map((r: VoteRow): Vote => ({ twitchId: r.twitch_id, award: r.award, votee: r.game }));
+
+    return <AzAwards initialVotes={initialVotes} allVotes={allVotes} signedIn={!!session} userName={session?.user?.name ?? null} />;
 }

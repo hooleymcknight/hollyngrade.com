@@ -6,8 +6,10 @@ import awards from '@/data/az/az_awards_2026.json';
 import { castVote } from "./actions";
 
 import '@/app/(site)/styles/az.css';
+import AzAwardsResults from "./azAwardsResults";
 
 type Vote = {
+    twitchId?: string;
     award: string;
     votee: string;
 }
@@ -22,14 +24,16 @@ type AwardData = {
 
 type AzAwardsProps = {
     initialVotes: Vote[];
+    allVotes: Vote[];
     signedIn: boolean;
     userName: string | null;
 }
 
 const awardsUrl: string = "/az-gauntlet/awards";
 const voteDeadlineStr: string = '2026-11-23T23:59:00-08:00';
+// const voteDeadlineStr: string = '2026-11-20T23:59:00-08:00'; // testing
 
-export default function AzAwards({ initialVotes, signedIn, userName }: AzAwardsProps) {
+export default function AzAwards({ initialVotes, allVotes, signedIn, userName }: AzAwardsProps) {
     const [votingCategory, setVotingCategory] = useState<string|null>(null);
     const [selectedVote, setSelectedVote] = useState<string|null>(null);
     const [votesSubmitted, setVotesSubmitted] = useState<Vote[]>(initialVotes);
@@ -84,13 +88,16 @@ export default function AzAwards({ initialVotes, signedIn, userName }: AzAwardsP
     });
 
     return (
-        <main data-page="az" className="relative az-block grid grid-cols-[1fr] sm:grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[var(--max-page-width)] mx-auto px-0 pb-48 sm:pb-32 gap-4">
+        <main data-page={deadlinePassed ? "az-results" : "az"} className="relative az-block grid grid-cols-[1fr] sm:grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[minmax(200px,auto)] w-[95%] max-w-[var(--max-page-width)] mx-auto px-0 pb-48 sm:pb-32 gap-4">
 
             <BentoBoxCompartment startCol={1} endCol={5} startRow={1} endRow={deadlinePassed ? 2 : 4}>
                 <h2>A-Z Awards</h2>
 
                 { deadlinePassed ?
-                    <p className="text-center mt-8 text-2xl">The deadline has passed.<br/>Check back soon for the results.</p>
+                    <>
+                        <p className="text-center mt-8 text-2xl">The votes are in!<br/>Check below for the results.</p>
+                        <AzAwardsResults allVotes={allVotes} />
+                    </>
                 : 
                     <>
                         <div className="flex flex-col sm:flex-row w-full justify-center items-center sm:justify-between mt-3 gap-1">
